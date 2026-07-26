@@ -153,7 +153,7 @@ SKILLS = [
         phase="70 for the quest cape block; 99 in the combat block after the Diary Cape.",
         summary="Cannon on Slayer tasks; chinning later.",
         methods=[
-            ("Cannon on Slayer tasks", "—", "40–80k", "Your pick. Cannon the multi-friendly tasks (dust devils, jellies, nechryael, greater demons) and it trains Ranged while the task still counts."),
+            ("Cannon on Slayer tasks", "—", "40–80k", "Your Pick. Cannon the multi-friendly tasks (dust devils, jellies, nechryael, greater demons) and it trains Ranged while the task still counts."),
             ("Chinning – maniacal monkeys", "MM2", "250–400k+", "The fastest Ranged in the game. Expensive, click-intensive, needs Monkey Madness II. This is the usual 99 route once you can afford chins."),
             ("Chinning – Wilderness caves", "—", "150–250k", "Cheaper (red chins), but PKer risk."),
             ("Blowpipe on crabs / Nagua", "—", "60–100k", "Low effort, scales dart tier."),
@@ -174,7 +174,7 @@ SKILLS = [
         phase="75 for the quest cape block; 99 in the combat block after the Diary Cape.",
         summary="Burst/barrage Slayer tasks.",
         methods=[
-            ("Bursting/barraging Slayer tasks", "Desert Treasure I", "100–250k", "Your pick. Nechryael and dust devils in the Catacombs, smoke devils, jellies. Best XP-plus-Slayer combination in the game, but rune-hungry."),
+            ("Bursting/barraging Slayer tasks", "Desert Treasure I", "100–250k", "Your Pick. Nechryael and dust devils in the Catacombs, smoke devils, jellies. Best XP-plus-Slayer combination in the game, but rune-hungry."),
             ("Bursting maniacal monkeys", "MM2, 70 Magic", "200–300k",
              "The fastest Magic XP in the game. Ice Burst on maniacal monkeys after Monkey Madness II, and it doubles as the Ranged chinning spot."),
             ("Splashing", "—", "10–30k", "Near-zero attention, near-zero rate. Only worth it if you genuinely cannot play actively."),
@@ -236,7 +236,7 @@ SKILLS = [
         phase="70 for the quest cape block (paired with Hunter), 99 in the slow-skills block.",
         summary="Drift Net Fishing with Hunter.",
         methods=[
-            ("Drift Net Fishing", "47 Fish / 44 Hunt", "40–60k each", "Your pick. Trains Fishing and Hunter simultaneously on Fossil Island. Exactly why it's in the plan for the 70/70 requirement."),
+            ("Drift Net Fishing", "47 Fish / 44 Hunt", "40–60k each", "Your Pick. Trains Fishing and Hunter simultaneously on Fossil Island. Exactly why it's in the plan for the 70/70 requirement."),
             ("Barbarian Fishing", "48 (+ quest)", "30–55k", "3-tick variant is much faster; also drips Strength and Agility XP."),
             ("2-tick harpooning", "71", "90–110k",
              "Swordfish and tuna with tick manipulation. The genuine fastest Fishing, and the most demanding."),
@@ -263,7 +263,7 @@ SKILLS = [
         phase="70 for the quest cape block (paired with Fishing). Not in the explicit post-Diary list. Slot it with the gathering skills.",
         summary="Drift Net Fishing with Fishing.",
         methods=[
-            ("Drift Net Fishing", "44 Hunt / 47 Fish", "40–60k each", "Your pick for the 70/70 requirement."),
+            ("Drift Net Fishing", "44 Hunt / 47 Fish", "40–60k each", "Your Pick for the 70/70 requirement."),
             ("Hunter Rumours (Hunters' Guild)", "Varlamore", "80–120k", "Varlamore contract system. Strong XP with useful rewards; the modern default for high Hunter."),
             ("Black chinchompas", "73", "150–250k", "Best XP in the skill and excellent GP, but deep Wilderness. High risk, high reward."),
             ("Red chinchompas", "63", "100–150k", "Safer, still good, and it stockpiles the chins you'll want for 99 Ranged."),
@@ -351,7 +351,7 @@ SKILLS = [
         phase="Slow-skills block.",
         summary="Forestry teaks (2-tick).",
         methods=[
-            ("Forestry teaks", "35", "80–150k", "Your pick. 2-tick teaks with Forestry events layered on top is the top sustained rate; the events also fund the Forestry shop."),
+            ("Forestry teaks", "35", "80–150k", "Your Pick. 2-tick teaks with Forestry events layered on top is the top sustained rate; the events also fund the Forestry shop."),
             ("Sulliuscep", "65 (+ Fossil Island)", "70–90k", "Fast, and drops fossils for the museum. A good change of pace."),
             ("Redwoods", "90", "~65k", "The AFK 99. Low rate, almost no attention."),
             ("Ironwood / rosewood trees", "80 / 92", "70–110k",
@@ -372,7 +372,7 @@ SKILLS = [
         phase="65 for the quest cape block, ~77 relatively early (blood runes), 99 first in the slow-skills block.",
         summary="GOTR, then blood runes or ZMI.",
         methods=[
-            ("Guardians of the Rift", "27", "40–80k", "Your pick. XP scales with level, plus pouches, the Abyssal needle, outfit and eventually the pet. The default modern Runecraft."),
+            ("Guardians of the Rift", "27", "40–80k", "Your Pick. XP scales with level, plus pouches, the Abyssal needle, outfit and eventually the pet. The default modern Runecraft."),
             ("ZMI altar", "50 (+ Lunar Diplomacy)", "40–70k", "Consistent, solo, no minigame timer. Needs pouches and the Ourania teleport."),
             ("Blood runes (Arceuus)", "77", "~40k", "Low attention, strong profit. This is why the plan wants 77 early. It turns Runecraft into passive income."),
             ("Lava runes with runners", "23", "80–130k",
@@ -584,12 +584,12 @@ VIDEOS = [
 
 
 PLAN_LINKS = [
-    ("progression", "Progression"),
-    ("quests", "Quests"),
-    ("diaries", "Diaries"),
-    ("approach", "Combat"),
-    ("max-order", "Max order"),
-    ("skills", "Skills"),
+    ("progression", "Progression", "assets/media/site/skills-tab.png"),
+    ("quests", "Quests", "assets/media/site/quests.png"),
+    ("diaries", "Diaries", "assets/icons/Diaries.png"),
+    ("approach", "Slayer", "assets/icons/Slayer.png"),
+    ("max-order", "Max Order", "assets/media/max-cape.png"),
+    ("skills", "Skills", "assets/media/site/combat.png"),
 ]
 
 
@@ -620,6 +620,9 @@ SKILL_NAMES = {s["name"] for s in SKILLS if s["group"] != SUPPORT}
 _ALIASES = {}
 for _n in SKILL_NAMES:
     _ALIASES[_n] = ("skill", f"assets/icons/{_n}.png")
+for _d in ("Diary", "Diaries", "diary", "diaries", "Achievement Diary",
+           "Achievement Diaries", "Diary Cape"):
+    _ALIASES[_d] = ("skill", "assets/icons/Diaries.png")
 for _alias, _title in PROSE_ENTITIES.items():
     _file = MANIFEST.get(_title)
     if _file and _alias not in _ALIASES:
@@ -638,19 +641,61 @@ def media_path(title, depth=0):
     return f"{'../' if depth else ''}assets/media/{f}" if f else None
 
 
+_REQ_NUM_FIRST = None
+_REQ_NAME_FIRST = None
+
+
+def _build_req_patterns():
+    """'100 combat', '50 Slayer', 'Defence 70' — the shapes the plan writes
+    requirements in."""
+    global _REQ_NUM_FIRST, _REQ_NAME_FIRST
+    names = "|".join(sorted(SKILL_NAMES, key=len, reverse=True))
+    _REQ_NUM_FIRST = re.compile(r"\b(\d{1,3})\s+(combat|" + names + r")\b")
+    _REQ_NAME_FIRST = re.compile(r"\b(" + names + r")\s+(\d{1,3})\b")
+
+
+def _met(skill, level):
+    if not STATS:
+        return False
+    if skill.lower() == "combat":
+        return (STATS.get("combat") or 0) >= level
+    st = stat_of(skill)
+    return bool(st and st["level"] >= level)
+
+
+def strike_met(text):
+    """Cross out requirements the account already meets."""
+    if not STATS:
+        return text
+    if _REQ_NUM_FIRST is None:
+        _build_req_patterns()
+
+    def num_first(m):
+        lvl, skill = int(m.group(1)), m.group(2)
+        if 2 <= lvl <= 126 and _met(skill, lvl):
+            return f'<s class="metreq" title="done">{m.group(0)}</s>'
+        return m.group(0)
+
+    def name_first(m):
+        skill, lvl = m.group(1), int(m.group(2))
+        if 2 <= lvl <= 99 and _met(skill, lvl):
+            return f'<s class="metreq" title="done">{m.group(0)}</s>'
+        return m.group(0)
+
+    return _REQ_NAME_FIRST.sub(name_first, _REQ_NUM_FIRST.sub(num_first, text))
+
+
 def annotate(text, depth=0, skip=()):
     """Escape prose and give the first mention of a known skill, NPC, location
     or unlock its picture."""
     root = "../" if depth else ""
-    esc = html.escape(str(text), quote=False)
-    used = set()
+    esc = strike_met(html.escape(str(text), quote=False))
 
     def repl(m):
         word = m.group(1)
-        if word in skip or word.lower() in used:
+        if word in skip:
             return word
         kind, frag = _ALIASES[word]
-        used.add(word.lower())
         cls = "mi pixel" if kind == "skill" else "mi"
         return (f'<span class="ment"><img class="{cls}" src="{root}{frag}" '
                 f'alt="" loading="lazy">{word}</span>')
@@ -803,6 +848,14 @@ def icon(skill_name, depth=0, cls=""):
     return f'<img class="{c}" src="{src}" alt="" width="22" height="22">'
 
 
+COMET_SVG = ('<svg class="comet" viewBox="0 0 16 16" width="14" height="14" '
+             'aria-hidden="true">'
+             '<circle cx="10.5" cy="5.5" r="3.2" fill="currentColor"/>'
+             '<path d="M7.4 8.6 2 14M6.2 6.1 3.1 7M9.9 9.8 9 12.9" fill="none" '
+             'stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
+             "</svg>")
+
+
 WIKI = "https://oldschool.runescape.wiki/w/"
 OQG_URL = WIKI + "Optimal_quest_guide"
 
@@ -814,8 +867,8 @@ def quest_link(name):
 def quest_panel():
     """Where you are in the optimal quest guide, and what is left."""
     if not QUESTS:
-        return ('<div class="panel"><div class="k">Quest cape</div>'
-                '<h3>Not linked yet</h3><p>Run <code>fetch_quests.py</code> once the '
+        return ('<div class="panel"><div class="k">Quest Cape</div>'
+                '<h3>Not Linked Yet</h3><p>Run <code>fetch_quests.py</code> once the '
                 'WikiSync plugin has uploaded your account. It reads quest completion '
                 'from RuneLite, which the hiscores do not carry.</p>'
                 f'<p class="gap"><a class="btn ghost sm" href="{OQG_URL}" '
@@ -840,7 +893,7 @@ def quest_panel():
     return (
         '<div class="questbox">'
         '<div class="qhead">'
-        f'<div><div class="k">Quest cape</div>'
+        f'<div><div class="k">Quest Cape</div>'
         f'<div class="qcount"><b class="num">{done}</b>'
         f'<span>of {total} done</span></div></div>'
         f'<div class="qright"><b class="num">{len(remaining)}</b>'
@@ -872,7 +925,7 @@ def diary_panel():
     """Every diary tier by region, with the plan's two milestones on top."""
     if not DIARIES:
         return ('<div class="panel"><div class="k">Diaries</div>'
-                '<h3>Not linked yet</h3><p>Run <code>fetch_quests.py</code>; the same '
+                '<h3>Not Linked Yet</h3><p>Run <code>fetch_quests.py</code>; the same '
                 'WikiSync upload carries achievement diary progress.</p></div>')
 
     done, total = DIARIES["done"], DIARIES["total"]
@@ -907,15 +960,19 @@ def diary_panel():
     return (
         '<div class="questbox">'
         '<div class="qhead">'
-        f'<div><div class="k">Achievement diaries</div>'
+        f'<div><div class="k">Achievement Diaries</div>'
         f'<div class="qcount"><b class="num">{done}</b>'
         f'<span>of {total} tiers done</span></div></div>'
         f'<div class="qright"><b class="num">{total - done}</b><span>to go</span></div>'
         "</div>"
         f'<span class="prog wide"><span class="fill" style="width:{pct}%"></span></span>'
         '<div class="dmiles">'
-        f'<span class="dmile"><i>Phase 3</i> Hard <b>{bt["Hard"]}</b> of {n}</span>'
-        f'<span class="dmile"><i>Phase 5</i> Elite <b>{bt["Elite"]}</b> of {n}</span>'
+        f'<a class="dmile" href="{WIKI}Achievement_Diary#Hard" rel="noopener" '
+        f'target="_blank"><i>Phase 3</i><span>Hard</span>'
+        f'<b>{bt["Hard"]}</b><em>/{n}</em></a>'
+        f'<a class="dmile" href="{WIKI}Achievement_Diary#Elite" rel="noopener" '
+        f'target="_blank"><i>Phase 5</i><span>Elite</span>'
+        f'<b>{bt["Elite"]}</b><em>/{n}</em></a>'
         "</div>"
         '<div class="tablescroll"><table class="dtable"><thead><tr><th></th>'
         + "".join(f'<th><a href="{WIKI}Achievement_Diary#{t}" rel="noopener">{e(t)}</a></th>'
@@ -1117,7 +1174,7 @@ def focus_panel():
 
     return (
         '<aside class="focus" id="focus">'
-        '<div class="fhead"><span class="k">Currently levelling</span>'
+        '<div class="fhead"><span class="k">Currently Levelling</span>'
         f'<a class="flink" id="flink" href="{f["href"]}">Open {e(f["name"])} &rsaquo;</a></div>'
         '<div class="ftop">'
         f'<img class="icon lg" id="fic" src="{f["icon"]}" alt="">'
@@ -1134,7 +1191,7 @@ def focus_panel():
         f'<span class="fxp" id="fxp">{xp} xp</span>'
         "</div>"
         f'<div class="falso" id="falso"{"" if also else " hidden"}>'
-        f'<i>Also trains</i>{also}</div>'
+        f'<i>Also Trains</i>{also}</div>'
         "</aside>"
     )
 
@@ -1161,7 +1218,7 @@ def rail_meter(root=""):
             '</svg></button>')
 
     if STATS:
-        rows = (f'<span class="mrow"><span>Total level</span>'
+        rows = (f'<span class="mrow"><span>Total Level</span>'
                 f'<b class="num" data-stat="total">{STATS.get("overall", {}).get("level")}</b>'
                 f'<span class="mmax">/{MAX_TOTAL}</span>{spin}</span>'
                 f'<span class="mrow"><span>Combat</span>'
@@ -1182,10 +1239,11 @@ def rail(active=None, depth=0):
          rail_meter(root),
          '  <nav class="rail-body">',
          '  <div class="rail-kick">Reference</div>']
-    for anchor, label in PLAN_LINKS:
-        p.append(f'  <a href="{root}index.html#{anchor}"><span class="t">{e(label)}</span></a>')
+    for anchor, label, ico in PLAN_LINKS:
+        p.append(f'  <a href="{root}index.html#{anchor}">'
+                 f'<img class="refico" src="{root}{ico}" alt="" width="15" height="15">'
+                 f'<span class="t">{e(label)}</span></a>')
 
-    p.append('  <div class="rail-kick">Videos</div>')
     for vid, title, channel, handle, avatar, extra in VIDEOS:
         p.append(
             f'  <span class="vidrow">'
@@ -1194,12 +1252,10 @@ def rail(active=None, depth=0):
             f'<img src="{root}assets/media/yt/{avatar}" alt="{e(channel)}" loading="lazy">'
             f'</a>'
             f'<a class="vid" href="https://www.youtube.com/watch?v={vid}{extra}" '
-            f'target="_blank" rel="noopener" title="{e(title)}">'
+            f'target="_blank" rel="noopener">'
             f'<span class="vt">{e(title)}</span>'
             f'<span class="vc">{e(channel)}</span></a></span>')
 
-    p.append(f'  <a class="slink" href="{root}stars.html">'
-             '<span class="t">Shooting stars</span></a>')
     p.append('  <div class="rail-kick">Links</div>')
     for label_, href in SITE_LINKS:
         p.append(f'  <a class="slink" href="{href}" target="_blank" rel="noopener">'
@@ -1373,7 +1429,7 @@ BONUS_JS = """
 
 STARS_JS = """
 <script>
-/* Shooting stars. Tries the local server first, then the snapshot committed to
+/* Shooting Stars. Tries the local server first, then the snapshot committed to
    the repo, and falls back to 07.gg's own tracker in a frame so the panel
    always shows something. */
 (function () {
@@ -1433,7 +1489,7 @@ STARS_JS = """
       var req = tier * 10;
       var can = !mining || mining >= req;
       var hit = findMap(s.location);
-      var loc = esc(hit && hit.n ? hit.n : tidy(s.location));
+      var loc = esc(tidy(hit && hit.n ? hit.n : s.location));
       var map = 'https://oldschool.runescape.wiki/w/Special:Search?go=Go&search='
         + encodeURIComponent(hit && hit.n ? hit.n : s.location);
       return '<div class="star' + (can ? '' : ' locked') + '">'
@@ -1525,10 +1581,16 @@ STARS_JS = """
 
   /* 07.gg's callers type these by hand, so tidy up what we cannot match to a
      wiki name: sentence case, and directions in caps. */
+  var SMALL = ['of', 'the', 'in', 'on', 'at', 'to', 'and', 'a', 'an', 'for', 'by'];
+
   function tidy(loc) {
-    var t = String(loc).trim().replace(/\s+/g, ' ');
-    t = t.replace(/\\b(nw|ne|sw|se)\\b/gi, function (m) { return m.toUpperCase(); });
-    return t.charAt(0).toUpperCase() + t.slice(1);
+    return String(loc).trim().split(/\\s+/).map(function (w, i) {
+      var bare = w.replace(/[^a-z]/gi, '').toLowerCase();
+      if (/^(nw|ne|sw|se)$/.test(bare)) return w.toUpperCase();
+      if (i > 0 && SMALL.indexOf(bare) !== -1) return w.toLowerCase();
+      if (/^[A-Z0-9'-]{2,}$/.test(w)) return w;
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    }).join(' ');
   }
 
   function norm(t) {
@@ -1579,7 +1641,7 @@ STARS_JS = """
       ? '<img src="' + (window.STARMAPROOT || '') + hit.f + '" alt="">'
       : '<div class="nomap">no map for this spot</div>')
       + '<span class="ploc"></span>';
-    pop.querySelector('.ploc').textContent = hit && hit.n ? hit.n : tidy(loc);
+    pop.querySelector('.ploc').textContent = tidy(hit && hit.n ? hit.n : loc);
     pop.hidden = false;
     var r = btn2.getBoundingClientRect();
     var top = r.bottom + window.scrollY + 8;
@@ -1704,7 +1766,7 @@ FOCUS_JS = """
     if (also) {
       var list = f.also || [];
       also.hidden = list.length === 0;
-      also.innerHTML = '<i>Also trains</i>' + list.map(function (a) {
+      also.innerHTML = '<i>Also Trains</i>' + list.map(function (a) {
         return '<a class="fa" href="' + a.href + '">'
           + '<img class="icon sm" src="' + a.icon + '" alt="">'
           + '<span class="fan">' + a.name + '</span>'
@@ -1825,7 +1887,7 @@ RAIL_JS = """
 
 def page(title, where, body, active=None, depth=0, skill_name=None):
     root = "../" if depth else ""
-    home = f'<a class="navlink" href="{root}index.html">Index</a>' if depth else ""
+    del where  # the header no longer shows a breadcrumb
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1841,11 +1903,11 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
 <body>
 <header class="topbar">
   <a class="mark" href="{root}index.html"><img class="capemark" src="{root}assets/media/max-cape.png" alt="">OSRS max time wasting plan</a>
-  <span class="sep">/</span>
-  <span class="where">{e(where)}</span>
   <span class="spacer"></span>
-  <a class="navlink" href="{root}stars.html">Shooting Stars</a>
-  {home}
+  <nav class="topnav">
+    <a class="navlink" href="{root}stars.html">{COMET_SVG}Shooting Stars</a>
+  </nav>
+  <span class="spacer"></span>
 </header>
 <div class="shell">
 <main class="main">
@@ -2069,7 +2131,7 @@ def bonus_controls(skill_name):
     notes = "".join(f'<li><b>{e(b["name"])}</b>. {e(b["note"])}</li>' for b in items)
     return (f'<div class="bonusbar" id="bonusbar" data-skill="{e(skill_name)}">'
             f'<span class="blabel">XP gear</span>{"".join(pills)}</div>'
-            f'<details class="bdetails"><summary>What these actually do</summary>'
+            f'<details class="bdetails"><summary>What These Actually Do</summary>'
             f'<ul>{notes}</ul></details>')
 
 
@@ -2178,10 +2240,9 @@ OSRSGUIDE = "https://www.osrsguide.com/"
 
 # Reference sites for the rail
 SITE_LINKS = [
-    ("OSRS Guide", OSRSGUIDE),
-    ("Skilling guides", OSRSGUIDE + "skilling-guides/"),
-    ("Calculators", OSRSGUIDE + "calculators/"),
-    ("Time to max", OSRSGUIDE + "time-to-max-osrs/"),
+    ("OSRS Guide", OSRSGUIDE + "skilling-guides/"),
+    ("Calculators", "https://07.gg/calculators"),
+    ("Time to Max", OSRSGUIDE + "time-to-max-osrs/"),
     ("OSRS Wiki", "https://oldschool.runescape.wiki/"),
 ]
 
@@ -2272,7 +2333,9 @@ def embed_panel(skill_name, full=False, depth=0):
         f'<div class="embed{" bare" if full else ""}" id="stars" '
         f'data-root="{"../" if depth else ""}" '
         f'data-mining="{(stat_of("Mining") or {}).get("level", 0)}">'
-        '<div class="ehead"><span class="k">Live &middot; shooting stars</span>'
+        f'<div class="ehead"><a class="cometlink" href="{"../" if depth else ""}stars.html" '
+        f'title="Open the Shooting Stars page">{COMET_SVG}</a>'
+        '<span class="k">Shooting Stars</span>'
         '<span class="espace"></span>'
         '<span class="tierlbl">tier</span>'
         '<select class="tierpick" id="tiermin" aria-label="Minimum star tier"><option value="1">10 Mining &middot; T1</option><option value="2">20 Mining &middot; T2</option><option value="3">30 Mining &middot; T3</option><option value="4">40 Mining &middot; T4</option><option value="5">50 Mining &middot; T5</option><option value="6">60 Mining &middot; T6</option><option value="7">70 Mining &middot; T7</option><option value="8">80 Mining &middot; T8</option><option value="9">90 Mining &middot; T9</option></select>'
@@ -2381,22 +2444,22 @@ def slayer_sections():
                      for n, d in POINT_ORDER)
 
     mort = (
-        '<div class="panel warn"><div class="k">Not live yet</div>'
+        '<div class="panel warn"><div class="k">Not Live Yet</div>'
         f'<p>{e(MORTIMER["live"])}</p></div>'
         f'<p class="lede2">{annotate(MORTIMER["unlock"], depth=1, skip=("Slayer",))}</p>'
         "<ul>" + "".join(f"<li>{e(x)}</li>" for x in MORTIMER["points"]) + "</ul>"
-        f'<div class="panel"><div class="k">Where it fits</div><p>{e(MORTIMER["verdict"])}</p></div>'
+        f'<div class="panel"><div class="k">Where It Fits</div><p>{e(MORTIMER["verdict"])}</p></div>'
     )
 
     return [
-        ("tasks", "Which tasks to do, skip or block",
+        ("tasks", "Which Tasks to Do, Skip or Block",
          '<p class="lede2">Verdicts and rates are the wiki\'s, for Duradel tasks. '
          'Sorted by verdict, then by how often the task comes up. Weight is its share '
          'of the assignment roll, so a heavy task you dislike is worth a block slot '
          'more than a rare one.</p>' + tasks_table),
-        ("points", "Spending Slayer points", f"<ol class=\"pts\">{points}</ol>"),
-        ("masters", "The masters", masters_table),
-        ("mortimer", "Mortimer, the new master", mort),
+        ("points", "Spending Slayer Points", f"<ol class=\"pts\">{points}</ol>"),
+        ("masters", "The Masters", masters_table),
+        ("mortimer", "Mortimer, the New Master", mort),
     ]
 
 
@@ -2436,7 +2499,7 @@ def build_skill_page(skill, prev_skill, next_skill):
         facts = [f'<span><i>XP</i> <b class="num">{xp:,}</b></span>']
         if nxt:
             facts.append(f'<span><i>To {nxt}</i> <b class="num">{togo:,}</b></span>')
-        parts.append('<div class="livebox"><div class="k">Your level</div>'
+        parts.append('<div class="livebox"><div class="k">Your Level</div>'
                      f'<div class="lvlrow">{head}</div>{bar}'
                      f'<div class="facts">{"".join(facts)}</div></div>')
 
@@ -2465,19 +2528,19 @@ def build_skill_page(skill, prev_skill, next_skill):
     pimg = (f'<img class="thumb lg" id="pickimg" src="{psrc}" alt="" loading="lazy">'
             if psrc else '<img class="thumb lg" id="pickimg" alt="" hidden>')
     parts.append(f'<div class="panel pick withpic" id="pickpanel"{"" if pick else " hidden"}>'
-                 '<div class="k">Your pick</div>'
+                 '<div class="k">Your Pick</div>'
                  f'<div class="pickbody">{pimg}'
                  f'<div><h3 id="pickname">{e(pick or "")}</h3>'
                  f'<div id="pickdetail">{detail}</div></div></div></div>')
     if not skill.get("done"):
         parts.append(f'<div class="panel warn" id="nopick"{" hidden" if pick else ""}>'
-                     '<div class="k">Open decision</div>'
-                     '<h3>No method locked in</h3>'
+                     '<div class="k">Open Decision</div>'
+                     '<h3>No Method Locked In</h3>'
                      "<p>The plan sets a target here but does not name a method. "
                      "Pick one with the circle at the end of any row below.</p></div>")
 
     if name == "Slayer":
-        parts.append('<h2 id="blocklist">Block and skip list</h2>')
+        parts.append('<h2 id="blocklist">Block and Skip List</h2>')
         parts.append(slayer_summary())
 
     parts.append('<h2 id="methods">Methods</h2>')
@@ -2565,8 +2628,7 @@ def card_head(s, tag="span"):
 def skill_card(s):
     return (
         f'  <a class="card" href="skills/{slug(s["name"])}.html">'
-        f'{card_head(s)}'
-        f'<span class="method">{e(s["summary"])}</span></a>'
+        f'{card_head(s)}</a>'
     )
 
 
@@ -2579,18 +2641,19 @@ def pair_card(a, b):
             f'    <a class="half" href="skills/{slug(s["name"])}.html">'
             f'{card_head(s)}</a>'
         )
-    return ('  <div class="card pair">\n' + "\n".join(halves) +
-            f'\n    <span class="method">{e(note)}</span>\n  </div>')
+    del note
+    return '  <div class="card pair">\n' + "\n".join(halves) + "\n  </div>"
 
 
 def build_stars_page():
     cfg = EMBEDS["Mining"]
     body = [
-        '<div class="kick">Live tracker</div>',
-        '<div class="page-head">' + icon("Mining") + '<h1 class="page">Shooting stars</h1></div>',
+        '<div class="kick">Live Tracker</div>',
+        '<div class="page-head"><span class="comethead">' + COMET_SVG
+        + '</span><h1 class="page">Shooting Stars</h1></div>',
         f'<p class="lede">{e(cfg["note"])}</p>',
         embed_panel("Mining", full=True),
-        '<h2 id="how">How the tiers work</h2>',
+        '<h2 id="how">How the Tiers Work</h2>',
         '<ul>'
         '<li>Star tier decides the Mining level you need: tier 1 at level 10, '
         'rising every ten levels to tier 9 at 90. A tier 9 star can be mined all '
@@ -2604,7 +2667,7 @@ def build_stars_page():
         'window depending on the wood you build it from.</li>'
         '</ul>',
     ]
-    return page("Shooting stars", "Shooting stars", "\n".join(body), depth=0)
+    return page("Shooting Stars", "Shooting Stars", "\n".join(body), depth=0)
 
 
 def build_index():
@@ -2615,7 +2678,7 @@ def build_index():
     parts.append("</section>")
 
 
-    parts.append('<h2 id="progression">Main progression</h2>')
+    parts.append('<h2 id="progression">Main Progression</h2>')
     parts.append('<ol class="phases">')
     for i, ph in enumerate(PLAN_PHASES, 1):
         body = phase_meter(ph.get("track", ""))
@@ -2629,29 +2692,29 @@ def build_index():
         parts.append(f'  <li id="phase-{i}"><b>{annotate(ph["title"])}</b>{body}</li>')
     parts.append("</ol>")
 
-    parts.append('<h2 id="quests">Quest cape progress</h2>')
+    parts.append('<h2 id="quests">Quest Cape Progress</h2>')
     parts.append(quest_panel())
 
-    parts.append('<h2 id="diaries">Diary progress</h2>')
+    parts.append('<h2 id="diaries">Diary Progress</h2>')
     parts.append(diary_panel())
 
-    parts.append('<h2 id="approach">Slayer and combat approach</h2>')
-    parts.append('<div class="panel"><div class="k">Standing rules</div><ul>' +
+    parts.append('<h2 id="approach">Slayer</h2>')
+    parts.append('<div class="panel"><div class="k">Standing Rules</div><ul>' +
                  "".join(f"<li>{annotate(c)}</li>" for c in COMBAT_APPROACH) +
                  "</ul></div>")
 
-    parts.append('<h2 id="max-order">Post-diary-cape maxing order</h2>')
+    parts.append('<h2 id="max-order">Post-Diary-Cape Maxing Order</h2>')
     parts.append('<ol class="phases">')
     for title, detail in MAX_ORDER:
         sub = f"<ul><li>{annotate(detail)}</li></ul>" if detail else ""
         parts.append(f"  <li><b>{annotate(title)}</b>{sub}</li>")
     parts.append("</ol>")
-    parts.append('<div class="panel"><div class="k">Gaps worth noting</div>'
+    parts.append('<div class="panel"><div class="k">Gaps Worth Noting</div>'
                  '<p>Fletching and Farming are already 99, so they sit outside the order above. '
                  'Thieving and Hunter are not listed in either block, so decide where they land: '
                  'Thieving fits with the faster skills, Hunter with the slow gathering ones.</p></div>')
 
-    parts.append('<h2 id="skills">All skills</h2>')
+    parts.append('<h2 id="skills">All Skills</h2>')
     for group in GROUP_ORDER:
         members = [s for s in SKILLS if s["group"] == group]
         if not members:

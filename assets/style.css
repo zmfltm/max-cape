@@ -194,14 +194,36 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
 .topbar .where { color: var(--muted); font-size: 14px; }
 .topbar .spacer { flex: 1; }
 
+.topnav { display: flex; align-items: center; gap: 18px; }
 .topbar .navlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 13.5px;
   color: var(--muted);
   letter-spacing: -0.01em;
   transition: color var(--fast) var(--ease);
 }
-.topbar .navlink + .navlink { margin-left: 18px; }
 .topbar .navlink:hover { color: var(--fg); }
+.navicon { border-radius: 3px; opacity: 0.8; }
+.comet { color: var(--accent); flex: 0 0 14px; }
+.cometlink { display: inline-flex; align-items: center; transition: transform var(--fast) var(--ease); }
+.cometlink:hover { transform: translateX(1px); }
+.comethead {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(255, 157, 46, 0.28);
+  color: var(--accent);
+}
+.comethead .comet { width: 18px; height: 18px; }
+.refico { object-fit: contain; opacity: 0.75; flex: 0 0 15px; }
+.rail a:hover .refico { opacity: 1; }
+.navlink:hover .navicon { opacity: 1; }
 
 /* -------------------------------------------------------------------- shell */
 
@@ -359,6 +381,19 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
 }
 .glink::after { content: " \2197"; font-size: 10px; color: var(--dim); }
 .glink:hover { color: var(--fg); border-color: rgba(255, 157, 46, 0.4); }
+
+s.metreq {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--done);
+  color: var(--dim);
+}
+
+.req-chip.met .rq, .req-chip.met .rl, .req-chip.met .rt {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(74, 222, 128, 0.7);
+}
 
 /* ---------------------------------------------------------------- typography */
 
@@ -613,20 +648,27 @@ li::marker { color: var(--dim); }
 
 .dmiles { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 4px; }
 .dmile {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
   font-size: 13px;
   color: var(--muted);
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 4px 12px;
+  padding: 4px 13px;
+  transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
 }
+.dmile:hover { color: var(--fg); border-color: rgba(255, 157, 46, 0.4); background: var(--surface); }
+.dmile em { font-style: normal; font-family: var(--font-mono); font-size: 10.5px; color: var(--dim); }
 .dmile i {
   font-style: normal;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--dim);
-  margin-right: 7px;
+  border-right: 1px solid var(--line);
+  padding-right: 7px;
 }
 .dmile b { color: var(--fg); font-weight: 500; font-variant-numeric: tabular-nums; }
 
@@ -1167,11 +1209,12 @@ tr.rec td:nth-child(2) { color: var(--fg); }
 .starlist { display: grid; gap: 1px; background: var(--line-soft); border-radius: var(--r-sm); overflow: hidden; }
 .starhead {
   display: grid;
+  align-items: baseline;
   grid-template-columns: 34px 46px 1fr 62px 46px 52px;
   gap: 10px;
-  padding: 0 10px 6px;
+  padding: 2px 10px 7px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--dim);
