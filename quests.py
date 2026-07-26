@@ -31,12 +31,28 @@ def sync_state(player):
     return json.loads(_get(SYNC.format(urllib.parse.quote(player))))
 
 
-def guide_order(known):
-    """Quest names in optimal-quest-guide order.
+# the guide writes Recipe for Disaster subquests with a slash, WikiSync with a dash
+RFD_MAP = {
+    "Another Cook's Quest": "Another Cook's Quest",
+    "Freeing the Mountain Dwarf": "Mountain Dwarf",
+    "Freeing the Goblin generals": "Wartface & Bentnoze",
+    "Freeing Pirate Pete": "Pirate Pete",
+    "Freeing the Lumbridge Guide": "Lumbridge Guide",
+    "Freeing Evil Dave": "Evil Dave",
+    "Freeing Skrach Uglogwee": "Skrach Uglogwee",
+    "Freeing Sir Amik Varze": "Sir Amik Varze",
+    "Freeing King Awowogei": "King Awowogei",
+    "Defeating the Culinaromancer": "Culinaromancer",
+}
 
-    Only the page's "Quests" section is ordered. The "Notable quest unlocks"
-    list above it explicitly says it is in no particular order, so reading the
-    whole page gives a scrambled route.
+
+def guide_route():
+    """Every step of the optimal quest guide, in order.
+
+    The guide tags each row with data-rowid, which is the cleanest handle on
+    the route: it covers quests, achievement diary tiers and the non-quest
+    steps, and it is ordered. Reading link order off the page instead picks up
+    the 'Notable quest unlocks' list, which says outright that it is unordered.
     """
     q = urllib.parse.urlencode({
         "action": "parse", "page": GUIDE, "prop": "text",
@@ -44,19 +60,35 @@ def guide_order(known):
     })
     body = json.loads(_get(f"{WIKI_API}?{q}"))["parse"]["text"]
 
-    start = body.find('id="Quests"')
-    end = body.find('id="See_also"')
-    section = body[start:end if end > start else len(body)] if start > 0 else body
+    seen, order = set(), []
+    for m in re.finditer(r'data-rowid="([^"]+)"', body):
+        rid = html.unescape(m.group(1))
+        if rid not in seen:
+            seen.add(rid)
+            order.append(rid)
+    return order
 
+
+def normalise(rid):
+    """Guide row id -> (kind, name, extra)."""
+    if "Diary#" in rid:
+        region, tier = rid.split(" Diary#")
+        return "diary", region, tier
+    if rid.startswith("Recipe for Disaster/"):
+        part = rid.split("/", 1)[1]
+        mapped = RFD_MAP.get(part)
+        return "quest", (f"Recipe for Disaster - {mapped}" if mapped else rid), None
+    return "quest", rid, None
+
+
+def guide_order(known):
+    """Quest names only, in guide order, for anything that needs a flat list."""
     order, seen = [], set()
-    for m in re.finditer(r'title="([^"]+)"', section):
-        title = html.unescape(m.group(1))
-        if title in known and title not in seen:
-            seen.add(title)
-            order.append(title)
-
-    # miniquests and Recipe for Disaster subquests are tracked by WikiSync but
-    # never linked in the guide; keep them so nothing goes missing
+    for rid in guide_route():
+        kind, name, _ = normalise(rid)
+        if kind == "quest" and name in known and name not in seen:
+            seen.add(name)
+            order.append(name)
     order += sorted(n for n in known if n not in seen)
     return order
 
@@ -98,6 +130,34 @@ def collect_diaries(raw, player=None):
     }
 
 
+def route_steps(quests, diaries):
+    """The guide route with each step marked done, started or outstanding."""
+    steps = []
+    for rid in guide_route():
+        kind, name, tier = normalise(rid)
+        if kind == "diary":
+            entry = (diaries.get(name) or {}).get(tier) or {}
+            tasks = entry.get("tasks") or []
+            steps.append({
+                "kind": "diary", "name": f"{name} Diary", "tier": tier,
+                "state": 2 if entry.get("complete") else (
+                    1 if any(tasks) else 0),
+                "done": sum(1 for t in tasks if t), "total": len(tasks),
+                "wiki": f"{name.replace(' ', '_')}_Diary#{tier}",
+            })
+        elif name in quests:
+            steps.append({
+                "kind": "quest", "name": name, "state": quests[name],
+                "wiki": name.replace(" ", "_"),
+            })
+        else:
+            steps.append({
+                "kind": "task", "name": name, "state": None,
+                "wiki": name.replace(" ", "_"),
+            })
+    return steps
+
+
 def collect(player, raw=None):
     raw = raw if raw is not None else sync_state(player)
     state = {
@@ -110,9 +170,18 @@ def collect(player, raw=None):
     done = [n for n in order if quests.get(n) == DONE]
     started = [n for n in order if quests.get(n) == IN_PROGRESS]
     todo = [n for n in order if quests.get(n) != DONE]
+    diaries = raw.get("achievement_diaries") or {}
+    steps = route_steps(quests, diaries)
+    # untracked steps (Tutorial Island, balloon routes) have no state, so they
+    # never count as outstanding
+    outstanding = [s for s in steps if s["state"] in (0, 1)]
+
     return {
         "name": state["username"],
         "synced": state["synced"],
+        "route": steps,
+        "route_next": outstanding[0] if outstanding else None,
+        "route_left": len(outstanding),
         "order": order,
         "states": quests,
         "done": len(done),

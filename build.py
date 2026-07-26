@@ -895,14 +895,35 @@ def quest_panel():
     nxt = QUESTS.get("next")
     remaining = QUESTS.get("remaining") or []
 
+    route = QUESTS.get("route") or []
+    nxt_step = QUESTS.get("route_next") or {}
     rows = []
-    for i, q in enumerate(remaining):
-        cls = " now" if q == nxt else (" wip" if q in started else "")
-        tag = ("on deck" if q == nxt else ("started" if q in started else ""))
-        rows.append(f'<li class="q{cls}"><span class="qn">{i + 1}</span>'
-                    f'<a href="{quest_link(q)}" rel="noopener">{e(q)}</a>'
-                    + (f'<span class="qtag">{tag}</span>' if tag else "")
-                    + "</li>")
+    n = 0
+    for step in route:
+        if step["state"] == 2 or step["state"] is None:
+            continue
+        n += 1
+        is_next = step is not None and step.get("name") == nxt_step.get("name") \
+            and step.get("tier") == nxt_step.get("tier")
+        kind = step["kind"]
+        label = step["name"] + (f' &middot; {step["tier"]}' if step.get("tier") else "")
+        tag = ""
+        if is_next:
+            tag = '<span class="qtag">on deck</span>'
+        elif kind == "diary":
+            tag = (f'<span class="qtag wip">{step["done"]}/{step["total"]}</span>'
+                   if step["done"] else '<span class="qtag dim">diary</span>')
+        elif step["state"] == 1:
+            tag = '<span class="qtag wip">started</span>'
+        cls = " now" if is_next else (" wip" if step["state"] == 1 else "")
+        rows.append(f'<li class="q{cls}"><span class="qn">{n}</span>'
+                    f'<a href="{WIKI}{step["wiki"]}" rel="noopener" target="_blank">'
+                    f'{label}</a>{tag}</li>')
+
+    remaining = [s for s in route if s["state"] in (0, 1)]
+    nxt = (nxt_step.get("name", "") +
+           (f' ({nxt_step["tier"]})' if nxt_step.get("tier") else ""))
+    started = [s for s in route if s["state"] == 1]
 
     synced = (QUESTS.get("synced") or "")[:10]
     return (
@@ -915,10 +936,12 @@ def quest_panel():
         '<span>to go</span></div>'
         "</div>"
         f'<span class="prog wide"><span class="fill" style="width:{pct}%"></span></span>'
-        + (f'<p class="qnow">Next in the guide: <a href="{quest_link(nxt)}" '
-           f'rel="noopener"><b>{e(nxt)}</b></a>'
-           + (f' &middot; {len(started)} others part-finished' if started else "")
-           + "</p>" if nxt else '<p class="qnow">Every quest is done. Claim the cape.</p>')
+        + (f'<p class="qnow">Next in the guide: '
+           f'<a href="{WIKI}{nxt_step.get("wiki", "")}" rel="noopener" '
+           f'target="_blank"><b>{e(nxt)}</b></a>'
+           + (f' &middot; {len(started)} part-finished' if started else "")
+           + "</p>" if nxt else
+           '<p class="qnow">Every step in the guide is done.</p>')
         + f'<ol class="qlist">{"".join(rows)}</ol>'
         f'<div class="qfoot"><a href="{OQG_URL}" rel="noopener">Optimal quest guide</a>'
         f'<span>WikiSync: {e(QUESTS.get("name", ""))}'

@@ -649,6 +649,8 @@ li::marker { color: var(--dim); }
 .qlist .q.now .qtag { color: var(--accent); border-color: rgba(255, 157, 46, 0.4); }
 .qlist .q.now .qn { color: var(--accent); }
 .qlist .q.wip .qtag { color: var(--warn); border-color: rgba(245, 196, 81, 0.35); }
+.qlist .qtag.dim { color: var(--dim); }
+.qlist .qtag.wip { color: var(--warn); border-color: rgba(245, 196, 81, 0.35); }
 
 .qfoot {
   display: flex;

@@ -1,31 +1,1518 @@
 {
  "name": "gxexe",
- "synced": "2026-07-26T18:20:20.575Z",
+ "synced": "2026-07-26T18:23:05.044Z",
+ "route": [
+  {
+   "kind": "task",
+   "name": "Tutorial Island",
+   "state": null,
+   "wiki": "Tutorial_Island"
+  },
+  {
+   "kind": "quest",
+   "name": "Cook's Assistant",
+   "state": 2,
+   "wiki": "Cook's_Assistant"
+  },
+  {
+   "kind": "quest",
+   "name": "Sheep Shearer",
+   "state": 2,
+   "wiki": "Sheep_Shearer"
+  },
+  {
+   "kind": "quest",
+   "name": "Misthalin Mystery",
+   "state": 2,
+   "wiki": "Misthalin_Mystery"
+  },
+  {
+   "kind": "quest",
+   "name": "Prince Ali Rescue",
+   "state": 2,
+   "wiki": "Prince_Ali_Rescue"
+  },
+  {
+   "kind": "quest",
+   "name": "The Restless Ghost",
+   "state": 2,
+   "wiki": "The_Restless_Ghost"
+  },
+  {
+   "kind": "quest",
+   "name": "Rune Mysteries",
+   "state": 2,
+   "wiki": "Rune_Mysteries"
+  },
+  {
+   "kind": "task",
+   "name": "Stronghold of Security",
+   "state": null,
+   "wiki": "Stronghold_of_Security"
+  },
+  {
+   "kind": "quest",
+   "name": "Imp Catcher",
+   "state": 2,
+   "wiki": "Imp_Catcher"
+  },
+  {
+   "kind": "quest",
+   "name": "Witch's Potion",
+   "state": 2,
+   "wiki": "Witch's_Potion"
+  },
+  {
+   "kind": "quest",
+   "name": "Gertrude's Cat",
+   "state": 2,
+   "wiki": "Gertrude's_Cat"
+  },
+  {
+   "kind": "quest",
+   "name": "Children of the Sun",
+   "state": 2,
+   "wiki": "Children_of_the_Sun"
+  },
+  {
+   "kind": "task",
+   "name": "Natural history quiz",
+   "state": null,
+   "wiki": "Natural_history_quiz"
+  },
+  {
+   "kind": "quest",
+   "name": "Daddy's Home",
+   "state": 2,
+   "wiki": "Daddy's_Home"
+  },
+  {
+   "kind": "quest",
+   "name": "Dwarf Cannon",
+   "state": 2,
+   "wiki": "Dwarf_Cannon"
+  },
+  {
+   "kind": "quest",
+   "name": "Waterfall Quest",
+   "state": 2,
+   "wiki": "Waterfall_Quest"
+  },
+  {
+   "kind": "quest",
+   "name": "Tree Gnome Village",
+   "state": 2,
+   "wiki": "Tree_Gnome_Village"
+  },
+  {
+   "kind": "quest",
+   "name": "Doric's Quest",
+   "state": 2,
+   "wiki": "Doric's_Quest"
+  },
+  {
+   "kind": "quest",
+   "name": "Witch's House",
+   "state": 2,
+   "wiki": "Witch's_House"
+  },
+  {
+   "kind": "quest",
+   "name": "The Knight's Sword",
+   "state": 2,
+   "wiki": "The_Knight's_Sword"
+  },
+  {
+   "kind": "quest",
+   "name": "The Tourist Trap",
+   "state": 2,
+   "wiki": "The_Tourist_Trap"
+  },
+  {
+   "kind": "quest",
+   "name": "Black Knights' Fortress",
+   "state": 2,
+   "wiki": "Black_Knights'_Fortress"
+  },
+  {
+   "kind": "quest",
+   "name": "Druidic Ritual",
+   "state": 2,
+   "wiki": "Druidic_Ritual"
+  },
+  {
+   "kind": "quest",
+   "name": "Recruitment Drive",
+   "state": 2,
+   "wiki": "Recruitment_Drive"
+  },
+  {
+   "kind": "quest",
+   "name": "Goblin Diplomacy",
+   "state": 2,
+   "wiki": "Goblin_Diplomacy"
+  },
+  {
+   "kind": "quest",
+   "name": "Sleeping Giants",
+   "state": 2,
+   "wiki": "Sleeping_Giants"
+  },
+  {
+   "kind": "quest",
+   "name": "Fight Arena",
+   "state": 2,
+   "wiki": "Fight_Arena"
+  },
+  {
+   "kind": "quest",
+   "name": "Plague City",
+   "state": 2,
+   "wiki": "Plague_City"
+  },
+  {
+   "kind": "quest",
+   "name": "Monk's Friend",
+   "state": 2,
+   "wiki": "Monk's_Friend"
+  },
+  {
+   "kind": "quest",
+   "name": "Hazeel Cult",
+   "state": 2,
+   "wiki": "Hazeel_Cult"
+  },
+  {
+   "kind": "quest",
+   "name": "Sheep Herder",
+   "state": 2,
+   "wiki": "Sheep_Herder"
+  },
+  {
+   "kind": "quest",
+   "name": "Biohazard",
+   "state": 2,
+   "wiki": "Biohazard"
+  },
+  {
+   "kind": "quest",
+   "name": "Tower of Life",
+   "state": 2,
+   "wiki": "Tower_of_Life"
+  },
+  {
+   "kind": "quest",
+   "name": "Tribal Totem",
+   "state": 2,
+   "wiki": "Tribal_Totem"
+  },
+  {
+   "kind": "quest",
+   "name": "Death Plateau",
+   "state": 2,
+   "wiki": "Death_Plateau"
+  },
+  {
+   "kind": "quest",
+   "name": "Merlin's Crystal",
+   "state": 2,
+   "wiki": "Merlin's_Crystal"
+  },
+  {
+   "kind": "quest",
+   "name": "Holy Grail",
+   "state": 2,
+   "wiki": "Holy_Grail"
+  },
+  {
+   "kind": "quest",
+   "name": "Murder Mystery",
+   "state": 2,
+   "wiki": "Murder_Mystery"
+  },
+  {
+   "kind": "quest",
+   "name": "The Grand Tree",
+   "state": 2,
+   "wiki": "The_Grand_Tree"
+  },
+  {
+   "kind": "diary",
+   "name": "Ardougne Diary",
+   "tier": "Easy",
+   "state": 2,
+   "done": 10,
+   "total": 10,
+   "wiki": "Ardougne_Diary#Easy"
+  },
+  {
+   "kind": "quest",
+   "name": "Rag and Bone Man I",
+   "state": 2,
+   "wiki": "Rag_and_Bone_Man_I"
+  },
+  {
+   "kind": "quest",
+   "name": "Priest in Peril",
+   "state": 2,
+   "wiki": "Priest_in_Peril"
+  },
+  {
+   "kind": "quest",
+   "name": "Nature Spirit",
+   "state": 2,
+   "wiki": "Nature_Spirit"
+  },
+  {
+   "kind": "quest",
+   "name": "Ghosts Ahoy",
+   "state": 2,
+   "wiki": "Ghosts_Ahoy"
+  },
+  {
+   "kind": "quest",
+   "name": "Making History",
+   "state": 2,
+   "wiki": "Making_History"
+  },
+  {
+   "kind": "quest",
+   "name": "The Ides of Milk",
+   "state": 0,
+   "wiki": "The_Ides_of_Milk"
+  },
+  {
+   "kind": "quest",
+   "name": "The Lost Tribe",
+   "state": 2,
+   "wiki": "The_Lost_Tribe"
+  },
+  {
+   "kind": "quest",
+   "name": "Death to the Dorgeshuun",
+   "state": 2,
+   "wiki": "Death_to_the_Dorgeshuun"
+  },
+  {
+   "kind": "quest",
+   "name": "Elemental Workshop I",
+   "state": 2,
+   "wiki": "Elemental_Workshop_I"
+  },
+  {
+   "kind": "quest",
+   "name": "Icthlarin's Little Helper",
+   "state": 2,
+   "wiki": "Icthlarin's_Little_Helper"
+  },
+  {
+   "kind": "quest",
+   "name": "The Golem",
+   "state": 2,
+   "wiki": "The_Golem"
+  },
+  {
+   "kind": "quest",
+   "name": "The Ribbiting Tale of a Lily Pad Labour Dispute",
+   "state": 2,
+   "wiki": "The_Ribbiting_Tale_of_a_Lily_Pad_Labour_Dispute"
+  },
+  {
+   "kind": "quest",
+   "name": "Lost City",
+   "state": 2,
+   "wiki": "Lost_City"
+  },
+  {
+   "kind": "quest",
+   "name": "Fairytale I - Growing Pains",
+   "state": 2,
+   "wiki": "Fairytale_I_-_Growing_Pains"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Another Cook's Quest",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Another_Cook's_Quest"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Wartface & Bentnoze",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Wartface_&_Bentnoze"
+  },
+  {
+   "kind": "quest",
+   "name": "Sea Slug",
+   "state": 2,
+   "wiki": "Sea_Slug"
+  },
+  {
+   "kind": "quest",
+   "name": "Pandemonium",
+   "state": 2,
+   "wiki": "Pandemonium"
+  },
+  {
+   "kind": "quest",
+   "name": "Prying Times",
+   "state": 2,
+   "wiki": "Prying_Times"
+  },
+  {
+   "kind": "quest",
+   "name": "Current Affairs",
+   "state": 2,
+   "wiki": "Current_Affairs"
+  },
+  {
+   "kind": "quest",
+   "name": "Fishing Contest",
+   "state": 2,
+   "wiki": "Fishing_Contest"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Mountain Dwarf",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Mountain_Dwarf"
+  },
+  {
+   "kind": "quest",
+   "name": "Mountain Daughter",
+   "state": 2,
+   "wiki": "Mountain_Daughter"
+  },
+  {
+   "kind": "quest",
+   "name": "Ratcatchers",
+   "state": 2,
+   "wiki": "Ratcatchers"
+  },
+  {
+   "kind": "quest",
+   "name": "The Feud",
+   "state": 2,
+   "wiki": "The_Feud"
+  },
+  {
+   "kind": "quest",
+   "name": "Death on the Isle",
+   "state": 0,
+   "wiki": "Death_on_the_Isle"
+  },
+  {
+   "kind": "quest",
+   "name": "Alfred Grimhand's Barcrawl",
+   "state": 2,
+   "wiki": "Alfred_Grimhand's_Barcrawl"
+  },
+  {
+   "kind": "quest",
+   "name": "Scorpion Catcher",
+   "state": 0,
+   "wiki": "Scorpion_Catcher"
+  },
+  {
+   "kind": "quest",
+   "name": "The Dig Site",
+   "state": 2,
+   "wiki": "The_Dig_Site"
+  },
+  {
+   "kind": "quest",
+   "name": "Elemental Workshop II",
+   "state": 2,
+   "wiki": "Elemental_Workshop_II"
+  },
+  {
+   "kind": "quest",
+   "name": "A Soul's Bane",
+   "state": 0,
+   "wiki": "A_Soul's_Bane"
+  },
+  {
+   "kind": "quest",
+   "name": "Enter the Abyss",
+   "state": 2,
+   "wiki": "Enter_the_Abyss"
+  },
+  {
+   "kind": "quest",
+   "name": "X Marks the Spot",
+   "state": 2,
+   "wiki": "X_Marks_the_Spot"
+  },
+  {
+   "kind": "quest",
+   "name": "Pirate's Treasure",
+   "state": 2,
+   "wiki": "Pirate's_Treasure"
+  },
+  {
+   "kind": "quest",
+   "name": "Client of Kourend",
+   "state": 2,
+   "wiki": "Client_of_Kourend"
+  },
+  {
+   "kind": "quest",
+   "name": "The Queen of Thieves",
+   "state": 0,
+   "wiki": "The_Queen_of_Thieves"
+  },
+  {
+   "kind": "quest",
+   "name": "The Depths of Despair",
+   "state": 0,
+   "wiki": "The_Depths_of_Despair"
+  },
+  {
+   "kind": "quest",
+   "name": "A Porcine of Interest",
+   "state": 2,
+   "wiki": "A_Porcine_of_Interest"
+  },
+  {
+   "kind": "quest",
+   "name": "Wanted!",
+   "state": 0,
+   "wiki": "Wanted!"
+  },
+  {
+   "kind": "quest",
+   "name": "Shield of Arrav",
+   "state": 2,
+   "wiki": "Shield_of_Arrav"
+  },
+  {
+   "kind": "task",
+   "name": "Varrock Museum",
+   "state": null,
+   "wiki": "Varrock_Museum"
+  },
+  {
+   "kind": "quest",
+   "name": "Bone Voyage",
+   "state": 2,
+   "wiki": "Bone_Voyage"
+  },
+  {
+   "kind": "quest",
+   "name": "Watchtower",
+   "state": 2,
+   "wiki": "Watchtower"
+  },
+  {
+   "kind": "quest",
+   "name": "The Giant Dwarf",
+   "state": 1,
+   "wiki": "The_Giant_Dwarf"
+  },
+  {
+   "kind": "quest",
+   "name": "Forgettable Tale...",
+   "state": 0,
+   "wiki": "Forgettable_Tale..."
+  },
+  {
+   "kind": "quest",
+   "name": "Another Slice of H.A.M.",
+   "state": 0,
+   "wiki": "Another_Slice_of_H.A.M."
+  },
+  {
+   "kind": "quest",
+   "name": "Vampyre Slayer",
+   "state": 2,
+   "wiki": "Vampyre_Slayer"
+  },
+  {
+   "kind": "quest",
+   "name": "Ernest the Chicken",
+   "state": 2,
+   "wiki": "Ernest_the_Chicken"
+  },
+  {
+   "kind": "quest",
+   "name": "Demon Slayer",
+   "state": 2,
+   "wiki": "Demon_Slayer"
+  },
+  {
+   "kind": "quest",
+   "name": "Shadow of the Storm",
+   "state": 2,
+   "wiki": "Shadow_of_the_Storm"
+  },
+  {
+   "kind": "quest",
+   "name": "Horror from the Deep",
+   "state": 2,
+   "wiki": "Horror_from_the_Deep"
+  },
+  {
+   "kind": "quest",
+   "name": "Animal Magnetism",
+   "state": 2,
+   "wiki": "Animal_Magnetism"
+  },
+  {
+   "kind": "quest",
+   "name": "Creature of Fenkenstrain",
+   "state": 2,
+   "wiki": "Creature_of_Fenkenstrain"
+  },
+  {
+   "kind": "quest",
+   "name": "Big Chompy Bird Hunting",
+   "state": 2,
+   "wiki": "Big_Chompy_Bird_Hunting"
+  },
+  {
+   "kind": "quest",
+   "name": "Jungle Potion",
+   "state": 2,
+   "wiki": "Jungle_Potion"
+  },
+  {
+   "kind": "quest",
+   "name": "Shilo Village",
+   "state": 2,
+   "wiki": "Shilo_Village"
+  },
+  {
+   "kind": "diary",
+   "name": "Karamja Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 4,
+   "total": 10,
+   "wiki": "Karamja_Diary#Easy"
+  },
+  {
+   "kind": "quest",
+   "name": "Zogre Flesh Eaters",
+   "state": 0,
+   "wiki": "Zogre_Flesh_Eaters"
+  },
+  {
+   "kind": "quest",
+   "name": "Observatory Quest",
+   "state": 2,
+   "wiki": "Observatory_Quest"
+  },
+  {
+   "kind": "quest",
+   "name": "Spirits of the Elid",
+   "state": 2,
+   "wiki": "Spirits_of_the_Elid"
+  },
+  {
+   "kind": "quest",
+   "name": "Garden of Tranquillity",
+   "state": 0,
+   "wiki": "Garden_of_Tranquillity"
+  },
+  {
+   "kind": "quest",
+   "name": "Enlightened Journey",
+   "state": 0,
+   "wiki": "Enlightened_Journey"
+  },
+  {
+   "kind": "task",
+   "name": "Crafting Guild Balloon",
+   "state": null,
+   "wiki": "Crafting_Guild_Balloon"
+  },
+  {
+   "kind": "task",
+   "name": "Varrock Balloon",
+   "state": null,
+   "wiki": "Varrock_Balloon"
+  },
+  {
+   "kind": "quest",
+   "name": "Romeo & Juliet",
+   "state": 2,
+   "wiki": "Romeo_&_Juliet"
+  },
+  {
+   "kind": "quest",
+   "name": "Tears of Guthix",
+   "state": 2,
+   "wiki": "Tears_of_Guthix"
+  },
+  {
+   "kind": "quest",
+   "name": "In Search of the Myreque",
+   "state": 2,
+   "wiki": "In_Search_of_the_Myreque"
+  },
+  {
+   "kind": "quest",
+   "name": "Shades of Mort'ton",
+   "state": 2,
+   "wiki": "Shades_of_Mort'ton"
+  },
+  {
+   "kind": "quest",
+   "name": "In Aid of the Myreque",
+   "state": 0,
+   "wiki": "In_Aid_of_the_Myreque"
+  },
+  {
+   "kind": "quest",
+   "name": "Skippy and the Mogres",
+   "state": 2,
+   "wiki": "Skippy_and_the_Mogres"
+  },
+  {
+   "kind": "quest",
+   "name": "Troll Stronghold",
+   "state": 2,
+   "wiki": "Troll_Stronghold"
+  },
+  {
+   "kind": "quest",
+   "name": "Troll Romance",
+   "state": 2,
+   "wiki": "Troll_Romance"
+  },
+  {
+   "kind": "quest",
+   "name": "Darkness of Hallowvale",
+   "state": 0,
+   "wiki": "Darkness_of_Hallowvale"
+  },
+  {
+   "kind": "quest",
+   "name": "Underground Pass",
+   "state": 2,
+   "wiki": "Underground_Pass"
+  },
+  {
+   "kind": "quest",
+   "name": "Regicide",
+   "state": 1,
+   "wiki": "Regicide"
+  },
+  {
+   "kind": "quest",
+   "name": "Dragon Slayer I",
+   "state": 2,
+   "wiki": "Dragon_Slayer_I"
+  },
+  {
+   "kind": "quest",
+   "name": "The Fremennik Trials",
+   "state": 2,
+   "wiki": "The_Fremennik_Trials"
+  },
+  {
+   "kind": "quest",
+   "name": "The Fremennik Isles",
+   "state": 2,
+   "wiki": "The_Fremennik_Isles"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Evil Dave",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Evil_Dave"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Pirate Pete",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Pirate_Pete"
+  },
+  {
+   "kind": "quest",
+   "name": "Tai Bwo Wannai Trio",
+   "state": 2,
+   "wiki": "Tai_Bwo_Wannai_Trio"
+  },
+  {
+   "kind": "diary",
+   "name": "Kandarin Diary",
+   "tier": "Easy",
+   "state": 0,
+   "done": 0,
+   "total": 11,
+   "wiki": "Kandarin_Diary#Easy"
+  },
+  {
+   "kind": "quest",
+   "name": "Contact!",
+   "state": 0,
+   "wiki": "Contact!"
+  },
+  {
+   "kind": "quest",
+   "name": "Temple of Ikov",
+   "state": 2,
+   "wiki": "Temple_of_Ikov"
+  },
+  {
+   "kind": "quest",
+   "name": "The Eyes of Glouphrie",
+   "state": 2,
+   "wiki": "The_Eyes_of_Glouphrie"
+  },
+  {
+   "kind": "quest",
+   "name": "Temple of the Eye",
+   "state": 2,
+   "wiki": "Temple_of_the_Eye"
+  },
+  {
+   "kind": "quest",
+   "name": "One Small Favour",
+   "state": 0,
+   "wiki": "One_Small_Favour"
+  },
+  {
+   "kind": "quest",
+   "name": "The Ascent of Arceuus",
+   "state": 0,
+   "wiki": "The_Ascent_of_Arceuus"
+  },
+  {
+   "kind": "quest",
+   "name": "Tale of the Righteous",
+   "state": 0,
+   "wiki": "Tale_of_the_Righteous"
+  },
+  {
+   "kind": "quest",
+   "name": "The Forsaken Tower",
+   "state": 0,
+   "wiki": "The_Forsaken_Tower"
+  },
+  {
+   "kind": "diary",
+   "name": "Desert Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 2,
+   "total": 11,
+   "wiki": "Desert_Diary#Easy"
+  },
+  {
+   "kind": "diary",
+   "name": "Fremennik Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 1,
+   "total": 10,
+   "wiki": "Fremennik_Diary#Easy"
+  },
+  {
+   "kind": "diary",
+   "name": "Falador Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 4,
+   "total": 11,
+   "wiki": "Falador_Diary#Easy"
+  },
+  {
+   "kind": "diary",
+   "name": "Kourend & Kebos Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 2,
+   "total": 12,
+   "wiki": "Kourend_&_Kebos_Diary#Easy"
+  },
+  {
+   "kind": "diary",
+   "name": "Lumbridge & Draynor Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 3,
+   "total": 12,
+   "wiki": "Lumbridge_&_Draynor_Diary#Easy"
+  },
+  {
+   "kind": "diary",
+   "name": "Morytania Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 4,
+   "total": 11,
+   "wiki": "Morytania_Diary#Easy"
+  },
+  {
+   "kind": "diary",
+   "name": "Varrock Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 4,
+   "total": 14,
+   "wiki": "Varrock_Diary#Easy"
+  },
+  {
+   "kind": "diary",
+   "name": "Western Provinces Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 3,
+   "total": 11,
+   "wiki": "Western_Provinces_Diary#Easy"
+  },
+  {
+   "kind": "diary",
+   "name": "Wilderness Diary",
+   "tier": "Easy",
+   "state": 1,
+   "done": 3,
+   "total": 12,
+   "wiki": "Wilderness_Diary#Easy"
+  },
+  {
+   "kind": "quest",
+   "name": "Between a Rock...",
+   "state": 0,
+   "wiki": "Between_a_Rock..."
+  },
+  {
+   "kind": "quest",
+   "name": "The Slug Menace",
+   "state": 0,
+   "wiki": "The_Slug_Menace"
+  },
+  {
+   "kind": "quest",
+   "name": "Getting Ahead",
+   "state": 0,
+   "wiki": "Getting_Ahead"
+  },
+  {
+   "kind": "task",
+   "name": "Museum Camp",
+   "state": null,
+   "wiki": "Museum_Camp"
+  },
+  {
+   "kind": "quest",
+   "name": "Cold War",
+   "state": 0,
+   "wiki": "Cold_War"
+  },
+  {
+   "kind": "quest",
+   "name": "The Hand in the Sand",
+   "state": 0,
+   "wiki": "The_Hand_in_the_Sand"
+  },
+  {
+   "kind": "quest",
+   "name": "Enakhra's Lament",
+   "state": 2,
+   "wiki": "Enakhra's_Lament"
+  },
+  {
+   "kind": "quest",
+   "name": "Eadgar's Ruse",
+   "state": 0,
+   "wiki": "Eadgar's_Ruse"
+  },
+  {
+   "kind": "quest",
+   "name": "My Arm's Big Adventure",
+   "state": 0,
+   "wiki": "My_Arm's_Big_Adventure"
+  },
+  {
+   "kind": "quest",
+   "name": "The Garden of Death",
+   "state": 2,
+   "wiki": "The_Garden_of_Death"
+  },
+  {
+   "kind": "quest",
+   "name": "Rag and Bone Man II",
+   "state": 1,
+   "wiki": "Rag_and_Bone_Man_II"
+  },
+  {
+   "kind": "quest",
+   "name": "Rum Deal",
+   "state": 0,
+   "wiki": "Rum_Deal"
+  },
+  {
+   "kind": "quest",
+   "name": "Cabin Fever",
+   "state": 0,
+   "wiki": "Cabin_Fever"
+  },
+  {
+   "kind": "quest",
+   "name": "Meat and Greet",
+   "state": 0,
+   "wiki": "Meat_and_Greet"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Lumbridge Guide",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Lumbridge_Guide"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Skrach Uglogwee",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Skrach_Uglogwee"
+  },
+  {
+   "kind": "quest",
+   "name": "Heroes' Quest",
+   "state": 2,
+   "wiki": "Heroes'_Quest"
+  },
+  {
+   "kind": "quest",
+   "name": "Throne of Miscellania",
+   "state": 0,
+   "wiki": "Throne_of_Miscellania"
+  },
+  {
+   "kind": "quest",
+   "name": "Royal Trouble",
+   "state": 0,
+   "wiki": "Royal_Trouble"
+  },
+  {
+   "kind": "quest",
+   "name": "Haunted Mine",
+   "state": 2,
+   "wiki": "Haunted_Mine"
+  },
+  {
+   "kind": "quest",
+   "name": "Lair of Tarn Razorlor",
+   "state": 0,
+   "wiki": "Lair_of_Tarn_Razorlor"
+  },
+  {
+   "kind": "quest",
+   "name": "Monkey Madness I",
+   "state": 2,
+   "wiki": "Monkey_Madness_I"
+  },
+  {
+   "kind": "quest",
+   "name": "Ethically Acquired Antiquities",
+   "state": 0,
+   "wiki": "Ethically_Acquired_Antiquities"
+  },
+  {
+   "kind": "quest",
+   "name": "Twilight's Promise",
+   "state": 0,
+   "wiki": "Twilight's_Promise"
+  },
+  {
+   "kind": "quest",
+   "name": "Roving Elves",
+   "state": 0,
+   "wiki": "Roving_Elves"
+  },
+  {
+   "kind": "quest",
+   "name": "Mourning's End Part I",
+   "state": 0,
+   "wiki": "Mourning's_End_Part_I"
+  },
+  {
+   "kind": "quest",
+   "name": "Mourning's End Part II",
+   "state": 0,
+   "wiki": "Mourning's_End_Part_II"
+  },
+  {
+   "kind": "quest",
+   "name": "Desert Treasure I",
+   "state": 2,
+   "wiki": "Desert_Treasure_I"
+  },
+  {
+   "kind": "quest",
+   "name": "Family Crest",
+   "state": 2,
+   "wiki": "Family_Crest"
+  },
+  {
+   "kind": "quest",
+   "name": "What Lies Below",
+   "state": 0,
+   "wiki": "What_Lies_Below"
+  },
+  {
+   "kind": "quest",
+   "name": "Eagles' Peak",
+   "state": 2,
+   "wiki": "Eagles'_Peak"
+  },
+  {
+   "kind": "quest",
+   "name": "A Tail of Two Cats",
+   "state": 2,
+   "wiki": "A_Tail_of_Two_Cats"
+  },
+  {
+   "kind": "quest",
+   "name": "Legends' Quest",
+   "state": 1,
+   "wiki": "Legends'_Quest"
+  },
+  {
+   "kind": "quest",
+   "name": "Land of the Goblins",
+   "state": 0,
+   "wiki": "Land_of_the_Goblins"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Sir Amik Varze",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Sir_Amik_Varze"
+  },
+  {
+   "kind": "quest",
+   "name": "Olaf's Quest",
+   "state": 0,
+   "wiki": "Olaf's_Quest"
+  },
+  {
+   "kind": "quest",
+   "name": "A Kingdom Divided",
+   "state": 0,
+   "wiki": "A_Kingdom_Divided"
+  },
+  {
+   "kind": "quest",
+   "name": "A Taste of Hope",
+   "state": 0,
+   "wiki": "A_Taste_of_Hope"
+  },
+  {
+   "kind": "quest",
+   "name": "At First Light",
+   "state": 0,
+   "wiki": "At_First_Light"
+  },
+  {
+   "kind": "task",
+   "name": "Castle Wars Balloon",
+   "state": null,
+   "wiki": "Castle_Wars_Balloon"
+  },
+  {
+   "kind": "diary",
+   "name": "Ardougne Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 2,
+   "total": 12,
+   "wiki": "Ardougne_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Desert Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 4,
+   "total": 12,
+   "wiki": "Desert_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Falador Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 2,
+   "total": 14,
+   "wiki": "Falador_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Fremennik Diary",
+   "tier": "Medium",
+   "state": 0,
+   "done": 0,
+   "total": 9,
+   "wiki": "Fremennik_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Kandarin Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 1,
+   "total": 14,
+   "wiki": "Kandarin_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Kourend & Kebos Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 3,
+   "total": 13,
+   "wiki": "Kourend_&_Kebos_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Lumbridge & Draynor Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 4,
+   "total": 12,
+   "wiki": "Lumbridge_&_Draynor_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Morytania Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 4,
+   "total": 11,
+   "wiki": "Morytania_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Varrock Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 5,
+   "total": 13,
+   "wiki": "Varrock_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Western Provinces Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 2,
+   "total": 13,
+   "wiki": "Western_Provinces_Diary#Medium"
+  },
+  {
+   "kind": "quest",
+   "name": "Curse of the Empty Lord",
+   "state": 0,
+   "wiki": "Curse_of_the_Empty_Lord"
+  },
+  {
+   "kind": "quest",
+   "name": "The General's Shadow",
+   "state": 0,
+   "wiki": "The_General's_Shadow"
+  },
+  {
+   "kind": "task",
+   "name": "Varrock Museum 2",
+   "state": null,
+   "wiki": "Varrock_Museum_2"
+  },
+  {
+   "kind": "quest",
+   "name": "His Faithful Servants",
+   "state": 0,
+   "wiki": "His_Faithful_Servants"
+  },
+  {
+   "kind": "quest",
+   "name": "The Great Brain Robbery",
+   "state": 0,
+   "wiki": "The_Great_Brain_Robbery"
+  },
+  {
+   "kind": "quest",
+   "name": "Scrambled!",
+   "state": 0,
+   "wiki": "Scrambled!"
+  },
+  {
+   "kind": "quest",
+   "name": "Fairytale II - Cure a Queen",
+   "state": 1,
+   "wiki": "Fairytale_II_-_Cure_a_Queen"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - King Awowogei",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_King_Awowogei"
+  },
+  {
+   "kind": "quest",
+   "name": "Recipe for Disaster - Culinaromancer",
+   "state": 2,
+   "wiki": "Recipe_for_Disaster_-_Culinaromancer"
+  },
+  {
+   "kind": "quest",
+   "name": "Perilous Moons",
+   "state": 0,
+   "wiki": "Perilous_Moons"
+  },
+  {
+   "kind": "quest",
+   "name": "The Path of Glouphrie",
+   "state": 0,
+   "wiki": "The_Path_of_Glouphrie"
+  },
+  {
+   "kind": "quest",
+   "name": "The Heart of Darkness",
+   "state": 0,
+   "wiki": "The_Heart_of_Darkness"
+  },
+  {
+   "kind": "quest",
+   "name": "Lunar Diplomacy",
+   "state": 0,
+   "wiki": "Lunar_Diplomacy"
+  },
+  {
+   "kind": "quest",
+   "name": "King's Ransom",
+   "state": 0,
+   "wiki": "King's_Ransom"
+  },
+  {
+   "kind": "task",
+   "name": "Knight Waves Training Grounds",
+   "state": null,
+   "wiki": "Knight_Waves_Training_Grounds"
+  },
+  {
+   "kind": "quest",
+   "name": "Swan Song",
+   "state": 0,
+   "wiki": "Swan_Song"
+  },
+  {
+   "kind": "quest",
+   "name": "Below Ice Mountain",
+   "state": 2,
+   "wiki": "Below_Ice_Mountain"
+  },
+  {
+   "kind": "quest",
+   "name": "Defender of Varrock",
+   "state": 0,
+   "wiki": "Defender_of_Varrock"
+  },
+  {
+   "kind": "quest",
+   "name": "Devious Minds",
+   "state": 0,
+   "wiki": "Devious_Minds"
+  },
+  {
+   "kind": "quest",
+   "name": "Grim Tales",
+   "state": 0,
+   "wiki": "Grim_Tales"
+  },
+  {
+   "kind": "quest",
+   "name": "Dream Mentor",
+   "state": 0,
+   "wiki": "Dream_Mentor"
+  },
+  {
+   "kind": "diary",
+   "name": "Karamja Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 6,
+   "total": 19,
+   "wiki": "Karamja_Diary#Medium"
+  },
+  {
+   "kind": "diary",
+   "name": "Wilderness Diary",
+   "tier": "Medium",
+   "state": 1,
+   "done": 1,
+   "total": 11,
+   "wiki": "Wilderness_Diary#Medium"
+  },
+  {
+   "kind": "quest",
+   "name": "The Fremennik Exiles",
+   "state": 0,
+   "wiki": "The_Fremennik_Exiles"
+  },
+  {
+   "kind": "quest",
+   "name": "Sins of the Father",
+   "state": 0,
+   "wiki": "Sins_of_the_Father"
+  },
+  {
+   "kind": "task",
+   "name": "Grand Tree Balloon",
+   "state": null,
+   "wiki": "Grand_Tree_Balloon"
+  },
+  {
+   "kind": "quest",
+   "name": "In Search of Knowledge",
+   "state": 0,
+   "wiki": "In_Search_of_Knowledge"
+  },
+  {
+   "kind": "quest",
+   "name": "Hopespear's Will",
+   "state": 0,
+   "wiki": "Hopespear's_Will"
+  },
+  {
+   "kind": "quest",
+   "name": "Beneath Cursed Sands",
+   "state": 0,
+   "wiki": "Beneath_Cursed_Sands"
+  },
+  {
+   "kind": "quest",
+   "name": "Shadows of Custodia",
+   "state": 0,
+   "wiki": "Shadows_of_Custodia"
+  },
+  {
+   "kind": "quest",
+   "name": "Troubled Tortugans",
+   "state": 0,
+   "wiki": "Troubled_Tortugans"
+  },
+  {
+   "kind": "quest",
+   "name": "The Red Reef",
+   "state": 0,
+   "wiki": "The_Red_Reef"
+  },
+  {
+   "kind": "quest",
+   "name": "Monkey Madness II",
+   "state": 0,
+   "wiki": "Monkey_Madness_II"
+  },
+  {
+   "kind": "quest",
+   "name": "Into the Tombs",
+   "state": 0,
+   "wiki": "Into_the_Tombs"
+  },
+  {
+   "kind": "quest",
+   "name": "A Night at the Theatre",
+   "state": 0,
+   "wiki": "A_Night_at_the_Theatre"
+  },
+  {
+   "kind": "quest",
+   "name": "Dragon Slayer II",
+   "state": 0,
+   "wiki": "Dragon_Slayer_II"
+  },
+  {
+   "kind": "quest",
+   "name": "The Curse of Arrav",
+   "state": 0,
+   "wiki": "The_Curse_of_Arrav"
+  },
+  {
+   "kind": "quest",
+   "name": "Making Friends with My Arm",
+   "state": 0,
+   "wiki": "Making_Friends_with_My_Arm"
+  },
+  {
+   "kind": "quest",
+   "name": "Secrets of the North",
+   "state": 0,
+   "wiki": "Secrets_of_the_North"
+  },
+  {
+   "kind": "quest",
+   "name": "The Final Dawn",
+   "state": 0,
+   "wiki": "The_Final_Dawn"
+  },
+  {
+   "kind": "quest",
+   "name": "While Guthix Sleeps",
+   "state": 0,
+   "wiki": "While_Guthix_Sleeps"
+  },
+  {
+   "kind": "quest",
+   "name": "Desert Treasure II - The Fallen Empire",
+   "state": 0,
+   "wiki": "Desert_Treasure_II_-_The_Fallen_Empire"
+  },
+  {
+   "kind": "quest",
+   "name": "Song of the Elves",
+   "state": 0,
+   "wiki": "Song_of_the_Elves"
+  },
+  {
+   "kind": "quest",
+   "name": "The Blood Moon Rises",
+   "state": 0,
+   "wiki": "The_Blood_Moon_Rises"
+  },
+  {
+   "kind": "quest",
+   "name": "Clock Tower",
+   "state": 0,
+   "wiki": "Clock_Tower"
+  },
+  {
+   "kind": "quest",
+   "name": "The Corsair Curse",
+   "state": 2,
+   "wiki": "The_Corsair_Curse"
+  }
+ ],
+ "route_next": {
+  "kind": "quest",
+  "name": "The Ides of Milk",
+  "state": 0,
+  "wiki": "The_Ides_of_Milk"
+ },
+ "route_left": 107,
  "order": [
-  "Learning the Ropes",
   "Cook's Assistant",
-  "Prince Ali Rescue",
-  "Rune Mysteries",
-  "The Restless Ghost",
   "Sheep Shearer",
   "Misthalin Mystery",
+  "Prince Ali Rescue",
+  "The Restless Ghost",
+  "Rune Mysteries",
   "Imp Catcher",
   "Witch's Potion",
   "Gertrude's Cat",
-  "Ratcatchers",
   "Children of the Sun",
   "Daddy's Home",
   "Dwarf Cannon",
-  "Alfred Grimhand's Barcrawl",
-  "Doric's Quest",
-  "The Knight's Sword",
   "Waterfall Quest",
   "Tree Gnome Village",
+  "Doric's Quest",
   "Witch's House",
+  "The Knight's Sword",
   "The Tourist Trap",
   "Black Knights' Fortress",
   "Druidic Ritual",
-  "Dragon Slayer I",
   "Recruitment Drive",
   "Goblin Diplomacy",
   "Sleeping Giants",
@@ -43,7 +1530,6 @@
   "Murder Mystery",
   "The Grand Tree",
   "Rag and Bone Man I",
-  "Rag and Bone Man II",
   "Priest in Peril",
   "Nature Spirit",
   "Ghosts Ahoy",
@@ -57,17 +1543,19 @@
   "The Ribbiting Tale of a Lily Pad Labour Dispute",
   "Lost City",
   "Fairytale I - Growing Pains",
-  "Fairytale II - Cure a Queen",
+  "Recipe for Disaster - Another Cook's Quest",
+  "Recipe for Disaster - Wartface & Bentnoze",
   "Sea Slug",
   "Pandemonium",
   "Prying Times",
   "Current Affairs",
   "Fishing Contest",
+  "Recipe for Disaster - Mountain Dwarf",
   "Mountain Daughter",
-  "The Giant Dwarf",
-  "Clock Tower",
+  "Ratcatchers",
   "The Feud",
   "Death on the Isle",
+  "Alfred Grimhand's Barcrawl",
   "Scorpion Catcher",
   "The Dig Site",
   "Elemental Workshop II",
@@ -83,6 +1571,7 @@
   "Shield of Arrav",
   "Bone Voyage",
   "Watchtower",
+  "The Giant Dwarf",
   "Forgettable Tale...",
   "Another Slice of H.A.M.",
   "Vampyre Slayer",
@@ -111,8 +1600,11 @@
   "Darkness of Hallowvale",
   "Underground Pass",
   "Regicide",
+  "Dragon Slayer I",
   "The Fremennik Trials",
   "The Fremennik Isles",
+  "Recipe for Disaster - Evil Dave",
+  "Recipe for Disaster - Pirate Pete",
   "Tai Bwo Wannai Trio",
   "Contact!",
   "Temple of Ikov",
@@ -131,9 +1623,12 @@
   "Eadgar's Ruse",
   "My Arm's Big Adventure",
   "The Garden of Death",
+  "Rag and Bone Man II",
   "Rum Deal",
   "Cabin Fever",
   "Meat and Greet",
+  "Recipe for Disaster - Lumbridge Guide",
+  "Recipe for Disaster - Skrach Uglogwee",
   "Heroes' Quest",
   "Throne of Miscellania",
   "Royal Trouble",
@@ -152,6 +1647,7 @@
   "A Tail of Two Cats",
   "Legends' Quest",
   "Land of the Goblins",
+  "Recipe for Disaster - Sir Amik Varze",
   "Olaf's Quest",
   "A Kingdom Divided",
   "A Taste of Hope",
@@ -161,8 +1657,10 @@
   "His Faithful Servants",
   "The Great Brain Robbery",
   "Scrambled!",
+  "Fairytale II - Cure a Queen",
+  "Recipe for Disaster - King Awowogei",
+  "Recipe for Disaster - Culinaromancer",
   "Perilous Moons",
-  "In Search of Knowledge",
   "The Path of Glouphrie",
   "The Heart of Darkness",
   "Lunar Diplomacy",
@@ -175,6 +1673,7 @@
   "Dream Mentor",
   "The Fremennik Exiles",
   "Sins of the Father",
+  "In Search of Knowledge",
   "Hopespear's Will",
   "Beneath Cursed Sands",
   "Shadows of Custodia",
@@ -192,23 +1691,15 @@
   "Desert Treasure II - The Fallen Empire",
   "Song of the Elves",
   "The Blood Moon Rises",
+  "Clock Tower",
   "The Corsair Curse",
   "Barbarian Training",
   "Bear Your Soul",
   "Family Pest",
+  "Learning the Ropes",
   "Mage Arena I",
   "Mage Arena II",
   "Recipe for Disaster",
-  "Recipe for Disaster - Another Cook's Quest",
-  "Recipe for Disaster - Culinaromancer",
-  "Recipe for Disaster - Evil Dave",
-  "Recipe for Disaster - King Awowogei",
-  "Recipe for Disaster - Lumbridge Guide",
-  "Recipe for Disaster - Mountain Dwarf",
-  "Recipe for Disaster - Pirate Pete",
-  "Recipe for Disaster - Sir Amik Varze",
-  "Recipe for Disaster - Skrach Uglogwee",
-  "Recipe for Disaster - Wartface & Bentnoze",
   "The Enchanted Key",
   "The Frozen Door",
   "Vale Totems"
@@ -428,27 +1919,24 @@
  "done": 119,
  "total": 210,
  "in_progress": [
-  "Rag and Bone Man II",
-  "Fairytale II - Cure a Queen",
   "The Giant Dwarf",
   "Regicide",
+  "Rag and Bone Man II",
   "Legends' Quest",
+  "Fairytale II - Cure a Queen",
   "The Enchanted Key",
   "The Frozen Door"
  ],
- "next": "Rag and Bone Man II",
+ "next": "The Ides of Milk",
  "remaining": [
-  "Rag and Bone Man II",
   "The Ides of Milk",
-  "Fairytale II - Cure a Queen",
-  "The Giant Dwarf",
-  "Clock Tower",
   "Death on the Isle",
   "Scorpion Catcher",
   "A Soul's Bane",
   "The Queen of Thieves",
   "The Depths of Despair",
   "Wanted!",
+  "The Giant Dwarf",
   "Forgettable Tale...",
   "Another Slice of H.A.M.",
   "Zogre Flesh Eaters",
@@ -469,6 +1957,7 @@
   "The Hand in the Sand",
   "Eadgar's Ruse",
   "My Arm's Big Adventure",
+  "Rag and Bone Man II",
   "Rum Deal",
   "Cabin Fever",
   "Meat and Greet",
@@ -492,8 +1981,8 @@
   "His Faithful Servants",
   "The Great Brain Robbery",
   "Scrambled!",
+  "Fairytale II - Cure a Queen",
   "Perilous Moons",
-  "In Search of Knowledge",
   "The Path of Glouphrie",
   "The Heart of Darkness",
   "Lunar Diplomacy",
@@ -505,6 +1994,7 @@
   "Dream Mentor",
   "The Fremennik Exiles",
   "Sins of the Father",
+  "In Search of Knowledge",
   "Hopespear's Will",
   "Beneath Cursed Sands",
   "Shadows of Custodia",
@@ -522,6 +2012,7 @@
   "Desert Treasure II - The Fallen Empire",
   "Song of the Elves",
   "The Blood Moon Rises",
+  "Clock Tower",
   "Barbarian Training",
   "Bear Your Soul",
   "Mage Arena I",
@@ -530,5 +2021,5 @@
   "The Frozen Door",
   "Vale Totems"
  ],
- "fetched": "2026-07-27T03:20+09:00"
+ "fetched": "2026-07-27T03:23+09:00"
 }
