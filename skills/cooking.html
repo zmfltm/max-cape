@@ -64,7 +64,7 @@
   <a href="../index.html#diaries"><img class="refico" src="../assets/icons/Diaries.png" alt="" width="15" height="15"><span class="t">Diaries</span></a>
   <a href="../index.html#approach"><img class="refico" src="../assets/icons/Slayer.png" alt="" width="15" height="15"><span class="t">Slayer</span></a>
   <a href="../index.html#max-order"><img class="refico" src="../assets/media/max-cape.png" alt="" width="15" height="15"><span class="t">Max Order</span></a>
-  <a href="../index.html#outfits"><img class="refico" src="../assets/media/site/skills-tab.png" alt="" width="15" height="15"><span class="t">XP Gear</span></a>
+  <a href="../index.html#outfits"><img class="refico" src="../assets/media/site/worn-equipment.png" alt="" width="15" height="15"><span class="t">Gear</span></a>
   <a href="../index.html#skills"><img class="refico" src="../assets/media/site/skills-tab.png" alt="" width="15" height="15"><span class="t">Skills</span></a>
   <div class="rail-kick">Links</div>
   <a class="slink" href="https://www.osrsguide.com/skilling-guides/" target="_blank" rel="noopener"><span class="t">OSRS Guide</span><span class="ext">&#8599;</span></a>
@@ -391,7 +391,6 @@
   var btn = document.getElementById('starrefresh');
   var limit = parseInt(list.getAttribute('data-limit'), 10) || 12;
   var root = box.getAttribute('data-root') || '';
-  var FRESH = 20 * 60 * 1000;
   var pickMin = document.getElementById('tiermin');
   var pickMax = document.getElementById('tiermax');
   var mining = parseInt(box.getAttribute('data-mining'), 10) || 0;
@@ -461,11 +460,11 @@
     return true;
   }
 
-  function frame() {
-    list.innerHTML = '<iframe src="https://07.gg/trackers/shooting-star" '
-      + 'title="Shooting star tracker" loading="lazy" height="' + (limit > 20 ? 900 : 560) + '" '
-      + 'referrerpolicy="no-referrer"></iframe>';
-    status.textContent = 'live from 07.gg';
+  function empty(msg) {
+    list.innerHTML = '<p class="starnone">' + msg + ' '
+      + '<a href="https://07.gg/trackers/shooting-star" target="_blank" rel="noopener">'
+      + 'Check the tracker directly &#8599;</a></p>';
+    status.textContent = 'no live data';
   }
 
   function get(url) {
@@ -492,15 +491,24 @@
     get('/api/stars')
       .then(function (d) {
         if (d.error || !d.stars) throw new Error('no data');
-        done(function () { if (!draw(d.stars, d.at)) frame(); });
+        done(function () {
+          if (!draw(d.stars, d.at)) empty('No stars are active right now.');
+        });
       })
       .catch(function () {
         get(root + 'data/stars.json')
           .then(function (d) {
-            var fresh = d.at && (Date.now() - d.at) < FRESH;
-            done(function () { if (!fresh || !draw(d.stars || [], d.at)) frame(); });
+            done(function () {
+              if (!draw(d.stars || [], d.at)) {
+                empty('The saved list has expired. Run <code>serve.py</code> for live stars.');
+              }
+            });
           })
-          .catch(function () { done(frame, true); });
+          .catch(function () {
+            done(function () {
+              empty('Live stars need <code>serve.py</code> running.');
+            }, true);
+          });
       });
   }
 
@@ -687,23 +695,26 @@
 </script>
 
 <script>
-/* Owned XP gear. Ticking one also switches on the matching rate toggle for
-   that skill, which lives under the same key the skill page reads. */
+/* Owned gear, a piece at a time. A completed set switches on that skill's rate
+   toggle, which lives under the key the skill page reads. */
 (function () {
-  var boxes = Array.prototype.slice.call(document.querySelectorAll('.ownbox'));
-  if (!boxes.length) return;
-  var KEY = 'osrsplan.owned';
+  var sets = Array.prototype.slice.call(document.querySelectorAll('.outfit'));
+  if (!sets.length) return;
+  var KEY = 'osrsplan.pieces';
 
   function load() {
     try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
     catch (err) { return {}; }
   }
+  var owned = load();
 
-  function bonusKey(skill) { return 'osrsplan.bonus.' + skill; }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(owned)); } catch (err) { /* ignore */ }
+  }
 
   function setBonus(skill, idx, on) {
-    if (!skill || idx === null) return;
-    var k = bonusKey(skill), list = [];
+    if (!skill || isNaN(idx)) return;
+    var k = 'osrsplan.bonus.' + skill, list = [];
     try { list = JSON.parse(localStorage.getItem(k) || '[]'); } catch (err) { list = []; }
     var at = list.indexOf(idx);
     if (on && at === -1) list.push(idx);
@@ -711,17 +722,34 @@
     try { localStorage.setItem(k, JSON.stringify(list)); } catch (err) { /* ignore */ }
   }
 
-  var owned = load();
-  boxes.forEach(function (b) {
-    b.checked = !!owned[b.getAttribute('data-key')];
-    b.parentNode.classList.toggle('have', b.checked);
-    b.addEventListener('change', function () {
-      owned[b.getAttribute('data-key')] = b.checked;
-      try { localStorage.setItem(KEY, JSON.stringify(owned)); } catch (err) { /* ignore */ }
-      b.parentNode.classList.toggle('have', b.checked);
-      setBonus(b.getAttribute('data-skill'),
-               parseInt(b.getAttribute('data-bonus'), 10), b.checked);
+  sets.forEach(function (row) {
+    var name = row.getAttribute('data-set');
+    var total = parseInt(row.getAttribute('data-total'), 10) || 0;
+    var boxes = Array.prototype.slice.call(row.querySelectorAll('.piecebox'));
+    var count = row.querySelector('.ocount');
+    var mine = owned[name] || {};
+
+    function refresh(write) {
+      var have = boxes.filter(function (b) { return b.checked; }).length;
+      count.textContent = have + '/' + total;
+      row.classList.toggle('have', have === total);
+      row.classList.toggle('part', have > 0 && have < total);
+      if (write) {
+        setBonus(row.getAttribute('data-skill'),
+                 parseInt(row.getAttribute('data-bonus'), 10), have === total);
+      }
+    }
+
+    boxes.forEach(function (b) {
+      b.checked = !!mine[b.getAttribute('data-piece')];
+      b.addEventListener('change', function () {
+        if (!owned[name]) owned[name] = {};
+        owned[name][b.getAttribute('data-piece')] = b.checked;
+        save();
+        refresh(true);
+      });
     });
+    refresh(false);
   });
 })();
 </script>

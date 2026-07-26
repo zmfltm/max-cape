@@ -603,7 +603,7 @@ PLAN_LINKS = [
     ("diaries", "Diaries", "assets/icons/Diaries.png"),
     ("approach", "Slayer", "assets/icons/Slayer.png"),
     ("max-order", "Max Order", "assets/media/max-cape.png"),
-    ("outfits", "XP Gear", "assets/media/site/skills-tab.png"),
+    ("outfits", "Gear", "assets/media/site/worn-equipment.png"),
     ("skills", "Skills", "assets/media/site/skills-tab.png"),
 ]
 
@@ -1391,23 +1391,26 @@ PICK_JS = """
 
 OWN_JS = """
 <script>
-/* Owned XP gear. Ticking one also switches on the matching rate toggle for
-   that skill, which lives under the same key the skill page reads. */
+/* Owned gear, a piece at a time. A completed set switches on that skill's rate
+   toggle, which lives under the key the skill page reads. */
 (function () {
-  var boxes = Array.prototype.slice.call(document.querySelectorAll('.ownbox'));
-  if (!boxes.length) return;
-  var KEY = 'osrsplan.owned';
+  var sets = Array.prototype.slice.call(document.querySelectorAll('.outfit'));
+  if (!sets.length) return;
+  var KEY = 'osrsplan.pieces';
 
   function load() {
     try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
     catch (err) { return {}; }
   }
+  var owned = load();
 
-  function bonusKey(skill) { return 'osrsplan.bonus.' + skill; }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(owned)); } catch (err) { /* ignore */ }
+  }
 
   function setBonus(skill, idx, on) {
-    if (!skill || idx === null) return;
-    var k = bonusKey(skill), list = [];
+    if (!skill || isNaN(idx)) return;
+    var k = 'osrsplan.bonus.' + skill, list = [];
     try { list = JSON.parse(localStorage.getItem(k) || '[]'); } catch (err) { list = []; }
     var at = list.indexOf(idx);
     if (on && at === -1) list.push(idx);
@@ -1415,17 +1418,34 @@ OWN_JS = """
     try { localStorage.setItem(k, JSON.stringify(list)); } catch (err) { /* ignore */ }
   }
 
-  var owned = load();
-  boxes.forEach(function (b) {
-    b.checked = !!owned[b.getAttribute('data-key')];
-    b.parentNode.classList.toggle('have', b.checked);
-    b.addEventListener('change', function () {
-      owned[b.getAttribute('data-key')] = b.checked;
-      try { localStorage.setItem(KEY, JSON.stringify(owned)); } catch (err) { /* ignore */ }
-      b.parentNode.classList.toggle('have', b.checked);
-      setBonus(b.getAttribute('data-skill'),
-               parseInt(b.getAttribute('data-bonus'), 10), b.checked);
+  sets.forEach(function (row) {
+    var name = row.getAttribute('data-set');
+    var total = parseInt(row.getAttribute('data-total'), 10) || 0;
+    var boxes = Array.prototype.slice.call(row.querySelectorAll('.piecebox'));
+    var count = row.querySelector('.ocount');
+    var mine = owned[name] || {};
+
+    function refresh(write) {
+      var have = boxes.filter(function (b) { return b.checked; }).length;
+      count.textContent = have + '/' + total;
+      row.classList.toggle('have', have === total);
+      row.classList.toggle('part', have > 0 && have < total);
+      if (write) {
+        setBonus(row.getAttribute('data-skill'),
+                 parseInt(row.getAttribute('data-bonus'), 10), have === total);
+      }
+    }
+
+    boxes.forEach(function (b) {
+      b.checked = !!mine[b.getAttribute('data-piece')];
+      b.addEventListener('change', function () {
+        if (!owned[name]) owned[name] = {};
+        owned[name][b.getAttribute('data-piece')] = b.checked;
+        save();
+        refresh(true);
+      });
     });
+    refresh(false);
   });
 })();
 </script>
@@ -1507,7 +1527,6 @@ STARS_JS = """
   var btn = document.getElementById('starrefresh');
   var limit = parseInt(list.getAttribute('data-limit'), 10) || 12;
   var root = box.getAttribute('data-root') || '';
-  var FRESH = 20 * 60 * 1000;
   var pickMin = document.getElementById('tiermin');
   var pickMax = document.getElementById('tiermax');
   var mining = parseInt(box.getAttribute('data-mining'), 10) || 0;
@@ -1577,11 +1596,11 @@ STARS_JS = """
     return true;
   }
 
-  function frame() {
-    list.innerHTML = '<iframe src="https://07.gg/trackers/shooting-star" '
-      + 'title="Shooting star tracker" loading="lazy" height="' + (limit > 20 ? 900 : 560) + '" '
-      + 'referrerpolicy="no-referrer"></iframe>';
-    status.textContent = 'live from 07.gg';
+  function empty(msg) {
+    list.innerHTML = '<p class="starnone">' + msg + ' '
+      + '<a href="https://07.gg/trackers/shooting-star" target="_blank" rel="noopener">'
+      + 'Check the tracker directly &#8599;</a></p>';
+    status.textContent = 'no live data';
   }
 
   function get(url) {
@@ -1608,15 +1627,24 @@ STARS_JS = """
     get('/api/stars')
       .then(function (d) {
         if (d.error || !d.stars) throw new Error('no data');
-        done(function () { if (!draw(d.stars, d.at)) frame(); });
+        done(function () {
+          if (!draw(d.stars, d.at)) empty('No stars are active right now.');
+        });
       })
       .catch(function () {
         get(root + 'data/stars.json')
           .then(function (d) {
-            var fresh = d.at && (Date.now() - d.at) < FRESH;
-            done(function () { if (!fresh || !draw(d.stars || [], d.at)) frame(); });
+            done(function () {
+              if (!draw(d.stars || [], d.at)) {
+                empty('The saved list has expired. Run <code>serve.py</code> for live stars.');
+              }
+            });
           })
-          .catch(function () { done(frame, true); });
+          .catch(function () {
+            done(function () {
+              empty('Live stars need <code>serve.py</code> running.');
+            }, true);
+          });
       });
   }
 
@@ -2810,89 +2838,120 @@ def build_stars_page():
     return page("Shooting Stars", "Shooting Stars", "\n".join(body), depth=0)
 
 
-# XP-affecting kit, where it comes from, and when the plan wants it.
-# `bonus` points at the matching entry in BONUSES so ticking one here flips the
-# rate toggle on that skill page.
+# Skilling outfits: what each piece is called, what the set does, and where it
+# comes from. `bonus` points at the matching entry in BONUSES so completing a
+# set switches on that skill's rate toggle.
 OUTFITS = [
-    dict(name="Prospector kit", skill="Mining", wiki="Prospector_kit", bonus=0,
-         effect="+2.5% Mining XP", source="180 golden nuggets at Motherlode Mine",
-         effort="Comes on its own while you mine pay-dirt",
-         when="Before the Mining grind, it pays for itself"),
-    dict(name="Angler's outfit", skill="Fishing", wiki="Angler%27s_outfit", bonus=0,
-         effect="+2.5% XP from all Fishing", source="Fishing Trawler",
-         effort="A few hours of trawler games",
-         when="Worth it before the 70 requirement, essential before 99"),
-    dict(name="Lumberjack outfit", skill="Woodcutting", wiki="Lumberjack_outfit", bonus=0,
-         effect="+2.5% Woodcutting XP", source="Temple Trekking rewards",
-         effort="Random drops, a few hours of trekking",
-         when="Before the teak grind"),
-    dict(name="Pyromancer outfit", skill="Firemaking", wiki="Pyromancer_outfit", bonus=0,
-         effect="+2.5% Firemaking XP", source="Wintertodt reward cart",
-         effort="Falls out while you train there anyway",
-         when="Early in Wintertodt, it speeds up the rest"),
-    dict(name="Carpenter's outfit", skill="Construction", wiki="Carpenter%27s_outfit", bonus=0,
-         effect="+2.5% Construction XP", source="Mahogany Homes contracts",
-         effort="Comes with the contracts you are doing regardless",
-         when="While you take Construction to 83"),
-    dict(name="Smiths' uniform", skill="Smithing", wiki="Smiths%27_Uniform", bonus=0,
+    dict(name="Prospector Kit", skill="Mining", wiki="Prospector_kit", bonus=0,
+         icon="prospector", effect="+2.5% Mining XP",
+         source="180 golden nuggets at Motherlode Mine",
+         pieces=["Prospector helmet", "Prospector jacket", "Prospector legs",
+                 "Prospector boots"]),
+    dict(name="Angler's Outfit", skill="Fishing", wiki="Angler%27s_outfit", bonus=0,
+         icon="angler", effect="+2.5% XP from all Fishing",
+         source="Fishing Trawler",
+         pieces=["Angler hat", "Angler top", "Angler waders", "Angler boots"]),
+    dict(name="Lumberjack Outfit", skill="Woodcutting", wiki="Lumberjack_outfit", bonus=0,
+         icon="lumberjack", effect="+2.5% Woodcutting XP",
+         source="Temple Trekking rewards",
+         pieces=["Lumberjack hat", "Lumberjack top", "Lumberjack legs",
+                 "Lumberjack boots"]),
+    dict(name="Pyromancer Outfit", skill="Firemaking", wiki="Pyromancer_outfit", bonus=0,
+         icon="pyromancer", effect="+2.5% Firemaking XP",
+         source="Wintertodt reward cart",
+         pieces=["Pyromancer hood", "Pyromancer garb", "Pyromancer robe",
+                 "Pyromancer boots"]),
+    dict(name="Carpenter's Outfit", skill="Construction", wiki="Carpenter%27s_outfit",
+         bonus=0, icon="carpenter", effect="+2.5% Construction XP",
+         source="Mahogany Homes contracts",
+         pieces=["Carpenter's helmet", "Carpenter's shirt", "Carpenter's trousers",
+                 "Carpenter's boots"]),
+    dict(name="Smiths' Uniform", skill="Smithing", wiki="Smiths%27_Uniform", bonus=0,
+         icon="worn-equipment",
          effect="Anvil actions 5 ticks to 4, about a quarter faster",
          source="15,000 Foundry Reputation at Giants' Foundry",
-         effort="A long stint at the Foundry",
-         when="Only if you plan to smith at an anvil; skip for gold bars"),
-    dict(name="Guild hunter outfit", skill="Hunter", wiki="Guild_hunter_outfit", bonus=0,
-         effect="+2.5% catch rate", source="1/50 from Hunters' Rumour loot sacks",
-         effort="Falls out of rumours over time",
-         when="While doing rumours for Hunter XP"),
-    dict(name="Raiments of the Eye", skill="Runecraft", wiki="Raiments_of_the_Eye", bonus=0,
-         effect="Up to 60% bonus runes, no extra XP",
-         source="Guardians of the Rift", effort="A handful of games",
-         when="Early at GOTR; it pays in runes, not levels"),
-    dict(name="Rogue's outfit", skill="Thieving", wiki="Rogue_equipment", bonus=0,
-         effect="Doubles pickpocket loot, no XP change",
-         source="Rogues' Den wall safes", effort="An hour or two of safe cracking",
-         when="Before any long Thieving stint"),
-    dict(name="Farmer's outfit", skill="Farming", wiki="Farmer%27s_outfit", bonus=0,
-         effect="+2.5% Farming XP", source="400 points at Tithe Farm",
-         effort="A few hours of Tithe Farm",
-         when="Farming is already 99, so only for the collection log"),
-    dict(name="Graceful outfit", skill="Agility", wiki="Graceful_outfit", bonus=None,
-         effect="Run energy restores faster, no XP change",
+         pieces=["Smiths tunic", "Smiths trousers", "Smiths gloves", "Smiths boots"]),
+    dict(name="Guild Hunter Outfit", skill="Hunter", wiki="Guild_hunter_outfit", bonus=0,
+         icon="hunterguild", effect="+2.5% catch rate",
+         source="1/50 from Hunters' Rumour loot sacks",
+         pieces=["Guild hunter headwear", "Guild hunter top", "Guild hunter legs",
+                 "Guild hunter boots"]),
+    dict(name="Raiments of the Eye", skill="Runecraft", wiki="Raiments_of_the_Eye",
+         bonus=0, icon="eye", effect="Up to 60% bonus runes, no extra XP",
+         source="Guardians of the Rift",
+         pieces=["Hat of the eye", "Robe top of the eye", "Robe bottoms of the eye",
+                 "Boots of the eye"]),
+    dict(name="Rogue's Outfit", skill="Thieving", wiki="Rogue_equipment", bonus=0,
+         icon="rogue", effect="Doubles pickpocket loot, no XP change",
+         source="Rogues' Den wall safes",
+         pieces=["Rogue mask", "Rogue top", "Rogue trousers", "Rogue gloves",
+                 "Rogue boots"]),
+    dict(name="Farmer's Outfit", skill="Farming", wiki="Farmer%27s_outfit", bonus=0,
+         icon="farmer", effect="+2.5% Farming XP", source="400 points at Tithe Farm",
+         pieces=["Farmer's strawhat", "Farmer's jacket", "Farmer's boro trousers",
+                 "Farmer's boots"]),
+    dict(name="Graceful Outfit", skill="Agility", wiki="Graceful_outfit", bonus=None,
+         icon="graceful", effect="Run energy restores faster, no XP change",
          source="260 marks of grace from rooftops",
-         effort="Comes while you run the courses",
-         when="As early as possible; it helps every skill after it"),
-    dict(name="Zealot's robes", skill="Prayer", wiki="Zealot%27s_robes", bonus=None,
-         effect="Chance of extra XP when burying or scattering",
+         pieces=["Graceful hood", "Graceful top", "Graceful legs", "Graceful gloves",
+                 "Graceful boots", "Graceful cape"]),
+    dict(name="Zealot's Robes", skill="Prayer", wiki="Zealot%27s_robes", bonus=None,
+         icon="zealot", effect="Chance of extra XP when burying or scattering",
          source="Gold chests in the Shade Catacombs",
-         effort="Shades of Mort'ton runs",
-         when="Only if you bury bones rather than use an altar"),
+         pieces=["Zealot's helm", "Zealot's robe top", "Zealot's robe bottom",
+                 "Zealot's boots"]),
 ]
 
 
+def piece_label(setname, piece):
+    """Drop whatever the piece repeats from the set name, so the pill reads
+    'hat' rather than "Angler's hat"."""
+    stop = {"outfit", "kit", "uniform", "robes", "raiments", "of", "the", "eye",
+            "guild", "s"}
+    owned = {w.strip("'s").lower() for w in setname.replace("'s", "").split()} | stop
+    words = piece.split()
+    while words and words[0].strip("'s").lower() in owned:
+        words.pop(0)
+    while words and words[-1].lower() in {"of", "the", "eye"}:
+        words.pop()
+    label = " ".join(words).strip()
+    for lead in ("'s ", "' ", "'"):
+        if label.startswith(lead):
+            label = label[len(lead):]
+            break
+    label = label.strip()
+    return (label[0].lower() + label[1:]) if label else piece
+
+
 def outfit_section():
+    """Every skilling outfit, ticked off a piece at a time."""
     rows = []
-    for i, o in enumerate(OUTFITS):
-        img = media_path(o["name"] if o["name"] != "Smiths' uniform" else "Smiths' Uniform")
-        if not img:
-            img = media_path({"Rogue's outfit": "Rogue equipment"}.get(o["name"], o["name"]))
-        pic = (f'<img class="ofit" src="{img}" alt="" loading="lazy">'
-               if img else '<span class="ofit"></span>')
+    for o in OUTFITS:
         sk = o["skill"]
-        done = (stat_of(sk) or {}).get("level", 0) >= 99
+        maxed = (stat_of(sk) or {}).get("level", 0) >= 99
+        pieces = "".join(
+            f'<label class="piece"><input type="checkbox" class="piecebox" '
+            f'data-set="{e(o["name"])}" data-piece="{e(pc)}" '
+            f'title="{e(pc)}"><span>{e(piece_label(o["name"], pc))}</span></label>'
+            for pc in o["pieces"])
         bonus_attr = (f' data-skill="{e(sk)}" data-bonus="{o["bonus"]}"'
                       if o["bonus"] is not None else "")
         rows.append(
-            f'<label class="outfit{" spent" if done else ""}">'
-            f'<input type="checkbox" class="ownbox"{bonus_attr} '
-            f'data-key="{e(o["name"])}">'
-            f'{pic}'
-            f'<span class="oname">{icon(sk)}<a href="{WIKI}{o["wiki"]}" target="_blank" '
-            f'rel="noopener">{e(o["name"])}</a></span>'
+            f'<div class="outfit{" spent" if maxed else ""}" '
+            f'data-set="{e(o["name"])}" data-total="{len(o["pieces"])}"{bonus_attr}>'
+            f'<img class="ofit" src="assets/media/site/{o["icon"]}.png" alt="" '
+            f'loading="lazy">'
+            f'<span class="oname">{icon(sk)}'
+            f'<a href="{WIKI}{o["wiki"]}" target="_blank" rel="noopener">'
+            f'{e(o["name"])}</a></span>'
+            f'<span class="ocount">0/{len(o["pieces"])}</span>'
             f'<span class="oeffect">{e(o["effect"])}</span>'
             f'<span class="osource">{e(o["source"])}</span>'
-            f'<span class="owhen">{e(o["when"])}</span>'
-            "</label>")
-    return ('<p class="lede2">Tick what you own. Anything with an XP effect also '
-            'switches on the matching rate toggle on that skill page.</p>'
+            f'<span class="opieces">{pieces}</span>'
+            "</div>")
+    return ('<p class="lede2">Tick each piece as you get it. Completing a set switches '
+            "on that skill's rate toggle, so the XP numbers match what you actually "
+            'wear.</p>'
             f'<div class="outfits">{"".join(rows)}</div>')
 
 
@@ -2947,7 +3006,7 @@ def build_index():
                  'Thieving and Hunter are not listed in either block, so decide where they land: '
                  'Thieving fits with the faster skills, Hunter with the slow gathering ones.</p></div>')
 
-    parts.append(h2("outfits", "XP Gear", "assets/media/site/skills-tab.png"))
+    parts.append(h2("outfits", "Gear", "assets/media/site/worn-equipment.png"))
     parts.append(outfit_section())
 
     parts.append(h2("skills", "All Skills", "assets/media/site/skills-tab.png"))
