@@ -1,0 +1,322 @@
+{
+ "name": "gxexe",
+ "synced": "2026-07-25T23:56:15.444Z",
+ "tiers": [
+  "Easy",
+  "Medium",
+  "Hard",
+  "Elite"
+ ],
+ "regions": [
+  {
+   "name": "Ardougne",
+   "tiers": {
+    "Easy": {
+     "complete": true,
+     "done": 10,
+     "total": 10
+    },
+    "Medium": {
+     "complete": false,
+     "done": 2,
+     "total": 12
+    },
+    "Hard": {
+     "complete": false,
+     "done": 2,
+     "total": 12
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 8
+    }
+   }
+  },
+  {
+   "name": "Desert",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 2,
+     "total": 11
+    },
+    "Medium": {
+     "complete": false,
+     "done": 4,
+     "total": 12
+    },
+    "Hard": {
+     "complete": false,
+     "done": 0,
+     "total": 10
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 6
+    }
+   }
+  },
+  {
+   "name": "Falador",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 4,
+     "total": 11
+    },
+    "Medium": {
+     "complete": false,
+     "done": 2,
+     "total": 14
+    },
+    "Hard": {
+     "complete": false,
+     "done": 1,
+     "total": 11
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 6
+    }
+   }
+  },
+  {
+   "name": "Fremennik",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 1,
+     "total": 10
+    },
+    "Medium": {
+     "complete": false,
+     "done": 0,
+     "total": 9
+    },
+    "Hard": {
+     "complete": false,
+     "done": 0,
+     "total": 9
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 6
+    }
+   }
+  },
+  {
+   "name": "Kandarin",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 0,
+     "total": 11
+    },
+    "Medium": {
+     "complete": false,
+     "done": 1,
+     "total": 14
+    },
+    "Hard": {
+     "complete": false,
+     "done": 0,
+     "total": 11
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 7
+    }
+   }
+  },
+  {
+   "name": "Karamja",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 4,
+     "total": 10
+    },
+    "Medium": {
+     "complete": false,
+     "done": 6,
+     "total": 19
+    },
+    "Hard": {
+     "complete": false,
+     "done": 1,
+     "total": 10
+    },
+    "Elite": {
+     "complete": false,
+     "done": 2,
+     "total": 5
+    }
+   }
+  },
+  {
+   "name": "Kourend & Kebos",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 2,
+     "total": 12
+    },
+    "Medium": {
+     "complete": false,
+     "done": 3,
+     "total": 13
+    },
+    "Hard": {
+     "complete": false,
+     "done": 1,
+     "total": 10
+    },
+    "Elite": {
+     "complete": false,
+     "done": 1,
+     "total": 8
+    }
+   }
+  },
+  {
+   "name": "Lumbridge & Draynor",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 3,
+     "total": 12
+    },
+    "Medium": {
+     "complete": false,
+     "done": 4,
+     "total": 12
+    },
+    "Hard": {
+     "complete": false,
+     "done": 1,
+     "total": 11
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 6
+    }
+   }
+  },
+  {
+   "name": "Morytania",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 4,
+     "total": 11
+    },
+    "Medium": {
+     "complete": false,
+     "done": 4,
+     "total": 11
+    },
+    "Hard": {
+     "complete": false,
+     "done": 0,
+     "total": 10
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 6
+    }
+   }
+  },
+  {
+   "name": "Varrock",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 4,
+     "total": 14
+    },
+    "Medium": {
+     "complete": false,
+     "done": 5,
+     "total": 13
+    },
+    "Hard": {
+     "complete": false,
+     "done": 0,
+     "total": 10
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 5
+    }
+   }
+  },
+  {
+   "name": "Western Provinces",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 3,
+     "total": 11
+    },
+    "Medium": {
+     "complete": false,
+     "done": 2,
+     "total": 13
+    },
+    "Hard": {
+     "complete": false,
+     "done": 1,
+     "total": 13
+    },
+    "Elite": {
+     "complete": false,
+     "done": 1,
+     "total": 7
+    }
+   }
+  },
+  {
+   "name": "Wilderness",
+   "tiers": {
+    "Easy": {
+     "complete": false,
+     "done": 3,
+     "total": 12
+    },
+    "Medium": {
+     "complete": false,
+     "done": 1,
+     "total": 11
+    },
+    "Hard": {
+     "complete": false,
+     "done": 1,
+     "total": 10
+    },
+    "Elite": {
+     "complete": false,
+     "done": 0,
+     "total": 7
+    }
+   }
+  }
+ ],
+ "done": 1,
+ "total": 48,
+ "by_tier": {
+  "Easy": 1,
+  "Medium": 0,
+  "Hard": 0,
+  "Elite": 0
+ },
+ "region_count": 12,
+ "fetched": "2026-07-26T08:56+09:00"
+}

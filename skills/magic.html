@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Magic</title>
+<link rel="preload" href="../assets/fonts/Geist-Regular.v1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.SKILL="Magic";</script>
+<script>window.FOCUSDATA={"Attack":{"name":"Attack","also":[{"name":"Slayer","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAMAAAAmopZHAAAAG1BMVEUAAAAAAAH////DqZmNg3m7uQN4d3ZCMSRZWFXjCMC1AAAAAXRSTlMAQObYZgAAAJNJREFUeNptzUsKAyAQBFGre/zc/8RBHTJg0hvhFWp7B/wT5nwCvXeYs0J5L6+xS/F7Zf7yWjv88SdwN8Zaiwp4jzHGWMD2ZEmHBwYoDtJlF9vBuizJXJekYK3DoPIMSCK+7s0ROoN0wrZ8CJQfpG8WYSTyJSIiHW7VDkSGHJZ4PU9DqyDfYYKW4UhAhA/vUWt5tA+SxARg2VEwWwAAAABJRU5ErkJggg==","href":"skills/slayer.html","level":50,"goal":72,"pct":12,"colour":"hsl(36 74% 62%)"},{"name":"Hitpoints","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAUCAMAAABRYFY8AAAAD1BMVEUAAADdTwEAAAF6PQmzOQNfjd9/AAAAAXRSTlMAQObYZgAAAFlJREFUeNqt0SESwDAMxEBZ9v/fXJAjdQp7KLMCAQY8A15vraoqFbW7uxWwMnVmTgCPZwmKkXjC9ro9+939+FfBmdsBndksCTcnzOaELLzCZtDumxM27wsCPPZhAwz1YXYUAAAAAElFTkSuQmCC","href":"skills/hitpoints.html","level":70,"goal":99,"pct":6,"colour":"hsl(56 76% 63%)"}],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAFVBMVEUAAAAAAAF1e3x6awlGPC+0qwZVXFpfKXj9AAAAAXRSTlMAQObYZgAAAE5JREFUeNrd0jEOgAAMw8C6bvn/k5EYUZAYmMh6g5dUHECG7uYJmido/gDHdzB3ACBB4e4aoFB3DQ3gohRndCXBjEoESOIMWVYogNfXOgGvAwGJkZCw2wAAAABJRU5ErkJggg==","href":"skills/attack.html","level":70,"xp":795329,"rank":-1,"goal":80,"pct":40,"done":false,"togo":1190739,"method":"Slayer tasks","methodHref":"skills/attack.html#m-slayer-tasks","colour":"hsl(56 76% 63%)","summary":"Slayer tasks; Strength first, then Attack."},"Strength":{"name":"Strength","also":[{"name":"Slayer","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAMAAAAmopZHAAAAG1BMVEUAAAAAAAH////DqZmNg3m7uQN4d3ZCMSRZWFXjCMC1AAAAAXRSTlMAQObYZgAAAJNJREFUeNptzUsKAyAQBFGre/zc/8RBHTJg0hvhFWp7B/wT5nwCvXeYs0J5L6+xS/F7Zf7yWjv88SdwN8Zaiwp4jzHGWMD2ZEmHBwYoDtJlF9vBuizJXJekYK3DoPIMSCK+7s0ROoN0wrZ8CJQfpG8WYSTyJSIiHW7VDkSGHJZ4PU9DqyDfYYKW4UhAhA/vUWt5tA+SxARg2VEwWwAAAABJRU5ErkJggg==","href":"skills/slayer.html","level":50,"goal":72,"pct":12,"colour":"hsl(36 74% 62%)"},{"name":"Hitpoints","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAUCAMAAABRYFY8AAAAD1BMVEUAAADdTwEAAAF6PQmzOQNfjd9/AAAAAXRSTlMAQObYZgAAAFlJREFUeNqt0SESwDAMxEBZ9v/fXJAjdQp7KLMCAQY8A15vraoqFbW7uxWwMnVmTgCPZwmKkXjC9ro9+939+FfBmdsBndksCTcnzOaELLzCZtDumxM27wsCPPZhAwz1YXYUAAAAAElFTkSuQmCC","href":"skills/hitpoints.html","level":70,"goal":99,"pct":6,"colour":"hsl(56 76% 63%)"}],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAMAAACzvE1FAAAADFBMVEUAAADBpHYAAAFGPC8vY/5LAAAAAXRSTlMAQObYZgAAAFNJREFUeNqtjkkKxEAMxCzp/38emGzdOcfgg+Qq8PxHnXUU1I0JvBgiIJd7QHgGgCLIk4OOdQTqdt6NOnhGnlLOyziXqQCdNbL9CvUW4CYA5xvxA/dnAV4NB3bkAAAAAElFTkSuQmCC","href":"skills/strength.html","level":70,"xp":801426,"rank":-1,"goal":85,"pct":25,"done":false,"togo":2457168,"method":"Slayer tasks","methodHref":"skills/strength.html#m-slayer-tasks","colour":"hsl(56 76% 63%)","summary":"Slayer tasks, Strength style first to ~85."},"Defence":{"name":"Defence","also":[{"name":"Slayer","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAMAAAAmopZHAAAAG1BMVEUAAAAAAAH////DqZmNg3m7uQN4d3ZCMSRZWFXjCMC1AAAAAXRSTlMAQObYZgAAAJNJREFUeNptzUsKAyAQBFGre/zc/8RBHTJg0hvhFWp7B/wT5nwCvXeYs0J5L6+xS/F7Zf7yWjv88SdwN8Zaiwp4jzHGWMD2ZEmHBwYoDtJlF9vBuizJXJekYK3DoPIMSCK+7s0ROoN0wrZ8CJQfpG8WYSTyJSIiHW7VDkSGHJZ4PU9DqyDfYYKW4UhAhA/vUWt5tA+SxARg2VEwWwAAAABJRU5ErkJggg==","href":"skills/slayer.html","level":50,"goal":72,"pct":12,"colour":"hsl(36 74% 62%)"},{"name":"Hitpoints","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAUCAMAAABRYFY8AAAAD1BMVEUAAADdTwEAAAF6PQmzOQNfjd9/AAAAAXRSTlMAQObYZgAAAFlJREFUeNqt0SESwDAMxEBZ9v/fXJAjdQp7KLMCAQY8A15vraoqFbW7uxWwMnVmTgCPZwmKkXjC9ro9+939+FfBmdsBndksCTcnzOaELLzCZtDumxM27wsCPPZhAwz1YXYUAAAAAElFTkSuQmCC","href":"skills/hitpoints.html","level":70,"goal":99,"pct":6,"colour":"hsl(56 76% 63%)"}],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAATCAYAAAB2pebxAAAAVUlEQVR42mNgYGD8TzEGEaExURi4tLoGA0+aNRUdww0hbAACk2wIspNHqiGkROvgMWQ0igkZAgGM5BgCkUMFjCRlQEwDMA0i0wBMg8g1AGEQFozTAACI+xqkhRvFKgAAAABJRU5ErkJggg==","href":"skills/defence.html","level":66,"xp":520396,"rank":-1,"goal":70,"pct":71,"done":false,"togo":217231,"method":"Slayer tasks","methodHref":"skills/defence.html#m-slayer-tasks","colour":"hsl(51 75% 63%)","summary":"70 for quests, then 75\u201380, then 99."},"Hitpoints":{"name":"Hitpoints","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAUCAMAAABRYFY8AAAAD1BMVEUAAADdTwEAAAF6PQmzOQNfjd9/AAAAAXRSTlMAQObYZgAAAFlJREFUeNqt0SESwDAMxEBZ9v/fXJAjdQp7KLMCAQY8A15vraoqFbW7uxWwMnVmTgCPZwmKkXjC9ro9+939+FfBmdsBndksCTcnzOaELLzCZtDumxM27wsCPPZhAwz1YXYUAAAAAElFTkSuQmCC","href":"skills/hitpoints.html","level":70,"xp":757501,"rank":-1,"goal":99,"pct":6,"done":false,"togo":12276930,"method":"not chosen yet","methodHref":"skills/hitpoints.html#methods","colour":"hsl(56 76% 63%)","summary":"Passive from all combat XP."},"Ranged":{"name":"Ranged","also":[{"name":"Slayer","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAMAAAAmopZHAAAAG1BMVEUAAAAAAAH////DqZmNg3m7uQN4d3ZCMSRZWFXjCMC1AAAAAXRSTlMAQObYZgAAAJNJREFUeNptzUsKAyAQBFGre/zc/8RBHTJg0hvhFWp7B/wT5nwCvXeYs0J5L6+xS/F7Zf7yWjv88SdwN8Zaiwp4jzHGWMD2ZEmHBwYoDtJlF9vBuizJXJekYK3DoPIMSCK+7s0ROoN0wrZ8CJQfpG8WYSTyJSIiHW7VDkSGHJZ4PU9DqyDfYYKW4UhAhA/vUWt5tA+SxARg2VEwWwAAAABJRU5ErkJggg==","href":"skills/slayer.html","level":50,"goal":72,"pct":12,"colour":"hsl(36 74% 62%)"}],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAAElBMVEUAAAAAAAF6PQl1e3wJbAI1Lxvn8OCVAAAAAXRSTlMAQObYZgAAAIJJREFUeNqNj0GOAyAQw7Bh/v/l1Q6QSuXSXJBsRMIYjP/QGZ8gDLDTZl9AxWST1gcA7HPKaDHlvKAwbxFzcsukSHcEWvAKKNVHUOgrKAAOjziVj7hLvnhlVThAwRHhrLWKuwqU4EVWqQQ3b5HrUKv5FmpqG0eQjY2zPoLg51s/CcYfVnwCCbDYPQAAAAAASUVORK5CYII=","href":"skills/ranged.html","level":56,"xp":202033,"rank":-1,"goal":70,"pct":27,"done":false,"togo":535594,"method":"Cannon on Slayer tasks","methodHref":"skills/ranged.html#m-cannon-on-slayer-tasks","colour":"hsl(41 75% 62%)","summary":"Cannon on Slayer tasks; chinning later."},"Magic":{"name":"Magic","also":[{"name":"Slayer","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAMAAAAmopZHAAAAG1BMVEUAAAAAAAH////DqZmNg3m7uQN4d3ZCMSRZWFXjCMC1AAAAAXRSTlMAQObYZgAAAJNJREFUeNptzUsKAyAQBFGre/zc/8RBHTJg0hvhFWp7B/wT5nwCvXeYs0J5L6+xS/F7Zf7yWjv88SdwN8Zaiwp4jzHGWMD2ZEmHBwYoDtJlF9vBuizJXJekYK3DoPIMSCK+7s0ROoN0wrZ8CJQfpG8WYSTyJSIiHW7VDkSGHJZ4PU9DqyDfYYKW4UhAhA/vUWt5tA+SxARg2VEwWwAAAABJRU5ErkJggg==","href":"skills/slayer.html","level":50,"goal":72,"pct":12,"colour":"hsl(36 74% 62%)"}],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAXCAMAAADJPRQhAAAAElBMVEUAAAAbBpIAAAEABv56PQm0qwYDZfXfAAAAAXRSTlMAQObYZgAAAHZJREFUeNp1kUEOAzEIA+Mx/P/LldIlaQU7R48MKFkHgDUA2LORPCqQZMNUkacSaDMYlWGuyGYQ0MdRuWRoZhwH0EzB+3UqYxgrkgMWUFviyTMj4nl3kCC+ZGSEsW3uhm0yZbvMPyVY0NL6Drrg3KbLiTdcfuIPVmkCpSUi/wEAAAAASUVORK5CYII=","href":"skills/magic.html","level":68,"xp":629877,"rank":-1,"goal":75,"pct":52,"done":false,"togo":580544,"method":"Bursting/barraging Slayer tasks","methodHref":"skills/magic.html#m-bursting-barraging-slayer-tasks","colour":"hsl(54 75% 63%)","summary":"Burst/barrage Slayer tasks."},"Prayer":{"name":"Prayer","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAAD1BMVEUAAAC2zboAAAHh79eSmpW4ABp2AAAAAXRSTlMAQObYZgAAAFxJREFUeNqt0kEKwCAMRNGZP7n/mbuIpSIWhPbvfAFdGE2hbYQ/HAI7r5gdV2wOHaoqtmHR9mkCVHPiMUEiU+4SJGCcbua5yqOq9eXm1rkeIB26aD524Q//9bYPF6kNAXYKRKlSAAAAAElFTkSuQmCC","href":"skills/prayer.html","level":77,"xp":1509888,"rank":840604,"goal":82,"pct":62,"done":false,"togo":911199,"method":"not chosen yet","methodHref":"skills/prayer.html#methods","colour":"hsl(67 76% 63%)","summary":"Gilded altar bones; ensouled heads as an alternative."},"Slayer":{"name":"Slayer","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAMAAAAmopZHAAAAG1BMVEUAAAAAAAH////DqZmNg3m7uQN4d3ZCMSRZWFXjCMC1AAAAAXRSTlMAQObYZgAAAJNJREFUeNptzUsKAyAQBFGre/zc/8RBHTJg0hvhFWp7B/wT5nwCvXeYs0J5L6+xS/F7Zf7yWjv88SdwN8Zaiwp4jzHGWMD2ZEmHBwYoDtJlF9vBuizJXJekYK3DoPIMSCK+7s0ROoN0wrZ8CJQfpG8WYSTyJSIiHW7VDkSGHJZ4PU9DqyDfYYKW4UhAhA/vUWt5tA+SxARg2VEwWwAAAABJRU5ErkJggg==","href":"skills/slayer.html","level":50,"xp":106748,"rank":-1,"goal":72,"pct":12,"done":false,"togo":792509,"method":"Nieve / Steve","methodHref":"skills/slayer.html#m-nieve-steve","colour":"hsl(36 74% 62%)","summary":"The spine of the whole plan."},"Fishing":{"name":"Fishing","also":[{"name":"Hunter","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAXCAMAAAA4Nk+sAAAAFVBMVEUAAAAMCws/NzwxKClbQUEjDCVZWFUEo2OeAAAAAXRSTlMAQObYZgAAAHJJREFUeNqF0EEOhDAMQ9F8pzP3PzJSLZooLOpFBA8Rq403hIdzYYTHULP9wuSNj+dkNv/GEjNJoMaI8ARhwJvMgav8rnX+rxj8sesSBJjBi/hL9HNL6YdiipFa/Q7b6T3SKS+Wkwy2fi92rfTy7jvV9gBpkQGYacnI9QAAAABJRU5ErkJggg==","href":"skills/hunter.html","level":64,"goal":70,"pct":58,"colour":"hsl(49 75% 63%)"}],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAXBAMAAADjD5IeAAAAD1BMVEUAAAAAAAFVXFp1e3xGPC9FFD+mAAAAAXRSTlMAQObYZgAAAI5JREFUeF5dj8ENxSAMQ2EDTLsAZgLwBJXYf6bvND19H4JfiBylhAC4fu4+T3sbuJ9zcB5ytFJtAByArZgQpdVuSJmZkEJABeKNEiSZL60ckJaUAG26f4384dBcfAF9dHETJWlucuaeTtkj4lG7NkescQzs2VeOSAPoMNQpEX5aRm2P1/Vl5VV5CObfIakfDY0TrPK6gqgAAAAASUVORK5CYII=","href":"skills/fishing.html","level":61,"xp":303820,"rank":-1,"goal":70,"pct":41,"done":false,"togo":433807,"method":"Drift Net Fishing","methodHref":"skills/fishing.html#m-drift-net-fishing","colour":"hsl(45 75% 62%)","summary":"Drift Net Fishing with Hunter."},"Hunter":{"name":"Hunter","also":[{"name":"Fishing","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAXBAMAAADjD5IeAAAAD1BMVEUAAAAAAAFVXFp1e3xGPC9FFD+mAAAAAXRSTlMAQObYZgAAAI5JREFUeF5dj8ENxSAMQ2EDTLsAZgLwBJXYf6bvND19H4JfiBylhAC4fu4+T3sbuJ9zcB5ytFJtAByArZgQpdVuSJmZkEJABeKNEiSZL60ckJaUAG26f4384dBcfAF9dHETJWlucuaeTtkj4lG7NkescQzs2VeOSAPoMNQpEX5aRm2P1/Vl5VV5CObfIakfDY0TrPK6gqgAAAAASUVORK5CYII=","href":"skills/fishing.html","level":61,"goal":70,"pct":41,"colour":"hsl(45 75% 62%)"}],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAXCAMAAAA4Nk+sAAAAFVBMVEUAAAAMCws/NzwxKClbQUEjDCVZWFUEo2OeAAAAAXRSTlMAQObYZgAAAHJJREFUeNqF0EEOhDAMQ9F8pzP3PzJSLZooLOpFBA8Rq403hIdzYYTHULP9wuSNj+dkNv/GEjNJoMaI8ARhwJvMgav8rnX+rxj8sesSBJjBi/hL9HNL6YdiipFa/Q7b6T3SKS+Wkwy2fi92rfTy7jvV9gBpkQGYacnI9QAAAABJRU5ErkJggg==","href":"skills/hunter.html","level":64,"xp":426664,"rank":1422382,"goal":70,"pct":58,"done":false,"togo":310963,"method":"Drift Net Fishing","methodHref":"skills/hunter.html#m-drift-net-fishing","colour":"hsl(49 75% 63%)","summary":"Drift Net Fishing with Fishing."},"Agility":{"name":"Agility","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAXUlEQVR42u3VQQoAIAhE0br/oWvVcvjUMCRR4MrgQWq2YqePFR+5WweKAMCQwAEQIN3bAjTCORuyO+/kKQBg6L2JJ6g+Yk6732nRggf/L50PAIA8A/DJA7x0yu75CYAJkwHGf7YeAAAAAElFTkSuQmCC","href":"skills/agility.html","level":60,"xp":295164,"rank":-1,"goal":71,"pct":36,"done":false,"togo":519281,"method":"not chosen yet","methodHref":"skills/agility.html#methods","colour":"hsl(44 75% 62%)","summary":"Rooftops, then Hallowed Sepulchre."},"Thieving":{"name":"Thieving","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAS0lEQVR42mMYBaNgIADjf1IxiQZTjmlsAQLT1AJMiwi7gHJ1xEYeKRFNwBLCiYIs9aQGAVnqYQy6Rf6QTMZULV5oWpaNlu+jYOABAHbr1QExwOoiAAAAAElFTkSuQmCC","href":"skills/thieving.html","level":56,"xp":189408,"rank":1705907,"goal":75,"pct":16,"done":false,"togo":1021013,"method":"not chosen yet","methodHref":"skills/thieving.html#methods","colour":"hsl(41 75% 62%)","summary":"Blackjacking or Pyramid Plunder."},"Mining":{"name":"Mining","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAADFBMVEUAAAAAAAF1e3xGPC/Lr9t+AAAAAXRSTlMAQObYZgAAAGRJREFUeNp10kEKxEAMA8Hu0f//vGBMmKBNH0v4ZjYnptvOpPDsnis10WW9bpI4rEy7uC5POygg1ADvTMab4wzNOF7MDsW0y+TtRmk3Qvlwuy/GZRNpN+MXH4vXPxn/M/YXAPwA3cIBiMrALJMAAAAASUVORK5CYII=","href":"skills/mining.html","level":72,"xp":918742,"rank":1318580,"goal":99,"pct":7,"done":false,"togo":12115689,"method":"not chosen yet","methodHref":"skills/mining.html#methods","colour":"hsl(58 76% 63%)","summary":"Motherlode Mine or Volcanic Mine."},"Woodcutting":{"name":"Woodcutting","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAWCAMAAAD6gTxzAAAAElBMVEUAAAAAAAEJbAJYOgwAvAB6PQl7bRBSAAAAAXRSTlMAQObYZgAAAGdJREFUeNpl0dEKwCAMQ9HdRv//l0fNrMUF9OHQUMRnBZynAjEy0MQ0aBJGoGSkGJd44nSJTbEOmJwRyY3k6yNpH9OyGgqvBCmnQPUoUAbJcGxOi4PlJksn1+6pLlTxt5BeszWi/8cLNqUCdjiFICMAAAAASUVORK5CYII=","href":"skills/woodcutting.html","level":71,"xp":814455,"rank":1591107,"goal":99,"pct":6,"done":false,"togo":12219976,"method":"Forestry teaks","methodHref":"skills/woodcutting.html#m-forestry-teaks","colour":"hsl(57 76% 63%)","summary":"Forestry teaks (2-tick)."},"Runecraft":{"name":"Runecraft","also":[{"name":"Magic","icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAXCAMAAADJPRQhAAAAElBMVEUAAAAbBpIAAAEABv56PQm0qwYDZfXfAAAAAXRSTlMAQObYZgAAAHZJREFUeNp1kUEOAzEIA+Mx/P/LldIlaQU7R48MKFkHgDUA2LORPCqQZMNUkacSaDMYlWGuyGYQ0MdRuWRoZhwH0EzB+3UqYxgrkgMWUFviyTMj4nl3kCC+ZGSEsW3uhm0yZbvMPyVY0NL6Drrg3KbLiTdcfuIPVmkCpSUi/wEAAAAASUVORK5CYII=","href":"skills/magic.html","level":68,"goal":75,"pct":52,"colour":"hsl(54 75% 63%)"}],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAFVBMVEUAAAAAAAF4d3ZZWFWLNwmUko+wOQR2sZzsAAAAAXRSTlMAQObYZgAAAIFJREFUeNqN0kEKwCAMRFF/JvH+Ry6EoYpU6Oz0MbpIxh7GJUxuMCcX+CYg54SToKqlCo77gkyoiFhGVVXQEh0W9DEzCdMGQAIW0XI2LJTF31iEK8dzsphWTS2DOESGQeyAZHlJJzRJIZGZCxyQtg6G18iZSHCbz/+ZmvizO/d9ewCFeAOFN5sfDAAAAABJRU5ErkJggg==","href":"skills/runecraft.html","level":57,"xp":221778,"rank":1232550,"goal":65,"pct":49,"done":false,"togo":227650,"method":"Guardians of the Rift","methodHref":"skills/runecraft.html#m-guardians-of-the-rift","colour":"hsl(42 75% 62%)","summary":"GOTR, then blood runes or ZMI."},"Farming":{"name":"Farming","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAXCAMAAADJPRQhAAAAJ1BMVEUAAAAAAAF6cWaNg3l4d3aUko9ZWFVoZmNSXv9bQUE/Nzxue/9eTTYjLEHpAAAAAXRSTlMAQObYZgAAAJZJREFUeNqN0kEOwyAMBVHGJt+F9P7nrQKF0CJVnQ2LhxCWnNZopS1wzzkbG7gDEMEm9FPsQOsWoAsmnScFOmBmJHBMj1ZlQMQlRodah+QQ7YJC0rMUm68R4pJ8HO6eDZsjYcEiRsRNWsVQMCQ+hbBBX5KIKfpTmJK4xN8CkqZwC6UUSKNFrNJhF0hL6687zIAudPixOi/7RARbtdPZTAAAAABJRU5ErkJggg==","href":"skills/farming.html","level":99,"xp":13106583,"rank":346616,"goal":99,"pct":100,"done":true,"togo":0,"method":"not chosen yet","methodHref":"skills/farming.html#methods","colour":"hsl(142 78% 65%)","summary":"Done."},"Sailing":{"name":"Sailing","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAABcWlDQ1BpY2MAAHjaldE5SANBGIbhN1FRPLDQQsRiCxUEbVTEMkQxCAZCEiFRC/fIBdlN2E2wSSnYBiw8GqMWNtbaWtgKguABYi9YKdpIWGcImiBEcKZ5+Gb+YeYf8Fayuum0+sC0CnY44Fdi8RWl/Zku2sQcZUzVnXwwshCl6fi4xQNwMyHP4n+jx0g4OngUwKfn7YLwOjCzUchL7wL9elo1hE+BcVtcUPhe5lrNL9IpabxI29HwnHA/oKQarDVYT9um8DQwbJiWIRyr2ZAuSZvZog4AeIDuhLUckTkwRIBFgoRQ0CiSIUuBCTJYKDiECeBvUj+IrA9RRCNLBh2FeXKYqMh65B/87q2TnJoEwNPth7Yn130bgfZtqJZd9/PQdatH0PIIF1a9PleB2XeRl+vZ8AH0bsLZZT3TduB8CwYe8qqtAtACeJNJeD2Bnjj0XUPnquzbzzrHdxAtwdIV7O3DaAp615q8u6Oxb3/t+e7fF7ntcsMvXATQAAAAD1BMVEUAAAAAAAGSmpVVXFp1e3yFTXRwAAAAAXRSTlMAQObYZgAAAIxJREFUeNpl0gEKxDAMA0GvpP+/+aA2NuEEJXiaRgRa/wGeaUYksbwjMRb7IUm7+J6CXux8q0RCsQfgCCTH/T7TgxPJ0Nticd2mOgSdO5zDsnOHUstTPn78zdKsHDesD7fb7RHNHZgCSc2X9Tx8t5zOTj3XobdI67YTCSARXL+dji3qArZtwJxv5f0MP2ZAAlUKS1qzAAAAAElFTkSuQmCC","href":"skills/sailing.html","level":50,"xp":101825,"rank":514166,"goal":99,"pct":1,"done":false,"togo":12932606,"method":"not chosen yet","methodHref":"skills/sailing.html#methods","colour":"hsl(36 74% 62%)","summary":"Barracuda Trials, or courier runs."},"Smithing":{"name":"Smithing","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAMAAABFjsb+AAAAD1BMVEUAAAAAAAF1e3w1LxtVXFqn84UMAAAAAXRSTlMAQObYZgAAAGBJREFUeNptzzESgDAMA0GdpP+/mQJPQoAr140sAL3CRmJaZvDEtnQsjDVpx8qPGQk7SVu3dVqzrWNFtGEbgEgCmWZLgnTr2gzcpxYdkaR8qeZLNk/qfMKmLOVpOe1IugDCQwJSf2NlWgAAAABJRU5ErkJggg==","href":"skills/smithing.html","level":60,"xp":293555,"rank":1746247,"goal":75,"pct":24,"done":false,"togo":916866,"method":"not chosen yet","methodHref":"skills/smithing.html#methods","colour":"hsl(44 75% 62%)","summary":"Blast Furnace or Giants' Foundry."},"Crafting":{"name":"Crafting","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWBAMAAAAoU0G7AAAAD1BMVEUAAAAAAAF1e3xYOgx6PQnLwrUpAAAAAXRSTlMAQObYZgAAAG1JREFUeF5Fj9EJBDEIBbUDZ+8a2HSwXAUL9l/TxSeS9xEzjCJax4kugqXCLwR3CB6ByD+l/FqLVoKj4Cj/vpswKRKj2qQyemErm7DVwJ7WLoV8eWJE4sCIWs2IuUGi4LpD0N2rmpM5vJ8TzvcPcmoOV5e0/nwAAAAASUVORK5CYII=","href":"skills/crafting.html","level":75,"xp":1238827,"rank":1004489,"goal":90,"pct":23,"done":false,"togo":4107505,"method":"Dragonhide bodies","methodHref":"skills/crafting.html#m-dragonhide-bodies","colour":"hsl(62 76% 63%)","summary":"D'hide bodies or battlestaves."},"Fletching":{"name":"Fletching","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAElBMVEUAAAAAAAEJbAI1Lxt6PQl1e3yWRDmsAAAAAXRSTlMAQObYZgAAAFtJREFUeNrN0jEOwDAIQ9F8B+5/5S7xUOSoa5mQHp7MGgMrD+IGggtoA1G2pCQGZhAnqOINvqUtBm8NBPD2ZwA6J6jmXGCwFC6AUS8cEJfKFAUXkGxA+prPR3sAd9cBJ6KIUMMAAAAASUVORK5CYII=","href":"skills/fletching.html","level":99,"xp":13041665,"rank":252501,"goal":99,"pct":100,"done":true,"togo":0,"method":"not chosen yet","methodHref":"skills/fletching.html#methods","colour":"hsl(142 78% 65%)","summary":"Done."},"Construction":{"name":"Construction","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAPFBMVEUAAAAAAAFJLx1cSTd2VDV8b15TODBxWlSMV1VcW1gLCwtKRk14dnQfCApFOTepqJuSkYyPg3UlICNQjlZUNdwuAAAAAXRSTlMAQObYZgAAAL1JREFUeF5tz8lyAyEMRVE/DUDPdvL//5on4aRxkbvR4hQq8ZhCxDlDraqK/0ALm+kwKwWYCQmc5BmKJuETtKgGTVL4hELCOQquIqeIBBXBCK9dZNskOQVZwL5kf2DNW1sDPADZ+9Rm6/XcWcr4CcNVvQMwCkHMrS6L+8exXFW50d3MDgwEXE9jzTwaiLBbpxYdGD7o1unU6JcA3tRFI46UTt+d1JR8C2kBvrqwQUh4YKUo+Zab9d2ZMtJdwg91awdGR2OY5QAAAABJRU5ErkJggg==","href":"skills/construction.html","level":77,"xp":1577278,"rank":822978,"goal":83,"pct":59,"done":false,"togo":1095836,"method":"not chosen yet","methodHref":"skills/construction.html#methods","colour":"hsl(67 76% 63%)","summary":"Mahogany Homes, then oak/mahogany builds."},"Herblore":{"name":"Herblore","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAARCAMAAAAfZPc8AAAADFBMVEUAAAAAvAAAAAEJbAIkm+0TAAAAAXRSTlMAQObYZgAAAF5JREFUeNpt0LENxEAMA0Htsv+eP3gfcTLMTBwo4VxR5zMmeZM6o0l0vwpqkkSFJfAIHFFHoD+AT6sq5p/eIwBaUYAKl7CFnFApbXAOVQqlSqG04ZCX7Mntbu0XrvoH5JACSLDJdnQAAAAASUVORK5CYII=","href":"skills/herblore.html","level":70,"xp":767891,"rank":1092215,"goal":99,"pct":6,"done":false,"togo":12266540,"method":"not chosen yet","methodHref":"skills/herblore.html#methods","colour":"hsl(56 76% 63%)","summary":"Potions. Cheapest available tier."},"Cooking":{"name":"Cooking","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAVCAMAAACT1yXjAAAAElBMVEUAAAAAAAF6awlYOgy0qwbh79essedQAAAAAXRSTlMAQObYZgAAAFtJREFUeNp10EEKxEAIBVGrZ7z/lYO1+EiHlLsHIlgTUFd0N1MB22bopkzEaTQjVp/G3djPzjl/0xgxiRKJIanZVSQkjU0LXdRyRFomvu1oYorJsYUhcUXZ/ZUHIk4C0T3Uvo8AAAAASUVORK5CYII=","href":"skills/cooking.html","level":70,"xp":742944,"rank":1917101,"goal":99,"pct":6,"done":false,"togo":12291487,"method":"not chosen yet","methodHref":"skills/cooking.html#methods","colour":"hsl(56 76% 63%)","summary":"Wines or 1-tick karambwans."},"Firemaking":{"name":"Firemaking","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAAElBMVEUAAAAAAAFYOgy0qwbdTwGzOQPKZnv3AAAAAXRSTlMAQObYZgAAAHtJREFUeNpty9EOAyAIQ1Eurf//y0tWlWSuD8UcoSbU/8Ajafi5CiC4V7OJJPJO9iayyDucTSRnaNwC2RnHsyl5ZZyDbG7PVTjitTL2ARGnH5en48jLacG348jQsFscB7q7UxAv4oPDz08VPdA3xM/P65xc5+r8QBX/Uh87fwNSBRw8oQAAAABJRU5ErkJggg==","href":"skills/firemaking.html","level":68,"xp":646353,"rank":1769864,"goal":75,"pct":53,"done":false,"togo":564068,"method":"Wintertodt","methodHref":"skills/firemaking.html#m-wintertodt","colour":"hsl(54 75% 63%)","summary":"Wintertodt."},"Diaries":{"name":"Diaries","also":[],"icon":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAMAAACeyVWkAAAAAXNSR0IArs4c6QAAACpQTFRFAAAA6/XqxuDJptmhmNOTh8yAeMRzYrxaTL1OR6BAQIhDL3MzH0odFjkYRfkgYQAAAAF0Uk5TAEDm2GYAAACWSURBVHjabdFBDgMhDEPRSbFjAuX+1y2jRIhF/wKkJ+/yVCt7qrLIbt9m2faDafWug6XFN7Lz4iWzRgKd5GxmWt+aCoDAKeR46VU4KZ8i33EpAVHDeWlE79L7x9iVfprkzpghdaJ0R7pHTNJht8pDmo7UZIocZJ+Jqa21re7w1ORdawOAFR62ATuYLMuUWLyUrcT/d/sBPDAICj96s28AAAAASUVORK5CYII=","href":"skills/diaries.html","level":null,"xp":null,"rank":null,"goal":99,"pct":0,"done":false,"togo":null,"method":"not chosen yet","methodHref":"skills/diaries.html#methods","colour":"hsl(12 70% 58%)","summary":"Hard diaries, then elite skill walls."}};window.FOCUSNOW="Fishing";</script>
+</head>
+<body>
+<header class="topbar">
+  <a class="mark" href="../index.html"><img class="capemark" src="../assets/media/max-cape.png" alt="">OSRS max time wasting plan</a>
+  <span class="sep">/</span>
+  <span class="where">Magic</span>
+  <span class="spacer"></span>
+  <a class="up star" href="../stars.html">Stars</a>
+  <a class="up" href="../index.html">Plan index</a>
+</header>
+<div class="shell">
+<main class="main">
+<a class="backlink" href="../index.html" title="Back to the plan" aria-label="Back to the plan"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M9.5 3.5 5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<div class="kick">Combat</div>
+<div class="page-head"><img class="icon lg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAXCAMAAADJPRQhAAAAElBMVEUAAAAbBpIAAAEABv56PQm0qwYDZfXfAAAAAXRSTlMAQObYZgAAAHZJREFUeNp1kUEOAzEIA+Mx/P/LldIlaQU7R48MKFkHgDUA2LORPCqQZMNUkacSaDMYlWGuyGYQ0MdRuWRoZhwH0EzB+3UqYxgrkgMWUFviyTMj4nl3kCC+ZGSEsW3uhm0yZbvMPyVY0NL6Drrg3KbLiTdcfuIPVmkCpSUi/wEAAAAASUVORK5CYII=" alt="" width="22" height="22"><h1 class="page">Magic</h1></div>
+<p class="lede">75 for the quest cape block; 99 in the combat block after the <span class="ment"><img class="mi" src="../assets/media/achievement-diary-cape.png" alt="" loading="lazy">Diary Cape</span>.</p>
+<div class="glinks"><a class="glink" href="https://oldschool.runescape.wiki/w/Magic_training" rel="noopener" target="_blank">Wiki guide</a><a class="glink" href="https://www.osrsguide.com/osrs-magic-guide/" rel="noopener" target="_blank">OSRS Guide</a></div>
+<div class="livebox"><div class="k">Your level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(54 75% 63%)" data-skill-level="Magic">68</b><span class="goal">of 75</span></div><span class="prog wide"><span class="fill lit" style="width:52%;--lc:hsl(54 75% 63%)" data-skill-bar="Magic" data-from="1" data-goal="75"></span></span><div class="facts"><span><i>XP</i> <b class="num">629,877</b></span><span><i>To 75</i> <b class="num">580,544</b></span></div></div>
+
+<div class="pillrow">
+<span class="pill"><span class="pl">Target</span><span class="pv">75 → 99</span></span>
+<span class="pill pick"><span class="pl">Method</span><span class="pv">Bursting/barraging Slayer tasks</span></span>
+<span class="pill"><span class="pl">Options</span><span class="pv">9</span></span>
+</div>
+<div class="panel pick withpic" id="pickpanel"><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" src="../assets/media/ice-barrage.gif" alt="" loading="lazy"><div><h3 id="pickname">Bursting/barraging Slayer tasks</h3><div id="pickdetail"><p>Your pick. Nechryael and dust devils in the Catacombs, smoke devils, jellies. Best XP-plus-Slayer combination in the game, but rune-hungry.</p></div></div></div></div>
+<div class="panel warn" id="nopick" hidden><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
+<h2 id="methods">Methods</h2>
+<p class="savednote">At 68 Magic, the best option open to you is <b>Bursting/barraging Slayer tasks</b> (100–250k/hr). Locked rows need a higher level.</p>
+<div class="tablewrap"><div class="tablescroll">
+<table class="methods">
+  <thead><tr><th class="pic"><span class="sr">Image</span></th><th>Method</th>
+  <th>Requirement</th><th>XP/hr</th><th>Notes</th>
+  <th class="choose"><span class="sr">Choose</span></th></tr></thead>
+  <tbody>
+    <tr class="m chosen rec" id="m-bursting-barraging-slayer-tasks" data-method="Bursting/barraging Slayer tasks"><td class="pic"><img class="thumb" src="../assets/media/ice-barrage.gif" alt="" loading="lazy"></td><td>Bursting/barraging Slayer tasks<span class="rtag rec">best at your level</span></td><td class="req">Desert Treasure I</td><td class="rate">100–250k</td><td class="notes">Your pick. Nechryael and dust devils in the Catacombs, smoke devils, jellies. Best XP-plus-Slayer combination in the game, but rune-hungry.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Bursting/barraging Slayer tasks"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-bursting-maniacal-monkeys" data-method="Bursting maniacal monkeys"><td class="pic"><img class="thumb" src="../assets/media/ice-burst.gif" alt="" loading="lazy"></td><td>Bursting maniacal monkeys<span class="rtag lock">needs 70 Magic</span></td><td class="req">MM2, 70 Magic</td><td class="rate">200–300k</td><td class="notes">The fastest Magic XP in the game. Ice Burst on <span class="ment"><img class="mi" src="../assets/media/maniacal-monkey.png" alt="" loading="lazy">maniacal monkeys</span> after Monkey Madness II, and it doubles as the <span class="ment"><img class="mi pixel" src="../assets/icons/Ranged.png" alt="" loading="lazy">Ranged</span> chinning spot.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 70 Magic" aria-label="Locked: needs 70 Magic"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-splashing" data-method="Splashing"><td class="pic"><img class="thumb" src="../assets/media/splashing.gif" alt="" loading="lazy"></td><td>Splashing</td><td class="req">—</td><td class="rate">10–30k</td><td class="notes">Near-zero attention, near-zero rate. Only worth it if you genuinely cannot play actively.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Splashing"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-high-alchemy" data-method="High Alchemy"><td class="pic"><img class="thumb" src="../assets/media/high-level-alchemy.gif" alt="" loading="lazy"></td><td>High Alchemy</td><td class="req">55</td><td class="rate">65k</td><td class="notes">78k GP-ish per hour spent; the classic buyable Magic. Combine with another activity.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use High Alchemy"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-stun-alching" data-method="Stun-alching"><td class="pic"><img class="thumb" src="../assets/media/stun.gif" alt="" loading="lazy"></td><td>Stun-alching</td><td class="req">—</td><td class="rate">~150k</td><td class="notes">Curse/Vulnerability + High Alch at NMZ. Fast but fully click-bound and expensive.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Stun-alching"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-powered-staff-on-slayer" data-method="Powered staff on Slayer"><td class="pic"><img class="thumb" src="../assets/media/trident-of-the-seas.png" alt="" loading="lazy"></td><td>Powered staff on Slayer</td><td class="req">—</td><td class="rate">40–80k</td><td class="notes">Trident/Sang on tasks. No rune cost beyond charges.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Powered staff on Slayer"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-guardians-of-the-rift" data-method="Guardians of the Rift"><td class="pic"><img class="thumb" src="../assets/media/guardians-of-the-rift.png" alt="" loading="lazy"></td><td>Guardians of the Rift</td><td class="req">27 RC</td><td class="rate">moderate</td><td class="notes">Side Magic XP while training <span class="ment"><img class="mi pixel" src="../assets/icons/Runecraft.png" alt="" loading="lazy">Runecraft</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Guardians of the Rift"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-tele-alch" data-method="Tele-alch"><td class="pic"><img class="thumb" src="../assets/media/high-level-alchemy.gif" alt="" loading="lazy"></td><td>Tele-alch</td><td class="req">55</td><td class="rate">~100k</td><td class="notes">Alternate a teleport with High Alchemy for a faster loop than alching alone. Costs more per hour but no combat needed.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Tele-alch"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-superheat-enchant-bolts" data-method="Superheat / Enchant bolts"><td class="pic"><img class="thumb" src="../assets/media/superheat-item.gif" alt="" loading="lazy"></td><td>Superheat / Enchant bolts</td><td class="req">43+</td><td class="rate">varies</td><td class="notes">Doubles up with <span class="ment"><img class="mi pixel" src="../assets/icons/Smithing.png" alt="" loading="lazy">Smithing</span> / <span class="ment"><img class="mi pixel" src="../assets/icons/Crafting.png" alt="" loading="lazy">Crafting</span> when you're doing those anyway.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Superheat / Enchant bolts"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+  </tbody>
+</table>
+</div></div>
+<h2 id="notes">Notes</h2>
+<ul>
+  <li>Barrage tasks are the single best overlap in your plan. Magic XP, <span class="ment"><img class="mi pixel" src="../assets/icons/Slayer.png" alt="" loading="lazy">Slayer</span> XP and Slayer points from the same hour.</li>
+  <li>Budget for runes. If the cost gets uncomfortable, fall back to trident tasks and take Magic to 99 later in the combat block.</li>
+</ul>
+<div class="prevnext"><a class="prev" href="ranged.html"><span class="d">Previous</span><span class="n">Ranged</span></a><a class="next" href="prayer.html"><span class="d">Next</span><span class="n">Prayer</span></a></div>
+<footer class="foot">
+  XP rates are approximate and assume reasonable gear. Method metas shift, so check the
+  <a href="https://oldschool.runescape.wiki/w/Skill_training" rel="noopener">OSRS Wiki</a>
+  training guide before committing to a long grind.<br>
+  Skill icons from the OSRS Wiki. Old School RuneScape is a trademark of Jagex Ltd.
+</footer>
+</main>
+<aside class="rail" aria-label="Site index">
+  <div class="meter"><span class="mrow"><span>Total level</span><b class="num" data-stat="total">1636</b><button class="refresh" type="button" hidden title="Refresh from the hiscores" aria-label="Refresh from the hiscores"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mrow"><span>Combat</span><b class="num" data-stat="combat">89</b><span class="spacer"></span></span></div>
+  <nav class="rail-body">
+  <div class="rail-kick">Reference</div>
+  <a href="../index.html#progression"><span class="t">Progression</span></a>
+  <a href="../index.html#quests"><span class="t">Quests</span></a>
+  <a href="../index.html#diaries"><span class="t">Diaries</span></a>
+  <a href="../index.html#approach"><span class="t">Combat</span></a>
+  <a href="../index.html#max-order"><span class="t">Max order</span></a>
+  <a href="../index.html#skills"><span class="t">Skills</span></a>
+  <div class="rail-kick">Videos</div>
+  <span class="vidrow"><a class="vch" href="https://www.youtube.com/@patyfatycake_OSRS" target="_blank" rel="noopener" title="Patyfatycake on YouTube"><img src="../assets/media/yt/ch-patyfatycake.jpg" alt="Patyfatycake" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=EgerHcjR0VI&t=934s" target="_blank" rel="noopener" title="How to max in 2026"><span class="vt">How to max in 2026</span><span class="vc">Patyfatycake</span></a></span>
+  <span class="vidrow"><a class="vch" href="https://www.youtube.com/@LocalOSRS" target="_blank" rel="noopener" title="Local OSRS on YouTube"><img src="../assets/media/yt/ch-localosrs.jpg" alt="Local OSRS" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=LZRbhpS5J3c" target="_blank" rel="noopener" title="What order to max"><span class="vt">What order to max</span><span class="vc">Local OSRS</span></a></span>
+  <span class="vidrow"><a class="vch" href="https://www.youtube.com/@Gissoia" target="_blank" rel="noopener" title="Gissoia on YouTube"><img src="../assets/media/yt/ch-gissoia.jpg" alt="Gissoia" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=LqMvToAkWkQ" target="_blank" rel="noopener" title="Maxing in 2026"><span class="vt">Maxing in 2026</span><span class="vc">Gissoia</span></a></span>
+  <span class="vidrow"><a class="vch" href="https://www.youtube.com/@Gissoia" target="_blank" rel="noopener" title="Gissoia on YouTube"><img src="../assets/media/yt/ch-gissoia.jpg" alt="Gissoia" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=AI_d03Xj_LE" target="_blank" rel="noopener" title="Best AFK methods"><span class="vt">Best AFK methods</span><span class="vc">Gissoia</span></a></span>
+  <a class="slink" href="../stars.html"><span class="t">Shooting stars</span></a>
+  <div class="rail-kick">Links</div>
+  <a class="slink" href="https://www.osrsguide.com/" target="_blank" rel="noopener"><span class="t">OSRS Guide</span><span class="ext">&#8599;</span></a>
+  <a class="slink" href="https://www.osrsguide.com/skilling-guides/" target="_blank" rel="noopener"><span class="t">Skilling guides</span><span class="ext">&#8599;</span></a>
+  <a class="slink" href="https://www.osrsguide.com/calculators/" target="_blank" rel="noopener"><span class="t">Calculators</span><span class="ext">&#8599;</span></a>
+  <a class="slink" href="https://www.osrsguide.com/time-to-max-osrs/" target="_blank" rel="noopener"><span class="t">Time to max</span><span class="ext">&#8599;</span></a>
+  <a class="slink" href="https://oldschool.runescape.wiki/" target="_blank" rel="noopener"><span class="t">OSRS Wiki</span><span class="ext">&#8599;</span></a>
+  <div class="rail-kick">Combat</div>
+  <span class="rrow"><a class="r" href="../skills/attack.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAFVBMVEUAAAAAAAF1e3x6awlGPC+0qwZVXFpfKXj9AAAAAXRSTlMAQObYZgAAAE5JREFUeNrd0jEOgAAMw8C6bvn/k5EYUZAYmMh6g5dUHECG7uYJmido/gDHdzB3ACBB4e4aoFB3DQ3gohRndCXBjEoESOIMWVYogNfXOgGvAwGJkZCw2wAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Attack</span><span class="r-lvl lit" style="--lc:hsl(56 76% 63%)">70</span></a><button class="focusbtn" type="button" data-skill="Attack" title="Set as the skill you are levelling" aria-label="Focus Attack"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/strength.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAMAAACzvE1FAAAADFBMVEUAAADBpHYAAAFGPC8vY/5LAAAAAXRSTlMAQObYZgAAAFNJREFUeNqtjkkKxEAMxCzp/38emGzdOcfgg+Qq8PxHnXUU1I0JvBgiIJd7QHgGgCLIk4OOdQTqdt6NOnhGnlLOyziXqQCdNbL9CvUW4CYA5xvxA/dnAV4NB3bkAAAAAElFTkSuQmCC" alt="" width="22" height="22"><span class="t">Strength</span><span class="r-lvl lit" style="--lc:hsl(56 76% 63%)">70</span></a><button class="focusbtn" type="button" data-skill="Strength" title="Set as the skill you are levelling" aria-label="Focus Strength"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/defence.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAATCAYAAAB2pebxAAAAVUlEQVR42mNgYGD8TzEGEaExURi4tLoGA0+aNRUdww0hbAACk2wIspNHqiGkROvgMWQ0igkZAgGM5BgCkUMFjCRlQEwDMA0i0wBMg8g1AGEQFozTAACI+xqkhRvFKgAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Defence</span><span class="r-lvl lit" style="--lc:hsl(51 75% 63%)">66</span></a><button class="focusbtn" type="button" data-skill="Defence" title="Set as the skill you are levelling" aria-label="Focus Defence"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/hitpoints.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAUCAMAAABRYFY8AAAAD1BMVEUAAADdTwEAAAF6PQmzOQNfjd9/AAAAAXRSTlMAQObYZgAAAFlJREFUeNqt0SESwDAMxEBZ9v/fXJAjdQp7KLMCAQY8A15vraoqFbW7uxWwMnVmTgCPZwmKkXjC9ro9+939+FfBmdsBndksCTcnzOaELLzCZtDumxM27wsCPPZhAwz1YXYUAAAAAElFTkSuQmCC" alt="" width="22" height="22"><span class="t">Hitpoints</span><span class="r-lvl lit" style="--lc:hsl(56 76% 63%)">70</span></a><button class="focusbtn" type="button" data-skill="Hitpoints" title="Set as the skill you are levelling" aria-label="Focus Hitpoints"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/ranged.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAAElBMVEUAAAAAAAF6PQl1e3wJbAI1Lxvn8OCVAAAAAXRSTlMAQObYZgAAAIJJREFUeNqNj0GOAyAQw7Bh/v/l1Q6QSuXSXJBsRMIYjP/QGZ8gDLDTZl9AxWST1gcA7HPKaDHlvKAwbxFzcsukSHcEWvAKKNVHUOgrKAAOjziVj7hLvnhlVThAwRHhrLWKuwqU4EVWqQQ3b5HrUKv5FmpqG0eQjY2zPoLg51s/CcYfVnwCCbDYPQAAAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Ranged</span><span class="r-lvl lit" style="--lc:hsl(41 75% 62%)">56</span></a><button class="focusbtn" type="button" data-skill="Ranged" title="Set as the skill you are levelling" aria-label="Focus Ranged"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r here" href="../skills/magic.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAXCAMAAADJPRQhAAAAElBMVEUAAAAbBpIAAAEABv56PQm0qwYDZfXfAAAAAXRSTlMAQObYZgAAAHZJREFUeNp1kUEOAzEIA+Mx/P/LldIlaQU7R48MKFkHgDUA2LORPCqQZMNUkacSaDMYlWGuyGYQ0MdRuWRoZhwH0EzB+3UqYxgrkgMWUFviyTMj4nl3kCC+ZGSEsW3uhm0yZbvMPyVY0NL6Drrg3KbLiTdcfuIPVmkCpSUi/wEAAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Magic</span><span class="r-lvl lit" style="--lc:hsl(54 75% 63%)">68</span></a><button class="focusbtn" type="button" data-skill="Magic" title="Set as the skill you are levelling" aria-label="Focus Magic"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/prayer.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAAD1BMVEUAAAC2zboAAAHh79eSmpW4ABp2AAAAAXRSTlMAQObYZgAAAFxJREFUeNqt0kEKwCAMRNGZP7n/mbuIpSIWhPbvfAFdGE2hbYQ/HAI7r5gdV2wOHaoqtmHR9mkCVHPiMUEiU+4SJGCcbua5yqOq9eXm1rkeIB26aD524Q//9bYPF6kNAXYKRKlSAAAAAElFTkSuQmCC" alt="" width="22" height="22"><span class="t">Prayer</span><span class="r-lvl lit" style="--lc:hsl(67 76% 63%)">77</span></a><button class="focusbtn" type="button" data-skill="Prayer" title="Set as the skill you are levelling" aria-label="Focus Prayer"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/slayer.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAMAAAAmopZHAAAAG1BMVEUAAAAAAAH////DqZmNg3m7uQN4d3ZCMSRZWFXjCMC1AAAAAXRSTlMAQObYZgAAAJNJREFUeNptzUsKAyAQBFGre/zc/8RBHTJg0hvhFWp7B/wT5nwCvXeYs0J5L6+xS/F7Zf7yWjv88SdwN8Zaiwp4jzHGWMD2ZEmHBwYoDtJlF9vBuizJXJekYK3DoPIMSCK+7s0ROoN0wrZ8CJQfpG8WYSTyJSIiHW7VDkSGHJZ4PU9DqyDfYYKW4UhAhA/vUWt5tA+SxARg2VEwWwAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Slayer</span><span class="r-lvl lit" style="--lc:hsl(36 74% 62%)">50</span></a><button class="focusbtn" type="button" data-skill="Slayer" title="Set as the skill you are levelling" aria-label="Focus Slayer"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <div class="rail-kick">Gathering</div>
+  <span class="rrow focused"><a class="r" href="../skills/fishing.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAXBAMAAADjD5IeAAAAD1BMVEUAAAAAAAFVXFp1e3xGPC9FFD+mAAAAAXRSTlMAQObYZgAAAI5JREFUeF5dj8ENxSAMQ2EDTLsAZgLwBJXYf6bvND19H4JfiBylhAC4fu4+T3sbuJ9zcB5ytFJtAByArZgQpdVuSJmZkEJABeKNEiSZL60ckJaUAG26f4384dBcfAF9dHETJWlucuaeTtkj4lG7NkescQzs2VeOSAPoMNQpEX5aRm2P1/Vl5VV5CObfIakfDY0TrPK6gqgAAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Fishing</span><span class="r-lvl lit" style="--lc:hsl(45 75% 62%)">61</span></a><button class="focusbtn" type="button" data-skill="Fishing" title="Set as the skill you are levelling" aria-label="Focus Fishing"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/hunter.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAXCAMAAAA4Nk+sAAAAFVBMVEUAAAAMCws/NzwxKClbQUEjDCVZWFUEo2OeAAAAAXRSTlMAQObYZgAAAHJJREFUeNqF0EEOhDAMQ9F8pzP3PzJSLZooLOpFBA8Rq403hIdzYYTHULP9wuSNj+dkNv/GEjNJoMaI8ARhwJvMgav8rnX+rxj8sesSBJjBi/hL9HNL6YdiipFa/Q7b6T3SKS+Wkwy2fi92rfTy7jvV9gBpkQGYacnI9QAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Hunter</span><span class="r-lvl lit" style="--lc:hsl(49 75% 63%)">64</span></a><button class="focusbtn" type="button" data-skill="Hunter" title="Set as the skill you are levelling" aria-label="Focus Hunter"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/agility.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAXUlEQVR42u3VQQoAIAhE0br/oWvVcvjUMCRR4MrgQWq2YqePFR+5WweKAMCQwAEQIN3bAjTCORuyO+/kKQBg6L2JJ6g+Yk6732nRggf/L50PAIA8A/DJA7x0yu75CYAJkwHGf7YeAAAAAElFTkSuQmCC" alt="" width="22" height="22"><span class="t">Agility</span><span class="r-lvl lit" style="--lc:hsl(44 75% 62%)">60</span></a><button class="focusbtn" type="button" data-skill="Agility" title="Set as the skill you are levelling" aria-label="Focus Agility"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/thieving.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAS0lEQVR42mMYBaNgIADjf1IxiQZTjmlsAQLT1AJMiwi7gHJ1xEYeKRFNwBLCiYIs9aQGAVnqYQy6Rf6QTMZULV5oWpaNlu+jYOABAHbr1QExwOoiAAAAAElFTkSuQmCC" alt="" width="22" height="22"><span class="t">Thieving</span><span class="r-lvl lit" style="--lc:hsl(41 75% 62%)">56</span></a><button class="focusbtn" type="button" data-skill="Thieving" title="Set as the skill you are levelling" aria-label="Focus Thieving"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/mining.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAADFBMVEUAAAAAAAF1e3xGPC/Lr9t+AAAAAXRSTlMAQObYZgAAAGRJREFUeNp10kEKxEAMA8Hu0f//vGBMmKBNH0v4ZjYnptvOpPDsnis10WW9bpI4rEy7uC5POygg1ADvTMab4wzNOF7MDsW0y+TtRmk3Qvlwuy/GZRNpN+MXH4vXPxn/M/YXAPwA3cIBiMrALJMAAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Mining</span><span class="r-lvl lit" style="--lc:hsl(58 76% 63%)">72</span></a><button class="focusbtn" type="button" data-skill="Mining" title="Set as the skill you are levelling" aria-label="Focus Mining"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/woodcutting.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAWCAMAAAD6gTxzAAAAElBMVEUAAAAAAAEJbAJYOgwAvAB6PQl7bRBSAAAAAXRSTlMAQObYZgAAAGdJREFUeNpl0dEKwCAMQ9HdRv//l0fNrMUF9OHQUMRnBZynAjEy0MQ0aBJGoGSkGJd44nSJTbEOmJwRyY3k6yNpH9OyGgqvBCmnQPUoUAbJcGxOi4PlJksn1+6pLlTxt5BeszWi/8cLNqUCdjiFICMAAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Woodcutting</span><span class="r-lvl lit" style="--lc:hsl(57 76% 63%)">71</span></a><button class="focusbtn" type="button" data-skill="Woodcutting" title="Set as the skill you are levelling" aria-label="Focus Woodcutting"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/runecraft.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAFVBMVEUAAAAAAAF4d3ZZWFWLNwmUko+wOQR2sZzsAAAAAXRSTlMAQObYZgAAAIFJREFUeNqN0kEKwCAMRFF/JvH+Ry6EoYpU6Oz0MbpIxh7GJUxuMCcX+CYg54SToKqlCo77gkyoiFhGVVXQEh0W9DEzCdMGQAIW0XI2LJTF31iEK8dzsphWTS2DOESGQeyAZHlJJzRJIZGZCxyQtg6G18iZSHCbz/+ZmvizO/d9ewCFeAOFN5sfDAAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Runecraft</span><span class="r-lvl lit" style="--lc:hsl(42 75% 62%)">57</span></a><button class="focusbtn" type="button" data-skill="Runecraft" title="Set as the skill you are levelling" aria-label="Focus Runecraft"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/farming.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAXCAMAAADJPRQhAAAAJ1BMVEUAAAAAAAF6cWaNg3l4d3aUko9ZWFVoZmNSXv9bQUE/Nzxue/9eTTYjLEHpAAAAAXRSTlMAQObYZgAAAJZJREFUeNqN0kEOwyAMBVHGJt+F9P7nrQKF0CJVnQ2LhxCWnNZopS1wzzkbG7gDEMEm9FPsQOsWoAsmnScFOmBmJHBMj1ZlQMQlRodah+QQ7YJC0rMUm68R4pJ8HO6eDZsjYcEiRsRNWsVQMCQ+hbBBX5KIKfpTmJK4xN8CkqZwC6UUSKNFrNJhF0hL6687zIAudPixOi/7RARbtdPZTAAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Farming</span><span class="r-lvl lit" style="--lc:hsl(142 78% 65%)">99</span></a><button class="focusbtn" type="button" data-skill="Farming" title="Set as the skill you are levelling" aria-label="Focus Farming"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/sailing.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAABcWlDQ1BpY2MAAHjaldE5SANBGIbhN1FRPLDQQsRiCxUEbVTEMkQxCAZCEiFRC/fIBdlN2E2wSSnYBiw8GqMWNtbaWtgKguABYi9YKdpIWGcImiBEcKZ5+Gb+YeYf8Fayuum0+sC0CnY44Fdi8RWl/Zku2sQcZUzVnXwwshCl6fi4xQNwMyHP4n+jx0g4OngUwKfn7YLwOjCzUchL7wL9elo1hE+BcVtcUPhe5lrNL9IpabxI29HwnHA/oKQarDVYT9um8DQwbJiWIRyr2ZAuSZvZog4AeIDuhLUckTkwRIBFgoRQ0CiSIUuBCTJYKDiECeBvUj+IrA9RRCNLBh2FeXKYqMh65B/87q2TnJoEwNPth7Yn130bgfZtqJZd9/PQdatH0PIIF1a9PleB2XeRl+vZ8AH0bsLZZT3TduB8CwYe8qqtAtACeJNJeD2Bnjj0XUPnquzbzzrHdxAtwdIV7O3DaAp615q8u6Oxb3/t+e7fF7ntcsMvXATQAAAAD1BMVEUAAAAAAAGSmpVVXFp1e3yFTXRwAAAAAXRSTlMAQObYZgAAAIxJREFUeNpl0gEKxDAMA0GvpP+/+aA2NuEEJXiaRgRa/wGeaUYksbwjMRb7IUm7+J6CXux8q0RCsQfgCCTH/T7TgxPJ0Nticd2mOgSdO5zDsnOHUstTPn78zdKsHDesD7fb7RHNHZgCSc2X9Tx8t5zOTj3XobdI67YTCSARXL+dji3qArZtwJxv5f0MP2ZAAlUKS1qzAAAAAElFTkSuQmCC" alt="" width="22" height="22"><span class="t">Sailing</span><span class="r-lvl lit" style="--lc:hsl(36 74% 62%)">50</span></a><button class="focusbtn" type="button" data-skill="Sailing" title="Set as the skill you are levelling" aria-label="Focus Sailing"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <div class="rail-kick">Artisan</div>
+  <span class="rrow"><a class="r" href="../skills/smithing.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAMAAABFjsb+AAAAD1BMVEUAAAAAAAF1e3w1LxtVXFqn84UMAAAAAXRSTlMAQObYZgAAAGBJREFUeNptzzESgDAMA0GdpP+/mQJPQoAr140sAL3CRmJaZvDEtnQsjDVpx8qPGQk7SVu3dVqzrWNFtGEbgEgCmWZLgnTr2gzcpxYdkaR8qeZLNk/qfMKmLOVpOe1IugDCQwJSf2NlWgAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Smithing</span><span class="r-lvl lit" style="--lc:hsl(44 75% 62%)">60</span></a><button class="focusbtn" type="button" data-skill="Smithing" title="Set as the skill you are levelling" aria-label="Focus Smithing"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/crafting.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWBAMAAAAoU0G7AAAAD1BMVEUAAAAAAAF1e3xYOgx6PQnLwrUpAAAAAXRSTlMAQObYZgAAAG1JREFUeF5Fj9EJBDEIBbUDZ+8a2HSwXAUL9l/TxSeS9xEzjCJax4kugqXCLwR3CB6ByD+l/FqLVoKj4Cj/vpswKRKj2qQyemErm7DVwJ7WLoV8eWJE4sCIWs2IuUGi4LpD0N2rmpM5vJ8TzvcPcmoOV5e0/nwAAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Crafting</span><span class="r-lvl lit" style="--lc:hsl(62 76% 63%)">75</span></a><button class="focusbtn" type="button" data-skill="Crafting" title="Set as the skill you are levelling" aria-label="Focus Crafting"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/fletching.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAElBMVEUAAAAAAAEJbAI1Lxt6PQl1e3yWRDmsAAAAAXRSTlMAQObYZgAAAFtJREFUeNrN0jEOwDAIQ9F8B+5/5S7xUOSoa5mQHp7MGgMrD+IGggtoA1G2pCQGZhAnqOINvqUtBm8NBPD2ZwA6J6jmXGCwFC6AUS8cEJfKFAUXkGxA+prPR3sAd9cBJ6KIUMMAAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Fletching</span><span class="r-lvl lit" style="--lc:hsl(142 78% 65%)">99</span></a><button class="focusbtn" type="button" data-skill="Fletching" title="Set as the skill you are levelling" aria-label="Focus Fletching"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/construction.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAPFBMVEUAAAAAAAFJLx1cSTd2VDV8b15TODBxWlSMV1VcW1gLCwtKRk14dnQfCApFOTepqJuSkYyPg3UlICNQjlZUNdwuAAAAAXRSTlMAQObYZgAAAL1JREFUeF5tz8lyAyEMRVE/DUDPdvL//5on4aRxkbvR4hQq8ZhCxDlDraqK/0ALm+kwKwWYCQmc5BmKJuETtKgGTVL4hELCOQquIqeIBBXBCK9dZNskOQVZwL5kf2DNW1sDPADZ+9Rm6/XcWcr4CcNVvQMwCkHMrS6L+8exXFW50d3MDgwEXE9jzTwaiLBbpxYdGD7o1unU6JcA3tRFI46UTt+d1JR8C2kBvrqwQUh4YKUo+Zab9d2ZMtJdwg91awdGR2OY5QAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Construction</span><span class="r-lvl lit" style="--lc:hsl(67 76% 63%)">77</span></a><button class="focusbtn" type="button" data-skill="Construction" title="Set as the skill you are levelling" aria-label="Focus Construction"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/herblore.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAARCAMAAAAfZPc8AAAADFBMVEUAAAAAvAAAAAEJbAIkm+0TAAAAAXRSTlMAQObYZgAAAF5JREFUeNpt0LENxEAMA0Htsv+eP3gfcTLMTBwo4VxR5zMmeZM6o0l0vwpqkkSFJfAIHFFHoD+AT6sq5p/eIwBaUYAKl7CFnFApbXAOVQqlSqG04ZCX7Mntbu0XrvoH5JACSLDJdnQAAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Herblore</span><span class="r-lvl lit" style="--lc:hsl(56 76% 63%)">70</span></a><button class="focusbtn" type="button" data-skill="Herblore" title="Set as the skill you are levelling" aria-label="Focus Herblore"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/cooking.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAVCAMAAACT1yXjAAAAElBMVEUAAAAAAAF6awlYOgy0qwbh79essedQAAAAAXRSTlMAQObYZgAAAFtJREFUeNp10EEKxEAIBVGrZ7z/lYO1+EiHlLsHIlgTUFd0N1MB22bopkzEaTQjVp/G3djPzjl/0xgxiRKJIanZVSQkjU0LXdRyRFomvu1oYorJsYUhcUXZ/ZUHIk4C0T3Uvo8AAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Cooking</span><span class="r-lvl lit" style="--lc:hsl(56 76% 63%)">70</span></a><button class="focusbtn" type="button" data-skill="Cooking" title="Set as the skill you are levelling" aria-label="Focus Cooking"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <span class="rrow"><a class="r" href="../skills/firemaking.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAAElBMVEUAAAAAAAFYOgy0qwbdTwGzOQPKZnv3AAAAAXRSTlMAQObYZgAAAHtJREFUeNpty9EOAyAIQ1Eurf//y0tWlWSuD8UcoSbU/8Ajafi5CiC4V7OJJPJO9iayyDucTSRnaNwC2RnHsyl5ZZyDbG7PVTjitTL2ARGnH5en48jLacG348jQsFscB7q7UxAv4oPDz08VPdA3xM/P65xc5+r8QBX/Uh87fwNSBRw8oQAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Firemaking</span><span class="r-lvl lit" style="--lc:hsl(54 75% 63%)">68</span></a><button class="focusbtn" type="button" data-skill="Firemaking" title="Set as the skill you are levelling" aria-label="Focus Firemaking"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  <div class="rail-kick">Support</div>
+  <span class="rrow"><a class="r" href="../skills/diaries.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAMAAACeyVWkAAAAAXNSR0IArs4c6QAAACpQTFRFAAAA6/XqxuDJptmhmNOTh8yAeMRzYrxaTL1OR6BAQIhDL3MzH0odFjkYRfkgYQAAAAF0Uk5TAEDm2GYAAACWSURBVHjabdFBDgMhDEPRSbFjAuX+1y2jRIhF/wKkJ+/yVCt7qrLIbt9m2faDafWug6XFN7Lz4iWzRgKd5GxmWt+aCoDAKeR46VU4KZ8i33EpAVHDeWlE79L7x9iVfprkzpghdaJ0R7pHTNJht8pDmo7UZIocZJ+Jqa21re7w1ORdawOAFR62ATuYLMuUWLyUrcT/d/sBPDAICj96s28AAAAASUVORK5CYII=" alt="" width="22" height="22"><span class="t">Diaries</span><span class="r-lvl">Hard</span></a><button class="focusbtn" type="button" data-skill="Diaries" title="Set as the skill you are levelling" aria-label="Focus Diaries"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
+  </nav>
+</aside>
+</div>
+
+<script>
+(function () {
+  var rail = document.querySelector('.rail-body');
+  if (!rail) return;
+  var here = rail.querySelector('a.here');
+  if (here && here.scrollIntoView) here.scrollIntoView({ block: 'nearest' });
+})();
+</script>
+
+<script>
+/* Pulls the hiscores through serve.py's /api/stats proxy. The hiscores send no
+   CORS headers, so a static page cannot call them directly. */
+(function () {
+  var btn = document.querySelector('.refresh');
+  if (!btn || !/^https?:$/.test(location.protocol)) return;
+  btn.hidden = false;
+
+  function xpFor(l) {
+    var t = 0;
+    for (var i = 1; i < l; i++) t += Math.floor(i + 300 * Math.pow(2, i / 7));
+    return Math.floor(t / 4);
+  }
+
+  function apply(d) {
+    var skills = d.skills || {}, left = 0;
+    document.querySelectorAll('[data-skill-level]').forEach(function (el) {
+      var s = skills[el.getAttribute('data-skill-level')];
+      if (s) el.textContent = s.level;
+    });
+    document.querySelectorAll('[data-skill-bar]').forEach(function (el) {
+      var s = skills[el.getAttribute('data-skill-bar')];
+      if (!s) return;
+      var from = parseInt(el.getAttribute('data-from'), 10) || 1;
+      var goal = parseInt(el.getAttribute('data-goal'), 10) || 99;
+      var lo = xpFor(from), hi = xpFor(goal);
+      var pct = hi <= lo ? 100 : Math.round(100 * (s.xp - lo) / (hi - lo));
+      el.style.width = Math.max(0, Math.min(100, pct)) + '%';
+    });
+    Object.keys(skills).forEach(function (k) { if (skills[k].level < 99) left++; });
+    var set = function (key, val) {
+      var el = document.querySelector('[data-stat="' + key + '"]');
+      if (el && val != null) el.textContent = val;
+    };
+    set('left', left);
+    set('total', d.overall && d.overall.level);
+    set('combat', d.combat);
+  }
+
+  btn.addEventListener('click', function (ev) {
+    ev.preventDefault();
+    if (btn.classList.contains('busy')) return;
+    btn.classList.add('busy');
+    btn.classList.remove('ok', 'bad');
+    var started = Date.now();
+    var settle = function (fn) {
+      setTimeout(fn, Math.max(0, 1400 - (Date.now() - started)));
+    };
+    fetch('/api/stats', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || d.error) throw new Error(d && d.error || 'failed');
+        settle(function () {
+          apply(d);
+          btn.classList.remove('busy');
+          btn.classList.add('ok');
+          btn.title = 'Updated just now';
+          setTimeout(function () { btn.classList.remove('ok'); }, 2500);
+        });
+      })
+      .catch(function (err) {
+        settle(function () {
+          btn.classList.remove('busy');
+          btn.classList.add('bad');
+          btn.title = String(err.message || err).slice(0, 60);
+          setTimeout(function () { btn.classList.remove('bad'); }, 3000);
+        });
+      });
+  });
+})();
+</script>
+
+<script>
+/* Choose the method you are actually using. Saved to data/picks.json through
+   serve.py when it is running, and to localStorage either way, so a rebuild
+   keeps the choice. */
+(function () {
+  var skill = window.SKILL;
+  if (!skill) return;
+  var rows = Array.prototype.slice.call(document.querySelectorAll('tr.m'));
+  if (!rows.length) return;
+  var note = document.getElementById('savednote');
+  var panel = document.getElementById('pickpanel');
+  var nopick = document.getElementById('nopick');
+  var pname = document.getElementById('pickname');
+  var pdetail = document.getElementById('pickdetail');
+  var pimg = document.getElementById('pickimg');
+  var KEY = 'osrsplan.pick.' + skill;
+
+  function say(msg, cls) {
+    if (!note) return;
+    note.textContent = msg;
+    note.className = 'savednote' + (cls ? ' ' + cls : '');
+  }
+
+  function show(row, announce) {
+    var method = row.getAttribute('data-method');
+    rows.forEach(function (r) { r.classList.toggle('chosen', r === row); });
+    if (pname) pname.textContent = method;
+    if (pdetail) {
+      var cell = row.querySelector('td.notes');
+      pdetail.innerHTML = cell ? '<p>' + cell.innerHTML + '</p>' : '';
+    }
+    if (pimg) {
+      var thumb = row.querySelector('img.thumb');
+      if (thumb) { pimg.src = thumb.getAttribute('src'); pimg.hidden = false; }
+      else { pimg.hidden = true; }
+    }
+    if (panel) panel.hidden = false;
+    if (nopick) nopick.hidden = true;
+    if (announce) say('Saved: ' + method + ' is your method for ' + skill + '.', 'ok');
+  }
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved) {
+      var match = rows.filter(function (r) { return r.getAttribute('data-method') === saved; })[0];
+      if (match && !match.classList.contains('chosen')) show(match, false);
+    }
+  } catch (err) { /* private mode */ }
+
+  rows.forEach(function (row) {
+    var btn = row.querySelector('.pickbtn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var method = row.getAttribute('data-method');
+      show(row, true);
+      try { localStorage.setItem(KEY, method); } catch (err) { /* ignore */ }
+      if (!/^https?:$/.test(location.protocol)) return;
+      fetch('/api/pick', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ skill: skill, method: method })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('not saved to disk');
+        say('Saved: ' + method + '. Run build.py to bake it in.', 'ok');
+      }).catch(function () {
+        say('Saved in this browser only. Start serve.py to write it to picks.json.', 'warnc');
+      });
+    });
+  });
+})();
+</script>
+
+<script>
+/* Choose the skill you are currently levelling. Rendered from FOCUSDATA so the
+   card updates without a rebuild; persisted to data/focus.json via serve.py and
+   to localStorage either way. */
+(function () {
+  var data = window.FOCUSDATA;
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.focusbtn'));
+  if (!data || !buttons.length) return;
+  var KEY = 'osrsplan.focus';
+  var panel = document.getElementById('focus');
+
+  function fmt(n) {
+    return n == null ? '--' : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function set(id, val) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+
+  function paint(name) {
+    var f = data[name];
+    if (!f) return;
+    buttons.forEach(function (b) {
+      b.parentNode.classList.toggle('focused', b.getAttribute('data-skill') === name);
+    });
+    if (!panel) return;
+
+    var ic = document.getElementById('fic');
+    if (ic) ic.src = f.icon;
+    set('fname', f.name);
+    set('flvl', f.level == null ? '--' : f.level);
+    set('fgoal', f.goal);
+    set('fxp', fmt(f.xp) + ' xp');
+    set('fmethod', f.method);
+    var ml = document.getElementById('fmethodlink');
+    if (ml) ml.href = f.methodHref;
+
+    var lvl = document.getElementById('flvl');
+    if (lvl) lvl.style.setProperty('--lc', f.colour);
+    var bar = document.getElementById('fbar');
+    if (bar) { bar.style.width = f.pct + '%'; bar.style.setProperty('--lc', f.colour); }
+    var link = document.getElementById('flink');
+    if (link) { link.href = f.href; link.textContent = 'Open ' + f.name + ' ›'; }
+
+    var also = document.getElementById('falso');
+    if (also) {
+      var list = f.also || [];
+      also.hidden = list.length === 0;
+      also.innerHTML = '<i>Also trains</i>' + list.map(function (a) {
+        return '<a class="fa" href="' + a.href + '">'
+          + '<img class="icon sm" src="' + a.icon + '" alt="">'
+          + '<span class="fan">' + a.name + '</span>'
+          + '<b class="fal" style="--lc:' + a.colour + '">' + (a.level || '--') + '</b>'
+          + '<span class="fag">/' + a.goal + '</span></a>';
+      }).join('');
+    }
+  }
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved && data[saved] && saved !== window.FOCUSNOW) paint(saved);
+  } catch (err) { /* private mode */ }
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      var name = btn.getAttribute('data-skill');
+      paint(name);
+      try { localStorage.setItem(KEY, name); } catch (err) { /* ignore */ }
+      if (!/^https?:$/.test(location.protocol)) return;
+      fetch('/api/focus', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ skill: name })
+      }).catch(function () { /* localStorage still has it */ });
+    });
+  });
+})();
+</script>
+
+<script>
+/* Filter and sort the Slayer task table. */
+(function () {
+  var table = document.getElementById('tasktable');
+  if (!table) return;
+  var body = table.tBodies[0];
+  var rows = Array.prototype.slice.call(body.rows);
+  var filters = Array.prototype.slice.call(document.querySelectorAll('.tf'));
+  var sorts = Array.prototype.slice.call(document.querySelectorAll('.ts'));
+
+  function num(row, key) { return parseInt(row.getAttribute('data-' + key), 10) || 0; }
+
+  filters.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var want = btn.getAttribute('data-f');
+      filters.forEach(function (b) { b.classList.toggle('on', b === btn); });
+      rows.forEach(function (r) {
+        r.hidden = want !== 'all' && r.getAttribute('data-tag') !== want;
+      });
+    });
+  });
+
+  sorts.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.getAttribute('data-s');
+      sorts.forEach(function (b) { b.classList.toggle('on', b === btn); });
+      var sorted = rows.slice().sort(function (a, b) {
+        if (key === 'verdict') {
+          return num(a, 'order') - num(b, 'order') || num(b, 'weight') - num(a, 'weight');
+        }
+        if (key === 'level') return num(a, 'level') - num(b, 'level');
+        return num(b, key) - num(a, key);
+      });
+      sorted.forEach(function (r) { body.appendChild(r); });
+    });
+  });
+})();
+</script>
+
+<script>
+/* Shooting stars, read from 07.gg through serve.py's /api/stars and rendered
+   here. Loads on open, refreshes on demand. */
+(function () {
+  var box = document.getElementById('stars');
+  if (!box) return;
+  var list = document.getElementById('starlist');
+  var status = document.getElementById('starstatus');
+  var btn = document.getElementById('starrefresh');
+
+  if (!/^https?:$/.test(location.protocol)) {
+    status.textContent = 'needs serve.py';
+    list.innerHTML = '<p class="starnone">Start the site with <code>python3 serve.py</code> '
+      + 'to pull live star data.</p>';
+    return;
+  }
+
+  function mins(ms) {
+    var m = Math.round((ms - Date.now()) / 60000);
+    if (m <= 0) return 'ending';
+    return m + 'm';
+  }
+
+  var limit = parseInt(list.getAttribute('data-limit'), 10) || 12;
+
+  function draw(stars) {
+    if (!stars.length) {
+      list.innerHTML = '<p class="starnone">No active stars reported right now.</p>';
+      return;
+    }
+    list.innerHTML = stars.slice(0, limit).map(function (s) {
+      var t = 'T' + s.tier;
+      var hot = s.tier >= 7 ? ' hot' : '';
+      return '<div class="star">'
+        + '<span class="stier' + hot + '">' + t + '</span>'
+        + '<span class="sworld">w' + s.world + '</span>'
+        + '<span class="sloc">' + s.location + '</span>'
+        + '<span class="sends">' + mins(s.endsAt) + '</span></div>';
+    }).join('');
+  }
+
+  function load() {
+    if (btn.classList.contains('busy')) return;
+    btn.classList.add('busy');
+    var started = Date.now();
+    fetch('/api/stars', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.error) throw new Error(d.error);
+        setTimeout(function () {
+          btn.classList.remove('busy');
+          draw(d.stars || []);
+          status.textContent = (d.stars || []).length + ' active';
+        }, Math.max(0, 700 - (Date.now() - started)));
+      })
+      .catch(function (err) {
+        btn.classList.remove('busy');
+        status.textContent = 'unavailable';
+        list.innerHTML = '<p class="starnone">Live data needs the local server '
+          + '(<code>python3 serve.py</code>). '
+          + '<a href="https://07.gg/trackers/shooting-star" target="_blank" '
+          + 'rel="noopener">Open the tracker on 07.gg &#8599;</a></p>';
+      });
+  }
+
+  btn.addEventListener('click', load);
+  load();
+})();
+</script>
+
+</body>
+</html>
