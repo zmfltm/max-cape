@@ -603,8 +603,8 @@ PLAN_LINKS = [
     ("diaries", "Diaries", "assets/icons/Diaries.png"),
     ("approach", "Slayer", "assets/icons/Slayer.png"),
     ("max-order", "Max Order", "assets/media/max-cape.png"),
-    ("outfits", "Gear", "assets/media/site/worn-equipment.png"),
-    ("skills", "Skills", "assets/media/site/skills-tab.png"),
+    ("outfits", "Gear", "assets/media/site/gear-icon.png"),
+    ("skills", "Skills", "assets/media/site/skills-icon.png"),
 ]
 
 
@@ -1276,7 +1276,7 @@ def rail(active=None, depth=0):
     ordered += [x for x in SKILLS if x not in ordered]
 
     p.append(f'  <div class="rail-kick"><img class="kickico" '
-             f'src="{root}assets/media/site/skills-tab.png" alt="" width="13" height="13">'
+             f'src="{root}assets/media/site/skills-icon.png" alt="" width="13" height="13">'
              'Skills</div>')
     for sk in ordered:
         sl = slug(sk["name"])
@@ -2264,7 +2264,8 @@ def method_table(methods, pick, skill_name=None):
         rows.append(
             f'    <tr class="m{cls}" id="m-{slug(name)}" data-method="{e(name)}">'
             f'<td class="pic">{pic}</td>'
-            f"<td>{e(name)}{tag}</td><td class=\"req\">{e(req)}</td>"
+            f'<td>{wiki_link(name, METHOD_MEDIA.get(name), cased=False)}{tag}</td>'
+            f"<td class=\"req\">{e(req)}</td>"
             f'<td class="rate" data-base="{e(rate)}">{e(rate)}</td>' 
             f'<td class="notes">{annotate(note, depth=1, skip=(skill_name,))}</td>'
             f'<td class="choose">{btn}</td></tr>'
@@ -2450,6 +2451,41 @@ def embed_panel(skill_name, full=False, depth=0):
     )
 
 
+SMALL_WORDS = {"of", "the", "in", "on", "at", "to", "and", "a", "an", "for", "by"}
+
+
+def title_case(text):
+    """Task and method names, capitalised the way the game writes them."""
+    words = str(text).split()
+    out = []
+    for i, w in enumerate(words):
+        bare = re.sub(r"[^A-Za-z]", "", w)
+        if not bare:
+            out.append(w)
+        elif w.upper() == w and len(bare) > 1:
+            out.append(w)
+        elif i and bare.lower() in SMALL_WORDS:
+            out.append(w.lower())
+        else:
+            out.append(w[0].upper() + w[1:])
+    return " ".join(out)
+
+
+def wiki_search(name):
+    """Jump straight to the wiki page when the name matches one."""
+    return ("https://oldschool.runescape.wiki/w/Special:Search?go=Go&search="
+            + urllib.parse.quote(str(name)))
+
+
+def wiki_link(name, page=None, cls="wl", cased=True):
+    """`cased` title-cases the label; our own copy is already written properly,
+    the wiki task table is not."""
+    href = f"{WIKI}{page.replace(' ', '_')}" if page else wiki_search(name)
+    label = title_case(name) if cased else name
+    return (f'<a class="{cls}" href="{href}" target="_blank" rel="noopener">'
+            f'{e(label)}</a>')
+
+
 def slayer_summary():
     """Block / never-unlock / skip lists at a glance."""
     by = {}
@@ -2458,7 +2494,8 @@ def slayer_summary():
 
     def chips(tag):
         return "".join(
-            f'<a class="tchip {tag}" href="#tasks" title="{e(t["rec"])}">{e(t["name"])}'
+            f'<a class="tchip {tag}" href="{wiki_search(t["name"])}" target="_blank" '
+            f'rel="noopener" title="{e(t["rec"])}">{e(title_case(t["name"]))}'
             f'<span>w{t["weight"]}</span></a>'
             for t in sorted(by.get(tag, []), key=lambda x: -int(x["weight"] or 0)))
 
@@ -2489,7 +2526,7 @@ def slayer_sections():
         rows.append(
             f'<tr class="tk {t["tag"]}">'
             f'<td class="tv"><span class="verdict {t["tag"]}">{label[t["tag"]]}</span></td>'
-            f'<td class="tn">{e(t["name"])}<span class="tmeta">{meta}</span>'
+            f'<td class="tn">{wiki_link(t["name"])}<span class="tmeta">{meta}</span>'
             f'<span class="tmeta xp">{e(t["xp"])}</span></td>'
             f'<td class="notes"><b>{e(t["rec"])}</b> {e(why)}</td></tr>')
 
@@ -2517,7 +2554,8 @@ def slayer_sections():
     )
 
     masters = "".join(
-        f'<tr><td class="tn">{e(n)}</td><td>{e(loc)}</td><td class="notes">{e(req)}</td>'
+        f'<tr><td class="tn">{wiki_link(n, cased=False)}</td><td>{e(loc)}</td>'
+        f'<td class="notes">{e(req)}</td>'
         f'<td class="rate">{e(pts)}</td><td class="req">{e(blk)}</td></tr>'
         for n, loc, req, pts, blk in MASTERS)
     masters_table = (
@@ -3006,10 +3044,10 @@ def build_index():
                  'Thieving and Hunter are not listed in either block, so decide where they land: '
                  'Thieving fits with the faster skills, Hunter with the slow gathering ones.</p></div>')
 
-    parts.append(h2("outfits", "Gear", "assets/media/site/worn-equipment.png"))
+    parts.append(h2("outfits", "Gear", "assets/media/site/gear-icon.png"))
     parts.append(outfit_section())
 
-    parts.append(h2("skills", "All Skills", "assets/media/site/skills-tab.png"))
+    parts.append(h2("skills", "All Skills", "assets/media/site/skills-icon.png"))
     for group in GROUP_ORDER:
         members = [s for s in SKILLS if s["group"] == group]
         if not members:

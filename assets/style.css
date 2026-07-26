@@ -1443,6 +1443,8 @@ td.tn .tmeta.xp { color: var(--muted); }
 table.mtable td.notes { font-size: 12.5px; }
 table.tasktable td, table.mtable td { vertical-align: top; }
 td.tn { font-weight: 500; }
+a.wl { color: inherit; }
+a.wl:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 td.tv { width: 96px; }
 
 .verdict {
