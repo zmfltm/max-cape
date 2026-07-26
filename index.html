@@ -535,5 +535,66 @@
 })();
 </script>
 
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
+})();
+</script>
+
 </body>
 </html>

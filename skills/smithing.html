@@ -35,6 +35,7 @@
 <div class="panel pick withpic" id="pickpanel" hidden><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" alt="" hidden><div><h3 id="pickname"></h3><div id="pickdetail"></div></div></div></div>
 <div class="panel warn" id="nopick"><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
 <h2 id="methods">Methods</h2>
+<div class="bonusbar" id="bonusbar" data-skill="Smithing"><span class="blabel">XP gear</span><label class="bonus" title="Each piece is a 20% chance to cut an anvil action from 5 ticks to 4; the full set is about a quarter faster at the anvil."><input type="checkbox" data-bonus="0" data-pct="25" data-applies="Anvil smithing (plates/darts)|Cannonballs|Rune items (3-bar)"><span class="bn">Smiths&#x27; uniform</span><span class="bp">+25% (some rows)</span></label><label class="bonus" title="Gold bars go from 22.5 to 56.2 XP each. This is the whole reason the method exists."><input type="checkbox" data-bonus="1" data-pct="150" data-applies="Blast Furnace – gold bars"><span class="bn">Goldsmith gauntlets</span><span class="bp">+150% (some rows)</span></label></div><details class="bdetails"><summary>What these actually do</summary><ul><li><b>Smiths&#x27; uniform</b>. Each piece is a 20% chance to cut an anvil action from 5 ticks to 4; the full set is about a quarter faster at the anvil.</li><li><b>Goldsmith gauntlets</b>. Gold bars go from 22.5 to 56.2 XP each. This is the whole reason the method exists.</li></ul></details>
 <p class="savednote">At 60 Smithing, the best option open to you is <b>Blast Furnace – gold bars</b>. Locked rows need a higher level.</p>
 <div class="tablewrap"><div class="tablescroll">
 <table class="methods">
@@ -42,18 +43,18 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m rec" id="m-blast-furnace-gold-bars" data-method="Blast Furnace – gold bars"><td class="pic"><img class="thumb" src="../assets/media/gold-bar.png" alt="" loading="lazy"></td><td>Blast Furnace – gold bars<span class="rtag rec">best at your level</span></td><td class="req">40 (60 for best rate)</td><td class="rate">~350k</td><td class="notes">With goldsmith gauntlets, the fastest Smithing XP in the game. Loses GP; you're buying levels.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Blast Furnace – gold bars"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-giants-foundry" data-method="Giants&#x27; Foundry"><td class="pic"><img class="thumb" src="../assets/media/giants-foundry.png" alt="" loading="lazy"></td><td>Giants&#x27; Foundry</td><td class="req">15</td><td class="rate">150–300k</td><td class="notes">Good XP with no real loss, plus moulds and the <span class="ment"><img class="mi" src="../assets/media/smiths-uniform.png" alt="" loading="lazy">Smiths' outfit</span> (which boosts everything else). The best all-round option.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Giants&#x27; Foundry"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-cannonballs" data-method="Cannonballs"><td class="pic"><img class="thumb" src="../assets/media/dwarf-multicannon.png" alt="" loading="lazy"></td><td>Cannonballs</td><td class="req">35</td><td class="rate">~20k</td><td class="notes">Extremely AFK and profitable. Terrible XP rate. Only for background training.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Cannonballs"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-blast-furnace-other-bars" data-method="Blast Furnace – other bars"><td class="pic"><img class="thumb" src="../assets/media/blast-furnace.png" alt="" loading="lazy"></td><td>Blast Furnace – other bars</td><td class="req">varies</td><td class="rate">100–250k</td><td class="notes">Runite bars at 85 are profitable rather than costly.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Blast Furnace – other bars"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-rune-items-3-bar" data-method="Rune items (3-bar)"><td class="pic"><img class="thumb" src="../assets/media/rune-platebody.png" alt="" loading="lazy"></td><td>Rune items (3-bar)<span class="rtag lock">needs 95 Smithing</span></td><td class="req">95</td><td class="rate">~120k</td><td class="notes">Profitable at the very top end, unlike gold bars.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 95 Smithing" aria-label="Locked: needs 95 Smithing"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m" id="m-anvil-smithing-plates-darts" data-method="Anvil smithing (plates/darts)"><td class="pic"><img class="thumb" src="../assets/media/anvil.png" alt="" loading="lazy"></td><td>Anvil smithing (plates/darts)</td><td class="req">varies</td><td class="rate">50–150k</td><td class="notes">Mostly obsolete since <span class="ment"><img class="mi" src="../assets/media/giants-foundry.png" alt="" loading="lazy">Giants' Foundry</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Anvil smithing (plates/darts)"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m rec" id="m-blast-furnace-gold-bars" data-method="Blast Furnace – gold bars"><td class="pic"><img class="thumb" src="../assets/media/gold-bar.png" alt="" loading="lazy"></td><td>Blast Furnace – gold bars<span class="rtag rec">best at your level</span></td><td class="req">40 (60 for best rate)</td><td class="rate" data-base="~350k">~350k</td><td class="notes">With goldsmith gauntlets, the fastest Smithing XP in the game. Loses GP; you're buying levels.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Blast Furnace – gold bars"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-giants-foundry" data-method="Giants&#x27; Foundry"><td class="pic"><img class="thumb" src="../assets/media/giants-foundry.png" alt="" loading="lazy"></td><td>Giants&#x27; Foundry</td><td class="req">15</td><td class="rate" data-base="150–300k">150–300k</td><td class="notes">Good XP with no real loss, plus moulds and the Smiths' uniform, which speeds up every later anvil session. The best all-round option.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Giants&#x27; Foundry"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-cannonballs" data-method="Cannonballs"><td class="pic"><img class="thumb" src="../assets/media/dwarf-multicannon.png" alt="" loading="lazy"></td><td>Cannonballs</td><td class="req">35</td><td class="rate" data-base="~20k">~20k</td><td class="notes">Extremely AFK and profitable. Terrible XP rate. Only for background training.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Cannonballs"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-blast-furnace-other-bars" data-method="Blast Furnace – other bars"><td class="pic"><img class="thumb" src="../assets/media/blast-furnace.png" alt="" loading="lazy"></td><td>Blast Furnace – other bars</td><td class="req">varies</td><td class="rate" data-base="100–250k">100–250k</td><td class="notes">Runite bars at 85 are profitable rather than costly.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Blast Furnace – other bars"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-rune-items-3-bar" data-method="Rune items (3-bar)"><td class="pic"><img class="thumb" src="../assets/media/rune-platebody.png" alt="" loading="lazy"></td><td>Rune items (3-bar)<span class="rtag lock">needs 95 Smithing</span></td><td class="req">95</td><td class="rate" data-base="~120k">~120k</td><td class="notes">Profitable at the very top end, unlike gold bars.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 95 Smithing" aria-label="Locked: needs 95 Smithing"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-anvil-smithing-plates-darts" data-method="Anvil smithing (plates/darts)"><td class="pic"><img class="thumb" src="../assets/media/anvil.png" alt="" loading="lazy"></td><td>Anvil smithing (plates/darts)</td><td class="req">varies</td><td class="rate" data-base="50–150k">50–150k</td><td class="notes">Mostly obsolete since <span class="ment"><img class="mi" src="../assets/media/giants-foundry.png" alt="" loading="lazy">Giants' Foundry</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Anvil smithing (plates/darts)"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
 <h2 id="notes">Notes</h2>
 <ul>
-  <li>Get the <span class="ment"><img class="mi" src="../assets/media/smiths-uniform.png" alt="" loading="lazy">Smiths' outfit</span> from <span class="ment"><img class="mi" src="../assets/media/giants-foundry.png" alt="" loading="lazy">Giants' Foundry</span> early. It's a flat XP bonus on every later Smithing hour.</li>
+  <li>Get the Smiths' uniform from <span class="ment"><img class="mi" src="../assets/media/giants-foundry.png" alt="" loading="lazy">Giants' Foundry</span> early. It is not an XP bonus: each piece gives a 20% chance to cut anvil actions from 5 ticks to 4, so the full set is effectively a quarter faster at the anvil, plus better preform progress in the Foundry.</li>
   <li>For the 75 requirement, <span class="ment"><img class="mi" src="../assets/media/giants-foundry.png" alt="" loading="lazy">Giants' Foundry</span> is the cheapest sane route. Save gold-bar blasting for the final push to 99 when you have GP to burn.</li>
 </ul>
 <div class="prevnext"><a class="prev" href="sailing.html"><span class="d">Previous</span><span class="n">Sailing</span></a><a class="next" href="crafting.html"><span class="d">Next</span><span class="n">Crafting</span></a></div>
@@ -501,6 +502,67 @@
 
   btn.addEventListener('click', load);
   load();
+})();
+</script>
+
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
 })();
 </script>
 

@@ -35,6 +35,7 @@
 <div class="panel pick withpic" id="pickpanel" hidden><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" alt="" hidden><div><h3 id="pickname"></h3><div id="pickdetail"></div></div></div></div>
 <div class="panel warn" id="nopick"><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
 <h2 id="methods">Methods</h2>
+
 <p class="savednote">At 70 Hitpoints, the best option open to you is <b>Any combat</b>. Locked rows need a higher level.</p>
 <div class="tablewrap"><div class="tablescroll">
 <table class="methods">
@@ -42,9 +43,9 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m rec" id="m-any-combat" data-method="Any combat"><td class="pic"><span class="thumb blank"></span></td><td>Any combat<span class="rtag rec">best at your level</span></td><td class="req">—</td><td class="rate">≈ 1/3 of combat XP</td><td class="notes">Every point of melee/ranged/magic damage gives Hitpoints XP alongside it.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Any combat"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-nightmare-zone-all-styles" data-method="Nightmare Zone (all styles)"><td class="pic"><img class="thumb" src="../assets/media/nightmare-zone.png" alt="" loading="lazy"></td><td>Nightmare Zone (all styles)</td><td class="req">Quest reqs</td><td class="rate">—</td><td class="notes">If Hitpoints ends up lagging, NMZ is the usual catch-up.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Nightmare Zone (all styles)"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-tempoross-wintertodt" data-method="Tempoross / Wintertodt"><td class="pic"><img class="thumb" src="../assets/media/tempoross.png" alt="" loading="lazy"></td><td>Tempoross / Wintertodt</td><td class="req">—</td><td class="rate">small</td><td class="notes">Minor Hitpoints XP as a side effect.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Tempoross / Wintertodt"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m rec" id="m-any-combat" data-method="Any combat"><td class="pic"><span class="thumb blank"></span></td><td>Any combat<span class="rtag rec">best at your level</span></td><td class="req">—</td><td class="rate" data-base="≈ 1/3 of combat XP">≈ 1/3 of combat XP</td><td class="notes">Every point of melee/ranged/magic damage gives Hitpoints XP alongside it.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Any combat"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-nightmare-zone-all-styles" data-method="Nightmare Zone (all styles)"><td class="pic"><img class="thumb" src="../assets/media/nightmare-zone.png" alt="" loading="lazy"></td><td>Nightmare Zone (all styles)</td><td class="req">Quest reqs</td><td class="rate" data-base="—">—</td><td class="notes">If Hitpoints ends up lagging, NMZ is the usual catch-up.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Nightmare Zone (all styles)"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-tempoross-wintertodt" data-method="Tempoross / Wintertodt"><td class="pic"><img class="thumb" src="../assets/media/tempoross.png" alt="" loading="lazy"></td><td>Tempoross / Wintertodt</td><td class="req">—</td><td class="rate" data-base="small">small</td><td class="notes">Minor Hitpoints XP as a side effect.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Tempoross / Wintertodt"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
@@ -497,6 +498,67 @@
 
   btn.addEventListener('click', load);
   load();
+})();
+</script>
+
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
 })();
 </script>
 

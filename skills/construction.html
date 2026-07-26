@@ -35,6 +35,7 @@
 <div class="panel pick withpic" id="pickpanel" hidden><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" alt="" hidden><div><h3 id="pickname"></h3><div id="pickdetail"></div></div></div></div>
 <div class="panel warn" id="nopick"><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
 <h2 id="methods">Methods</h2>
+<div class="bonusbar" id="bonusbar" data-skill="Construction"><span class="blabel">XP gear</span><label class="bonus" title="Full set, +2.5% Construction XP."><input type="checkbox" data-bonus="0" data-pct="2.5" data-applies=""><span class="bn">Carpenter&#x27;s outfit</span><span class="bp">+2.5%</span></label></div><details class="bdetails"><summary>What these actually do</summary><ul><li><b>Carpenter&#x27;s outfit</b>. Full set, +2.5% Construction XP.</li></ul></details>
 <p class="savednote">At 77 Construction, the best option open to you is <b>Teak garden benches</b>. Locked rows need a higher level.</p>
 <div class="tablewrap"><div class="tablescroll">
 <table class="methods">
@@ -42,13 +43,13 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m" id="m-mahogany-homes" data-method="Mahogany Homes"><td class="pic"><img class="thumb" src="../assets/media/mahogany-homes.png" alt="" loading="lazy"></td><td>Mahogany Homes</td><td class="req">20+</td><td class="rate">50–120k</td><td class="notes">Contracts. By far the cheapest GP per XP, plus the <span class="ment"><img class="mi" src="../assets/media/carpenter-s-outfit.png" alt="" loading="lazy">carpenter's outfit</span> and plank sack. The right way to reach your 83–85 target.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Mahogany Homes"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-oak-larders" data-method="Oak larders"><td class="pic"><img class="thumb" src="../assets/media/oak-plank.png" alt="" loading="lazy"></td><td>Oak larders</td><td class="req">33</td><td class="rate">~180k</td><td class="notes">Classic butler-based training; cheap planks, high clicks.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Oak larders"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-oak-dungeon-doors" data-method="Oak dungeon doors"><td class="pic"><img class="thumb" src="../assets/media/oak-door.png" alt="" loading="lazy"></td><td>Oak dungeon doors</td><td class="req">74</td><td class="rate">~250k</td><td class="notes">The mid-game standard once you pass 74.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Oak dungeon doors"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-mounted-mythical-capes" data-method="Mounted mythical capes"><td class="pic"><img class="thumb" src="../assets/media/mythical-cape-mounted.png" alt="" loading="lazy"></td><td>Mounted mythical capes</td><td class="req">50 (+ Dragon Slayer II)</td><td class="rate">~200k</td><td class="notes">Teak-based and cheaper per XP than mahogany furniture, with a butler doing the running.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Mounted mythical capes"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-mahogany-tables" data-method="Mahogany tables"><td class="pic"><img class="thumb" src="../assets/media/mahogany-plank.png" alt="" loading="lazy"></td><td>Mahogany tables</td><td class="req">52</td><td class="rate">~300k+</td><td class="notes">Fast and very expensive.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Mahogany tables"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-shipwrights-workbench" data-method="Shipwrights&#x27; workbench"><td class="pic"><img class="thumb" src="../assets/media/shipwrights-workbench.png" alt="" loading="lazy"></td><td>Shipwrights&#x27; workbench</td><td class="req">Sailing content</td><td class="rate">verify</td><td class="notes">Boat facilities built at the workbench. Ties Construction into your <span class="ment"><img class="mi pixel" src="../assets/icons/Sailing.png" alt="" loading="lazy">Sailing</span> goals; check the wiki for current rates.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Shipwrights&#x27; workbench"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m rec" id="m-teak-garden-benches" data-method="Teak garden benches"><td class="pic"><img class="thumb" src="../assets/media/teak-plank.png" alt="" loading="lazy"></td><td>Teak garden benches<span class="rtag rec">best at your level</span></td><td class="req">66</td><td class="rate">~350k</td><td class="notes">Similar rate to mahogany tables, usually cheaper per XP.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Teak garden benches"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-mahogany-homes" data-method="Mahogany Homes"><td class="pic"><img class="thumb" src="../assets/media/mahogany-homes.png" alt="" loading="lazy"></td><td>Mahogany Homes</td><td class="req">20+</td><td class="rate" data-base="50–120k">50–120k</td><td class="notes">Contracts. By far the cheapest GP per XP, plus the <span class="ment"><img class="mi" src="../assets/media/carpenter-s-outfit.png" alt="" loading="lazy">carpenter's outfit</span> and plank sack. The right way to reach your 83–85 target.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Mahogany Homes"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-oak-larders" data-method="Oak larders"><td class="pic"><img class="thumb" src="../assets/media/oak-plank.png" alt="" loading="lazy"></td><td>Oak larders</td><td class="req">33</td><td class="rate" data-base="~180k">~180k</td><td class="notes">Classic butler-based training; cheap planks, high clicks.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Oak larders"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-oak-dungeon-doors" data-method="Oak dungeon doors"><td class="pic"><img class="thumb" src="../assets/media/oak-door.png" alt="" loading="lazy"></td><td>Oak dungeon doors</td><td class="req">74</td><td class="rate" data-base="~250k">~250k</td><td class="notes">The mid-game standard once you pass 74.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Oak dungeon doors"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-mounted-mythical-capes" data-method="Mounted mythical capes"><td class="pic"><img class="thumb" src="../assets/media/mythical-cape-mounted.png" alt="" loading="lazy"></td><td>Mounted mythical capes</td><td class="req">50 (+ Dragon Slayer II)</td><td class="rate" data-base="~200k">~200k</td><td class="notes">Teak-based and cheaper per XP than mahogany furniture, with a butler doing the running.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Mounted mythical capes"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-mahogany-tables" data-method="Mahogany tables"><td class="pic"><img class="thumb" src="../assets/media/mahogany-plank.png" alt="" loading="lazy"></td><td>Mahogany tables</td><td class="req">52</td><td class="rate" data-base="~300k+">~300k+</td><td class="notes">Fast and very expensive.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Mahogany tables"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-shipwrights-workbench" data-method="Shipwrights&#x27; workbench"><td class="pic"><img class="thumb" src="../assets/media/shipwrights-workbench.png" alt="" loading="lazy"></td><td>Shipwrights&#x27; workbench</td><td class="req">Sailing content</td><td class="rate" data-base="verify">verify</td><td class="notes">Boat facilities built at the workbench. Ties Construction into your <span class="ment"><img class="mi pixel" src="../assets/icons/Sailing.png" alt="" loading="lazy">Sailing</span> goals; check the wiki for current rates.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Shipwrights&#x27; workbench"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m rec" id="m-teak-garden-benches" data-method="Teak garden benches"><td class="pic"><img class="thumb" src="../assets/media/teak-plank.png" alt="" loading="lazy"></td><td>Teak garden benches<span class="rtag rec">best at your level</span></td><td class="req">66</td><td class="rate" data-base="~350k">~350k</td><td class="notes">Similar rate to mahogany tables, usually cheaper per XP.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Teak garden benches"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
@@ -503,6 +504,67 @@
 
   btn.addEventListener('click', load);
   load();
+})();
+</script>
+
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
 })();
 </script>
 

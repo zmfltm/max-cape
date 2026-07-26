@@ -36,6 +36,7 @@
 <div class="panel pick withpic" id="pickpanel"><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" src="../assets/media/guardians-of-the-rift.png" alt="" loading="lazy"><div><h3 id="pickname">Guardians of the Rift</h3><div id="pickdetail"><p>Your pick. XP scales with level, plus pouches, the Abyssal needle, outfit and eventually the pet. The default modern Runecraft.</p><p class="gap">ZMI is the named fallback in the plan if you would rather train solo without the minigame timer.</p></div></div></div></div>
 <div class="panel warn" id="nopick" hidden><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
 <h2 id="methods">Methods</h2>
+<div class="bonusbar" id="bonusbar" data-skill="Runecraft"><span class="blabel">XP gear</span><label class="bonus" title="Bonus runes, not bonus XP. Worth wearing for the profit, but it will not move these rates."><input type="checkbox" data-bonus="0" data-pct="0" data-applies=""><span class="bn">Raiments of the Eye</span><span class="bp">no XP change</span></label></div><details class="bdetails"><summary>What these actually do</summary><ul><li><b>Raiments of the Eye</b>. Bonus runes, not bonus XP. Worth wearing for the profit, but it will not move these rates.</li></ul></details>
 <p class="savednote">At 57 Runecraft, the best option open to you is <b>Lava runes with runners</b> (80–130k/hr). Locked rows need a higher level.</p>
 <div class="tablewrap"><div class="tablescroll">
 <table class="methods">
@@ -43,15 +44,15 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m chosen" id="m-guardians-of-the-rift" data-method="Guardians of the Rift"><td class="pic"><img class="thumb" src="../assets/media/guardians-of-the-rift.png" alt="" loading="lazy"></td><td>Guardians of the Rift</td><td class="req">27</td><td class="rate">40–80k</td><td class="notes">Your pick. XP scales with level, plus pouches, the Abyssal needle, outfit and eventually the pet. The default modern Runecraft.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Guardians of the Rift"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-zmi-altar" data-method="ZMI altar"><td class="pic"><img class="thumb" src="../assets/media/ourania-altar.png" alt="" loading="lazy"></td><td>ZMI altar</td><td class="req">50 (+ Lunar Diplomacy)</td><td class="rate">40–70k</td><td class="notes">Consistent, solo, no minigame timer. Needs pouches and the Ourania teleport.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use ZMI altar"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-blood-runes-arceuus" data-method="Blood runes (Arceuus)"><td class="pic"><img class="thumb" src="../assets/media/blood-rune.png" alt="" loading="lazy"></td><td>Blood runes (Arceuus)<span class="rtag lock">needs 77 Runecraft</span></td><td class="req">77</td><td class="rate">~40k</td><td class="notes">Low attention, strong profit. This is why the plan wants 77 early. It turns Runecraft into passive income.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 77 Runecraft" aria-label="Locked: needs 77 Runecraft"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m rec" id="m-lava-runes-with-runners" data-method="Lava runes with runners"><td class="pic"><img class="thumb" src="../assets/media/lava-rune.png" alt="" loading="lazy"></td><td>Lava runes with runners<span class="rtag rec">best at your level</span></td><td class="req">23</td><td class="rate">80–130k</td><td class="notes">The classic runner method. Far faster than solo lavas, but you depend on other players showing up.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Lava runes with runners"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-lava-runes-binding-necklace" data-method="Lava runes (binding necklace)"><td class="pic"><img class="thumb" src="../assets/media/lava-rune.png" alt="" loading="lazy"></td><td>Lava runes (binding necklace)</td><td class="req">23</td><td class="rate">50–80k</td><td class="notes">Cheap and fast; requires a lot of clicking through the abyss.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Lava runes (binding necklace)"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-mud-runes" data-method="Mud runes"><td class="pic"><img class="thumb" src="../assets/media/mud-rune.png" alt="" loading="lazy"></td><td>Mud runes</td><td class="req">23 (+ Lunars)</td><td class="rate">60–100k</td><td class="notes">Binding necklace runs like lavas but with the <span class="ment"><img class="mi pixel" src="../assets/icons/Magic.png" alt="" loading="lazy">Magic</span> Imbue spell instead of an earth talisman staff. Similar rate; take whichever is cheaper.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Mud runes"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-aether-runes-with-runners" data-method="Aether runes with runners"><td class="pic"><img class="thumb" src="../assets/media/aether-rune.png" alt="" loading="lazy"></td><td>Aether runes with runners<span class="rtag lock">needs 90 Runecraft</span></td><td class="req">90</td><td class="rate">verify</td><td class="notes">The top-end runner method. Newer, so check current rates on the wiki.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 90 Runecraft" aria-label="Locked: needs 90 Runecraft"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m locked" id="m-wrath-runes" data-method="Wrath runes"><td class="pic"><img class="thumb" src="../assets/media/wrath-rune.png" alt="" loading="lazy"></td><td>Wrath runes<span class="rtag lock">needs 95 Runecraft</span></td><td class="req">95</td><td class="rate">~60k</td><td class="notes">Best XP and money at the very top end.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 95 Runecraft" aria-label="Locked: needs 95 Runecraft"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m" id="m-daeyalt-essence" data-method="Daeyalt essence"><td class="pic"><img class="thumb" src="../assets/media/daeyalt-essence.png" alt="" loading="lazy"></td><td>Daeyalt essence</td><td class="req">Sins of the Father</td><td class="rate">+XP</td><td class="notes">Straight multiplier on any essence-based method. Get it before long Runecraft sessions.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Daeyalt essence"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m chosen" id="m-guardians-of-the-rift" data-method="Guardians of the Rift"><td class="pic"><img class="thumb" src="../assets/media/guardians-of-the-rift.png" alt="" loading="lazy"></td><td>Guardians of the Rift</td><td class="req">27</td><td class="rate" data-base="40–80k">40–80k</td><td class="notes">Your pick. XP scales with level, plus pouches, the Abyssal needle, outfit and eventually the pet. The default modern Runecraft.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Guardians of the Rift"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-zmi-altar" data-method="ZMI altar"><td class="pic"><img class="thumb" src="../assets/media/ourania-altar.png" alt="" loading="lazy"></td><td>ZMI altar</td><td class="req">50 (+ Lunar Diplomacy)</td><td class="rate" data-base="40–70k">40–70k</td><td class="notes">Consistent, solo, no minigame timer. Needs pouches and the Ourania teleport.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use ZMI altar"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-blood-runes-arceuus" data-method="Blood runes (Arceuus)"><td class="pic"><img class="thumb" src="../assets/media/blood-rune.png" alt="" loading="lazy"></td><td>Blood runes (Arceuus)<span class="rtag lock">needs 77 Runecraft</span></td><td class="req">77</td><td class="rate" data-base="~40k">~40k</td><td class="notes">Low attention, strong profit. This is why the plan wants 77 early. It turns Runecraft into passive income.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 77 Runecraft" aria-label="Locked: needs 77 Runecraft"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m rec" id="m-lava-runes-with-runners" data-method="Lava runes with runners"><td class="pic"><img class="thumb" src="../assets/media/lava-rune.png" alt="" loading="lazy"></td><td>Lava runes with runners<span class="rtag rec">best at your level</span></td><td class="req">23</td><td class="rate" data-base="80–130k">80–130k</td><td class="notes">The classic runner method. Far faster than solo lavas, but you depend on other players showing up.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Lava runes with runners"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-lava-runes-binding-necklace" data-method="Lava runes (binding necklace)"><td class="pic"><img class="thumb" src="../assets/media/lava-rune.png" alt="" loading="lazy"></td><td>Lava runes (binding necklace)</td><td class="req">23</td><td class="rate" data-base="50–80k">50–80k</td><td class="notes">Cheap and fast; requires a lot of clicking through the abyss.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Lava runes (binding necklace)"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-mud-runes" data-method="Mud runes"><td class="pic"><img class="thumb" src="../assets/media/mud-rune.png" alt="" loading="lazy"></td><td>Mud runes</td><td class="req">23 (+ Lunars)</td><td class="rate" data-base="60–100k">60–100k</td><td class="notes">Binding necklace runs like lavas but with the <span class="ment"><img class="mi pixel" src="../assets/icons/Magic.png" alt="" loading="lazy">Magic</span> Imbue spell instead of an earth talisman staff. Similar rate; take whichever is cheaper.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Mud runes"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-aether-runes-with-runners" data-method="Aether runes with runners"><td class="pic"><img class="thumb" src="../assets/media/aether-rune.png" alt="" loading="lazy"></td><td>Aether runes with runners<span class="rtag lock">needs 90 Runecraft</span></td><td class="req">90</td><td class="rate" data-base="verify">verify</td><td class="notes">The top-end runner method. Newer, so check current rates on the wiki.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 90 Runecraft" aria-label="Locked: needs 90 Runecraft"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m locked" id="m-wrath-runes" data-method="Wrath runes"><td class="pic"><img class="thumb" src="../assets/media/wrath-rune.png" alt="" loading="lazy"></td><td>Wrath runes<span class="rtag lock">needs 95 Runecraft</span></td><td class="req">95</td><td class="rate" data-base="~60k">~60k</td><td class="notes">Best XP and money at the very top end.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 95 Runecraft" aria-label="Locked: needs 95 Runecraft"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-daeyalt-essence" data-method="Daeyalt essence"><td class="pic"><img class="thumb" src="../assets/media/daeyalt-essence.png" alt="" loading="lazy"></td><td>Daeyalt essence</td><td class="req">Sins of the Father</td><td class="rate" data-base="+XP">+XP</td><td class="notes">Straight multiplier on any essence-based method. Get it before long Runecraft sessions.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Daeyalt essence"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
@@ -505,6 +506,67 @@
 
   btn.addEventListener('click', load);
   load();
+})();
+</script>
+
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
 })();
 </script>
 

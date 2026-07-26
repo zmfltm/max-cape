@@ -36,6 +36,7 @@
 <div class="panel pick withpic" id="pickpanel"><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" src="../assets/media/drift-net-fishing.png" alt="" loading="lazy"><div><h3 id="pickname">Drift Net Fishing</h3><div id="pickdetail"><p>Your pick for the 70/70 requirement.</p></div></div></div></div>
 <div class="panel warn" id="nopick" hidden><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
 <h2 id="methods">Methods</h2>
+<div class="bonusbar" id="bonusbar" data-skill="Hunter"><span class="blabel">XP gear</span><label class="bonus" title="Full set, +2.5% catch rate, which is close enough to +2.5% XP per hour."><input type="checkbox" data-bonus="0" data-pct="2.5" data-applies=""><span class="bn">Guild hunter outfit</span><span class="bp">+2.5%</span></label></div><details class="bdetails"><summary>What these actually do</summary><ul><li><b>Guild hunter outfit</b>. Full set, +2.5% catch rate, which is close enough to +2.5% XP per hour.</li></ul></details>
 <p class="savednote">At 64 Hunter, the best option open to you is <b>Red chinchompas</b> (100–150k/hr). Locked rows need a higher level.</p>
 <div class="tablewrap"><div class="tablescroll">
 <table class="methods">
@@ -43,14 +44,14 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m chosen" id="m-drift-net-fishing" data-method="Drift Net Fishing"><td class="pic"><img class="thumb" src="../assets/media/drift-net-fishing.png" alt="" loading="lazy"></td><td>Drift Net Fishing</td><td class="req">44 Hunt / 47 Fish</td><td class="rate">40–60k each</td><td class="notes">Your pick for the 70/70 requirement.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Drift Net Fishing"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-hunter-rumours-hunters-guild" data-method="Hunter Rumours (Hunters&#x27; Guild)"><td class="pic"><img class="thumb" src="../assets/media/hunter-guild.png" alt="" loading="lazy"></td><td>Hunter Rumours (Hunters&#x27; Guild)</td><td class="req">Varlamore</td><td class="rate">80–120k</td><td class="notes"><span class="ment"><img class="mi" src="../assets/media/varlamore.png" alt="" loading="lazy">Varlamore</span> contract system. Strong XP with useful rewards; the modern default for high Hunter.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Hunter Rumours (Hunters&#x27; Guild)"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-black-chinchompas" data-method="Black chinchompas"><td class="pic"><img class="thumb" src="../assets/media/black-chinchompa.png" alt="" loading="lazy"></td><td>Black chinchompas<span class="rtag lock">needs 73 Hunter</span></td><td class="req">73</td><td class="rate">150–250k</td><td class="notes">Best XP in the skill and excellent GP, but deep <span class="ment"><img class="mi" src="../assets/media/wilderness.png" alt="" loading="lazy">Wilderness</span>. High risk, high reward.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 73 Hunter" aria-label="Locked: needs 73 Hunter"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m rec" id="m-red-chinchompas" data-method="Red chinchompas"><td class="pic"><img class="thumb" src="../assets/media/red-chinchompa.png" alt="" loading="lazy"></td><td>Red chinchompas<span class="rtag rec">best at your level</span></td><td class="req">63</td><td class="rate">100–150k</td><td class="notes">Safer, still good, and it stockpiles the <span class="ment"><img class="mi" src="../assets/media/black-chinchompa.png" alt="" loading="lazy">chins</span> you'll want for 99 <span class="ment"><img class="mi pixel" src="../assets/icons/Ranged.png" alt="" loading="lazy">Ranged</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Red chinchompas"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-razor-backed-kebbits" data-method="Razor-backed kebbits"><td class="pic"><img class="thumb" src="../assets/media/razor-backed-kebbit.png" alt="" loading="lazy"></td><td>Razor-backed kebbits</td><td class="req">49</td><td class="rate">80–100k</td><td class="notes">Deadfall trapping in the Piscatoris hunter area. The standard bridge between falconry and chinning.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Razor-backed kebbits"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-herbiboar" data-method="Herbiboar"><td class="pic"><img class="thumb" src="../assets/media/herbiboar.png" alt="" loading="lazy"></td><td>Herbiboar<span class="rtag lock">needs 80 Hunter</span></td><td class="req">80 (+ 31 Herb)</td><td class="rate">60–80k</td><td class="notes">Slower XP, but pays out herbs continuously. Requires <span class="ment"><img class="mi" src="../assets/media/fossil-island.png" alt="" loading="lazy">Fossil Island</span> access and Bone Voyage.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 80 Hunter" aria-label="Locked: needs 80 Hunter"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m" id="m-falconry" data-method="Falconry"><td class="pic"><img class="thumb" src="../assets/media/falconry.png" alt="" loading="lazy"></td><td>Falconry</td><td class="req">43</td><td class="rate">60–80k</td><td class="notes">Spotted and dark kebbits at Piscatoris. No traps, just clicking, and it is the fastest option in its band.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Falconry"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-birdhouse-runs" data-method="Birdhouse runs"><td class="pic"><img class="thumb" src="../assets/media/oak-bird-house.png" alt="" loading="lazy"></td><td>Birdhouse runs</td><td class="req">5+</td><td class="rate">passive</td><td class="notes">Two minutes every 50 minutes. Free XP forever. Start doing these now regardless of method.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Birdhouse runs"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m chosen" id="m-drift-net-fishing" data-method="Drift Net Fishing"><td class="pic"><img class="thumb" src="../assets/media/drift-net-fishing.png" alt="" loading="lazy"></td><td>Drift Net Fishing</td><td class="req">44 Hunt / 47 Fish</td><td class="rate" data-base="40–60k each">40–60k each</td><td class="notes">Your pick for the 70/70 requirement.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Drift Net Fishing"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-hunter-rumours-hunters-guild" data-method="Hunter Rumours (Hunters&#x27; Guild)"><td class="pic"><img class="thumb" src="../assets/media/hunter-guild.png" alt="" loading="lazy"></td><td>Hunter Rumours (Hunters&#x27; Guild)</td><td class="req">Varlamore</td><td class="rate" data-base="80–120k">80–120k</td><td class="notes"><span class="ment"><img class="mi" src="../assets/media/varlamore.png" alt="" loading="lazy">Varlamore</span> contract system. Strong XP with useful rewards; the modern default for high Hunter.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Hunter Rumours (Hunters&#x27; Guild)"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-black-chinchompas" data-method="Black chinchompas"><td class="pic"><img class="thumb" src="../assets/media/black-chinchompa.png" alt="" loading="lazy"></td><td>Black chinchompas<span class="rtag lock">needs 73 Hunter</span></td><td class="req">73</td><td class="rate" data-base="150–250k">150–250k</td><td class="notes">Best XP in the skill and excellent GP, but deep <span class="ment"><img class="mi" src="../assets/media/wilderness.png" alt="" loading="lazy">Wilderness</span>. High risk, high reward.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 73 Hunter" aria-label="Locked: needs 73 Hunter"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m rec" id="m-red-chinchompas" data-method="Red chinchompas"><td class="pic"><img class="thumb" src="../assets/media/red-chinchompa.png" alt="" loading="lazy"></td><td>Red chinchompas<span class="rtag rec">best at your level</span></td><td class="req">63</td><td class="rate" data-base="100–150k">100–150k</td><td class="notes">Safer, still good, and it stockpiles the <span class="ment"><img class="mi" src="../assets/media/black-chinchompa.png" alt="" loading="lazy">chins</span> you'll want for 99 <span class="ment"><img class="mi pixel" src="../assets/icons/Ranged.png" alt="" loading="lazy">Ranged</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Red chinchompas"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-razor-backed-kebbits" data-method="Razor-backed kebbits"><td class="pic"><img class="thumb" src="../assets/media/razor-backed-kebbit.png" alt="" loading="lazy"></td><td>Razor-backed kebbits</td><td class="req">49</td><td class="rate" data-base="80–100k">80–100k</td><td class="notes">Deadfall trapping in the Piscatoris hunter area. The standard bridge between falconry and chinning.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Razor-backed kebbits"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-herbiboar" data-method="Herbiboar"><td class="pic"><img class="thumb" src="../assets/media/herbiboar.png" alt="" loading="lazy"></td><td>Herbiboar<span class="rtag lock">needs 80 Hunter</span></td><td class="req">80 (+ 31 Herb)</td><td class="rate" data-base="60–80k">60–80k</td><td class="notes">Slower XP, but pays out herbs continuously. Requires <span class="ment"><img class="mi" src="../assets/media/fossil-island.png" alt="" loading="lazy">Fossil Island</span> access and Bone Voyage.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 80 Hunter" aria-label="Locked: needs 80 Hunter"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-falconry" data-method="Falconry"><td class="pic"><img class="thumb" src="../assets/media/falconry.png" alt="" loading="lazy"></td><td>Falconry</td><td class="req">43</td><td class="rate" data-base="60–80k">60–80k</td><td class="notes">Spotted and dark kebbits at Piscatoris. No traps, just clicking, and it is the fastest option in its band.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Falconry"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-birdhouse-runs" data-method="Birdhouse runs"><td class="pic"><img class="thumb" src="../assets/media/oak-bird-house.png" alt="" loading="lazy"></td><td>Birdhouse runs</td><td class="req">5+</td><td class="rate" data-base="passive">passive</td><td class="notes">Two minutes every 50 minutes. Free XP forever. Start doing these now regardless of method.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Birdhouse runs"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
@@ -504,6 +505,67 @@
 
   btn.addEventListener('click', load);
   load();
+})();
+</script>
+
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
 })();
 </script>
 

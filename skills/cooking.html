@@ -35,6 +35,7 @@
 <div class="panel pick withpic" id="pickpanel" hidden><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" alt="" hidden><div><h3 id="pickname"></h3><div id="pickdetail"></div></div></div></div>
 <div class="panel warn" id="nopick"><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
 <h2 id="methods">Methods</h2>
+<div class="bonusbar" id="bonusbar" data-skill="Cooking"><span class="blabel">XP gear</span><label class="bonus" title="Fewer burns on lobsters, swordfish, sharks and anglerfish, so slightly more XP per inventory."><input type="checkbox" data-bonus="0" data-pct="5" data-applies="Fish at Hosidius / Myths&#x27; Guild|Sharks / Anglerfish"><span class="bn">Cooking gauntlets</span><span class="bp">+5% (some rows)</span></label></div><details class="bdetails"><summary>What these actually do</summary><ul><li><b>Cooking gauntlets</b>. Fewer burns on lobsters, swordfish, sharks and anglerfish, so slightly more XP per inventory.</li></ul></details>
 <p class="savednote">At 70 Cooking, the best option open to you is <b>1-tick karambwans</b> (700k+/hr). Locked rows need a higher level.</p>
 <div class="tablewrap"><div class="tablescroll">
 <table class="methods">
@@ -42,11 +43,11 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m" id="m-jugs-of-wine" data-method="Jugs of wine"><td class="pic"><img class="thumb" src="../assets/media/jug-of-wine.png" alt="" loading="lazy"></td><td>Jugs of wine</td><td class="req">35</td><td class="rate">300–450k</td><td class="notes">The fastest and cheapest 99 Cooking. Mind-numbing but short.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Jugs of wine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m rec" id="m-1-tick-karambwans" data-method="1-tick karambwans"><td class="pic"><img class="thumb" src="../assets/media/cooked-karambwan.png" alt="" loading="lazy"></td><td>1-tick karambwans<span class="rtag rec">best at your level</span></td><td class="req">30</td><td class="rate">700k+</td><td class="notes">The fastest cooking in the game by a wide margin, and it needs perfect tick timing.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use 1-tick karambwans"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-bake-pie" data-method="Bake Pie"><td class="pic"><img class="thumb" src="../assets/media/bake-pie.gif" alt="" loading="lazy"></td><td>Bake Pie</td><td class="req">10 (+ 65 Magic)</td><td class="rate">~150k</td><td class="notes">The Lunar spell. Trains Cooking and <span class="ment"><img class="mi pixel" src="../assets/icons/Magic.png" alt="" loading="lazy">Magic</span> at once, which is why it shows up in both guides.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Bake Pie"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-fish-at-hosidius-myths-guild" data-method="Fish at Hosidius / Myths&#x27; Guild"><td class="pic"><img class="thumb" src="../assets/media/myths-guild.png" alt="" loading="lazy"></td><td>Fish at Hosidius / Myths&#x27; Guild</td><td class="req">varies</td><td class="rate">150–250k</td><td class="notes">Range next to a bank; no burning at Hosidius.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Fish at Hosidius / Myths&#x27; Guild"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-sharks-anglerfish" data-method="Sharks / Anglerfish"><td class="pic"><img class="thumb" src="../assets/media/shark.png" alt="" loading="lazy"></td><td>Sharks / Anglerfish<span class="rtag lock">needs 80 Cooking</span></td><td class="req">80/84</td><td class="rate">—</td><td class="notes">Cook what you catch if you fished it yourself.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 80 Cooking" aria-label="Locked: needs 80 Cooking"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-jugs-of-wine" data-method="Jugs of wine"><td class="pic"><img class="thumb" src="../assets/media/jug-of-wine.png" alt="" loading="lazy"></td><td>Jugs of wine</td><td class="req">35</td><td class="rate" data-base="300–450k">300–450k</td><td class="notes">The fastest and cheapest 99 Cooking. Mind-numbing but short.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Jugs of wine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m rec" id="m-1-tick-karambwans" data-method="1-tick karambwans"><td class="pic"><img class="thumb" src="../assets/media/cooked-karambwan.png" alt="" loading="lazy"></td><td>1-tick karambwans<span class="rtag rec">best at your level</span></td><td class="req">30</td><td class="rate" data-base="700k+">700k+</td><td class="notes">The fastest cooking in the game by a wide margin, and it needs perfect tick timing.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use 1-tick karambwans"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-bake-pie" data-method="Bake Pie"><td class="pic"><img class="thumb" src="../assets/media/bake-pie.gif" alt="" loading="lazy"></td><td>Bake Pie</td><td class="req">10 (+ 65 Magic)</td><td class="rate" data-base="~150k">~150k</td><td class="notes">The Lunar spell. Trains Cooking and <span class="ment"><img class="mi pixel" src="../assets/icons/Magic.png" alt="" loading="lazy">Magic</span> at once, which is why it shows up in both guides.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Bake Pie"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-fish-at-hosidius-myths-guild" data-method="Fish at Hosidius / Myths&#x27; Guild"><td class="pic"><img class="thumb" src="../assets/media/myths-guild.png" alt="" loading="lazy"></td><td>Fish at Hosidius / Myths&#x27; Guild</td><td class="req">varies</td><td class="rate" data-base="150–250k">150–250k</td><td class="notes">Range next to a bank; no burning at Hosidius.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Fish at Hosidius / Myths&#x27; Guild"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-sharks-anglerfish" data-method="Sharks / Anglerfish"><td class="pic"><img class="thumb" src="../assets/media/shark.png" alt="" loading="lazy"></td><td>Sharks / Anglerfish<span class="rtag lock">needs 80 Cooking</span></td><td class="req">80/84</td><td class="rate" data-base="—">—</td><td class="notes">Cook what you catch if you fished it yourself.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 80 Cooking" aria-label="Locked: needs 80 Cooking"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
@@ -499,6 +500,67 @@
 
   btn.addEventListener('click', load);
   load();
+})();
+</script>
+
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
 })();
 </script>
 

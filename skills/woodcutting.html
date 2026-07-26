@@ -36,6 +36,7 @@
 <div class="panel pick withpic" id="pickpanel"><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" src="../assets/media/teak-tree.png" alt="" loading="lazy"><div><h3 id="pickname">Forestry teaks</h3><div id="pickdetail"><p>Your pick. 2-tick teaks with Forestry events layered on top is the top sustained rate; the events also fund the Forestry shop.</p></div></div></div></div>
 <div class="panel warn" id="nopick" hidden><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
 <h2 id="methods">Methods</h2>
+<div class="bonusbar" id="bonusbar" data-skill="Woodcutting"><span class="blabel">XP gear</span><label class="bonus" title="Full set, +2.5% Woodcutting XP."><input type="checkbox" data-bonus="0" data-pct="2.5" data-applies=""><span class="bn">Lumberjack outfit</span><span class="bp">+2.5%</span></label></div><details class="bdetails"><summary>What these actually do</summary><ul><li><b>Lumberjack outfit</b>. Full set, +2.5% Woodcutting XP.</li></ul></details>
 <p class="savednote">At 71 Woodcutting, the best option open to you is <b>Forestry teaks</b> (80–150k/hr). Locked rows need a higher level.</p>
 <div class="tablewrap"><div class="tablescroll">
 <table class="methods">
@@ -43,13 +44,13 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m chosen rec" id="m-forestry-teaks" data-method="Forestry teaks"><td class="pic"><img class="thumb" src="../assets/media/teak-tree.png" alt="" loading="lazy"></td><td>Forestry teaks<span class="rtag rec">best at your level</span></td><td class="req">35</td><td class="rate">80–150k</td><td class="notes">Your pick. 2-tick teaks with Forestry events layered on top is the top sustained rate; the events also fund the Forestry shop.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Forestry teaks"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-sulliuscep" data-method="Sulliuscep"><td class="pic"><img class="thumb" src="../assets/media/sulliuscep.png" alt="" loading="lazy"></td><td>Sulliuscep</td><td class="req">65 (+ Fossil Island)</td><td class="rate">70–90k</td><td class="notes">Fast, and drops fossils for the museum. A good change of pace.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Sulliuscep"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-redwoods" data-method="Redwoods"><td class="pic"><img class="thumb" src="../assets/media/redwood-tree.png" alt="" loading="lazy"></td><td>Redwoods<span class="rtag lock">needs 90 Woodcutting</span></td><td class="req">90</td><td class="rate">~65k</td><td class="notes">The AFK 99. Low rate, almost no attention.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 90 Woodcutting" aria-label="Locked: needs 90 Woodcutting"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m locked" id="m-ironwood-rosewood-trees" data-method="Ironwood / rosewood trees"><td class="pic"><img class="thumb" src="../assets/media/rosewood-tree.png" alt="" loading="lazy"></td><td>Ironwood / rosewood trees<span class="rtag lock">needs 80 Woodcutting</span></td><td class="req">80 / 92</td><td class="rate">70–110k</td><td class="notes">The high-level trees added alongside <span class="ment"><img class="mi pixel" src="../assets/icons/Sailing.png" alt="" loading="lazy">Sailing</span>. Rosewood at 92 feeds the rosewood hull, which is a straight Sailing XP multiplier.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 80 Woodcutting" aria-label="Locked: needs 80 Woodcutting"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m" id="m-yews-magics" data-method="Yews / Magics"><td class="pic"><img class="thumb" src="../assets/media/yew-tree.png" alt="" loading="lazy"></td><td>Yews / Magics</td><td class="req">60 / 75</td><td class="rate">30–50k</td><td class="notes">Slow but profitable; mostly obsolete for XP.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Yews / Magics"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-blisterwood-tree" data-method="Blisterwood tree"><td class="pic"><img class="thumb" src="../assets/media/blisterwood-tree.png" alt="" loading="lazy"></td><td>Blisterwood tree</td><td class="req">62 (+ Sins of the Father)</td><td class="rate">~60k</td><td class="notes">No competition, banks itself through the Darkmeyer bank, and drops blisterwood logs for vampyre gear.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Blisterwood tree"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-woodcutting-guild" data-method="Woodcutting Guild"><td class="pic"><img class="thumb" src="../assets/media/woodcutting-guild.png" alt="" loading="lazy"></td><td>Woodcutting Guild</td><td class="req">60</td><td class="rate">—</td><td class="notes">Invisible +7 boost and a bank; use it wherever it applies.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Woodcutting Guild"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m chosen rec" id="m-forestry-teaks" data-method="Forestry teaks"><td class="pic"><img class="thumb" src="../assets/media/teak-tree.png" alt="" loading="lazy"></td><td>Forestry teaks<span class="rtag rec">best at your level</span></td><td class="req">35</td><td class="rate" data-base="80–150k">80–150k</td><td class="notes">Your pick. 2-tick teaks with Forestry events layered on top is the top sustained rate; the events also fund the Forestry shop.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Forestry teaks"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-sulliuscep" data-method="Sulliuscep"><td class="pic"><img class="thumb" src="../assets/media/sulliuscep.png" alt="" loading="lazy"></td><td>Sulliuscep</td><td class="req">65 (+ Fossil Island)</td><td class="rate" data-base="70–90k">70–90k</td><td class="notes">Fast, and drops fossils for the museum. A good change of pace.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Sulliuscep"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-redwoods" data-method="Redwoods"><td class="pic"><img class="thumb" src="../assets/media/redwood-tree.png" alt="" loading="lazy"></td><td>Redwoods<span class="rtag lock">needs 90 Woodcutting</span></td><td class="req">90</td><td class="rate" data-base="~65k">~65k</td><td class="notes">The AFK 99. Low rate, almost no attention.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 90 Woodcutting" aria-label="Locked: needs 90 Woodcutting"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m locked" id="m-ironwood-rosewood-trees" data-method="Ironwood / rosewood trees"><td class="pic"><img class="thumb" src="../assets/media/rosewood-tree.png" alt="" loading="lazy"></td><td>Ironwood / rosewood trees<span class="rtag lock">needs 80 Woodcutting</span></td><td class="req">80 / 92</td><td class="rate" data-base="70–110k">70–110k</td><td class="notes">The high-level trees added alongside <span class="ment"><img class="mi pixel" src="../assets/icons/Sailing.png" alt="" loading="lazy">Sailing</span>. Rosewood at 92 feeds the rosewood hull, which is a straight Sailing XP multiplier.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 80 Woodcutting" aria-label="Locked: needs 80 Woodcutting"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-yews-magics" data-method="Yews / Magics"><td class="pic"><img class="thumb" src="../assets/media/yew-tree.png" alt="" loading="lazy"></td><td>Yews / Magics</td><td class="req">60 / 75</td><td class="rate" data-base="30–50k">30–50k</td><td class="notes">Slow but profitable; mostly obsolete for XP.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Yews / Magics"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-blisterwood-tree" data-method="Blisterwood tree"><td class="pic"><img class="thumb" src="../assets/media/blisterwood-tree.png" alt="" loading="lazy"></td><td>Blisterwood tree</td><td class="req">62 (+ Sins of the Father)</td><td class="rate" data-base="~60k">~60k</td><td class="notes">No competition, banks itself through the Darkmeyer bank, and drops blisterwood logs for vampyre gear.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Blisterwood tree"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-woodcutting-guild" data-method="Woodcutting Guild"><td class="pic"><img class="thumb" src="../assets/media/woodcutting-guild.png" alt="" loading="lazy"></td><td>Woodcutting Guild</td><td class="req">60</td><td class="rate" data-base="—">—</td><td class="notes">Invisible +7 boost and a bank; use it wherever it applies.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Woodcutting Guild"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
@@ -503,6 +504,67 @@
 
   btn.addEventListener('click', load);
   load();
+})();
+</script>
+
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
 })();
 </script>
 

@@ -35,6 +35,7 @@
 <div class="panel pick withpic" id="pickpanel" hidden><div class="k">Your pick</div><div class="pickbody"><img class="thumb lg" id="pickimg" alt="" hidden><div><h3 id="pickname"></h3><div id="pickdetail"></div></div></div></div>
 <div class="panel warn" id="nopick"><div class="k">Open decision</div><h3>No method locked in</h3><p>The plan sets a target here but does not name a method. Pick one with the circle at the end of any row below.</p></div>
 <h2 id="methods">Methods</h2>
+
 <p class="savednote">At 60 Agility, the best option open to you is <b>Hallowed Sepulchre</b> (50–90k/hr). Locked rows need a higher level.</p>
 <div class="tablewrap"><div class="tablescroll">
 <table class="methods">
@@ -42,13 +43,13 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m" id="m-rooftop-courses" data-method="Rooftop courses"><td class="pic"><img class="thumb" src="../assets/media/ardougne-rooftop-course.png" alt="" loading="lazy"></td><td>Rooftop courses</td><td class="req">10–90</td><td class="rate">20–60k</td><td class="notes">Canifis 40, Seers' 60, Pollnivneach 70, Rellekka 80, Ardougne 90. Marks of grace fund <span class="ment"><img class="mi" src="../assets/media/graceful-outfit.png" alt="" loading="lazy">graceful</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Rooftop courses"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m rec" id="m-hallowed-sepulchre" data-method="Hallowed Sepulchre"><td class="pic"><img class="thumb" src="../assets/media/hallowed-sepulchre.png" alt="" loading="lazy"></td><td>Hallowed Sepulchre<span class="rtag rec">best at your level</span></td><td class="req">52</td><td class="rate">50–90k</td><td class="notes">The main 99 route. XP scales with floors unlocked (62/72/82/92) and it's genuinely profitable.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Hallowed Sepulchre"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-colossal-wyrm-course" data-method="Colossal Wyrm course"><td class="pic"><img class="thumb" src="../assets/media/colossal-wyrm-agility-course.png" alt="" loading="lazy"></td><td>Colossal Wyrm course</td><td class="req">50 (62 advanced)</td><td class="rate">50–70k</td><td class="notes">The <span class="ment"><img class="mi" src="../assets/media/varlamore.png" alt="" loading="lazy">Varlamore</span> course. Pays in wyrm agility tickets for the Colossal Wyrm rewards.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Colossal Wyrm course"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-prifddinas-rooftop" data-method="Prifddinas rooftop"><td class="pic"><img class="thumb" src="../assets/media/prifddinas-agility-course.png" alt="" loading="lazy"></td><td>Prifddinas rooftop<span class="rtag lock">needs 75 Agility</span></td><td class="req">75 (+ Song of the Elves)</td><td class="rate">~60k</td><td class="notes">Highest rooftop rate; also drops crystal shards.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 75 Agility" aria-label="Locked: needs 75 Agility"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m" id="m-wilderness-agility-course" data-method="Wilderness Agility Course"><td class="pic"><img class="thumb" src="../assets/media/wilderness-agility-course.png" alt="" loading="lazy"></td><td>Wilderness Agility Course</td><td class="req">47</td><td class="rate">45–60k</td><td class="notes">Faster than rooftops in its band and drops from the pile at the end, but you are in the <span class="ment"><img class="mi" src="../assets/media/wilderness.png" alt="" loading="lazy">Wilderness</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Wilderness Agility Course"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-brimhaven-agility-arena" data-method="Brimhaven Agility Arena"><td class="pic"><img class="thumb" src="../assets/media/brimhaven-agility-arena.png" alt="" loading="lazy"></td><td>Brimhaven Agility Arena</td><td class="req">1+</td><td class="rate">15–40k</td><td class="notes">Slow XP but tickets buy <span class="ment"><img class="mi" src="../assets/media/graceful-outfit.png" alt="" loading="lazy">graceful</span>/pet-adjacent rewards. Mostly skipped now.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Brimhaven Agility Arena"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-werewolf-skullball" data-method="Werewolf Skullball"><td class="pic"><img class="thumb" src="../assets/media/werewolf-skullball.png" alt="" loading="lazy"></td><td>Werewolf Skullball</td><td class="req">—</td><td class="rate">low</td><td class="notes">Only useful for very early levels.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Werewolf Skullball"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-rooftop-courses" data-method="Rooftop courses"><td class="pic"><img class="thumb" src="../assets/media/ardougne-rooftop-course.png" alt="" loading="lazy"></td><td>Rooftop courses</td><td class="req">10–90</td><td class="rate" data-base="20–60k">20–60k</td><td class="notes">Canifis 40, Seers' 60, Pollnivneach 70, Rellekka 80, Ardougne 90. Marks of grace fund <span class="ment"><img class="mi" src="../assets/media/graceful-outfit.png" alt="" loading="lazy">graceful</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Rooftop courses"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m rec" id="m-hallowed-sepulchre" data-method="Hallowed Sepulchre"><td class="pic"><img class="thumb" src="../assets/media/hallowed-sepulchre.png" alt="" loading="lazy"></td><td>Hallowed Sepulchre<span class="rtag rec">best at your level</span></td><td class="req">52</td><td class="rate" data-base="50–90k">50–90k</td><td class="notes">The main 99 route. XP scales with floors unlocked (62/72/82/92) and it's genuinely profitable.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Hallowed Sepulchre"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-colossal-wyrm-course" data-method="Colossal Wyrm course"><td class="pic"><img class="thumb" src="../assets/media/colossal-wyrm-agility-course.png" alt="" loading="lazy"></td><td>Colossal Wyrm course</td><td class="req">50 (62 advanced)</td><td class="rate" data-base="50–70k">50–70k</td><td class="notes">The <span class="ment"><img class="mi" src="../assets/media/varlamore.png" alt="" loading="lazy">Varlamore</span> course. Pays in wyrm agility tickets for the Colossal Wyrm rewards.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Colossal Wyrm course"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-prifddinas-rooftop" data-method="Prifddinas rooftop"><td class="pic"><img class="thumb" src="../assets/media/prifddinas-agility-course.png" alt="" loading="lazy"></td><td>Prifddinas rooftop<span class="rtag lock">needs 75 Agility</span></td><td class="req">75 (+ Song of the Elves)</td><td class="rate" data-base="~60k">~60k</td><td class="notes">Highest rooftop rate; also drops crystal shards.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 75 Agility" aria-label="Locked: needs 75 Agility"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-wilderness-agility-course" data-method="Wilderness Agility Course"><td class="pic"><img class="thumb" src="../assets/media/wilderness-agility-course.png" alt="" loading="lazy"></td><td>Wilderness Agility Course</td><td class="req">47</td><td class="rate" data-base="45–60k">45–60k</td><td class="notes">Faster than rooftops in its band and drops from the pile at the end, but you are in the <span class="ment"><img class="mi" src="../assets/media/wilderness.png" alt="" loading="lazy">Wilderness</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Wilderness Agility Course"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-brimhaven-agility-arena" data-method="Brimhaven Agility Arena"><td class="pic"><img class="thumb" src="../assets/media/brimhaven-agility-arena.png" alt="" loading="lazy"></td><td>Brimhaven Agility Arena</td><td class="req">1+</td><td class="rate" data-base="15–40k">15–40k</td><td class="notes">Slow XP but tickets buy <span class="ment"><img class="mi" src="../assets/media/graceful-outfit.png" alt="" loading="lazy">graceful</span>/pet-adjacent rewards. Mostly skipped now.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Brimhaven Agility Arena"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-werewolf-skullball" data-method="Werewolf Skullball"><td class="pic"><img class="thumb" src="../assets/media/werewolf-skullball.png" alt="" loading="lazy"></td><td>Werewolf Skullball</td><td class="req">—</td><td class="rate" data-base="low">low</td><td class="notes">Only useful for very early levels.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Werewolf Skullball"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
@@ -503,6 +504,67 @@
 
   btn.addEventListener('click', load);
   load();
+})();
+</script>
+
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
 })();
 </script>
 

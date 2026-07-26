@@ -432,7 +432,7 @@ SKILLS = [
         summary="Blast Furnace or Giants' Foundry.",
         methods=[
             ("Blast Furnace – gold bars", "40 (60 for best rate)", "~350k", "With goldsmith gauntlets, the fastest Smithing XP in the game. Loses GP; you're buying levels."),
-            ("Giants' Foundry", "15", "150–300k", "Good XP with no real loss, plus moulds and the Smiths' outfit (which boosts everything else). The best all-round option."),
+            ("Giants' Foundry", "15", "150–300k", "Good XP with no real loss, plus moulds and the Smiths' uniform, which speeds up every later anvil session. The best all-round option."),
             ("Cannonballs", "35", "~20k", "Extremely AFK and profitable. Terrible XP rate. Only for background training."),
             ("Blast Furnace – other bars", "varies", "100–250k", "Runite bars at 85 are profitable rather than costly."),
             ("Rune items (3-bar)", "95", "~120k",
@@ -440,7 +440,7 @@ SKILLS = [
             ("Anvil smithing (plates/darts)", "varies", "50–150k", "Mostly obsolete since Giants' Foundry."),
         ],
         notes=[
-            "Get the Smiths' outfit from Giants' Foundry early. It's a flat XP bonus on every later Smithing hour.",
+            "Get the Smiths' uniform from Giants' Foundry early. It is not an XP bonus: each piece gives a 20% chance to cut anvil actions from 5 ticks to 4, so the full set is effectively a quarter faster at the anvil, plus better preform progress in the Foundry.",
             "For the 75 requirement, Giants' Foundry is the cheapest sane route. Save gold-bar blasting for the final push to 99 when you have GP to burn.",
         ],
     ),
@@ -1303,6 +1303,69 @@ PICK_JS = """
 </script>
 """
 
+BONUS_JS = """
+<script>
+/* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
+   the base numbers, so the toggles only ever multiply up. */
+(function () {
+  var bar = document.getElementById('bonusbar');
+  if (!bar) return;
+  var skill = bar.getAttribute('data-skill');
+  var boxes = Array.prototype.slice.call(bar.querySelectorAll('input[type=checkbox]'));
+  var cells = Array.prototype.slice.call(document.querySelectorAll('td.rate[data-base]'));
+  var KEY = 'osrsplan.bonus.' + skill;
+
+  function scale(text, mult) {
+    if (mult === 1) return text;
+    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+      var v = parseFloat(num.replace(/,/g, ''));
+      if (!isFinite(v)) return all;
+      var out = v * mult;
+      if (k) return (out >= 100 ? Math.round(out) : Math.round(out * 10) / 10) + k;
+      if (out >= 1000) return Math.round(out).toLocaleString();
+      return Math.round(out * 10) / 10 + '';
+    });
+  }
+
+  function apply() {
+    var active = boxes.filter(function (b) { return b.checked; });
+    bar.classList.toggle('on', active.length > 0);
+    cells.forEach(function (cell) {
+      var base = cell.getAttribute('data-base');
+      var row = cell.closest('tr');
+      var method = row ? row.getAttribute('data-method') : '';
+      var mult = 1;
+      active.forEach(function (b) {
+        var applies = b.getAttribute('data-applies');
+        if (applies && applies.split('|').indexOf(method) === -1) return;
+        mult *= 1 + (parseFloat(b.getAttribute('data-pct')) || 0) / 100;
+      });
+      cell.textContent = scale(base, mult);
+      cell.classList.toggle('boosted', mult !== 1);
+    });
+  }
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    boxes.forEach(function (b, i) { b.checked = saved.indexOf(i) !== -1; });
+  } catch (err) { /* private mode */ }
+
+  boxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      apply();
+      try {
+        localStorage.setItem(KEY, JSON.stringify(
+          boxes.map(function (x, i) { return x.checked ? i : -1; })
+               .filter(function (i) { return i >= 0; })));
+      } catch (err) { /* ignore */ }
+    });
+  });
+
+  apply();
+})();
+</script>
+"""
+
 STARS_JS = """
 <script>
 /* Shooting stars. Tries the local server first, then the snapshot committed to
@@ -1663,7 +1726,7 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
 </main>
 {rail(active=active, depth=depth)}
 </div>
-{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}
+{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}
 </body>
 </html>
 """
@@ -1817,6 +1880,66 @@ def tier_line(method, skill_name):
     return line
 
 
+# XP-affecting gear, per skill. `pct` is the effective XP-rate change, `applies`
+# limits it to certain methods, and `note` says what the item actually does,
+# because several of these are speed or loot effects rather than XP multipliers.
+BONUSES = {
+    "Mining": [dict(name="Prospector kit", pct=2.5, applies=None,
+                    note="Full set, +2.5% Mining XP.")],
+    "Fishing": [dict(name="Angler's outfit", pct=2.5, applies=None,
+                     note="Full set, +2.5% XP from all Fishing.")],
+    "Woodcutting": [dict(name="Lumberjack outfit", pct=2.5, applies=None,
+                         note="Full set, +2.5% Woodcutting XP.")],
+    "Firemaking": [dict(name="Pyromancer outfit", pct=2.5, applies=None,
+                        note="Full set, +2.5% Firemaking XP.")],
+    "Construction": [dict(name="Carpenter's outfit", pct=2.5, applies=None,
+                          note="Full set, +2.5% Construction XP.")],
+    "Farming": [dict(name="Farmer's outfit", pct=2.5, applies=None,
+                     note="Full set, +2.5% Farming XP.")],
+    "Hunter": [dict(name="Guild hunter outfit", pct=2.5, applies=None,
+                    note="Full set, +2.5% catch rate, which is close enough to +2.5% XP per hour.")],
+    "Smithing": [
+        dict(name="Smiths' uniform", pct=25, applies=["Anvil smithing (plates/darts)",
+                                                      "Cannonballs", "Rune items (3-bar)"],
+             note="Each piece is a 20% chance to cut an anvil action from 5 ticks to 4; "
+                  "the full set is about a quarter faster at the anvil."),
+        dict(name="Goldsmith gauntlets", pct=150, applies=["Blast Furnace – gold bars"],
+             note="Gold bars go from 22.5 to 56.2 XP each. This is the whole reason the "
+                  "method exists."),
+    ],
+    "Cooking": [dict(name="Cooking gauntlets", pct=5,
+                     applies=["Fish at Hosidius / Myths' Guild", "Sharks / Anglerfish"],
+                     note="Fewer burns on lobsters, swordfish, sharks and anglerfish, so "
+                          "slightly more XP per inventory.")],
+    "Runecraft": [dict(name="Raiments of the Eye", pct=0, applies=None,
+                       note="Bonus runes, not bonus XP. Worth wearing for the profit, but "
+                            "it will not move these rates.")],
+    "Thieving": [dict(name="Rogue's outfit", pct=0, applies=None,
+                      note="Doubles loot, no XP effect.")],
+}
+
+
+def bonus_controls(skill_name):
+    items = BONUSES.get(skill_name)
+    if not items:
+        return ""
+    pills = []
+    for i, b in enumerate(items):
+        scope = "" if b["applies"] is None else " (some rows)"
+        eff = f'+{b["pct"]:g}%' if b["pct"] else "no XP change"
+        pills.append(
+            f'<label class="bonus" title="{e(b["note"])}">'
+            f'<input type="checkbox" data-bonus="{i}" data-pct="{b["pct"]}" '
+            f'data-applies="{e("|".join(b["applies"]) if b["applies"] else "")}">'
+            f'<span class="bn">{e(b["name"])}</span>'
+            f'<span class="bp">{eff}{scope}</span></label>')
+    notes = "".join(f'<li><b>{e(b["name"])}</b>. {e(b["note"])}</li>' for b in items)
+    return (f'<div class="bonusbar" id="bonusbar" data-skill="{e(skill_name)}">'
+            f'<span class="blabel">XP gear</span>{"".join(pills)}</div>'
+            f'<details class="bdetails"><summary>What these actually do</summary>'
+            f'<ul>{notes}</ul></details>')
+
+
 def best_for_level(methods, skill_name):
     """Highest-rate method whose requirements you already meet."""
     if not STATS:
@@ -1860,7 +1983,7 @@ def method_table(methods, pick, skill_name=None):
             f'    <tr class="m{cls}" id="m-{slug(name)}" data-method="{e(name)}">'
             f'<td class="pic">{pic}</td>'
             f"<td>{e(name)}{tag}</td><td class=\"req\">{e(req)}</td>"
-            f"<td class=\"rate\">{e(rate)}</td>"
+            f'<td class="rate" data-base="{e(rate)}">{e(rate)}</td>' 
             f'<td class="notes">{annotate(note, depth=1, skip=(skill_name,))}</td>'
             f'<td class="choose">{btn}</td></tr>'
         )
@@ -2213,6 +2336,7 @@ def build_skill_page(skill, prev_skill, next_skill):
         parts.append(slayer_summary())
 
     parts.append('<h2 id="methods">Methods</h2>')
+    parts.append(bonus_controls(name))
     rec = best_for_level(skill["methods"], name)
     st_now = stat_of(name)
     if rec and st_now:
