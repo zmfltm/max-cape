@@ -1443,10 +1443,15 @@ STARS_JS = """
   function load() {
     if (btn.classList.contains('busy')) return;
     btn.classList.add('busy');
+    btn.classList.remove('ok', 'bad');
     var started = Date.now();
-    var done = function (fn) {
-      setTimeout(function () { btn.classList.remove('busy'); fn(); },
-                 Math.max(0, 600 - (Date.now() - started)));
+    var done = function (fn, bad) {
+      setTimeout(function () {
+        btn.classList.remove('busy');
+        btn.classList.add(bad ? 'bad' : 'ok');
+        setTimeout(function () { btn.classList.remove('ok', 'bad'); }, bad ? 3000 : 2500);
+        fn();
+      }, Math.max(0, 1400 - (Date.now() - started)));
     };
 
     get('/api/stars')
@@ -1460,7 +1465,7 @@ STARS_JS = """
             var fresh = d.at && (Date.now() - d.at) < FRESH;
             done(function () { if (!fresh || !draw(d.stars || [], d.at)) frame(); });
           })
-          .catch(function () { done(frame); });
+          .catch(function () { done(frame, true); });
       });
   }
 
@@ -1692,7 +1697,7 @@ RAIL_JS = """
 
 def page(title, where, body, active=None, depth=0, skill_name=None):
     root = "../" if depth else ""
-    home = f'<a class="up" href="{root}index.html">Plan index</a>' if depth else ""
+    home = f'<a class="navlink" href="{root}index.html">Index</a>' if depth else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1711,7 +1716,7 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
   <span class="sep">/</span>
   <span class="where">{e(where)}</span>
   <span class="spacer"></span>
-  <a class="up star" href="{root}stars.html">Stars</a>
+  <a class="navlink" href="{root}stars.html">Shooting Stars</a>
   {home}
 </header>
 <div class="shell">

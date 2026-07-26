@@ -16,7 +16,7 @@
   <span class="sep">/</span>
   <span class="where">Shooting stars</span>
   <span class="spacer"></span>
-  <a class="up star" href="stars.html">Stars</a>
+  <a class="navlink" href="stars.html">Shooting Stars</a>
   
 </header>
 <div class="shell">
@@ -438,10 +438,15 @@
   function load() {
     if (btn.classList.contains('busy')) return;
     btn.classList.add('busy');
+    btn.classList.remove('ok', 'bad');
     var started = Date.now();
-    var done = function (fn) {
-      setTimeout(function () { btn.classList.remove('busy'); fn(); },
-                 Math.max(0, 600 - (Date.now() - started)));
+    var done = function (fn, bad) {
+      setTimeout(function () {
+        btn.classList.remove('busy');
+        btn.classList.add(bad ? 'bad' : 'ok');
+        setTimeout(function () { btn.classList.remove('ok', 'bad'); }, bad ? 3000 : 2500);
+        fn();
+      }, Math.max(0, 1400 - (Date.now() - started)));
     };
 
     get('/api/stars')
@@ -455,7 +460,7 @@
             var fresh = d.at && (Date.now() - d.at) < FRESH;
             done(function () { if (!fresh || !draw(d.stars || [], d.at)) frame(); });
           })
-          .catch(function () { done(frame); });
+          .catch(function () { done(frame, true); });
       });
   }
 

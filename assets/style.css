@@ -194,16 +194,14 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
 .topbar .where { color: var(--muted); font-size: 14px; }
 .topbar .spacer { flex: 1; }
 
-.topbar .up {
-  font-size: 13px;
-  color: var(--fg-2);
-  padding: 6px 12px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  background: var(--surface);
-  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease), border-color var(--fast) var(--ease);
+.topbar .navlink {
+  font-size: 13.5px;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+  transition: color var(--fast) var(--ease);
 }
-.topbar .up:hover { background: var(--surface-hi); color: var(--fg); border-color: rgba(255,255,255,0.16); }
+.topbar .navlink + .navlink { margin-left: 18px; }
+.topbar .navlink:hover { color: var(--fg); }
 
 /* -------------------------------------------------------------------- shell */
 
@@ -450,7 +448,7 @@ li::marker { color: var(--dim); }
   border-radius: 4px;
   padding: 1px 4px;
 }
-.meter .refresh {
+.refresh {
   flex: 0 0 18px;
   display: inline-flex;
   align-items: center;
@@ -465,11 +463,11 @@ li::marker { color: var(--dim); }
   transition: color var(--fast) var(--ease);
 }
 .meter .refresh:hover { color: var(--accent); }
-.meter .refresh svg { display: block; transform-origin: 50% 50%; }
-.meter .refresh.busy { color: var(--accent); }
-.meter .refresh.busy svg { animation: spin 700ms linear infinite; }
-.meter .refresh.ok { color: var(--done); border-color: rgba(74, 222, 128, 0.4); }
-.meter .refresh.bad { color: var(--bear, #e5484d); border-color: rgba(229, 72, 77, 0.45); }
+.refresh svg { display: block; transform-origin: 50% 50%; }
+.refresh.busy { color: var(--accent); }
+.refresh.busy svg { animation: spin 700ms linear infinite; }
+.refresh.ok { color: var(--done); }
+.refresh.bad { color: #e5847d; }
 
 @keyframes spin {
   from { transform: rotate(0deg); }
@@ -1150,22 +1148,7 @@ tr.rec td:nth-child(2) { color: var(--fg); }
 }
 .tierpick:hover { color: var(--fg); border-color: rgba(255, 157, 46, 0.4); }
 .tierpick:focus { outline: none; border-color: var(--accent); }
-.embed .refresh {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--dim);
-  cursor: pointer;
-  transition: color var(--fast) var(--ease);
-}
-.embed .refresh:hover { color: var(--accent); }
-.embed .refresh.busy { color: var(--accent); }
-.embed .refresh.busy svg { animation: spin 700ms linear infinite; }
+
 
 .starlist { display: grid; gap: 1px; background: var(--line-soft); border-radius: var(--r-sm); overflow: hidden; }
 .star {
@@ -1404,5 +1387,5 @@ footer.foot a { color: var(--muted); text-decoration: underline; text-underline-
   * { transition: none !important; animation: none !important; }
   html { scroll-behavior: auto; }
   /* the spinner is feedback, not decoration, so it keeps turning */
-  .meter .refresh.busy svg { animation: spin 700ms linear infinite !important; }
+  .refresh.busy svg { animation: spin 700ms linear infinite !important; }
 }
