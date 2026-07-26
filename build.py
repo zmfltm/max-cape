@@ -1381,6 +1381,7 @@ STARS_JS = """
   var root = box.getAttribute('data-root') || '';
   var FRESH = 20 * 60 * 1000;
   var picker = document.getElementById('tierpick');
+  var mining = parseInt(box.getAttribute('data-mining'), 10) || 0;
   var KEY = 'osrsplan.startier';
   var latest = [];
   var latestAt = 0;
@@ -1414,10 +1415,18 @@ STARS_JS = """
     if (!live.length) return false;
     list.innerHTML = live.slice(0, limit).map(function (s) {
       var tier = int(s.tier), world = int(s.world);
-      return '<div class="star">'
-        + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '">T' + tier + '</span>'
+      var req = tier * 10;
+      var can = !mining || mining >= req;
+      var loc = esc(s.location);
+      var map = 'https://oldschool.runescape.wiki/w/Special:Search?go=Go&search='
+        + encodeURIComponent(s.location);
+      return '<div class="star' + (can ? '' : ' locked') + '">'
+        + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '" title="Tier ' + tier
+        + ', needs ' + req + ' Mining">T' + tier + '</span>'
         + '<span class="sworld">w' + world + '</span>'
-        + '<span class="sloc">' + esc(s.location) + '</span>'
+        + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
+        + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
+        + '<span class="sreq" title="Mining level for this tier">' + req + '</span>'
         + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
     var age = at ? Math.round((Date.now() - at) / 60000) : 0;
@@ -2126,7 +2135,8 @@ def embed_panel(skill_name, full=False, depth=0):
         return ""
     return (
         f'<div class="embed{" bare" if full else ""}" id="stars" '
-        f'data-root="{"../" if depth else ""}">'
+        f'data-root="{"../" if depth else ""}" '
+        f'data-mining="{(stat_of("Mining") or {}).get("level", 0)}">'
         '<div class="ehead"><span class="k">Live &middot; shooting stars</span>'
         '<span class="espace"></span>'
         '<select class="tierpick" id="tierpick" aria-label="Filter stars by tier">'
@@ -2148,6 +2158,8 @@ def embed_panel(skill_name, full=False, depth=0):
         'stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
         "</div>"
         f'<p class="enote">{e(cfg["note"])}</p>'
+        '<div class="starhead"><span>tier</span><span>world</span>'
+        '<span>location</span><span>mining</span><span>ends</span></div>'
         f'<div class="starlist{" full" if full else ""}" id="starlist" '
         f'data-limit="{99 if full else 12}"></div>'
         f'<div class="qfoot"><a href="{cfg["url"]}" target="_blank" rel="noopener">'

@@ -406,6 +406,7 @@
   var root = box.getAttribute('data-root') || '';
   var FRESH = 20 * 60 * 1000;
   var picker = document.getElementById('tierpick');
+  var mining = parseInt(box.getAttribute('data-mining'), 10) || 0;
   var KEY = 'osrsplan.startier';
   var latest = [];
   var latestAt = 0;
@@ -439,10 +440,18 @@
     if (!live.length) return false;
     list.innerHTML = live.slice(0, limit).map(function (s) {
       var tier = int(s.tier), world = int(s.world);
-      return '<div class="star">'
-        + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '">T' + tier + '</span>'
+      var req = tier * 10;
+      var can = !mining || mining >= req;
+      var loc = esc(s.location);
+      var map = 'https://oldschool.runescape.wiki/w/Special:Search?go=Go&search='
+        + encodeURIComponent(s.location);
+      return '<div class="star' + (can ? '' : ' locked') + '">'
+        + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '" title="Tier ' + tier
+        + ', needs ' + req + ' Mining">T' + tier + '</span>'
         + '<span class="sworld">w' + world + '</span>'
-        + '<span class="sloc">' + esc(s.location) + '</span>'
+        + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
+        + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
+        + '<span class="sreq" title="Mining level for this tier">' + req + '</span>'
         + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
     var age = at ? Math.round((Date.now() - at) / 60000) : 0;

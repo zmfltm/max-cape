@@ -27,7 +27,7 @@
 <p class="lede">Slow-skills block, after <span class="ment"><img class="mi pixel" src="../assets/icons/Runecraft.png" alt="" loading="lazy">Runecraft</span> and <span class="ment"><img class="mi pixel" src="../assets/icons/Agility.png" alt="" loading="lazy">Agility</span>.</p>
 <div class="glinks"><a class="glink" href="https://oldschool.runescape.wiki/w/Mining_training" rel="noopener" target="_blank">Wiki guide</a><a class="glink" href="https://www.osrsguide.com/osrs-mining-guide/" rel="noopener" target="_blank">OSRS Guide</a></div>
 <div class="livebox"><div class="k">Your level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(58 76% 63%)" data-skill-level="Mining">72</b><span class="goal">of 99</span></div><span class="prog wide"><span class="fill lit" style="width:7%;--lc:hsl(58 76% 63%)" data-skill-bar="Mining" data-from="1" data-goal="99"></span></span><div class="facts"><span><i>XP</i> <b class="num">918,742</b></span><span><i>To 99</i> <b class="num">12,115,689</b></span></div></div>
-<div class="embed" id="stars" data-root="../"><div class="ehead"><span class="k">Live &middot; shooting stars</span><span class="espace"></span><select class="tierpick" id="tierpick" aria-label="Filter stars by tier"><option value="0">All tiers</option><option value="9">T9 only</option><option value="8">T8 and up</option><option value="7">T7 and up</option><option value="6">T6 and up</option><option value="5">T5 and up</option><option value="3">T3 and up</option></select><span class="estatus" id="starstatus">loading</span><button class="refresh" id="starrefresh" type="button" title="Refresh stars" aria-label="Refresh stars"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><p class="enote">Crashed stars land about every 90 minutes per world. Mining stardust is the most AFK training in the skill and buys the celestial ring.</p><div class="starlist" id="starlist" data-limit="12"></div><div class="qfoot"><a href="https://07.gg/trackers/shooting-star" target="_blank" rel="noopener">Full tracker on 07.gg &#8599;</a><span>Data from 07.gg, read through serve.py</span></div></div>
+<div class="embed" id="stars" data-root="../" data-mining="72"><div class="ehead"><span class="k">Live &middot; shooting stars</span><span class="espace"></span><select class="tierpick" id="tierpick" aria-label="Filter stars by tier"><option value="0">All tiers</option><option value="9">T9 only</option><option value="8">T8 and up</option><option value="7">T7 and up</option><option value="6">T6 and up</option><option value="5">T5 and up</option><option value="3">T3 and up</option></select><span class="estatus" id="starstatus">loading</span><button class="refresh" id="starrefresh" type="button" title="Refresh stars" aria-label="Refresh stars"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><p class="enote">Crashed stars land about every 90 minutes per world. Mining stardust is the most AFK training in the skill and buys the celestial ring.</p><div class="starhead"><span>tier</span><span>world</span><span>location</span><span>mining</span><span>ends</span></div><div class="starlist" id="starlist" data-limit="12"></div><div class="qfoot"><a href="https://07.gg/trackers/shooting-star" target="_blank" rel="noopener">Full tracker on 07.gg &#8599;</a><span>Data from 07.gg, read through serve.py</span></div></div>
 <div class="pillrow">
 <span class="pill"><span class="pl">Target</span><span class="pv">99 (slow-skills block)</span></span>
 <span class="pill"><span class="pl">Options</span><span class="pv">8</span></span>
@@ -409,6 +409,7 @@
   var root = box.getAttribute('data-root') || '';
   var FRESH = 20 * 60 * 1000;
   var picker = document.getElementById('tierpick');
+  var mining = parseInt(box.getAttribute('data-mining'), 10) || 0;
   var KEY = 'osrsplan.startier';
   var latest = [];
   var latestAt = 0;
@@ -442,10 +443,18 @@
     if (!live.length) return false;
     list.innerHTML = live.slice(0, limit).map(function (s) {
       var tier = int(s.tier), world = int(s.world);
-      return '<div class="star">'
-        + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '">T' + tier + '</span>'
+      var req = tier * 10;
+      var can = !mining || mining >= req;
+      var loc = esc(s.location);
+      var map = 'https://oldschool.runescape.wiki/w/Special:Search?go=Go&search='
+        + encodeURIComponent(s.location);
+      return '<div class="star' + (can ? '' : ' locked') + '">'
+        + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '" title="Tier ' + tier
+        + ', needs ' + req + ' Mining">T' + tier + '</span>'
         + '<span class="sworld">w' + world + '</span>'
-        + '<span class="sloc">' + esc(s.location) + '</span>'
+        + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
+        + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
+        + '<span class="sreq" title="Mining level for this tier">' + req + '</span>'
         + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
     var age = at ? Math.round((Date.now() - at) / 60000) : 0;
