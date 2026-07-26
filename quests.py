@@ -32,22 +32,31 @@ def sync_state(player):
 
 
 def guide_order(known):
-    """Quest names in optimal-quest-guide order, filtered to `known` names."""
+    """Quest names in optimal-quest-guide order.
+
+    Only the page's "Quests" section is ordered. The "Notable quest unlocks"
+    list above it explicitly says it is in no particular order, so reading the
+    whole page gives a scrambled route.
+    """
     q = urllib.parse.urlencode({
         "action": "parse", "page": GUIDE, "prop": "text",
         "format": "json", "formatversion": "2",
     })
     body = json.loads(_get(f"{WIKI_API}?{q}"))["parse"]["text"]
 
+    start = body.find('id="Quests"')
+    end = body.find('id="See_also"')
+    section = body[start:end if end > start else len(body)] if start > 0 else body
+
     order, seen = [], set()
-    for m in re.finditer(r'title="([^"]+)"', body):
+    for m in re.finditer(r'title="([^"]+)"', section):
         title = html.unescape(m.group(1))
         if title in known and title not in seen:
             seen.add(title)
             order.append(title)
 
-    # anything WikiSync knows about but the guide never links (miniquests,
-    # Recipe for Disaster subquests) goes on the end so nothing is lost
+    # miniquests and Recipe for Disaster subquests are tracked by WikiSync but
+    # never linked in the guide; keep them so nothing goes missing
     order += sorted(n for n in known if n not in seen)
     return order
 
