@@ -2019,7 +2019,8 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
   <a class="mark" href="{root}index.html"><img class="capemark" src="{root}assets/media/max-cape.png" alt="">OSRS max time wasting plan</a>
   <nav class="topnav">
     <a class="navlink" href="{root}stars.html">{COMET_SVG}Shooting Stars</a>
-    <a class="navlink" href="{root}afk.html">AFK Path</a>
+    <a class="navlink" href="{root}paths.html">Paths</a>
+    <a class="navlink" href="{root}afk.html">AFK</a>
   </nav>
 </header>
 <div class="shell">
@@ -3229,6 +3230,164 @@ def build_afk_page():
     return page("The AFK Path", "AFK", "\n".join(body), depth=0)
 
 
+# Three ways to spend the remaining XP. Each entry is (method, sustained rate).
+# "afk" is the lowest-attention option that still trains the skill; where a
+# skill has none, it holds the least demanding thing available and says so.
+PATHS = {
+    "Slayer":       dict(fast=("Duradel, barrage tasks", 60_000),
+                         afk=("Cannon on long tasks", 30_000),
+                         hybrid=("Duradel, cannon and barrage", 50_000)),
+    "Attack":       dict(fast=("Slayer with best gear", 70_000),
+                         afk=("Nightmare Zone", 45_000),
+                         hybrid=("Slayer", 60_000)),
+    "Strength":     dict(fast=("Slayer with best gear", 70_000),
+                         afk=("Nightmare Zone", 45_000),
+                         hybrid=("Slayer", 60_000)),
+    "Defence":      dict(fast=("Slayer with best gear", 70_000),
+                         afk=("Nightmare Zone", 45_000),
+                         hybrid=("Slayer", 60_000)),
+    "Hitpoints":    dict(fast=("Arrives with combat", 0),
+                         afk=("Arrives with combat", 0),
+                         hybrid=("Arrives with combat", 0)),
+    "Ranged":       dict(fast=("Chinning maniacal monkeys", 250_000),
+                         afk=("Gemstone Crab", 45_000),
+                         hybrid=("Cannon on Slayer tasks", 80_000)),
+    "Magic":        dict(fast=("Bursting maniacal monkeys", 250_000),
+                         afk=("Splashing", 20_000),
+                         hybrid=("Barrage on Slayer tasks", 110_000)),
+    "Prayer":       dict(fast=("Superior bones, gilded altar", 500_000),
+                         afk=("Bonecrusher while you fight", 25_000),
+                         hybrid=("Chaos altar, dragon bones", 300_000)),
+    "Runecraft":    dict(fast=("Lava runes with runners", 110_000),
+                         afk=("Blood runes at Arceuus", 40_000),
+                         hybrid=("Guardians of the Rift", 60_000)),
+    "Agility":      dict(fast=("Hallowed Sepulchre, top floors", 90_000),
+                         afk=("Rooftops, nothing is idle here", 55_000),
+                         hybrid=("Hallowed Sepulchre", 70_000)),
+    "Thieving":     dict(fast=("Blackjacking", 250_000),
+                         afk=("Stealing artefacts", 70_000),
+                         hybrid=("Pyramid Plunder", 200_000)),
+    "Mining":       dict(fast=("Volcanic Mine, 3-tick iron", 90_000),
+                         afk=("Shooting Stars", 30_000),
+                         hybrid=("Motherlode Mine", 60_000)),
+    "Fishing":      dict(fast=("2-tick harpooning", 100_000),
+                         afk=("Anglerfish", 30_000),
+                         hybrid=("Drift Net Fishing", 55_000)),
+    "Woodcutting":  dict(fast=("2-tick teaks", 130_000),
+                         afk=("Redwoods", 65_000),
+                         hybrid=("Forestry teaks", 95_000)),
+    "Firemaking":   dict(fast=("Burning logs at a bank", 350_000),
+                         afk=("Bonfires", 250_000),
+                         hybrid=("Wintertodt", 250_000)),
+    "Cooking":      dict(fast=("1-tick karambwans", 700_000),
+                         afk=("Range cooking", 200_000),
+                         hybrid=("Jugs of wine", 400_000)),
+    "Crafting":     dict(fast=("Black d'hide bodies", 300_000),
+                         afk=("Cutting amethyst", 30_000),
+                         hybrid=("Battlestaves", 250_000)),
+    "Smithing":     dict(fast=("Blast Furnace gold bars", 350_000),
+                         afk=("Cannonballs", 20_000),
+                         hybrid=("Giants' Foundry", 250_000)),
+    "Herblore":     dict(fast=("Unfinished potions", 300_000),
+                         afk=("Potions, nothing is idle here", 250_000),
+                         hybrid=("Super combats", 250_000)),
+    "Construction": dict(fast=("Mahogany tables", 350_000),
+                         afk=("Mahogany Homes, nothing is idle here", 120_000),
+                         hybrid=("Mahogany Homes", 120_000)),
+    "Hunter":       dict(fast=("Letvek and stymphikes", 145_000),
+                         afk=("Birdhouse runs", 5_000),
+                         hybrid=("Hunter Rumours", 90_000)),
+    "Sailing":      dict(fast=("Barracuda Trials", 200_000),
+                         afk=("Shipwreck salvaging", 8_000),
+                         hybrid=("Courier tasks", 120_000)),
+}
+
+PATH_META = [
+    ("fast", "Fastest", "Every hour is the best rate available, tick manipulation "
+                        "included. The shortest route to the cape and the one that "
+                        "asks the most of you."),
+    ("hybrid", "Hybrid", "The fast method where the gap is worth it, the calm one "
+                         "where it barely is. What most people actually do."),
+    ("afk", "AFK", "The lowest attention that still trains the skill. Five skills "
+                   "have no idle option, so they hold the least demanding thing "
+                   "available."),
+]
+
+
+def path_hours(key):
+    """Hours to 99 per skill on one path, from live XP."""
+    out, total = [], 0
+    for name, opts in PATHS.items():
+        st = stat_of(name)
+        if not st:
+            continue
+        left = max(0, xp_for_level(99) - (st["xp"] or 0))
+        method, rate = opts[key]
+        hrs = (left / rate) if (rate and left) else 0
+        total += hrs
+        out.append(dict(skill=name, level=st["level"], method=method,
+                        rate=rate, hours=hrs, left=left))
+    out.sort(key=lambda x: -x["hours"])
+    return out, total
+
+
+def paths_page():
+    cards, totals = [], {}
+    for key, label, blurb in PATH_META:
+        rows, total = path_hours(key)
+        totals[key] = total
+        cells = []
+        for r in rows:
+            if not r["left"]:
+                continue
+            rate = f'{r["rate"] // 1000}k' if r["rate"] else "free"
+            hrs = f'{r["hours"]:.0f}h' if r["hours"] else "free"
+            cells.append(
+                f'<tr><td class="tn"><a href="skills/{slug(r["skill"])}.html">'
+                f'{icon(r["skill"])}{e(r["skill"])}</a></td>'
+                f'<td>{e(r["method"])}</td>'
+                f'<td class="rate">{rate}</td>'
+                f'<td class="rate afkgap">{hrs}</td></tr>')
+        body = "".join(cells)
+        cards.append(
+            f'<section class="pathcard" id="path-{key}">'
+            f'<div class="phead"><h2 id="{key}">{e(label)}</h2>'
+            f'<span class="ptot">{total:,.0f} hours</span></div>'
+            f'<p class="lede2">{e(blurb)}</p>'
+            '<div class="tablewrap"><div class="tablescroll">'
+            '<table class="pathtable"><thead><tr><th>Skill</th><th>Method</th>'
+            '<th>XP/hr</th><th>Hours</th></tr></thead>'
+            f'<tbody>{body}</tbody></table></div></div></section>')
+
+    fast, hybrid, afk = totals["fast"], totals["hybrid"], totals["afk"]
+    summary = (
+        '<div class="stats">'
+        f'<div class="stat"><div class="l">Fastest</div>'
+        f'<div class="v">{fast:,.0f}<small>h</small></div></div>'
+        f'<div class="stat"><div class="l">Hybrid</div>'
+        f'<div class="v">{hybrid:,.0f}<small>h</small></div>'
+        f'</div>'
+        f'<div class="stat"><div class="l">AFK</div>'
+        f'<div class="v">{afk:,.0f}<small>h</small></div></div>'
+        f'<div class="stat"><div class="l">AFK costs you</div>'
+        f'<div class="v">+{afk - fast:,.0f}<small>h</small></div></div>'
+        "</div>")
+
+    body = [
+        '<div class="kick">Three routes, same cape</div>',
+        '<div class="page-head">'
+        '<img class="icon lg" src="assets/media/max-cape.png" alt="">'
+        '<h1 class="page">Which Path</h1></div>',
+        f'<p class="lede">You have {sum(r["left"] for r in path_hours("fast")[0]):,} '
+        'XP left. What that costs in hours depends entirely on how much attention '
+        'you are willing to pay.</p>',
+        summary,
+        '<p class="lede2">Hitpoints is missing from every table because it arrives '
+        'with combat. Fletching and Farming are already done.</p>',
+    ] + cards
+    return page("Which Path", "Paths", "\n".join(body), depth=0)
+
+
 def build_index():
     parts = []
     art = focus_panel()
@@ -3318,6 +3477,9 @@ def main():
 
     with open(os.path.join(OUT, "afk.html"), "w", encoding="utf-8") as f:
         f.write(build_afk_page())
+
+    with open(os.path.join(OUT, "paths.html"), "w", encoding="utf-8") as f:
+        f.write(paths_page())
 
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(build_index())
