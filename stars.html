@@ -35,6 +35,7 @@
   <a href="index.html#diaries"><img class="refico" src="assets/icons/Diaries.png" alt="" width="15" height="15"><span class="t">Diaries</span></a>
   <a href="index.html#approach"><img class="refico" src="assets/icons/Slayer.png" alt="" width="15" height="15"><span class="t">Slayer</span></a>
   <a href="index.html#max-order"><img class="refico" src="assets/media/max-cape.png" alt="" width="15" height="15"><span class="t">Max Order</span></a>
+  <a href="index.html#outfits"><img class="refico" src="assets/media/site/skills-tab.png" alt="" width="15" height="15"><span class="t">XP Gear</span></a>
   <a href="index.html#skills"><img class="refico" src="assets/media/site/skills-tab.png" alt="" width="15" height="15"><span class="t">Skills</span></a>
   <div class="rail-kick">Links</div>
   <a class="slink" href="https://www.osrsguide.com/skilling-guides/" target="_blank" rel="noopener"><span class="t">OSRS Guide</span><span class="ext">&#8599;</span></a>
@@ -653,6 +654,46 @@
   });
 
   apply();
+})();
+</script>
+
+<script>
+/* Owned XP gear. Ticking one also switches on the matching rate toggle for
+   that skill, which lives under the same key the skill page reads. */
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.ownbox'));
+  if (!boxes.length) return;
+  var KEY = 'osrsplan.owned';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
+    catch (err) { return {}; }
+  }
+
+  function bonusKey(skill) { return 'osrsplan.bonus.' + skill; }
+
+  function setBonus(skill, idx, on) {
+    if (!skill || idx === null) return;
+    var k = bonusKey(skill), list = [];
+    try { list = JSON.parse(localStorage.getItem(k) || '[]'); } catch (err) { list = []; }
+    var at = list.indexOf(idx);
+    if (on && at === -1) list.push(idx);
+    if (!on && at !== -1) list.splice(at, 1);
+    try { localStorage.setItem(k, JSON.stringify(list)); } catch (err) { /* ignore */ }
+  }
+
+  var owned = load();
+  boxes.forEach(function (b) {
+    b.checked = !!owned[b.getAttribute('data-key')];
+    b.parentNode.classList.toggle('have', b.checked);
+    b.addEventListener('change', function () {
+      owned[b.getAttribute('data-key')] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(owned)); } catch (err) { /* ignore */ }
+      b.parentNode.classList.toggle('have', b.checked);
+      setBonus(b.getAttribute('data-skill'),
+               parseInt(b.getAttribute('data-bonus'), 10), b.checked);
+    });
+  });
 })();
 </script>
 

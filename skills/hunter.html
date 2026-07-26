@@ -26,6 +26,7 @@
 <div class="glinks"><a class="glink" href="https://oldschool.runescape.wiki/w/Hunter_training" rel="noopener" target="_blank">Wiki guide</a><a class="glink" href="https://www.osrsguide.com/osrs-hunter-guide/" rel="noopener" target="_blank">OSRS Guide</a></div>
 <div class="livebox"><div class="k">Your Level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(49 75% 63%)" data-skill-level="Hunter">64</b><span class="goal">of 70</span></div><span class="prog wide"><span class="fill lit" style="width:58%;--lc:hsl(49 75% 63%)" data-skill-bar="Hunter" data-from="1" data-goal="70"></span></span><div class="facts"><span><i>XP</i> <b class="num">427,998</b></span><span><i>To 70</i> <b class="num">309,629</b></span></div></div>
 
+<div class="panel"><div class="k">Birdhouse run</div><h3>Yew bird houses &mdash; 4,080 Hunter XP a run</h3><p>Four houses, emptied and rebuilt every 50 minutes. That is about 4,451 XP an hour for two minutes of work, and it stacks with whatever else you are doing. Seeds are 10 low-level ones per house, so use whatever is cheapest.</p><p class="gap">Next tier: <b>Magic</b> at 74 Hunter, worth 4,560 per run.</p><p class="gap"><b>The route.</b> Digsite pendant to Fossil Island, then the magic mushtree at the House on the Hill to hop between stops:</p><ol class="bhstops"><li><b>Verdant Valley</b>. Two spots south of the Museum Camp, next to each other.</li><li><b>Mushroom Forest</b>. West of the ancient shroom, straight north of the magic mushtree.</li><li><b>Tar Swamp</b>. By the swamp entrance, south from the mushtree.</li></ol><p class="gap">Carry a hammer, chisel, logs, seeds and five clockworks: building the next house while walking saves a trip. <a href="https://oldschool.runescape.wiki/w/Bird_house_trapping" target="_blank" rel="noopener">Full guide on the wiki &#8599;</a></p></div>
 <div class="pillrow">
 <span class="pill"><span class="pl">Target</span><span class="pv">70 → 99</span></span>
 <span class="pill pick"><span class="pl">Method</span><span class="pv">Drift Net Fishing</span></span>
@@ -69,6 +70,7 @@
   <a href="../index.html#diaries"><img class="refico" src="../assets/icons/Diaries.png" alt="" width="15" height="15"><span class="t">Diaries</span></a>
   <a href="../index.html#approach"><img class="refico" src="../assets/icons/Slayer.png" alt="" width="15" height="15"><span class="t">Slayer</span></a>
   <a href="../index.html#max-order"><img class="refico" src="../assets/media/max-cape.png" alt="" width="15" height="15"><span class="t">Max Order</span></a>
+  <a href="../index.html#outfits"><img class="refico" src="../assets/media/site/skills-tab.png" alt="" width="15" height="15"><span class="t">XP Gear</span></a>
   <a href="../index.html#skills"><img class="refico" src="../assets/media/site/skills-tab.png" alt="" width="15" height="15"><span class="t">Skills</span></a>
   <div class="rail-kick">Links</div>
   <a class="slink" href="https://www.osrsguide.com/skilling-guides/" target="_blank" rel="noopener"><span class="t">OSRS Guide</span><span class="ext">&#8599;</span></a>
@@ -687,6 +689,46 @@
   });
 
   apply();
+})();
+</script>
+
+<script>
+/* Owned XP gear. Ticking one also switches on the matching rate toggle for
+   that skill, which lives under the same key the skill page reads. */
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.ownbox'));
+  if (!boxes.length) return;
+  var KEY = 'osrsplan.owned';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
+    catch (err) { return {}; }
+  }
+
+  function bonusKey(skill) { return 'osrsplan.bonus.' + skill; }
+
+  function setBonus(skill, idx, on) {
+    if (!skill || idx === null) return;
+    var k = bonusKey(skill), list = [];
+    try { list = JSON.parse(localStorage.getItem(k) || '[]'); } catch (err) { list = []; }
+    var at = list.indexOf(idx);
+    if (on && at === -1) list.push(idx);
+    if (!on && at !== -1) list.splice(at, 1);
+    try { localStorage.setItem(k, JSON.stringify(list)); } catch (err) { /* ignore */ }
+  }
+
+  var owned = load();
+  boxes.forEach(function (b) {
+    b.checked = !!owned[b.getAttribute('data-key')];
+    b.parentNode.classList.toggle('have', b.checked);
+    b.addEventListener('change', function () {
+      owned[b.getAttribute('data-key')] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(owned)); } catch (err) { /* ignore */ }
+      b.parentNode.classList.toggle('have', b.checked);
+      setBonus(b.getAttribute('data-skill'),
+               parseInt(b.getAttribute('data-bonus'), 10), b.checked);
+    });
+  });
 })();
 </script>
 

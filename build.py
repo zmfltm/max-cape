@@ -603,6 +603,7 @@ PLAN_LINKS = [
     ("diaries", "Diaries", "assets/icons/Diaries.png"),
     ("approach", "Slayer", "assets/icons/Slayer.png"),
     ("max-order", "Max Order", "assets/media/max-cape.png"),
+    ("outfits", "XP Gear", "assets/media/site/skills-tab.png"),
     ("skills", "Skills", "assets/media/site/skills-tab.png"),
 ]
 
@@ -1388,6 +1389,48 @@ PICK_JS = """
 </script>
 """
 
+OWN_JS = """
+<script>
+/* Owned XP gear. Ticking one also switches on the matching rate toggle for
+   that skill, which lives under the same key the skill page reads. */
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.ownbox'));
+  if (!boxes.length) return;
+  var KEY = 'osrsplan.owned';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
+    catch (err) { return {}; }
+  }
+
+  function bonusKey(skill) { return 'osrsplan.bonus.' + skill; }
+
+  function setBonus(skill, idx, on) {
+    if (!skill || idx === null) return;
+    var k = bonusKey(skill), list = [];
+    try { list = JSON.parse(localStorage.getItem(k) || '[]'); } catch (err) { list = []; }
+    var at = list.indexOf(idx);
+    if (on && at === -1) list.push(idx);
+    if (!on && at !== -1) list.splice(at, 1);
+    try { localStorage.setItem(k, JSON.stringify(list)); } catch (err) { /* ignore */ }
+  }
+
+  var owned = load();
+  boxes.forEach(function (b) {
+    b.checked = !!owned[b.getAttribute('data-key')];
+    b.parentNode.classList.toggle('have', b.checked);
+    b.addEventListener('change', function () {
+      owned[b.getAttribute('data-key')] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(owned)); } catch (err) { /* ignore */ }
+      b.parentNode.classList.toggle('have', b.checked);
+      setBonus(b.getAttribute('data-skill'),
+               parseInt(b.getAttribute('data-bonus'), 10), b.checked);
+    });
+  });
+})();
+</script>
+"""
+
 BONUS_JS = """
 <script>
 /* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
@@ -1937,7 +1980,7 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
 </main>
 {rail(active=active, depth=depth)}
 </div>
-{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}
+{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}
 </body>
 </html>
 """
@@ -2479,6 +2522,67 @@ def slayer_sections():
     ]
 
 
+# Bird house tiers: (log, Crafting level, Hunter level, Hunter XP per house)
+BIRDHOUSE_TIERS = [
+    ("Regular", 5, 5, 280), ("Oak", 15, 14, 420), ("Willow", 25, 24, 560),
+    ("Teak", 35, 34, 700), ("Maple", 45, 44, 820), ("Mahogany", 50, 49, 960),
+    ("Yew", 60, 59, 1020), ("Magic", 75, 74, 1140), ("Redwood", 90, 89, 1200),
+]
+
+BIRDHOUSE_STOPS = [
+    ("Verdant Valley", "Two spots south of the Museum Camp, next to each other."),
+    ("Mushroom Forest", "West of the ancient shroom, straight north of the magic mushtree."),
+    ("Tar Swamp", "By the swamp entrance, south from the mushtree."),
+]
+
+
+def birdhouse_box():
+    """The run itself, at whatever tier the account can build."""
+    craft = (stat_of("Crafting") or {}).get("level", 1)
+    hunt = (stat_of("Hunter") or {}).get("level", 1)
+    if not STATS:
+        return ""
+
+    usable = [t for t in BIRDHOUSE_TIERS if t[1] <= craft and t[2] <= hunt]
+    best = usable[-1] if usable else BIRDHOUSE_TIERS[0]
+    nxt = next((t for t in BIRDHOUSE_TIERS
+                if t[1] > craft or t[2] > hunt), None)
+
+    per_run = best[3] * 4
+    per_hour = round(per_run * 60 / 55)
+
+    stops = "".join(
+        f'<li><b>{e(name)}</b>. {e(note)}</li>' for name, note in BIRDHOUSE_STOPS)
+
+    nxt_line = ""
+    if nxt:
+        need = []
+        if nxt[1] > craft:
+            need.append(f"{nxt[1]} Crafting")
+        if nxt[2] > hunt:
+            need.append(f"{nxt[2]} Hunter")
+        nxt_line = (f'<p class="gap">Next tier: <b>{e(nxt[0])}</b> at '
+                    f'{e(" and ".join(need))}, worth {nxt[3] * 4:,} per run.</p>')
+
+    return (
+        '<div class="panel"><div class="k">Birdhouse run</div>'
+        f'<h3>{e(best[0])} bird houses &mdash; {per_run:,} Hunter XP a run</h3>'
+        f'<p>Four houses, emptied and rebuilt every 50 minutes. That is about '
+        f'{per_hour:,} XP an hour for two minutes of work, and it stacks with '
+        f'whatever else you are doing. Seeds are 10 low-level ones per house, so '
+        f'use whatever is cheapest.</p>'
+        f'{nxt_line}'
+        '<p class="gap"><b>The route.</b> Digsite pendant to Fossil Island, then the '
+        'magic mushtree at the House on the Hill to hop between stops:</p>'
+        f'<ol class="bhstops">{stops}</ol>'
+        '<p class="gap">Carry a hammer, chisel, logs, seeds and five clockworks: '
+        'building the next house while walking saves a trip. '
+        f'<a href="{WIKI}Bird_house_trapping" target="_blank" rel="noopener">'
+        'Full guide on the wiki &#8599;</a></p>'
+        "</div>"
+    )
+
+
 def build_skill_page(skill, prev_skill, next_skill):
     name = skill["name"]
     pick = skill.get("pick")
@@ -2520,6 +2624,8 @@ def build_skill_page(skill, prev_skill, next_skill):
                      f'<div class="facts">{"".join(facts)}</div></div>')
 
     parts.append(embed_panel(name, depth=1))
+    if name == "Hunter":
+        parts.append(birdhouse_box())
 
     parts.append('<div class="pillrow">')
     done_cls = " done" if skill.get("done") else ""
@@ -2686,6 +2792,92 @@ def build_stars_page():
     return page("Shooting Stars", "Shooting Stars", "\n".join(body), depth=0)
 
 
+# XP-affecting kit, where it comes from, and when the plan wants it.
+# `bonus` points at the matching entry in BONUSES so ticking one here flips the
+# rate toggle on that skill page.
+OUTFITS = [
+    dict(name="Prospector kit", skill="Mining", wiki="Prospector_kit", bonus=0,
+         effect="+2.5% Mining XP", source="180 golden nuggets at Motherlode Mine",
+         effort="Comes on its own while you mine pay-dirt",
+         when="Before the Mining grind, it pays for itself"),
+    dict(name="Angler's outfit", skill="Fishing", wiki="Angler%27s_outfit", bonus=0,
+         effect="+2.5% XP from all Fishing", source="Fishing Trawler",
+         effort="A few hours of trawler games",
+         when="Worth it before the 70 requirement, essential before 99"),
+    dict(name="Lumberjack outfit", skill="Woodcutting", wiki="Lumberjack_outfit", bonus=0,
+         effect="+2.5% Woodcutting XP", source="Temple Trekking rewards",
+         effort="Random drops, a few hours of trekking",
+         when="Before the teak grind"),
+    dict(name="Pyromancer outfit", skill="Firemaking", wiki="Pyromancer_outfit", bonus=0,
+         effect="+2.5% Firemaking XP", source="Wintertodt reward cart",
+         effort="Falls out while you train there anyway",
+         when="Early in Wintertodt, it speeds up the rest"),
+    dict(name="Carpenter's outfit", skill="Construction", wiki="Carpenter%27s_outfit", bonus=0,
+         effect="+2.5% Construction XP", source="Mahogany Homes contracts",
+         effort="Comes with the contracts you are doing regardless",
+         when="While you take Construction to 83"),
+    dict(name="Smiths' uniform", skill="Smithing", wiki="Smiths%27_Uniform", bonus=0,
+         effect="Anvil actions 5 ticks to 4, about a quarter faster",
+         source="15,000 Foundry Reputation at Giants' Foundry",
+         effort="A long stint at the Foundry",
+         when="Only if you plan to smith at an anvil; skip for gold bars"),
+    dict(name="Guild hunter outfit", skill="Hunter", wiki="Guild_hunter_outfit", bonus=0,
+         effect="+2.5% catch rate", source="1/50 from Hunters' Rumour loot sacks",
+         effort="Falls out of rumours over time",
+         when="While doing rumours for Hunter XP"),
+    dict(name="Raiments of the Eye", skill="Runecraft", wiki="Raiments_of_the_Eye", bonus=0,
+         effect="Up to 60% bonus runes, no extra XP",
+         source="Guardians of the Rift", effort="A handful of games",
+         when="Early at GOTR; it pays in runes, not levels"),
+    dict(name="Rogue's outfit", skill="Thieving", wiki="Rogue_equipment", bonus=0,
+         effect="Doubles pickpocket loot, no XP change",
+         source="Rogues' Den wall safes", effort="An hour or two of safe cracking",
+         when="Before any long Thieving stint"),
+    dict(name="Farmer's outfit", skill="Farming", wiki="Farmer%27s_outfit", bonus=0,
+         effect="+2.5% Farming XP", source="400 points at Tithe Farm",
+         effort="A few hours of Tithe Farm",
+         when="Farming is already 99, so only for the collection log"),
+    dict(name="Graceful outfit", skill="Agility", wiki="Graceful_outfit", bonus=None,
+         effect="Run energy restores faster, no XP change",
+         source="260 marks of grace from rooftops",
+         effort="Comes while you run the courses",
+         when="As early as possible; it helps every skill after it"),
+    dict(name="Zealot's robes", skill="Prayer", wiki="Zealot%27s_robes", bonus=None,
+         effect="Chance of extra XP when burying or scattering",
+         source="Gold chests in the Shade Catacombs",
+         effort="Shades of Mort'ton runs",
+         when="Only if you bury bones rather than use an altar"),
+]
+
+
+def outfit_section():
+    rows = []
+    for i, o in enumerate(OUTFITS):
+        img = media_path(o["name"] if o["name"] != "Smiths' uniform" else "Smiths' Uniform")
+        if not img:
+            img = media_path({"Rogue's outfit": "Rogue equipment"}.get(o["name"], o["name"]))
+        pic = (f'<img class="ofit" src="{img}" alt="" loading="lazy">'
+               if img else '<span class="ofit"></span>')
+        sk = o["skill"]
+        done = (stat_of(sk) or {}).get("level", 0) >= 99
+        bonus_attr = (f' data-skill="{e(sk)}" data-bonus="{o["bonus"]}"'
+                      if o["bonus"] is not None else "")
+        rows.append(
+            f'<label class="outfit{" spent" if done else ""}">'
+            f'<input type="checkbox" class="ownbox"{bonus_attr} '
+            f'data-key="{e(o["name"])}">'
+            f'{pic}'
+            f'<span class="oname">{icon(sk)}<a href="{WIKI}{o["wiki"]}" target="_blank" '
+            f'rel="noopener">{e(o["name"])}</a></span>'
+            f'<span class="oeffect">{e(o["effect"])}</span>'
+            f'<span class="osource">{e(o["source"])}</span>'
+            f'<span class="owhen">{e(o["when"])}</span>'
+            "</label>")
+    return ('<p class="lede2">Tick what you own. Anything with an XP effect also '
+            'switches on the matching rate toggle on that skill page.</p>'
+            f'<div class="outfits">{"".join(rows)}</div>')
+
+
 def h2(anchor, title, ico=None):
     """Section heading, with the matching game icon where there is one."""
     mark = (f'<img class="h2ico" src="{ico}" alt="" width="20" height="20">'
@@ -2736,6 +2928,9 @@ def build_index():
                  '<p>Fletching and Farming are already 99, so they sit outside the order above. '
                  'Thieving and Hunter are not listed in either block, so decide where they land: '
                  'Thieving fits with the faster skills, Hunter with the slow gathering ones.</p></div>')
+
+    parts.append(h2("outfits", "XP Gear", "assets/media/site/skills-tab.png"))
+    parts.append(outfit_section())
 
     parts.append(h2("skills", "All Skills", "assets/media/site/skills-tab.png"))
     for group in GROUP_ORDER:

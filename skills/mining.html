@@ -41,7 +41,7 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m" id="m-motherlode-mine" data-method="Motherlode Mine"><td class="pic"><img class="thumb" src="../assets/media/motherlode-mine.png" alt="" loading="lazy"></td><td>Motherlode Mine</td><td class="req">30</td><td class="rate" data-base="30–65k">30–65k</td><td class="notes">The AFK standard. Prospector kit, upper level at 72, pay-dirt sack upgrades. Gives free ores and nuggets.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Motherlode Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-motherlode-mine" data-method="Motherlode Mine"><td class="pic"><img class="thumb" src="../assets/media/motherlode-mine.png" alt="" loading="lazy"></td><td>Motherlode Mine</td><td class="req">30</td><td class="rate" data-base="30–65k">30–65k</td><td class="notes">The AFK standard. <span class="ment"><img class="mi" src="../assets/media/prospector-kit.png" alt="" loading="lazy">Prospector kit</span>, upper level at 72, pay-dirt sack upgrades. Gives free ores and nuggets.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Motherlode Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
     <tr class="m" id="m-shooting-stars" data-method="Shooting Stars"><td class="pic"><img class="thumb" src="../assets/media/shooting-stars.png" alt="" loading="lazy"></td><td>Shooting Stars</td><td class="req">10 (60+ useful)</td><td class="rate" data-base="20–40k">20–40k</td><td class="notes">Crashed stars, a Distraction and Diversion. One click every 7 minutes, so it is the most AFK Mining there is, and stardust buys the celestial ring (+4 invisible Mining boost). Star tier scales with your level.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Shooting Stars"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
     <tr class="m rec" id="m-volcanic-mine" data-method="Volcanic Mine"><td class="pic"><img class="thumb" src="../assets/media/volcanic-mine.png" alt="" loading="lazy"></td><td>Volcanic Mine<span class="rtag rec">best at your level</span></td><td class="req">70 (+ quests)</td><td class="rate" data-base="70–100k">70–100k</td><td class="notes">Fastest non-tick-manipulated Mining. Group activity, needs attention.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Volcanic Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
     <tr class="m" id="m-3-tick-iron-granite" data-method="3-tick iron / granite"><td class="pic"><img class="thumb" src="../assets/media/iron-ore.png" alt="" loading="lazy"></td><td>3-tick iron / granite</td><td class="req">15 / 45</td><td class="rate" data-base="60–100k">60–100k</td><td class="notes">Top rates if you're willing to tick-manipulate. Granite at the Quarry, iron at the <span class="ment"><img class="mi" src="../assets/media/mining-guild.png" alt="" loading="lazy">Mining Guild</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use 3-tick iron / granite"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
@@ -68,6 +68,7 @@
   <a href="../index.html#diaries"><img class="refico" src="../assets/icons/Diaries.png" alt="" width="15" height="15"><span class="t">Diaries</span></a>
   <a href="../index.html#approach"><img class="refico" src="../assets/icons/Slayer.png" alt="" width="15" height="15"><span class="t">Slayer</span></a>
   <a href="../index.html#max-order"><img class="refico" src="../assets/media/max-cape.png" alt="" width="15" height="15"><span class="t">Max Order</span></a>
+  <a href="../index.html#outfits"><img class="refico" src="../assets/media/site/skills-tab.png" alt="" width="15" height="15"><span class="t">XP Gear</span></a>
   <a href="../index.html#skills"><img class="refico" src="../assets/media/site/skills-tab.png" alt="" width="15" height="15"><span class="t">Skills</span></a>
   <div class="rail-kick">Links</div>
   <a class="slink" href="https://www.osrsguide.com/skilling-guides/" target="_blank" rel="noopener"><span class="t">OSRS Guide</span><span class="ext">&#8599;</span></a>
@@ -686,6 +687,46 @@
   });
 
   apply();
+})();
+</script>
+
+<script>
+/* Owned XP gear. Ticking one also switches on the matching rate toggle for
+   that skill, which lives under the same key the skill page reads. */
+(function () {
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.ownbox'));
+  if (!boxes.length) return;
+  var KEY = 'osrsplan.owned';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
+    catch (err) { return {}; }
+  }
+
+  function bonusKey(skill) { return 'osrsplan.bonus.' + skill; }
+
+  function setBonus(skill, idx, on) {
+    if (!skill || idx === null) return;
+    var k = bonusKey(skill), list = [];
+    try { list = JSON.parse(localStorage.getItem(k) || '[]'); } catch (err) { list = []; }
+    var at = list.indexOf(idx);
+    if (on && at === -1) list.push(idx);
+    if (!on && at !== -1) list.splice(at, 1);
+    try { localStorage.setItem(k, JSON.stringify(list)); } catch (err) { /* ignore */ }
+  }
+
+  var owned = load();
+  boxes.forEach(function (b) {
+    b.checked = !!owned[b.getAttribute('data-key')];
+    b.parentNode.classList.toggle('have', b.checked);
+    b.addEventListener('change', function () {
+      owned[b.getAttribute('data-key')] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(owned)); } catch (err) { /* ignore */ }
+      b.parentNode.classList.toggle('have', b.checked);
+      setBonus(b.getAttribute('data-skill'),
+               parseInt(b.getAttribute('data-bonus'), 10), b.checked);
+    });
+  });
 })();
 </script>
 
