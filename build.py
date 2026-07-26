@@ -1145,6 +1145,10 @@ def focus_data_script():
             + ";window.FOCUSNOW=" + json.dumps(default_focus()) + ";</script>")
 
 
+MAX_TOTAL = sum(1 for x in SKILLS if x["group"] != SUPPORT) * 99
+MAX_COMBAT = 126
+
+
 def rail_meter(root=""):
     """Account line at the top of the index: total level and combat."""
     spin = ('<button class="refresh" type="button" hidden '
@@ -1159,9 +1163,10 @@ def rail_meter(root=""):
     if STATS:
         rows = (f'<span class="mrow"><span>Total level</span>'
                 f'<b class="num" data-stat="total">{STATS.get("overall", {}).get("level")}</b>'
-                f'{spin}</span>'
+                f'<span class="mmax">/{MAX_TOTAL}</span>{spin}</span>'
                 f'<span class="mrow"><span>Combat</span>'
                 f'<b class="num" data-stat="combat">{STATS.get("combat")}</b>'
+                f'<span class="mmax">/{MAX_COMBAT}</span>'
                 f'<span class="spacer"></span></span>')
     else:
         rows = (f'<span class="mrow"><span>Not linked</span>{spin}</span>'
@@ -1427,19 +1432,18 @@ STARS_JS = """
       var tier = int(s.tier), world = int(s.world);
       var req = tier * 10;
       var can = !mining || mining >= req;
-      var loc = esc(s.location);
+      var hit = findMap(s.location);
+      var loc = esc(hit && hit.n ? hit.n : tidy(s.location));
       var map = 'https://oldschool.runescape.wiki/w/Special:Search?go=Go&search='
-        + encodeURIComponent(s.location);
+        + encodeURIComponent(hit && hit.n ? hit.n : s.location);
       return '<div class="star' + (can ? '' : ' locked') + '">'
         + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '" title="Tier ' + tier
         + ', needs ' + req + ' Mining">T' + tier + '</span>'
-        + '<span class="sworld">w' + world + '</span>'
+        + '<span class="sworld">' + world + '</span>'
         + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
         + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
         + '<button class="sview" type="button" data-loc="' + loc + '" '
-        + 'title="Map area. Click to open the 07.gg tracker">'
-        + '<img src="' + (window.SRCICON || '') + '" alt="" width="11" height="11">'
-        + 'view</button>'
+        + 'title="Map area. Click to open the tracker">view</button>'
         + '<span class="sreq" title="Mining level for this tier">' + req + '</span>'
         + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
@@ -1513,9 +1517,19 @@ STARS_JS = """
   var mapIndex = (function () {
     var out = {};
     var src = window.STARMAPS || {};
-    Object.keys(src).forEach(function (k) { out[norm(k)] = src[k]; });
+    Object.keys(src).forEach(function (k) {
+      out[norm(k)] = { f: src[k].f, n: k };
+    });
     return out;
   })();
+
+  /* 07.gg's callers type these by hand, so tidy up what we cannot match to a
+     wiki name: sentence case, and directions in caps. */
+  function tidy(loc) {
+    var t = String(loc).trim().replace(/\s+/g, ' ');
+    t = t.replace(/\\b(nw|ne|sw|se)\\b/gi, function (m) { return m.toUpperCase(); });
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
 
   function norm(t) {
     return String(t).toLowerCase().replace(/\(.*?\)/g, ' ')
@@ -1560,12 +1574,12 @@ STARS_JS = """
 
   function showPop(btn2) {
     var loc = btn2.getAttribute('data-loc');
-    var file = findMap(loc);
-    pop.innerHTML = (file
-      ? '<img src="' + (window.STARMAPROOT || '') + file + '" alt="">'
+    var hit = findMap(loc);
+    pop.innerHTML = (hit
+      ? '<img src="' + (window.STARMAPROOT || '') + hit.f + '" alt="">'
       : '<div class="nomap">no map for this spot</div>')
       + '<span class="ploc"></span>';
-    pop.querySelector('.ploc').textContent = loc;
+    pop.querySelector('.ploc').textContent = hit && hit.n ? hit.n : tidy(loc);
     pop.hidden = false;
     var r = btn2.getBoundingClientRect();
     var top = r.bottom + window.scrollY + 8;
@@ -2241,7 +2255,7 @@ def starmap_script(depth=0):
             maps = json.load(f)
     except (OSError, ValueError):
         return ""
-    slim = {k: v["file"] for k, v in maps.items()}
+    slim = {k: {"f": v["file"]} for k, v in maps.items()}
     root = "../" if depth else ""
     return ("<script>window.STARMAPS=" + json.dumps(slim, separators=(",", ":"))
             + ";window.STARMAPROOT=" + json.dumps(root + "assets/media/starmaps/")
@@ -2258,10 +2272,7 @@ def embed_panel(skill_name, full=False, depth=0):
         f'<div class="embed{" bare" if full else ""}" id="stars" '
         f'data-root="{"../" if depth else ""}" '
         f'data-mining="{(stat_of("Mining") or {}).get("level", 0)}">'
-        '<div class="ehead">'
-        f'<img class="srcicon" src="{"../" if depth else ""}assets/media/site/07gg.png" '
-        'alt="07.gg" width="14" height="14" title="Data from 07.gg">'
-        '<span class="k">Live &middot; shooting stars</span>'
+        '<div class="ehead"><span class="k">Live &middot; shooting stars</span>'
         '<span class="espace"></span>'
         '<span class="tierlbl">tier</span>'
         '<select class="tierpick" id="tiermin" aria-label="Minimum star tier"><option value="1">10 Mining &middot; T1</option><option value="2">20 Mining &middot; T2</option><option value="3">30 Mining &middot; T3</option><option value="4">40 Mining &middot; T4</option><option value="5">50 Mining &middot; T5</option><option value="6">60 Mining &middot; T6</option><option value="7">70 Mining &middot; T7</option><option value="8">80 Mining &middot; T8</option><option value="9">90 Mining &middot; T9</option></select>'
@@ -2276,15 +2287,15 @@ def embed_panel(skill_name, full=False, depth=0):
         '<path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" '
         'stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
         "</div>"
-        f'<p class="enote">{e(cfg["note"])}</p>'
-        '<div class="starhead"><span>tier</span><span>world</span>'
+        + (f'<p class="enote">{e(cfg["note"])}</p>' if not full else "")
+        + '<div class="starhead"><span>tier</span><span>world</span>'
         '<span>location</span><span>map</span><span>mining</span>'
         '<span>ends</span></div>'
         f'<div class="starlist{" full" if full else ""}" id="starlist" '
         f'data-limit="{99 if full else 12}"></div>'
-        f'<div class="qfoot"><a href="{cfg["url"]}" target="_blank" rel="noopener">'
-        f'Full tracker on {e(cfg["host"])} &#8599;</a>'
-        '<span>Data from 07.gg, read through serve.py</span></div>'
+        f'<div class="qfoot one"><a class="srclink" href="{cfg["url"]}" target="_blank" '
+        f'rel="noopener"><img src="{"../" if depth else ""}assets/media/site/07gg.png" '
+        f'alt="" width="14" height="14">Stars called on {e(cfg["host"])} &#8599;</a></div>'
         "</div>"
     )
 

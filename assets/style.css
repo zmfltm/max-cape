@@ -430,15 +430,17 @@ li::marker { color: var(--dim); }
 }
 .meter .mrow {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: baseline;
+  gap: 6px;
   font-size: 12.5px;
   color: var(--muted);
-  padding: 2px 0;
+  padding: 0;
+  line-height: 1.5;
 }
 .meter .mrow > span:first-child { flex: 1; }
 .meter .mrow .spacer { flex: 0 0 18px; }
-.meter .mrow b { color: var(--fg); font-size: 13px; font-weight: 500; }
+.meter .mrow b { color: var(--fg); font-size: 15px; font-weight: 500; letter-spacing: -0.02em; }
+.meter .mmax { font-family: var(--font-mono); font-size: 10.5px; color: var(--dim); }
 .meter .mrow.hint { display: block; color: var(--dim); font-size: 11px; line-height: 1.5; }
 .meter code {
   font-family: var(--font-mono);
