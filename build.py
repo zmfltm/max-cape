@@ -55,12 +55,6 @@ COMBAT_APPROACH = [
     "Let Slayer and later bossing carry most combat XP rather than separately grinding combats early.",
 ]
 
-MAX_ORDER = [
-    ("Slayer 99", ""),
-    ("Combat 99s", "Strength, Attack, Defence, Ranged, Magic, Hitpoints, Prayer"),
-    ("Slow gathering skills", "Runecraft, Agility, Mining, Fishing, Woodcutting, Sailing"),
-    ("Remaining buyables / faster skills", "Construction, Herblore, Smithing, Crafting, Cooking, Firemaking"),
-]
 
 # --------------------------------------------------------------------------
 # Skills.  Each entry:
@@ -3008,6 +3002,94 @@ def outfit_section():
             f'<div class="outfits">{"".join(rows)}</div>')
 
 
+# Sustained rate for the method the plan actually picks, and whether those
+# hours pay you, break even, or cost gold. Used to estimate what is left.
+SKILL_RATE = {
+    "Slayer": (55_000, "pays"), "Attack": (60_000, "pays"),
+    "Strength": (60_000, "pays"), "Defence": (60_000, "pays"),
+    "Hitpoints": (0, "free"), "Ranged": (250_000, "costs"),
+    "Magic": (250_000, "costs"), "Prayer": (300_000, "costs"),
+    "Runecraft": (60_000, "pays"), "Agility": (70_000, "pays"),
+    "Thieving": (200_000, "pays"), "Hunter": (150_000, "pays"),
+    "Mining": (65_000, "neutral"), "Fishing": (60_000, "neutral"),
+    "Woodcutting": (100_000, "neutral"), "Sailing": (120_000, "neutral"),
+    "Firemaking": (250_000, "pays"), "Herblore": (250_000, "costs"),
+    "Crafting": (250_000, "costs"), "Construction": (250_000, "costs"),
+    "Smithing": (300_000, "costs"), "Cooking": (350_000, "costs"),
+    "Fletching": (0, "free"), "Farming": (0, "free"),
+}
+
+# The order, and why each block sits where it does.
+MAX_ORDER = [
+    dict(title="Slayer to 99",
+         why="Every hour here is also Attack, Strength, Defence and Hitpoints, "
+             "and Ranged and Magic on cannon and barrage tasks. Bank the bones: "
+             "they are most of your Prayer.",
+         skills=["Slayer"]),
+    dict(title="Finish combat",
+         why="Whatever Slayer did not already carry. Ranged and Magic go fast on "
+             "chins and barrage, Prayer burns the bones you banked, Hitpoints "
+             "arrives on its own.",
+         caveat="Counted as if you trained each one alone. Most of it lands "
+                "during the 235 hours above, so treat this as the ceiling, not "
+                "the bill.",
+         skills=["Attack", "Strength", "Defence", "Ranged", "Magic", "Prayer",
+                 "Hitpoints"]),
+    dict(title="The grinds that pay",
+         why="Long, but they fund everything after them. Runecraft first: 77 turns "
+             "blood runes into income for the rest of the account.",
+         skills=["Runecraft", "Agility", "Thieving", "Hunter", "Firemaking"]),
+    dict(title="Slow gatherers",
+         why="The tail. Roughly break-even, so do them once the bank is fat and "
+             "nothing else depends on them.",
+         skills=["Mining", "Fishing", "Woodcutting", "Sailing"]),
+    dict(title="Buyables last",
+         why="Fast, and paid for by the blocks above. Cheapest per hour first so "
+             "the bank drains slowest.",
+         skills=["Cooking", "Smithing", "Construction", "Crafting", "Herblore"]),
+]
+
+
+def hours_left(skill_name):
+    """Hours to 99 at the plan's method, from the live XP."""
+    rate = SKILL_RATE.get(skill_name, (0, ""))[0]
+    st = stat_of(skill_name)
+    if not st or not rate:
+        return None
+    left = max(0, xp_for_level(99) - (st["xp"] or 0))
+    return left / rate if left else 0
+
+
+def max_order_block(phase, index):
+    chips = []
+    total = 0
+    for name in phase["skills"]:
+        sk = next((x for x in SKILLS if x["name"] == name), None)
+        if not sk:
+            continue
+        st = stat_of(name)
+        hrs = hours_left(name)
+        done = st and st["level"] >= 99
+        if hrs:
+            total += hrs
+        money = SKILL_RATE.get(name, (0, ""))[1]
+        chips.append(
+            f'<a class="mo {money}{" met" if done else ""}" '
+            f'href="skills/{slug(name)}.html">{icon(name)}'
+            f'<span class="mn">{e(name)}</span>'
+            + (f'<span class="ml">{st["level"]}</span>' if st else "")
+            + (f'<span class="mh">{hrs:.0f}h</span>' if hrs else
+               '<span class="mh done">99</span>')
+            + "</a>")
+    head = (f'<b>{e(phase["title"])}</b>'
+            + (f'<span class="mtot">{total:.0f} hours</span>' if total else ""))
+    caveat = (f'<p class="mcaveat">{annotate(phase["caveat"])}</p>'
+              if phase.get("caveat") else "")
+    return (f'  <li>{head}'
+            f'<p class="mwhy">{annotate(phase["why"])}</p>{caveat}'
+            f'<div class="mochips">{"".join(chips)}</div></li>')
+
+
 def h2(anchor, title, ico=None):
     """Section heading, with the matching game icon where there is one."""
     mark = (f'<img class="h2ico" src="{ico}" alt="" width="20" height="20">'
@@ -3048,11 +3130,14 @@ def build_index():
                  "".join(f"<li>{annotate(c)}</li>" for c in COMBAT_APPROACH) +
                  "</ul></div>")
 
-    parts.append(h2("max-order", "Post-Diary-Cape Maxing Order", "assets/media/max-cape.png"))
-    parts.append('<ol class="phases">')
-    for title, detail in MAX_ORDER:
-        sub = f"<ul><li>{annotate(detail)}</li></ul>" if detail else ""
-        parts.append(f"  <li><b>{annotate(title)}</b>{sub}</li>")
+    parts.append(h2("max-order", "Post-Diary-Cape Maxing Order",
+                    "assets/media/max-cape.png"))
+    parts.append('<p class="lede2">Ordered so the hours that pay come before the '
+                 'hours that cost, and so nothing waits on something later. '
+                 'Estimates use your live XP at the rates on each skill page.</p>')
+    parts.append('<ol class="phases maxorder">')
+    for i, phase in enumerate(MAX_ORDER, 1):
+        parts.append(max_order_block(phase, i))
     parts.append("</ol>")
     parts.append('<div class="panel"><div class="k">Gaps Worth Noting</div>'
                  '<p>Fletching and Farming are already 99, so they sit outside the order above. '

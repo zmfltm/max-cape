@@ -887,6 +887,46 @@ td.dt.none { color: var(--dim); }
   width: 5px; height: 5px; border-radius: 50%; background: var(--dim);
 }
 
+/* ------------------------------------------------------------- maxing order */
+
+.maxorder > li { padding-bottom: 30px; }
+.maxorder .mtot {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--dim);
+  margin-left: 10px;
+}
+.mwhy { color: var(--muted); font-size: 13.5px; margin: 5px 0 6px; max-width: 68ch; }
+.mcaveat {
+  color: var(--dim);
+  font-size: 12.5px;
+  margin: 0 0 9px;
+  max-width: 68ch;
+  padding-left: 10px;
+  border-left: 2px solid var(--line);
+}
+
+.mochips { display: flex; flex-wrap: wrap; gap: 6px; }
+.mo {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 11px 4px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--fg-2);
+  transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+.mo:hover { border-color: rgba(255, 255, 255, 0.22); background: var(--surface-hi); }
+.mo .ml { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.mo .mh { font-family: var(--font-mono); font-size: 10.5px; color: var(--dim); }
+.mo .mh.done { color: var(--done); }
+.mo.pays { border-color: rgba(74, 222, 128, 0.22); }
+.mo.costs { border-color: rgba(255, 157, 46, 0.22); }
+.mo.met { opacity: 0.55; }
+
 /* ------------------------------------------------------------------- panels */
 
 .panel {
