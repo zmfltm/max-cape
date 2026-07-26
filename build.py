@@ -2579,7 +2579,25 @@ def birdhouse_box():
         'building the next house while walking saves a trip. '
         f'<a href="{WIKI}Bird_house_trapping" target="_blank" rel="noopener">'
         'Full guide on the wiki &#8599;</a></p>'
-        "</div>"
+        '<div class="subpanel"><div class="k">While drift netting</div>'
+        '<p>Both happen on Fossil Island, so the run costs you about three minutes '
+        'of fishing. Set the houses before you dive, so the 50 minutes runs while '
+        'you are underwater.</p>'
+        '<ol class="bhstops">'
+        '<li>Surface and climb out. You land on the small island, which has a '
+        '<b>bank</b>: restock nets, seeds and logs here rather than teleporting.</li>'
+        '<li>Row back to the Museum Camp, then run south to the '
+        '<b>Verdant Valley</b> mushtree. Two houses sit right by it.</li>'
+        '<li>Mushtree to <b>Mushroom Meadow</b>, third house is north of it.</li>'
+        '<li>Mushtree to <b>Sticky Swamp</b>, fourth house is by the Tar Swamp '
+        'entrance. Bring an axe and rake the first time you go.</li>'
+        '<li>Mushtree back to <b>Verdant Valley</b>, run north to the camp, row out '
+        'and dive.</li>'
+        "</ol>"
+        '<p class="gap">Two things that pay for themselves: <b>20,000 numulites</b> '
+        'for permanent drift net access, so surfacing never costs you the daily fee, '
+        'and <b>flippers</b> for sprinting underwater.</p>'
+        "</div></div>"
     )
 
 

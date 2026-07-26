@@ -146,6 +146,12 @@ img.icon.lg { width: 32px; height: 32px; flex-basis: 32px; padding: 5px; border-
 .pickbody { display: flex; gap: 16px; align-items: flex-start; }
 .panel.pick .thumb { background: rgba(74, 222, 128, 0.06); border-color: rgba(74, 222, 128, 0.18); }
 p.gap { margin-top: 8px; }
+.subpanel {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+}
+.subpanel .k { margin-bottom: 6px; }
 .bhstops { margin: 8px 0 0; padding-left: 20px; }
 .bhstops li { color: var(--muted); font-size: 13.5px; margin-bottom: 4px; }
 .bhstops b { color: var(--fg-2); font-weight: 500; }
