@@ -75,6 +75,16 @@ def shooting_stars(max_age=45):
 
     stars.sort(key=lambda x: (-x["tier"], x["endsAt"]))
     _star_cache.update(at=now, data=stars)
+
+    # keep a snapshot on disk: the published copy on GitHub Pages reads this,
+    # since Pages has no server to proxy with
+    try:
+        os.makedirs(os.path.join(HERE, "data"), exist_ok=True)
+        with open(os.path.join(HERE, "data", "stars.json"), "w", encoding="utf-8") as f:
+            json.dump({"stars": stars, "at": int(now * 1000), "source": STAR_URL}, f)
+    except OSError:
+        pass
+
     return stars
 
 

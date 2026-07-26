@@ -1305,67 +1305,74 @@ PICK_JS = """
 
 STARS_JS = """
 <script>
-/* Shooting stars, read from 07.gg through serve.py's /api/stars and rendered
-   here. Loads on open, refreshes on demand. */
+/* Shooting stars. Tries the local server first, then the snapshot committed to
+   the repo, and falls back to 07.gg's own tracker in a frame so the panel
+   always shows something. */
 (function () {
   var box = document.getElementById('stars');
   if (!box) return;
   var list = document.getElementById('starlist');
   var status = document.getElementById('starstatus');
   var btn = document.getElementById('starrefresh');
-
-  if (!/^https?:$/.test(location.protocol)) {
-    status.textContent = 'needs serve.py';
-    list.innerHTML = '<p class="starnone">Start the site with <code>python3 serve.py</code> '
-      + 'to pull live star data.</p>';
-    return;
-  }
+  var limit = parseInt(list.getAttribute('data-limit'), 10) || 12;
+  var root = box.getAttribute('data-root') || '';
+  var FRESH = 20 * 60 * 1000;
 
   function mins(ms) {
     var m = Math.round((ms - Date.now()) / 60000);
-    if (m <= 0) return 'ending';
-    return m + 'm';
+    return m <= 0 ? 'ending' : m + 'm';
   }
 
-  var limit = parseInt(list.getAttribute('data-limit'), 10) || 12;
-
-  function draw(stars) {
-    if (!stars.length) {
-      list.innerHTML = '<p class="starnone">No active stars reported right now.</p>';
-      return;
-    }
-    list.innerHTML = stars.slice(0, limit).map(function (s) {
-      var t = 'T' + s.tier;
-      var hot = s.tier >= 7 ? ' hot' : '';
+  function draw(stars, at) {
+    var live = stars.filter(function (s) { return s.endsAt > Date.now(); });
+    if (!live.length) return false;
+    list.innerHTML = live.slice(0, limit).map(function (s) {
       return '<div class="star">'
-        + '<span class="stier' + hot + '">' + t + '</span>'
+        + '<span class="stier' + (s.tier >= 7 ? ' hot' : '') + '">T' + s.tier + '</span>'
         + '<span class="sworld">w' + s.world + '</span>'
         + '<span class="sloc">' + s.location + '</span>'
         + '<span class="sends">' + mins(s.endsAt) + '</span></div>';
     }).join('');
+    var age = at ? Math.round((Date.now() - at) / 60000) : 0;
+    status.textContent = live.length + ' active' + (age > 1 ? ' \u00b7 ' + age + 'm ago' : '');
+    return true;
+  }
+
+  function frame() {
+    list.innerHTML = '<iframe src="https://07.gg/trackers/shooting-star" '
+      + 'title="Shooting star tracker" loading="lazy" height="' + (limit > 20 ? 900 : 560) + '" '
+      + 'referrerpolicy="no-referrer"></iframe>';
+    status.textContent = 'live from 07.gg';
+  }
+
+  function get(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    });
   }
 
   function load() {
     if (btn.classList.contains('busy')) return;
     btn.classList.add('busy');
     var started = Date.now();
-    fetch('/api/stars', { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
+    var done = function (fn) {
+      setTimeout(function () { btn.classList.remove('busy'); fn(); },
+                 Math.max(0, 600 - (Date.now() - started)));
+    };
+
+    get('/api/stars')
       .then(function (d) {
-        if (d.error) throw new Error(d.error);
-        setTimeout(function () {
-          btn.classList.remove('busy');
-          draw(d.stars || []);
-          status.textContent = (d.stars || []).length + ' active';
-        }, Math.max(0, 700 - (Date.now() - started)));
+        if (d.error || !d.stars) throw new Error('no data');
+        done(function () { if (!draw(d.stars, d.at)) frame(); });
       })
-      .catch(function (err) {
-        btn.classList.remove('busy');
-        status.textContent = 'unavailable';
-        list.innerHTML = '<p class="starnone">Live data needs the local server '
-          + '(<code>python3 serve.py</code>). '
-          + '<a href="https://07.gg/trackers/shooting-star" target="_blank" '
-          + 'rel="noopener">Open the tracker on 07.gg &#8599;</a></p>';
+      .catch(function () {
+        get(root + 'data/stars.json')
+          .then(function (d) {
+            var fresh = d.at && (Date.now() - d.at) < FRESH;
+            done(function () { if (!fresh || !draw(d.stars || [], d.at)) frame(); });
+          })
+          .catch(function () { done(frame); });
       });
   }
 
@@ -1949,13 +1956,14 @@ EMBEDS = {
 }
 
 
-def embed_panel(skill_name, full=False):
+def embed_panel(skill_name, full=False, depth=0):
     """A live panel fed by serve.py, rendered in our own UI."""
     cfg = EMBEDS.get(skill_name)
     if not cfg:
         return ""
     return (
-        f'<div class="embed{" bare" if full else ""}" id="stars">'
+        f'<div class="embed{" bare" if full else ""}" id="stars" '
+        f'data-root="{"../" if depth else ""}">'
         '<div class="ehead"><span class="k">Live &middot; shooting stars</span>'
         '<span class="espace"></span>'
         '<span class="estatus" id="starstatus">loading</span>'
@@ -2120,7 +2128,7 @@ def build_skill_page(skill, prev_skill, next_skill):
                      f'<div class="lvlrow">{head}</div>{bar}'
                      f'<div class="facts">{"".join(facts)}</div></div>')
 
-    parts.append(embed_panel(name))
+    parts.append(embed_panel(name, depth=1))
 
     parts.append('<div class="pillrow">')
     done_cls = " done" if skill.get("done") else ""
