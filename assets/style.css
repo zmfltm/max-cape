@@ -222,6 +222,8 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
 }
 .comethead .comet { width: 18px; height: 18px; }
 .refico { object-fit: contain; opacity: 0.75; flex: 0 0 15px; }
+.refsvg { flex: 0 0 15px; color: var(--dim); }
+.rail a:hover .refsvg, .rail a.here .refsvg { color: var(--accent); }
 .rail a:hover .refico { opacity: 1; }
 .navlink:hover .navicon { opacity: 1; }
 

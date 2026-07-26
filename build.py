@@ -583,13 +583,27 @@ VIDEOS = [
 ]
 
 
+# plain marks for the two entries that are not a thing in the game
+REF_SVG = {
+    "progression": ('<svg class="refsvg" viewBox="0 0 16 16" width="14" height="14" '
+                    'aria-hidden="true"><path d="M2 13h3V8H2zM6.5 13h3V5h-3zM11 13h3V2h-3z" '
+                    'fill="currentColor"/></svg>'),
+    "skills": ('<svg class="refsvg" viewBox="0 0 16 16" width="14" height="14" '
+               'aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1.2" '
+               'fill="currentColor"/><rect x="9" y="2" width="5" height="5" rx="1.2" '
+               'fill="currentColor" opacity=".65"/><rect x="2" y="9" width="5" height="5" '
+               'rx="1.2" fill="currentColor" opacity=".65"/><rect x="9" y="9" width="5" '
+               'height="5" rx="1.2" fill="currentColor"/></svg>'),
+}
+
+
 PLAN_LINKS = [
-    ("progression", "Progression", "assets/media/site/skills-tab.png"),
+    ("progression", "Progression", "svg:progression"),
     ("quests", "Quests", "assets/media/site/quests.png"),
     ("diaries", "Diaries", "assets/icons/Diaries.png"),
     ("approach", "Slayer", "assets/icons/Slayer.png"),
     ("max-order", "Max Order", "assets/media/max-cape.png"),
-    ("skills", "Skills", "assets/media/site/combat.png"),
+    ("skills", "Skills", "svg:skills"),
 ]
 
 
@@ -1240,8 +1254,9 @@ def rail(active=None, depth=0):
          '  <nav class="rail-body">',
          '  <div class="rail-kick">Reference</div>']
     for anchor, label, ico in PLAN_LINKS:
-        p.append(f'  <a href="{root}index.html#{anchor}">'
-                 f'<img class="refico" src="{root}{ico}" alt="" width="15" height="15">'
+        mark = (REF_SVG[ico[4:]] if ico.startswith("svg:")
+                else f'<img class="refico" src="{root}{ico}" alt="" width="15" height="15">')
+        p.append(f'  <a href="{root}index.html#{anchor}">{mark}'
                  f'<span class="t">{e(label)}</span></a>')
 
     for vid, title, channel, handle, avatar, extra in VIDEOS:
