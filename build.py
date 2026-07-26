@@ -2019,6 +2019,7 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
   <a class="mark" href="{root}index.html"><img class="capemark" src="{root}assets/media/max-cape.png" alt="">OSRS max time wasting plan</a>
   <nav class="topnav">
     <a class="navlink" href="{root}stars.html">{COMET_SVG}Shooting Stars</a>
+    <a class="navlink" href="{root}afk.html">AFK Path</a>
   </nav>
 </header>
 <div class="shell">
@@ -3107,6 +3108,127 @@ def h2(anchor, title, ico=None):
     return f'<h2 id="{anchor}">{mark}{e(title)}</h2>'
 
 
+# The least-attention option for each skill. `every` is how long you can leave
+# it between clicks, which is the thing that actually makes something AFK.
+AFK = [
+    dict(skill="Hunter", method="Birdhouse runs", level="5+", every=50 * 60,
+         xp="4-5k", note="Four houses, then nothing for 50 minutes. Nothing else "
+                         "in the game asks so little of you."),
+    dict(skill="Mining", method="Shooting Stars", level="10+", every=7 * 60,
+         xp="20-40k", note="One click per layer, seven minutes apart. Stardust "
+                           "buys the celestial ring on the side."),
+    dict(skill="Magic", method="Splashing", level="1+", every=20 * 60,
+         xp="10-30k", note="Attack once and walk away until the runes run out. "
+                           "The lowest attention in the game, and the rate shows it."),
+    dict(skill="Attack", method="Nightmare Zone, absorptions", level="Quest reqs",
+         every=15 * 60, xp="40-80k",
+         note="Absorption potions and a rock cake. Top up every ten to fifteen "
+              "minutes. Works for Strength, Defence and Hitpoints too."),
+    dict(skill="Strength", method="Gemstone Crab", level="1+", every=10 * 60,
+         xp="30-60k", note="Shared health pool in Varlamore, so it never dies on "
+                           "you and never stops being aggressive."),
+    dict(skill="Woodcutting", method="Redwoods", level="90", every=5 * 60,
+         xp="~65k", note="Chops until the inventory fills, and the Woodcutting "
+                         "Guild bank is right there."),
+    dict(skill="Firemaking", method="Bonfires", level="1+", every=4 * 60,
+         xp="200-300k", note="Add the whole inventory at once and it burns "
+                             "through unattended. Slower per log than a line of "
+                             "fires, but you are not clicking."),
+    dict(skill="Smithing", method="Cannonballs", level="35", every=3 * 60,
+         xp="~20k", note="A full inventory of steel bars smelts itself. Profitable, "
+                         "and the rate is as bad as it looks."),
+    dict(skill="Fishing", method="Anglerfish", level="82", every=3 * 60,
+         xp="~30k", note="Fishes until the inventory fills. Dark crabs and monkfish "
+                         "behave the same way if the level is not there yet."),
+    dict(skill="Sailing", method="Shipwreck salvaging with crew", level="15 (42 better)",
+         every=3 * 60, xp="7-8k",
+         note="Put a crewmate on your hook and it keeps salvaging while you sort. "
+              "The wiki's own figure for the idle version."),
+    dict(skill="Crafting", method="Cutting amethyst", level="83", every=2 * 60,
+         xp="~30k", note="Cuts through the inventory on its own. The only Crafting "
+                         "worth calling AFK."),
+    dict(skill="Runecraft", method="Blood runes at Arceuus", level="77", every=90,
+         xp="~40k", note="Run essence, craft, repeat. Low attention and it pays, "
+                         "which nothing else in Runecraft manages."),
+    dict(skill="Cooking", method="Range cooking", level="1+", every=60,
+         xp="150-250k", note="One click per inventory at a bank range. Not truly "
+                            "idle, but you get a minute back each time."),
+    dict(skill="Prayer", method="Bonecrusher and ash sanctifier", level="Passive",
+         every=None, xp="passive",
+         note="Zero clicks: bones and ashes convert while you are killing things "
+              "for something else. The only free XP on this page."),
+]
+
+NO_AFK = [
+    ("Agility", "Every course is a click every few seconds. There is no idle option."),
+    ("Construction", "Butler cycles are five seconds apart from start to finish."),
+    ("Thieving", "Pickpocketing is one click per attempt, whatever the target."),
+    ("Herblore", "Potions are made an inventory at a time, by hand."),
+    ("Slayer", "Individual tasks can be low effort, but the skill itself is not."),
+]
+
+
+def afk_rows():
+    rows = []
+    for a in sorted(AFK, key=lambda x: -(x["every"] or 10 ** 9)):
+        if a["every"] is None:
+            gap = "no clicks"
+        elif a["every"] >= 60 * 60:
+            gap = f'{a["every"] // 3600}h'
+        elif a["every"] >= 60:
+            gap = f'{a["every"] // 60} min'
+        else:
+            gap = f'{a["every"]}s'
+        st = stat_of(a["skill"])
+        lvl = f'<span class="al">{st["level"]}</span>' if st else ""
+        src = media_path(METHOD_MEDIA.get(a["method"], ""))
+        pic = (f'<img class="thumb" src="{src}" alt="" loading="lazy">'
+               if src else '<span class="thumb blank"></span>')
+        rows.append(
+            f'<tr><td class="pic">{pic}</td>'
+            f'<td class="tn"><a href="skills/{slug(a["skill"])}.html">'
+            f'{icon(a["skill"])}{e(a["skill"])}</a>{lvl}</td>'
+            f'<td>{e(a["method"])}</td>'
+            f'<td class="req">{e(a["level"])}</td>'
+            f'<td class="rate afkgap">{e(gap)}</td>'
+            f'<td class="rate">{e(a["xp"])}</td>'
+            f'<td class="notes">{annotate(a["note"])}</td></tr>')
+    return "".join(rows)
+
+
+def build_afk_page():
+    body = [
+        '<div class="kick">Least attention wins</div>',
+        '<div class="page-head">'
+        + f'<img class="icon lg" src="assets/media/site/skills-icon.png" alt="">'
+        + '<h1 class="page">The AFK Path</h1></div>',
+        '<p class="lede">Sorted by how long you can leave it alone, which is the '
+        'only measure that matters here. XP rates are the price you pay for that.</p>',
+        '<div class="tablewrap"><div class="tablescroll">'
+        '<table class="afktable"><thead><tr>'
+        '<th class="pic"><span class="sr">Image</span></th><th>Skill</th>'
+        '<th>Method</th><th>Needs</th><th>Click every</th><th>XP/hr</th>'
+        '<th>Why</th></tr></thead>'
+        f'<tbody>{afk_rows()}</tbody></table></div></div>',
+        '<h2 id="none">Skills With No AFK Option</h2>',
+        '<p class="lede2">Being honest about these is more useful than pretending. '
+        'If you want to idle, spend the time on the table above and come back to '
+        'these when you can pay attention.</p>',
+        '<ul>' + "".join(f'<li><b>{e(n)}</b>. {e(why)}</li>' for n, why in NO_AFK)
+        + "</ul>",
+        '<h2 id="stack">Stacking Them</h2>',
+        '<ul>'
+        '<li>Birdhouses run on a 50 minute timer that ignores what else you are '
+        'doing, so they stack with everything on this page.</li>'
+        '<li>A bonecrusher and ash sanctifier turn any combat into passive Prayer, '
+        'including the Nightmare Zone and crab hours.</li>'
+        '<li>Drift net fishing trains Fishing and Hunter at once, and the birdhouse '
+        'run fits inside its downtime.</li>'
+        "</ul>",
+    ]
+    return page("The AFK Path", "AFK", "\n".join(body), depth=0)
+
+
 def build_index():
     parts = []
     art = focus_panel()
@@ -3193,6 +3315,9 @@ def main():
 
     with open(os.path.join(OUT, "stars.html"), "w", encoding="utf-8") as f:
         f.write(build_stars_page())
+
+    with open(os.path.join(OUT, "afk.html"), "w", encoding="utf-8") as f:
+        f.write(build_afk_page())
 
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(build_index())
