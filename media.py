@@ -169,6 +169,11 @@ METHOD_MEDIA = {
     "Dark crabs": "Raw dark crab",
     "Pest Control": "Pest Control",
     "Mud runes": "Mud rune",
+    "Wyrmscraig": "Wyrmscraig",
+    "Letvek and stymphikes": "Stymphike",
+    "Bloodwood trees": "Bloodwood tree",
+    "Rubium rocks": "Rubium rocks",
+    "Infernal shale": "Infernal shale",
     # diaries
     "Hard diaries": "Achievement Diary",
     "Elite diaries": "Achievement Diary",
