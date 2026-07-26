@@ -598,12 +598,12 @@ REF_SVG = {
 
 
 PLAN_LINKS = [
-    ("progression", "Progression", "assets/media/site/skills-tab.png"),
+    ("progression", "Progression", "assets/media/site/combat-achievements.png"),
     ("quests", "Quests", "assets/media/site/quests.png"),
     ("diaries", "Diaries", "assets/icons/Diaries.png"),
     ("approach", "Slayer", "assets/icons/Slayer.png"),
     ("max-order", "Max Order", "assets/media/max-cape.png"),
-    ("skills", "Skills", "svg:skills"),
+    ("skills", "Skills", "assets/media/site/skills-tab.png"),
 ]
 
 
@@ -1259,6 +1259,44 @@ def rail(active=None, depth=0):
         p.append(f'  <a href="{root}index.html#{anchor}">{mark}'
                  f'<span class="t">{e(label)}</span></a>')
 
+    p.append('  <div class="rail-kick">Links</div>')
+    for label_, href in SITE_LINKS:
+        p.append(f'  <a class="slink" href="{href}" target="_blank" rel="noopener">'
+                 f'<span class="t">{e(label_)}</span>'
+                 f'<span class="ext">&#8599;</span></a>')
+
+    from hiscores import SKILL_ORDER
+
+    ordered = [x for x in SKILLS if x["group"] == SUPPORT]          # diaries first
+    for name in SKILL_ORDER:
+        match = next((x for x in SKILLS if x["name"] == name), None)
+        if match:
+            ordered.append(match)
+    ordered += [x for x in SKILLS if x not in ordered]
+
+    p.append(f'  <div class="rail-kick"><img class="kickico" '
+             f'src="{root}assets/media/site/skills-tab.png" alt="" width="13" height="13">'
+             'Skills</div>')
+    for sk in ordered:
+        sl = slug(sk["name"])
+        here = " here" if sl == active else ""
+        tag, is_done = level_badge(sk)
+        st = stat_of(sk["name"])
+        style = level_style(st["level"]) if st else ""
+        cls = " lit" if st else (" done" if is_done else "")
+        focused = " focused" if sk["name"] == default_focus() else ""
+        p.append(
+            f'  <span class="rrow{focused}">'
+            f'<a class="r{here}" href="{root}skills/{sl}.html">'
+            f'{icon(sk["name"], depth, "sm")}'
+            f'<span class="t">{e(sk["name"])}</span>'
+            f'<span class="r-lvl{cls}"{style}>{e(tag)}</span></a>'
+            f'<button class="focusbtn" type="button" data-skill="{e(sk["name"])}" '
+            f'title="Set as the skill you are levelling" '
+            f'aria-label="Focus {e(sk["name"])}">{DOT_SVG}</button></span>'
+        )
+
+    p.append('  <div class="rail-kick spaced">Videos</div>')
     for vid, title, channel, handle, avatar, extra in VIDEOS:
         p.append(
             f'  <span class="vidrow">'
@@ -1271,35 +1309,6 @@ def rail(active=None, depth=0):
             f'<span class="vt">{e(title)}</span>'
             f'<span class="vc">{e(channel)}</span></a></span>')
 
-    p.append('  <div class="rail-kick">Links</div>')
-    for label_, href in SITE_LINKS:
-        p.append(f'  <a class="slink" href="{href}" target="_blank" rel="noopener">'
-                 f'<span class="t">{e(label_)}</span>'
-                 f'<span class="ext">&#8599;</span></a>')
-
-    for group in GROUP_ORDER:
-        members = [s for s in SKILLS if s["group"] == group]
-        if not members:
-            continue
-        p.append(f'  <div class="rail-kick">{e(group)}</div>')
-        for s in members:
-            sl = slug(s["name"])
-            here = " here" if sl == active else ""
-            tag, is_done = level_badge(s)
-            st = stat_of(s["name"])
-            style = level_style(st["level"]) if st else ""
-            cls = " lit" if st else (" done" if is_done else "")
-            focused = " focused" if s["name"] == default_focus() else ""
-            p.append(
-                f'  <span class="rrow{focused}">'
-                f'<a class="r{here}" href="{root}skills/{sl}.html">'
-                f'{icon(s["name"], depth, "sm")}'
-                f'<span class="t">{e(s["name"])}</span>'
-                f'<span class="r-lvl{cls}"{style}>{e(tag)}</span></a>'
-                f'<button class="focusbtn" type="button" data-skill="{e(s["name"])}" '
-                f'title="Set as the skill you are levelling" '
-                f'aria-label="Focus {e(s["name"])}">{DOT_SVG}</button></span>'
-            )
     p.append("  </nav>")
     p.append("</aside>")
     return "\n".join(p)
@@ -1918,21 +1927,13 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
 <body>
 <header class="topbar">
   <a class="mark" href="{root}index.html"><img class="capemark" src="{root}assets/media/max-cape.png" alt="">OSRS max time wasting plan</a>
-  <span class="spacer"></span>
   <nav class="topnav">
     <a class="navlink" href="{root}stars.html">{COMET_SVG}Shooting Stars</a>
   </nav>
-  <span class="spacer"></span>
 </header>
 <div class="shell">
 <main class="main">
 {body}
-<footer class="foot">
-  XP rates are approximate and assume reasonable gear. Method metas shift, so check the
-  <a href="https://oldschool.runescape.wiki/w/Skill_training" rel="noopener">OSRS Wiki</a>
-  training guide before committing to a long grind.<br>
-  Skill icons from the OSRS Wiki. Old School RuneScape is a trademark of Jagex Ltd.
-</footer>
 </main>
 {rail(active=active, depth=depth)}
 </div>
@@ -2685,6 +2686,13 @@ def build_stars_page():
     return page("Shooting Stars", "Shooting Stars", "\n".join(body), depth=0)
 
 
+def h2(anchor, title, ico=None):
+    """Section heading, with the matching game icon where there is one."""
+    mark = (f'<img class="h2ico" src="{ico}" alt="" width="20" height="20">'
+            if ico else "")
+    return f'<h2 id="{anchor}">{mark}{e(title)}</h2>'
+
+
 def build_index():
     parts = []
     art = focus_panel()
@@ -2693,7 +2701,7 @@ def build_index():
     parts.append("</section>")
 
 
-    parts.append('<h2 id="progression">Main Progression</h2>')
+    parts.append(h2("progression", "Main Progression", "assets/media/site/combat-achievements.png"))
     parts.append('<ol class="phases">')
     for i, ph in enumerate(PLAN_PHASES, 1):
         body = phase_meter(ph.get("track", ""))
@@ -2707,18 +2715,18 @@ def build_index():
         parts.append(f'  <li id="phase-{i}"><b>{annotate(ph["title"])}</b>{body}</li>')
     parts.append("</ol>")
 
-    parts.append('<h2 id="quests">Quest Cape Progress</h2>')
+    parts.append(h2("quests", "Quest Cape Progress", "assets/media/quest-point-cape.png"))
     parts.append(quest_panel())
 
-    parts.append('<h2 id="diaries">Diary Progress</h2>')
+    parts.append(h2("diaries", "Diary Progress", "assets/icons/Diaries.png"))
     parts.append(diary_panel())
 
-    parts.append('<h2 id="approach">Slayer</h2>')
+    parts.append(h2("approach", "Slayer", "assets/icons/Slayer.png"))
     parts.append('<div class="panel"><div class="k">Standing Rules</div><ul>' +
                  "".join(f"<li>{annotate(c)}</li>" for c in COMBAT_APPROACH) +
                  "</ul></div>")
 
-    parts.append('<h2 id="max-order">Post-Diary-Cape Maxing Order</h2>')
+    parts.append(h2("max-order", "Post-Diary-Cape Maxing Order", "assets/media/max-cape.png"))
     parts.append('<ol class="phases">')
     for title, detail in MAX_ORDER:
         sub = f"<ul><li>{annotate(detail)}</li></ul>" if detail else ""
@@ -2729,7 +2737,7 @@ def build_index():
                  'Thieving and Hunter are not listed in either block, so decide where they land: '
                  'Thieving fits with the faster skills, Hunter with the slow gathering ones.</p></div>')
 
-    parts.append('<h2 id="skills">All Skills</h2>')
+    parts.append(h2("skills", "All Skills", "assets/media/site/skills-tab.png"))
     for group in GROUP_ORDER:
         members = [s for s in SKILLS if s["group"] == group]
         if not members:

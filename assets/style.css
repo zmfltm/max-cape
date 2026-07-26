@@ -176,7 +176,8 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
   height: var(--bar-h);
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 26px;
   padding: 0 24px;
   border-bottom: 1px solid var(--line-soft);
   background: rgba(12, 13, 16, 0.76);
@@ -222,6 +223,8 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
 }
 .comethead .comet { width: 18px; height: 18px; }
 .refico { object-fit: contain; opacity: 0.75; flex: 0 0 15px; }
+.kickico { object-fit: contain; opacity: 0.8; }
+.h2ico { object-fit: contain; flex: 0 0 20px; }
 .refsvg { flex: 0 0 15px; color: var(--dim); }
 .rail a:hover .refsvg, .rail a.here .refsvg { color: var(--accent); }
 .rail a:hover .refico { opacity: 1; }
@@ -277,6 +280,9 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
 .rail-search:focus { outline: none; border-color: rgba(255,157,46,0.45); background: var(--surface-hi); }
 
 .rail-kick {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 500;
@@ -287,6 +293,7 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
   padding-left: 8px;
 }
 .rail-kick:first-of-type { margin-top: 0; }
+.rail-kick.spaced { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
 
 .rail a {
   display: flex;
@@ -442,6 +449,9 @@ h1.display {
 h1.page { font-size: 32px; font-weight: 600; letter-spacing: -0.03em; margin: 0; }
 
 h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
   font-size: 19px;
   font-weight: 500;
   letter-spacing: -0.02em;

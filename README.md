@@ -104,3 +104,10 @@ render without a picture.
 
 Skill icons come from the OSRS Wiki. Old School RuneScape is a trademark of
 Jagex Ltd; this is a personal, non-commercial planning page.
+
+## Credits
+
+Skill icons, method images, crash-site maps and the guide data come from the
+[OSRS Wiki](https://oldschool.runescape.wiki/), used under CC BY-NC-SA 3.0.
+Shooting star calls come from [07.gg](https://07.gg/). Old School RuneScape is
+a trademark of Jagex Ltd; this is a personal, non-commercial planning page.
