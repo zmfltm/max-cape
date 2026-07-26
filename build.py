@@ -1380,25 +1380,34 @@ STARS_JS = """
   var limit = parseInt(list.getAttribute('data-limit'), 10) || 12;
   var root = box.getAttribute('data-root') || '';
   var FRESH = 20 * 60 * 1000;
-  var picker = document.getElementById('tierpick');
+  var pickMin = document.getElementById('tiermin');
+  var pickMax = document.getElementById('tiermax');
   var mining = parseInt(box.getAttribute('data-mining'), 10) || 0;
   var KEY = 'osrsplan.startier';
   var latest = [];
   var latestAt = 0;
 
+  if (pickMin) pickMin.value = '1';
+  if (pickMax) pickMax.value = '9';
   try {
-    var saved = localStorage.getItem(KEY);
-    if (saved && picker) picker.value = saved;
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved && pickMin && pickMax) {
+      pickMin.value = String(saved[0]); pickMax.value = String(saved[1]);
+    }
   } catch (err) { /* private mode */ }
 
-  function minTier() { return picker ? (parseInt(picker.value, 10) || 0) : 0; }
+  function lo() { return pickMin ? (parseInt(pickMin.value, 10) || 1) : 1; }
+  function hi() { return pickMax ? (parseInt(pickMax.value, 10) || 9) : 9; }
 
   function mins(ms) {
     var m = Math.round((ms - Date.now()) / 60000);
     return m <= 0 ? 'ending' : m + 'm';
   }
 
-  /* star fields are crowd-sourced on 07.gg, so treat them as untrusted */
+  /* Star fields are crowd-sourced on 07.gg, so treat them as untrusted. This
+     encodes quotes as well as angle brackets, so it is safe in both text and
+     quoted-attribute context; serve.py also strips these characters on the way
+     in. */
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -1408,9 +1417,10 @@ STARS_JS = """
 
   function draw(stars, at) {
     latest = stars; latestAt = at;
-    var floor = minTier();
+    var min = lo(), max = hi();
     var live = stars.filter(function (s) {
-      return s.endsAt > Date.now() && int(s.tier) >= floor;
+      var t = int(s.tier);
+      return s.endsAt > Date.now() && t >= min && t <= max;
     });
     if (!live.length) return false;
     list.innerHTML = live.slice(0, limit).map(function (s) {
@@ -1426,11 +1436,16 @@ STARS_JS = """
         + '<span class="sworld">w' + world + '</span>'
         + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
         + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
+        + '<button class="sview" type="button" data-loc="' + loc + '" '
+        + 'title="Map area. Click to open the 07.gg tracker">'
+        + '<img src="' + (window.SRCICON || '') + '" alt="" width="11" height="11">'
+        + 'view</button>'
         + '<span class="sreq" title="Mining level for this tier">' + req + '</span>'
         + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
     var age = at ? Math.round((Date.now() - at) / 60000) : 0;
-    var shown = floor ? live.length + ' at T' + floor + '+' : live.length + ' active';
+    var ranged = (min > 1 || max < 9);
+    var shown = live.length + (ranged ? ' in T' + min + '-T' + max : ' active');
     status.textContent = shown + (age > 1 ? ' \u00b7 ' + age + 'm ago' : '');
     return true;
   }
@@ -1478,15 +1493,105 @@ STARS_JS = """
       });
   }
 
-  if (picker) {
-    picker.addEventListener('change', function () {
-      try { localStorage.setItem(KEY, picker.value); } catch (err) { /* ignore */ }
+  [pickMin, pickMax].forEach(function (sel) {
+    if (!sel) return;
+    sel.addEventListener('change', function () {
+      if (lo() > hi()) {
+        if (sel === pickMin) pickMax.value = pickMin.value;
+        else pickMin.value = pickMax.value;
+      }
+      try { localStorage.setItem(KEY, JSON.stringify([lo(), hi()])); } catch (err) { /* ignore */ }
       if (latest.length && !draw(latest, latestAt)) {
-        list.innerHTML = '<p class="starnone">No stars at that tier right now.</p>';
-        status.textContent = '0 at T' + minTier() + '+';
+        list.innerHTML = '<p class="starnone">Nothing in that tier range right now.</p>';
+        status.textContent = '0 in T' + lo() + '-T' + hi();
       }
     });
+  });
+
+  /* 07.gg types its own location names, so match them loosely against the
+     wiki's crash-site list. */
+  var mapIndex = (function () {
+    var out = {};
+    var src = window.STARMAPS || {};
+    Object.keys(src).forEach(function (k) { out[norm(k)] = src[k]; });
+    return out;
+  })();
+
+  function norm(t) {
+    return String(t).toLowerCase().replace(/\(.*?\)/g, ' ')
+      .replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
   }
+
+  /* names 07.gg uses that the wiki files under something else */
+  var ALIAS = {
+    'prifddinas zalcano entrance': 'trahaearn mine entrance',
+    'ardougne monastery': 'south east ardougne mine monastery',
+    'mine northwest of hunter guild': 'mistrock mine',
+    'theatre of blood bank': 'ver sinhaza bank',
+    'varlamore colosseum entrance bank': 'civitas illa fortis east bank',
+    'south of mount quidamortem': 'mount quidamortem bank',
+    'lava maze runite mine': 'lava maze runite mine'
+  };
+
+  function findMap(loc) {
+    var n = norm(loc);
+    if (ALIAS[n]) n = ALIAS[n];
+    if (mapIndex[n]) return mapIndex[n];
+    var keys = Object.keys(mapIndex), best = null, score = 0;
+    var words = n.split(' ');
+    keys.forEach(function (k) {
+      if (k.indexOf(n) !== -1 || n.indexOf(k) !== -1) {
+        var s2 = Math.min(k.length, n.length) / Math.max(k.length, n.length) + 1;
+        if (s2 > score) { score = s2; best = mapIndex[k]; }
+        return;
+      }
+      var kw = k.split(' ');
+      var hits = words.filter(function (w) { return w.length > 2 && kw.indexOf(w) !== -1; }).length;
+      var s3 = hits / Math.max(words.length, kw.length);
+      if (hits >= 2 && s3 > score) { score = s3; best = mapIndex[k]; }
+    });
+    return score >= 0.5 ? best : null;
+  }
+
+  var pop = document.createElement('div');
+  pop.className = 'starpop';
+  pop.hidden = true;
+  document.body.appendChild(pop);
+
+  function showPop(btn2) {
+    var loc = btn2.getAttribute('data-loc');
+    var file = findMap(loc);
+    pop.innerHTML = (file
+      ? '<img src="' + (window.STARMAPROOT || '') + file + '" alt="">'
+      : '<div class="nomap">no map for this spot</div>')
+      + '<span class="ploc"></span>';
+    pop.querySelector('.ploc').textContent = loc;
+    pop.hidden = false;
+    var r = btn2.getBoundingClientRect();
+    var top = r.bottom + window.scrollY + 8;
+    var left = Math.min(r.left + window.scrollX - 90,
+                        window.scrollX + document.documentElement.clientWidth - 230);
+    pop.style.top = top + 'px';
+    pop.style.left = Math.max(window.scrollX + 8, left) + 'px';
+  }
+
+  list.addEventListener('mouseover', function (ev) {
+    var b = ev.target.closest('.sview');
+    if (b) showPop(b);
+  });
+  list.addEventListener('mouseout', function (ev) {
+    if (ev.target.closest('.sview')) pop.hidden = true;
+  });
+  list.addEventListener('focusin', function (ev) {
+    var b = ev.target.closest('.sview');
+    if (b) showPop(b);
+  });
+  list.addEventListener('focusout', function () { pop.hidden = true; });
+  list.addEventListener('click', function (ev) {
+    if (ev.target.closest('.sview')) {
+      window.open('https://07.gg/trackers/shooting-star', '_blank', 'noopener');
+    }
+  });
 
   btn.addEventListener('click', load);
   load();
@@ -2128,6 +2233,22 @@ EMBEDS = {
 }
 
 
+def starmap_script(depth=0):
+    """Crash-site maps plus the tracker icon path for the client."""
+    path = os.path.join(OUT, "assets", "media", "starmaps", "manifest.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            maps = json.load(f)
+    except (OSError, ValueError):
+        return ""
+    slim = {k: v["file"] for k, v in maps.items()}
+    root = "../" if depth else ""
+    return ("<script>window.STARMAPS=" + json.dumps(slim, separators=(",", ":"))
+            + ";window.STARMAPROOT=" + json.dumps(root + "assets/media/starmaps/")
+            + ";window.SRCICON=" + json.dumps(root + "assets/media/site/07gg.png")
+            + ";</script>")
+
+
 def embed_panel(skill_name, full=False, depth=0):
     """A live panel fed by serve.py, rendered in our own UI."""
     cfg = EMBEDS.get(skill_name)
@@ -2137,17 +2258,15 @@ def embed_panel(skill_name, full=False, depth=0):
         f'<div class="embed{" bare" if full else ""}" id="stars" '
         f'data-root="{"../" if depth else ""}" '
         f'data-mining="{(stat_of("Mining") or {}).get("level", 0)}">'
-        '<div class="ehead"><span class="k">Live &middot; shooting stars</span>'
+        '<div class="ehead">'
+        f'<img class="srcicon" src="{"../" if depth else ""}assets/media/site/07gg.png" '
+        'alt="07.gg" width="14" height="14" title="Data from 07.gg">'
+        '<span class="k">Live &middot; shooting stars</span>'
         '<span class="espace"></span>'
-        '<select class="tierpick" id="tierpick" aria-label="Filter stars by tier">'
-        '<option value="0">All tiers</option>'
-        '<option value="9">T9 only</option>'
-        '<option value="8">T8 and up</option>'
-        '<option value="7">T7 and up</option>'
-        '<option value="6">T6 and up</option>'
-        '<option value="5">T5 and up</option>'
-        '<option value="3">T3 and up</option>'
-        "</select>"
+        '<span class="tierlbl">tier</span>'
+        '<select class="tierpick" id="tiermin" aria-label="Minimum star tier"><option value="1">10 Mining &middot; T1</option><option value="2">20 Mining &middot; T2</option><option value="3">30 Mining &middot; T3</option><option value="4">40 Mining &middot; T4</option><option value="5">50 Mining &middot; T5</option><option value="6">60 Mining &middot; T6</option><option value="7">70 Mining &middot; T7</option><option value="8">80 Mining &middot; T8</option><option value="9">90 Mining &middot; T9</option></select>'
+        '<span class="tierto">to</span>'
+        '<select class="tierpick" id="tiermax" aria-label="Maximum star tier"><option value="1">10 Mining &middot; T1</option><option value="2">20 Mining &middot; T2</option><option value="3">30 Mining &middot; T3</option><option value="4">40 Mining &middot; T4</option><option value="5">50 Mining &middot; T5</option><option value="6">60 Mining &middot; T6</option><option value="7">70 Mining &middot; T7</option><option value="8">80 Mining &middot; T8</option><option value="9">90 Mining &middot; T9</option></select>'
         '<span class="estatus" id="starstatus">loading</span>'
         '<button class="refresh" id="starrefresh" type="button" title="Refresh stars" '
         'aria-label="Refresh stars">'
@@ -2159,7 +2278,8 @@ def embed_panel(skill_name, full=False, depth=0):
         "</div>"
         f'<p class="enote">{e(cfg["note"])}</p>'
         '<div class="starhead"><span>tier</span><span>world</span>'
-        '<span>location</span><span>mining</span><span>ends</span></div>'
+        '<span>location</span><span>map</span><span>mining</span>'
+        '<span>ends</span></div>'
         f'<div class="starlist{" full" if full else ""}" id="starlist" '
         f'data-limit="{99 if full else 12}"></div>'
         f'<div class="qfoot"><a href="{cfg["url"]}" target="_blank" rel="noopener">'
