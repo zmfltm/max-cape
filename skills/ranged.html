@@ -399,18 +399,11 @@
   var pickMin = document.getElementById('tiermin');
   var pickMax = document.getElementById('tiermax');
   var mining = parseInt(box.getAttribute('data-mining'), 10) || 0;
-  var KEY = 'osrsplan.startier';
   var latest = [];
   var latestAt = 0;
 
   if (pickMin) pickMin.value = '1';
   if (pickMax) pickMax.value = '9';
-  try {
-    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (saved && pickMin && pickMax) {
-      pickMin.value = String(saved[0]); pickMax.value = String(saved[1]);
-    }
-  } catch (err) { /* private mode */ }
 
   function lo() { return pickMin ? (parseInt(pickMin.value, 10) || 1) : 1; }
   function hi() { return pickMax ? (parseInt(pickMax.value, 10) || 9) : 9; }
@@ -524,7 +517,6 @@
         if (sel === pickMin) pickMax.value = pickMin.value;
         else pickMin.value = pickMax.value;
       }
-      try { localStorage.setItem(KEY, JSON.stringify([lo(), hi()])); } catch (err) { /* ignore */ }
       if (latest.length && !draw(latest, latestAt)) {
         list.innerHTML = '<p class="starnone">Nothing in that tier range right now.</p>';
         status.textContent = '0 in T' + lo() + '-T' + hi();
