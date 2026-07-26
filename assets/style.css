@@ -1146,6 +1146,26 @@ tr.rec td:nth-child(2) { color: var(--fg); }
 }
 .starnone code { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-2); }
 
+/* Display-only 07.gg preview: the embedded tracker's own tabs and filters are
+   not this page's controls, so pointer events stop at an overlay that opens
+   the real tracker in a new tab instead. */
+.starframe { position: relative; border-radius: var(--r-sm); overflow: hidden; }
+.starframe iframe { pointer-events: none; }
+.starframe .fover { position: absolute; inset: 0; display: flex; align-items: flex-end; }
+.starframe .fhint {
+  margin: 0 auto 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+}
+.starframe .fover:hover .fhint, .starframe .fover:focus-visible .fhint { opacity: 1; }
+
 /* ------------------------------------------------------------- slayer guide */
 
 table.tasktable, table.mtable { min-width: 600px; font-size: 13.5px; }

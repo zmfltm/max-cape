@@ -24,7 +24,7 @@
 <div class="kick">Live tracker</div>
 <div class="page-head"><img class="icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAADFBMVEUAAAAAAAF1e3xGPC/Lr9t+AAAAAXRSTlMAQObYZgAAAGRJREFUeNp10kEKxEAMA8Hu0f//vGBMmKBNH0v4ZjYnptvOpPDsnis10WW9bpI4rEy7uC5POygg1ADvTMab4wzNOF7MDsW0y+TtRmk3Qvlwuy/GZRNpN+MXH4vXPxn/M/YXAPwA3cIBiMrALJMAAAAASUVORK5CYII=" alt="" width="22" height="22"><h1 class="page">Shooting stars</h1></div>
 <p class="lede">Crashed stars land about every 90 minutes per world. Mining stardust is the most AFK training in the skill and buys the celestial ring.</p>
-<div class="embed bare" id="stars" data-root=""><div class="ehead"><span class="k">Live &middot; shooting stars</span><span class="espace"></span><span class="estatus" id="starstatus">loading</span><button class="refresh" id="starrefresh" type="button" title="Refresh stars" aria-label="Refresh stars"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><p class="enote">Crashed stars land about every 90 minutes per world. Mining stardust is the most AFK training in the skill and buys the celestial ring.</p><div class="starlist full" id="starlist" data-limit="99"></div><div class="qfoot"><a href="https://07.gg/trackers/shooting-star" target="_blank" rel="noopener">Full tracker on 07.gg &#8599;</a><span>Data from 07.gg, read through serve.py</span></div></div>
+<div class="embed bare" id="stars" data-root=""><div class="ehead"><span class="k">Live &middot; shooting stars</span><span class="espace"></span><span class="estatus" id="starstatus">loading</span><button class="refresh" id="starrefresh" type="button" title="Refresh stars" aria-label="Refresh stars"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="starlist full" id="starlist" data-limit="99"></div><div class="qfoot"><a href="https://07.gg/trackers/shooting-star" target="_blank" rel="noopener">Full tracker on 07.gg &#8599;</a><span>Data from 07.gg, read through serve.py</span></div></div>
 <h2 id="how">How the tiers work</h2>
 <ul><li>Star tier decides the Mining level you need: tier 1 at level 10, rising every ten levels to tier 9 at 90. A tier 9 star can be mined all the way down, so it lasts longest.</li><li>Each layer takes seven minutes to deplete with at least one person mining, so a fresh star is worth travelling for and a nearly dead one is not.</li><li>Stardust buys the celestial ring (an invisible +4 Mining boost), along with soft clay packs and bags of gems, at Dusuri's Star Shop by the Mining Guild entrance in Falador.</li><li>A telescope in your house narrows the next landing to a 24, 9 or 2 minute window depending on the wood you build it from.</li></ul>
 <footer class="foot">
@@ -381,15 +381,24 @@
     return m <= 0 ? 'ending' : m + 'm';
   }
 
+  /* star fields are crowd-sourced on 07.gg, so treat them as untrusted */
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function int(v) { return Math.max(0, parseInt(v, 10) || 0); }
+
   function draw(stars, at) {
     var live = stars.filter(function (s) { return s.endsAt > Date.now(); });
     if (!live.length) return false;
     list.innerHTML = live.slice(0, limit).map(function (s) {
+      var tier = int(s.tier), world = int(s.world);
       return '<div class="star">'
-        + '<span class="stier' + (s.tier >= 7 ? ' hot' : '') + '">T' + s.tier + '</span>'
-        + '<span class="sworld">w' + s.world + '</span>'
-        + '<span class="sloc">' + s.location + '</span>'
-        + '<span class="sends">' + mins(s.endsAt) + '</span></div>';
+        + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '">T' + tier + '</span>'
+        + '<span class="sworld">w' + world + '</span>'
+        + '<span class="sloc">' + esc(s.location) + '</span>'
+        + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
     var age = at ? Math.round((Date.now() - at) / 60000) : 0;
     status.textContent = live.length + ' active' + (age > 1 ? ' · ' + age + 'm ago' : '');
@@ -397,10 +406,17 @@
   }
 
   function frame() {
-    list.innerHTML = '<iframe src="https://07.gg/trackers/shooting-star" '
-      + 'title="Shooting star tracker" loading="lazy" height="' + (limit > 20 ? 900 : 560) + '" '
-      + 'referrerpolicy="no-referrer"></iframe>';
-    status.textContent = 'live from 07.gg';
+    list.innerHTML = '<div class="starframe">'
+      + '<iframe src="https://07.gg/trackers/shooting-star" '
+      + 'title="Shooting star tracker" loading="lazy" tabindex="-1" height="' + (limit > 20 ? 900 : 560) + '" '
+      + 'referrerpolicy="no-referrer"></iframe>'
+      + '<a class="fover" href="https://07.gg/trackers/shooting-star" target="_blank" rel="noopener" '
+      + 'aria-label="Open the shooting star tracker on 07.gg">'
+      + '<span class="fhint">Read-only preview &middot; open on 07.gg &#8599;</span></a>'
+      + '</div>'
+      + '<p class="starnone">Live data needs the local server (<code>python3 serve.py</code>); '
+      + 'this preview is display only.</p>';
+    status.textContent = 'preview \u00b7 07.gg';
   }
 
   function get(url) {

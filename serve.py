@@ -55,6 +55,13 @@ def shooting_stars(max_age=45):
     with urllib.request.urlopen(req, timeout=25) as r:
         page = r.read().decode("utf-8", "replace")
 
+    def clean(text, limit=60):
+        """Third-party, crowd-sourced text: keep it plain before it ever reaches
+        a page."""
+        text = re.sub(r"[<>&\"'\\\\]", "", text or "")
+        text = re.sub(r"\\s+", " ", text).strip()
+        return text[:limit]
+
     stars, seen = [], set()
     for m in re.finditer(
             r'calledAt\\?":(\d+),\\?"caller\\?":\\?"(.*?)\\?",\\?"world\\?":(\d+),'
@@ -67,8 +74,8 @@ def shooting_stars(max_age=45):
         stars.append({
             "world": int(world),
             "tier": int(tier),
-            "location": loc.replace("\\\\", ""),
-            "caller": caller,
+            "location": clean(loc),
+            "caller": clean(caller, 20),
             "calledAt": int(called),
             "endsAt": int(end),
         })

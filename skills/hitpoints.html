@@ -407,15 +407,24 @@
     return m <= 0 ? 'ending' : m + 'm';
   }
 
+  /* star fields are crowd-sourced on 07.gg, so treat them as untrusted */
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function int(v) { return Math.max(0, parseInt(v, 10) || 0); }
+
   function draw(stars, at) {
     var live = stars.filter(function (s) { return s.endsAt > Date.now(); });
     if (!live.length) return false;
     list.innerHTML = live.slice(0, limit).map(function (s) {
+      var tier = int(s.tier), world = int(s.world);
       return '<div class="star">'
-        + '<span class="stier' + (s.tier >= 7 ? ' hot' : '') + '">T' + s.tier + '</span>'
-        + '<span class="sworld">w' + s.world + '</span>'
-        + '<span class="sloc">' + s.location + '</span>'
-        + '<span class="sends">' + mins(s.endsAt) + '</span></div>';
+        + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '">T' + tier + '</span>'
+        + '<span class="sworld">w' + world + '</span>'
+        + '<span class="sloc">' + esc(s.location) + '</span>'
+        + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
     var age = at ? Math.round((Date.now() - at) / 60000) : 0;
     status.textContent = live.length + ' active' + (age > 1 ? ' · ' + age + 'm ago' : '');
