@@ -2280,7 +2280,6 @@ def build_skill_page(skill, prev_skill, next_skill):
         cur, nxt, pct, done = pr
         st = stat_of(name) or {}
         xp = st.get("xp") or 0
-        rank = st.get("rank")
         togo = max(0, xp_for_level(nxt) - xp) if nxt else 0
         goals = milestones(skill)
         frm = max([g for g in goals if g <= cur] or [1])
@@ -2294,8 +2293,6 @@ def build_skill_page(skill, prev_skill, next_skill):
         facts = [f'<span><i>XP</i> <b class="num">{xp:,}</b></span>']
         if nxt:
             facts.append(f'<span><i>To {nxt}</i> <b class="num">{togo:,}</b></span>')
-        if rank and rank > 0:
-            facts.append(f'<span><i>Rank</i> <b class="num">{rank:,}</b></span>')
         parts.append('<div class="livebox"><div class="k">Your level</div>'
                      f'<div class="lvlrow">{head}</div>{bar}'
                      f'<div class="facts">{"".join(facts)}</div></div>')
