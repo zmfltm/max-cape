@@ -399,6 +399,17 @@
   var limit = parseInt(list.getAttribute('data-limit'), 10) || 12;
   var root = box.getAttribute('data-root') || '';
   var FRESH = 20 * 60 * 1000;
+  var picker = document.getElementById('tierpick');
+  var KEY = 'osrsplan.startier';
+  var latest = [];
+  var latestAt = 0;
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved && picker) picker.value = saved;
+  } catch (err) { /* private mode */ }
+
+  function minTier() { return picker ? (parseInt(picker.value, 10) || 0) : 0; }
 
   function mins(ms) {
     var m = Math.round((ms - Date.now()) / 60000);
@@ -414,7 +425,11 @@
   function int(v) { return Math.max(0, parseInt(v, 10) || 0); }
 
   function draw(stars, at) {
-    var live = stars.filter(function (s) { return s.endsAt > Date.now(); });
+    latest = stars; latestAt = at;
+    var floor = minTier();
+    var live = stars.filter(function (s) {
+      return s.endsAt > Date.now() && int(s.tier) >= floor;
+    });
     if (!live.length) return false;
     list.innerHTML = live.slice(0, limit).map(function (s) {
       var tier = int(s.tier), world = int(s.world);
@@ -425,7 +440,8 @@
         + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
     var age = at ? Math.round((Date.now() - at) / 60000) : 0;
-    status.textContent = live.length + ' active' + (age > 1 ? ' · ' + age + 'm ago' : '');
+    var shown = floor ? live.length + ' at T' + floor + '+' : live.length + ' active';
+    status.textContent = shown + (age > 1 ? ' · ' + age + 'm ago' : '');
     return true;
   }
 
@@ -465,6 +481,16 @@
           })
           .catch(function () { done(frame); });
       });
+  }
+
+  if (picker) {
+    picker.addEventListener('change', function () {
+      try { localStorage.setItem(KEY, picker.value); } catch (err) { /* ignore */ }
+      if (latest.length && !draw(latest, latestAt)) {
+        list.innerHTML = '<p class="starnone">No stars at that tier right now.</p>';
+        status.textContent = '0 at T' + minTier() + '+';
+      }
+    });
   }
 
   btn.addEventListener('click', load);

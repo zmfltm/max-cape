@@ -1094,6 +1094,19 @@ tr.rec td:nth-child(2) { color: var(--fg); }
 .embed .enote { color: var(--muted); font-size: 13.5px; margin: 8px 0 12px; }
 .espace { flex: 1; }
 .estatus { font-family: var(--font-mono); font-size: 10.5px; color: var(--dim); }
+.tierpick {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--fg-2);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 3px 6px;
+  cursor: pointer;
+  transition: border-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.tierpick:hover { color: var(--fg); border-color: rgba(255, 157, 46, 0.4); }
+.tierpick:focus { outline: none; border-color: var(--accent); }
 .embed .refresh {
   display: inline-flex;
   align-items: center;
