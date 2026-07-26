@@ -598,7 +598,7 @@ REF_SVG = {
 
 
 PLAN_LINKS = [
-    ("progression", "Progression", "svg:progression"),
+    ("progression", "Progression", "assets/media/site/skills-tab.png"),
     ("quests", "Quests", "assets/media/site/quests.png"),
     ("diaries", "Diaries", "assets/icons/Diaries.png"),
     ("approach", "Slayer", "assets/icons/Slayer.png"),
