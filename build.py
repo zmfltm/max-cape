@@ -34,13 +34,14 @@ PLAN_PHASES = [
          track="quests",
          subs=["Continue following the Optimal Quest Guide",
                "Use quest XP before manually finishing skill requirements where possible"]),
-    dict(title="All Hard Diaries", track="diary_hard", subs=[]),
+    dict(title="All Hard Diaries", track="diary_hard", diary_tier="Hard",
+         subs=[]),
     dict(title="Slayer to 95",
          track="slayer",
          subs=["Slayer remains the default activity for combat training",
                "Complete elite-diary skill requirements as you reach them"]),
     dict(title="Elite diary skill walls",
-         track="diary_elite",
+         track="diary_elite", diary_tier="Elite",
          subs=["Train whatever individual requirements remain",
                "Finish the Diary Cape"]),
     dict(title="Max Cape", track="max", subs=[]),
@@ -4525,6 +4526,29 @@ CALC_JS = """
 CALC_PATH = os.path.join(OUT, "data", "calculators.json")
 
 
+# spelled out rather than reusing a TIERS name, which is already taken in this
+# file by the method-tier table
+DIARY_TIER_ORDER = ["Easy", "Medium", "Hard", "Elite"]
+
+
+def diary_wall(tier):
+    """The highest level any region asks for at this tier or below.
+
+    Tiers have to be done in order, so the wall in front of Hard is really the
+    tallest of Easy, Medium and Hard across all twelve regions.
+    """
+    order = DIARY_TIER_ORDER
+    upto = order[:order.index(tier) + 1] if tier in order else [tier]
+    wall = {}
+    for region in DIARY_REQS.values():
+        for name in upto:
+            for skill, level in (region.get(name) or {}).items():
+                if skill in NOT_A_SKILL or skill not in SKILL_NAMES:
+                    continue
+                wall[skill] = max(wall.get(skill, 0), int(level))
+    return sorted(wall.items(), key=lambda kv: (-kv[1], kv[0]))
+
+
 def calculator_skills():
     """Skills the wiki publishes an action table for, in our own order."""
     try:
@@ -4618,8 +4642,10 @@ def build_index():
     parts.append('<ol class="phases">')
     for i, ph in enumerate(PLAN_PHASES, 1):
         body = phase_meter(ph.get("track", ""))
-        if ph.get("reqs"):
-            chips = "".join(req_chip(n, lv) for n, lv in ph["reqs"])
+        reqs = ph.get("reqs") or (diary_wall(ph["diary_tier"])
+                                  if ph.get("diary_tier") else None)
+        if reqs:
+            chips = "".join(req_chip(n, lv) for n, lv in reqs)
             if ph.get("combat"):
                 chips += combat_chip(ph["combat"])
             body += f'<div class="reqgrid">{chips}</div>'
