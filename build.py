@@ -2909,6 +2909,76 @@ def birdhouse_box():
     )
 
 
+MILESTONES = [60, 70, 75, 80, 85, 90, 95, 99]
+COMBAT_SKILLS = ["Attack", "Strength", "Defence", "Hitpoints", "Ranged", "Magic"]
+SHORT = {"Attack": "Att", "Strength": "Str", "Defence": "Def", "Hitpoints": "HP",
+         "Ranged": "Rng", "Magic": "Mag", "Hunter": "Hunter", "Smithing": "Smith",
+         "Agility": "Agi"}
+
+
+def carry_panel(skill_name, pick=None):
+    """Where the other skills end up while you train this one.
+
+    Only for methods that train more than one thing. The rates are the ones
+    the route tables use, so these numbers agree with Which Path.
+    """
+    from hiscores import combat_level
+
+    st = stat_of(skill_name)
+    opts = PATHS.get(skill_name)
+    if not st or not opts:
+        return ""
+
+    method = pick if pick in CARRIES else opts["hybrid"][0]
+    carries = {k: v for k, v in (CARRIES.get(method) or {}).items()
+               if k != skill_name and stat_of(k)}
+    rate = next((r for m, r in opts.values() if m == method), opts["hybrid"][1])
+    if not carries or not rate:
+        return ""
+
+    # combat skills in the order the stats tab shows them, then the rest
+    others = ([n for n in COMBAT_SKILLS if n in carries]
+              + sorted(n for n in carries if n not in COMBAT_SKILLS))
+    combat = any(n in COMBAT_SKILLS for n in others)
+    base = {n: (stat_of(n) or {}).get("xp") or 0 for n in SKILL_NAMES}
+
+    def row(label, hours, xp):
+        levels = {n: level_at(min(v, MAX_XP)) for n, v in xp.items()}
+        cells = "".join(f'<td class="rate">{levels[n]}</td>' for n in others)
+        cl = (f'<td class="rate afkgap">{combat_level(levels)}</td>'
+              if combat else "")
+        hrs = f"{hours:,.0f}h" if hours else "—"
+        return (f'<tr><td class="tn">{label}</td>'
+                f'<td class="rate">{hrs}</td>{cells}{cl}</tr>')
+
+    rows = [row("now", 0, base)]
+    for goal in MILESTONES:
+        if goal <= st["level"]:
+            continue
+        hours = max(0, XP_TABLE[goal] - (st["xp"] or 0)) / rate
+        xp = dict(base)
+        xp[skill_name] = max(xp[skill_name], XP_TABLE[goal])
+        for name, r in carries.items():
+            xp[name] = min(xp[name] + hours * r, MAX_XP)
+        rows.append(row(f"{skill_name} {goal}", hours, xp))
+
+    if len(rows) < 2:
+        return ""
+
+    heads = "".join(f"<th>{e(SHORT.get(n, n))}</th>" for n in others)
+    return (
+        f'<h2 id="alongtheway">Along the Way</h2>'
+        f'<p class="savednote">{e(method)} trains '
+        + e(", ".join(others[:-1]) + (" and " if len(others) > 1 else "")
+            + others[-1])
+        + ' alongside it. Where those land as you go, and what your combat '
+        'level reads at each point.</p>'
+        '<div class="tablewrap"><div class="tablescroll">'
+        '<table class="pathtable carry"><thead><tr><th>At</th><th>Hours</th>'
+        f'{heads}{"<th>Cmb</th>" if combat else ""}</tr></thead>'
+        f'<tbody>{"".join(rows)}</tbody></table></div></div>')
+
+
 def build_skill_page(skill, prev_skill, next_skill):
     name = skill["name"]
     pick = skill.get("pick")
@@ -2989,6 +3059,8 @@ def build_skill_page(skill, prev_skill, next_skill):
                      '<h3>No Method Locked In</h3>'
                      "<p>The plan sets a target here but does not name a method. "
                      "Pick one with the circle at the end of any row below.</p></div>")
+
+    parts.append(carry_panel(name, pick))
 
     if name == "Slayer":
         parts.append('<h2 id="blocklist">Block and Skip List</h2>')

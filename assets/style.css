@@ -1502,6 +1502,11 @@ button.stat.pick.on .v { color: var(--accent); }
   color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
+table.pathtable.carry { min-width: 460px; }
+table.pathtable.carry td.tn { color: var(--fg); white-space: nowrap; }
+table.pathtable.carry tbody tr:first-child td { color: var(--dim); }
+table.pathtable.carry th { text-align: right; }
+table.pathtable.carry th:first-child, table.pathtable.carry td:first-child { text-align: left; }
 table.pathtable.swaps { min-width: 460px; }
 table.pathtable.swaps td.route {
   font-family: var(--font-mono);
