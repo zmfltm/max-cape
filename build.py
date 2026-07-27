@@ -1629,6 +1629,20 @@ POTION_JS = """
   });
   btn.addEventListener('click', load);
   load();
+
+  /* Re-render from what is already loaded: drops anything that has run out,
+     re-sorts, and moves the countdowns on. No network. */
+  setInterval(function () {
+    if (latest.length && !draw(latest, latestAt)) {
+      empty('Every star on the last list has burned out.');
+    }
+  }, TICK);
+
+  /* Only worth polling when something is actually serving live stars. The
+     committed snapshot does not change between page loads. */
+  setInterval(function () {
+    if (fromServer && !document.hidden) load();
+  }, POLL);
 })();
 </script>
 """
@@ -1714,6 +1728,15 @@ STARS_JS = """
   var mining = parseInt(box.getAttribute('data-mining'), 10) || 0;
   var latest = [];
   var latestAt = 0;
+  var fromServer = false;
+
+  /* Two different clocks. The countdowns only need arithmetic on data we
+     already hold, so they tick locally and cost nothing. Actually re-fetching
+     is worth doing about once a minute: a new star lands somewhere every half
+     a minute or so, but you are picking from ninety-odd live ones, so the list
+     does not go stale nearly as fast as it grows. */
+  var TICK = 20000;
+  var POLL = 60000;
 
   if (pickMin) pickMin.value = '1';
   if (pickMax) pickMax.value = '9';
@@ -1808,6 +1831,7 @@ STARS_JS = """
     get('/api/stars')
       .then(function (d) {
         if (d.error || !d.stars) throw new Error('no data');
+        fromServer = true;
         done(function () {
           if (!draw(d.stars, d.at)) empty('No stars are active right now.');
         });
@@ -1951,6 +1975,20 @@ STARS_JS = """
 
   btn.addEventListener('click', load);
   load();
+
+  /* Re-render from what is already loaded: drops anything that has run out,
+     re-sorts, and moves the countdowns on. No network. */
+  setInterval(function () {
+    if (latest.length && !draw(latest, latestAt)) {
+      empty('Every star on the last list has burned out.');
+    }
+  }, TICK);
+
+  /* Only worth polling when something is actually serving live stars. The
+     committed snapshot does not change between page loads. */
+  setInterval(function () {
+    if (fromServer && !document.hidden) load();
+  }, POLL);
 })();
 </script>
 """
