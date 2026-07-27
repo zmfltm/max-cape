@@ -1528,6 +1528,22 @@ table.pathtable td.tn a:hover { color: var(--accent); }
   color: var(--done);
   margin-top: 2px;
 }
+.dias { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin-top: 6px; }
+.dias i {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.dia {
+  font-size: 11px;
+  color: var(--done);
+  border: 1px solid color-mix(in srgb, var(--done) 35%, transparent);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
 .alts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
 .alt {
   display: inline-flex;

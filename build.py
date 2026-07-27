@@ -3556,38 +3556,25 @@ CARRIES = {
 }
 
 
-def apply_carries(rows, by_skill):
-    """Credit the XP a method hands to other skills, then recost those skills.
+MAX_XP = xp_for_level(99)
 
-    One pass only: a skill that gets carried does not then carry others. Good
-    enough to stop the totals double-counting, and flagged on the page."""
-    gained = {}
-    for r in rows:
-        for skill, rate in CARRIES.get(r["method"], {}).items():
-            if skill == r["skill"]:
-                continue
-            gained[skill] = gained.get(skill, 0) + r["hours"] * rate
+DIARY_REQS_PATH = os.path.join(OUT, "data", "diary_reqs.json")
+try:
+    with open(DIARY_REQS_PATH, encoding="utf-8") as _f:
+        DIARY_REQS = json.load(_f)
+except FileNotFoundError:                    # run fetch_diary_reqs.py
+    DIARY_REQS = {}
 
-    for r in rows:
-        extra = gained.get(r["skill"], 0)
-        if not extra:
-            continue
-        r["carried"] = min(extra, r["left"])
-        r["left"] = max(0, r["left"] - extra)
-        r["hours"] = (r["left"] / r["rate"]) if r["rate"] else 0
 
-    for r in rows:
-        gives = []
-        for skill, rate in CARRIES.get(r["method"], {}).items():
-            if skill == r["skill"]:
-                continue
-            xp = r["hours"] * rate
-            target = by_skill.get(skill)
-            if not target:
-                continue
-            gives.append((skill, xp))
-        r["gives"] = gives
-    return rows
+def level_at(xp):
+    """Level for an XP figure, capped at 99."""
+    lv = 1
+    for level in range(2, 100):
+        if xp >= XP_TABLE[level]:
+            lv = level
+        else:
+            break
+    return lv
 
 
 def order_rows(rows):
@@ -3597,14 +3584,80 @@ def order_rows(rows):
     that receives it. Train Hunter first and drift net's 11m lands on a 99 you
     already paid for; train Fishing first and Hunter is nearly done for free.
     """
+    naive = {r["skill"]: (r["need"] / r["rate"] if r["rate"] and r["need"] else 0)
+             for r in rows}
+    need = {r["skill"]: r["need"] for r in rows}
+
     def rank(r):
-        useful = any(r["recv"].get(name, 0) > 0 for name, _ in r["gives"])
-        return (0 if useful else 1, -r["hours"])
+        hands_over = any(need.get(name, 0) > 0
+                         for name in CARRIES.get(r["method"], {})
+                         if name != r["skill"])
+        return (0 if hands_over else 1, -naive[r["skill"]])
 
     rows.sort(key=rank)
+    return rows
+
+
+# the wiki lists quest points alongside the skills; nothing here knows how many
+# you have, so that requirement is left out and called out on the page
+NOT_A_SKILL = {"Quest"}
+DIARY_TIERS = sum(1 for r in DIARY_REQS.values() for t in r.values() if t)
+
+
+def diary_state(levels):
+    """Which diary tiers the levels alone would cover."""
+    ok = set()
+    for region, tiers in DIARY_REQS.items():
+        for tier, reqs in tiers.items():
+            wants = {sk: lv for sk, lv in reqs.items() if sk not in NOT_A_SKILL}
+            if wants and all(levels.get(sk, 0) >= lv for sk, lv in wants.items()):
+                ok.add(f"{region} {tier}")
+    return ok
+
+
+def walk(rows):
+    """Train the list in order and record where every skill ends up.
+
+    Sequential rather than an average: a skill trained late has already been
+    carried by everything above it, which is the whole point of the ordering.
+    """
+    xp = {r["skill"]: r["xp"] for r in rows}
+    # seed from every skill, not just the ones still being trained: a diary
+    # tier can hang on a 99 that is already banked
+    levels = {name: (stat_of(name) or {}).get("level", 0) for name in SKILL_NAMES}
+    levels.update({r["skill"]: r["level"] for r in rows})
+    have = diary_state(levels)
+
+    total = 0
     for i, r in enumerate(rows, 1):
         r["order"] = i
-    return rows
+        r["arrive"] = level_at(min(xp[r["skill"]], MAX_XP))
+        r["carried"] = max(0, min(xp[r["skill"]], MAX_XP) - r["xp"])
+
+        left = max(0, MAX_XP - xp[r["skill"]])
+        r["left"] = left
+        r["hours"] = (left / r["rate"]) if (r["rate"] and left) else 0
+        total += r["hours"]
+
+        xp[r["skill"]] = max(xp[r["skill"]], MAX_XP)
+        levels[r["skill"]] = 99
+
+        gives = []
+        for name, rate in CARRIES.get(r["method"], {}).items():
+            if name == r["skill"] or name not in xp:
+                continue
+            before = levels[name]
+            xp[name] += r["hours"] * rate
+            levels[name] = level_at(min(xp[name], MAX_XP))
+            if levels[name] > before:
+                gives.append((name, levels[name]))
+        r["gives"] = gives
+
+        unlocked = diary_state(levels) - have
+        have |= unlocked
+        r["diaries"] = sorted(unlocked)
+
+    return rows, total, have
 
 
 def rows_for(choice):
@@ -3614,22 +3667,16 @@ def rows_for(choice):
         st = stat_of(name)
         if not st:
             continue
-        left = max(0, xp_for_level(99) - (st["xp"] or 0))
-        key = choice.get(name, "hybrid")
-        method, rate = opts[key]
-        out.append(dict(skill=name, level=st["level"], method=method, key=key,
-                        rate=rate, hours=(left / rate) if (rate and left) else 0,
-                        left=left, need=left, carried=0, gives=[],
-                        xp=st["xp"] or 0))
+        method, rate = opts[choice.get(name, "hybrid")]
+        out.append(dict(skill=name, level=st["level"], method=method,
+                        key=choice.get(name, "hybrid"), rate=rate,
+                        need=max(0, MAX_XP - (st["xp"] or 0)),
+                        xp=st["xp"] or 0, hours=0, left=0, carried=0,
+                        gives=[], diaries=[], order=0, arrive=st["level"]))
 
-    by_skill = {r["skill"]: r for r in out}
-    apply_carries(out, by_skill)
-    # what each receiver still needed before anyone carried it, so the ordering
-    # rule can tell a real handover from a gift to an already-maxed skill
-    need = {r["skill"]: r["need"] for r in out}
-    for r in out:
-        r["recv"] = need
-    return order_rows(out), sum(r["hours"] for r in out)
+    order_rows(out)
+    rows, total, _ = walk(out)
+    return rows, total
 
 
 def path_hours(key):
@@ -3641,8 +3688,8 @@ def optimal_mix():
 
     Picking each skill's fastest method in isolation is not the best plan:
     2-tick harpooning beats drift net for Fishing, but drift net hands Hunter
-    most of a 99 and wins on the total. Local search over the three routes'
-    options, one skill at a time, until nothing improves.
+    most of a 99 and could win on the total. Local search over the three
+    routes' options, one skill at a time, until nothing improves.
     """
     keys = [k for k, _, _ in PATH_META]
     choice = {name: "fast" for name in PATHS}
@@ -3768,17 +3815,20 @@ def paths_page():
                 others.append(
                     f'<span class="alt"><i>{e(other_label.lower())}</i> '
                     f'{e(pair[0])} <b>{sign}{delta:.0f}h</b></span>')
-            gives = ", ".join(f'{n} +{xp / 1e6:.1f}m'
-                              for n, xp in r["gives"] if xp > 50_000)
-            got = (f'<span class="carried">carried {r["carried"] / 1e6:.1f}m</span>'
-                   if r.get("carried") else "")
+            gives = " · ".join(f"{n} {lv}" for n, lv in r["gives"])
+            got = (f'<span class="carried">arrive at {r["arrive"]}</span>'
+                   if r["arrive"] > r["level"] else "")
+            unlocks = "".join(f'<span class="dia">{e(d)}</span>'
+                              for d in r["diaries"])
             cells.append(
                 f'<tr><td class="num">{r["order"]}</td>'
                 f'<td class="tn"><a href="skills/{slug(r["skill"])}.html">'
                 f'{icon(r["skill"])}{e(r["skill"])}</a>{got}</td>'
                 f'<td>{e(r["method"])}'
-                + (f'<span class="gives">also {e(gives)}</span>' if gives else "")
+                + (f'<span class="gives">leaves {e(gives)}</span>' if gives else "")
                 + (f'<div class="alts">{"".join(others)}</div>' if others else "")
+                + (f'<div class="dias"><i>unlocks</i>{unlocks}</div>'
+                   if unlocks else "")
                 + "</td>"
                 f'<td class="rate">{rate}</td>'
                 f'<td class="rate afkgap">{hrs}</td></tr>')
@@ -3805,6 +3855,8 @@ def paths_page():
         for key, label, _ in meta)
 
     left = sum(r["need"] for r in computed["fast"][0])
+    now = {name: (stat_of(name) or {}).get("level", 0) for name in SKILL_NAMES}
+    have_now = len(diary_state(now))
     body = [
         '<div class="kick">Four routes, same cape</div>',
         '<div class="page-head">'
@@ -3815,8 +3867,11 @@ def paths_page():
         f'<div class="stats switcher">{buttons}</div>',
         '<p class="note">Numbered in the order worth doing them: skills that '
         'hand XP to other skills come first, so the gift lands before you pay '
-        'for those levels. Shared XP is counted once and credited one step '
-        'deep, so read the totals as close rather than exact.</p>',
+        'for those levels. The hours are then walked down that order, so a '
+        'skill shows the level you will actually arrive at rather than the one '
+        f'you are on today. {have_now} of {DIARY_TIERS} diary tiers are '
+        'already inside your levels; the rest are marked on the step that '
+        'brings them in range. Diary tiers also want quest points and items, which none of this knows about, and the XP lamps they pay out are not counted.</p>',
     ] + cards
     return page("Which Path", "\n".join(body), depth=0)
 
