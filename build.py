@@ -2250,6 +2250,9 @@ def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
 <meta name="color-scheme" content="dark">
 <title>{e(title)}</title>
 <link rel="preload" href="{root}assets/fonts/Geist-Regular.v1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" type="image/png" sizes="64x64" href="{root}assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{root}assets/favicon-32.png">
+<link rel="apple-touch-icon" href="{root}assets/favicon-64.png">
 <link rel="stylesheet" href="{root}assets/style.css">
 {f'<script>window.SKILL={json.dumps(skill_name)};</script>' if skill_name else ""}
 {focus_data_script()}
