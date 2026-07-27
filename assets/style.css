@@ -839,7 +839,9 @@ td.dt.none { color: var(--dim); }
 .phases > li:last-child { padding-bottom: 0; }
 .phases > li:last-child::after { display: none; }
 
-.phases > li b { font-weight: 500; font-size: 16px; letter-spacing: -0.018em; line-height: 26px; display: block; }
+/* was display:block, which pushed anything beside the title onto its own line */
+.phases > li b { font-weight: 500; font-size: 16px; letter-spacing: -0.018em; line-height: 26px; }
+.phases > li > b { display: inline; }
 .phases > li ul { margin: 6px 0 0; padding: 0; list-style: none; }
 .phases > li li { color: var(--muted); font-size: 14px; padding-left: 15px; position: relative; margin-bottom: 2px; }
 .phases > li li::before {
@@ -1899,4 +1901,11 @@ table.calctable td.good { color: var(--done); }
 
 @media (max-width: 860px) {
   .feeder { grid-template-columns: 1fr; gap: 6px; }
+}
+.ptag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  margin-left: 9px;
+  font-variant-numeric: tabular-nums;
 }

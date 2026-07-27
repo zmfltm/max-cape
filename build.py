@@ -1042,7 +1042,16 @@ def req_chip(skill_name, target):
             f'<span class="rq">{e(skill_name)}</span>'
             f'<b class="rl" style="--lc:{level_color(cur)}">{cur}</b>'
             f'<span class="rt">/{target}</span></a>{dot}'
-            f'{mini_bar(pct, level=cur)}</span>')
+            f'{chip_bar(pct)}</span>')
+
+
+def chip_bar(pct):
+    """A requirement bar is measuring progress to the target, not the level
+    itself, so it colours by how close it is rather than by how high. Sitting
+    on 77 of 78 should look nearly done, which the absolute scale reads as
+    mid-orange. The sweep starts partway up so the fill is not mostly red."""
+    at = max(1, min(99, round(1 + pct * 98 / 100)))
+    return mini_bar(pct, colour=None, from_level=max(1, at - 30), level=at)
 
 
 def combat_chip(target):
@@ -1086,17 +1095,17 @@ def phase_meter(kind):
         return (f'<div class="pmeter"><b style="--lc:{level_color(cur)}" class="lit">{cur}</b>'
                 f'<span>of {goal} Slayer</span>{mini_bar(pct, level=cur)}</div>')
 
-    if kind == "max" and STATS:
-        skills_only = [x for x in SKILLS if x["group"] != SUPPORT]
-        done = sum(1 for x in skills_only
-                   if (stat_of(x["name"]) or {}).get("level", 1) >= 99)
-        total = len(skills_only)
-        pct = round(100 * done / total)
-        cur_total = STATS.get("overall", {}).get("level")
-        return (f'<div class="pmeter"><b>{done}</b><span>of {total} skills at 99</span>'
-                f'{mini_bar(pct)}<span class="pn">total level {cur_total}</span></div>')
-
     return ""
+
+
+def phase_tag(kind):
+    """A count that belongs beside the title rather than under it."""
+    if kind != "max" or not STATS:
+        return ""
+    skills_only = [x for x in SKILLS if x["group"] != SUPPORT]
+    done = sum(1 for x in skills_only
+               if (stat_of(x["name"]) or {}).get("level", 1) >= 99)
+    return f'<span class="ptag">{done}/{len(skills_only)}</span>'
 
 
 # Methods that hand out XP in more than one skill. Only genuine dual-XP
@@ -4821,7 +4830,8 @@ def build_index():
             body += f'<div class="reqgrid">{chips}</div>'
         if ph.get("subs"):
             body += "<ul>" + "".join(f"<li>{annotate(x)}</li>" for x in ph["subs"]) + "</ul>"
-        parts.append(f'  <li id="phase-{i}"><b>{annotate(ph["title"])}</b>{body}</li>')
+        parts.append(f'  <li id="phase-{i}"><b>{annotate(ph["title"])}</b>'
+                     f'{phase_tag(ph.get("track", ""))}{body}</li>')
     parts.append("</ol>")
 
     parts.append(h2("quests", "Quest Cape Progress", "assets/media/quest-point-cape.png"))
