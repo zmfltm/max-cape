@@ -1478,6 +1478,114 @@ OWN_JS = """
 </script>
 """
 
+POTION_JS = """
+<script>
+/* Potion costs, priced from the official API. It allows cross-origin reads, so
+   this works on the published copy as well as locally. */
+(function () {
+  var table = document.getElementById('pottable');
+  if (!table) return;
+  var rows = Array.prototype.slice.call(table.querySelectorAll('tr.pot'));
+  var status = document.getElementById('potstatus');
+  var btn = document.getElementById('potrefresh');
+  var mine = document.getElementById('potmine');
+  var pick = document.getElementById('potpick');
+  var level = parseInt(table.getAttribute('data-level'), 10)
+    || parseInt(document.body.getAttribute('data-hlevel'), 10) || 0;
+
+  function gp(n) {
+    if (n == null || !isFinite(n)) return '-';
+    var sign = n < 0 ? '-' : '';
+    var v = Math.abs(Math.round(n));
+    return sign + v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function apply(prices) {
+    var best = null;
+    rows.forEach(function (row) {
+      var inputs = JSON.parse(row.getAttribute('data-inputs'));
+      var made = prices[row.getAttribute('data-made')];
+      var xp = parseFloat(row.getAttribute('data-xp'));
+      var cost = 0, ok = made != null;
+      inputs.forEach(function (i) {
+        var p = prices[i.id];
+        if (p == null) { ok = false; return; }
+        cost += p * i.qty;
+      });
+      var gpxp = ok ? (cost - made) / xp : null;
+      var profit = ok ? made - cost : null;
+      row.querySelector('.gpxp').textContent = ok ? gp(gpxp) : '-';
+      row.querySelector('.profit').textContent = ok ? gp(profit) : '-';
+      row.querySelector('.profit').classList.toggle('good', ok && profit > 0);
+      row.querySelector('.gpxp').classList.toggle('good', ok && gpxp <= 0);
+      row.dataset.gpxp = ok ? gpxp : '';
+      var usable = parseInt(row.getAttribute('data-level'), 10) <= level;
+      if (ok && usable && (best === null || gpxp < best.gpxp)) {
+        best = { gpxp: gpxp, name: row.querySelector('.tn').textContent.trim(),
+                 xp: xp, profit: profit, level: row.getAttribute('data-level') };
+      }
+    });
+
+    if (best && pick) {
+      var verdict = best.gpxp <= 0
+        ? 'It turns a profit while you train, so the only cost is your time.'
+        : 'The cheapest experience open to you right now.';
+      pick.innerHTML = '<span class="k">Best at your level</span>'
+        + '<b>' + best.name + '</b>'
+        + '<span class="pdet">' + gp(best.gpxp) + ' gp per xp \u00b7 '
+        + best.xp + ' xp each \u00b7 ' + gp(best.profit) + ' gp profit each</span>'
+        + '<span class="pwhy">' + verdict + '</span>';
+      pick.hidden = false;
+    }
+    filter();
+  }
+
+  function filter() {
+    var only = mine && mine.checked;
+    rows.forEach(function (row) {
+      row.hidden = only && parseInt(row.getAttribute('data-level'), 10) > level;
+    });
+  }
+
+  function load() {
+    if (btn.classList.contains('busy')) return;
+    btn.classList.add('busy');
+    btn.classList.remove('ok', 'bad');
+    var started = Date.now();
+    var settle = function (fn, bad) {
+      setTimeout(function () {
+        btn.classList.remove('busy');
+        btn.classList.add(bad ? 'bad' : 'ok');
+        setTimeout(function () { btn.classList.remove('ok', 'bad'); }, 2500);
+        fn();
+      }, Math.max(0, 900 - (Date.now() - started)));
+    };
+
+    fetch('https://prices.runescape.wiki/api/v1/osrs/latest', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var prices = {};
+        Object.keys(d.data || {}).forEach(function (id) {
+          var p = d.data[id];
+          prices[id] = p.high || p.low;
+        });
+        settle(function () {
+          apply(prices);
+          status.textContent = 'priced just now';
+        });
+      })
+      .catch(function () {
+        settle(function () { status.textContent = 'prices unavailable'; }, true);
+      });
+  }
+
+  if (mine) mine.addEventListener('change', filter);
+  btn.addEventListener('click', load);
+  load();
+})();
+</script>
+"""
+
 BONUS_JS = """
 <script>
 /* XP gear toggles: rescale the rate column by whatever is ticked. Rates are
@@ -2029,7 +2137,7 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
 </main>
 {rail(active=active, depth=depth)}
 </div>
-{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}
+{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}{POTION_JS}
 </body>
 </html>
 """
@@ -2507,6 +2615,95 @@ def wiki_link(name, page=None, cls="wl", cased=True):
             f'{e(label)}</a>')
 
 
+POTIONS_PATH = os.path.join(OUT, "data", "potions.json")
+try:
+    with open(POTIONS_PATH, encoding="utf-8") as _f:
+        POTIONS = json.load(_f).get("potions", [])
+except (OSError, ValueError):
+    POTIONS = []
+
+
+def potion_ladder():
+    """The XP-per-potion ladder from where you are to 99: each rung is the next
+    unlock that actually beats the one before it."""
+    lvl = (stat_of("Herblore") or {}).get("level", 1)
+    best_so_far = 0
+    rungs = []
+    for p in sorted(POTIONS, key=lambda x: (x["level"], -x["xp"])):
+        if p["xp"] > best_so_far:
+            best_so_far = p["xp"]
+            rungs.append(p)
+
+    live = [r for r in rungs if r["level"] >= lvl] or rungs[-1:]
+    current = [r for r in rungs if r["level"] <= lvl]
+    if current:
+        live = [current[-1]] + [r for r in live if r["level"] > lvl]
+
+    cells = []
+    for r in live:
+        now = r["level"] <= lvl
+        cells.append(
+            f'<span class="rung{" now" if now else ""}">'
+            f'<span class="rl">{r["level"]}</span>'
+            f'<span class="rn">{e(r["name"])}</span>'
+            f'<span class="rx">{r["xp"]:g} xp</span></span>')
+
+    return ('<div class="ladder"><span class="k">Fastest ladder to 99</span>'
+            f'<div class="rungs">{"".join(cells)}</div>'
+            '<p class="lede2">Actions per hour barely change between potions, so '
+            'the highest XP per potion is the fastest. Each rung is the next '
+            'unlock worth switching to.</p></div>')
+
+
+def potion_section(depth=1):
+    """Every potion you can make, priced live in the browser."""
+    if not POTIONS:
+        return ""
+    lvl = (stat_of("Herblore") or {}).get("level", 1)
+
+    rows = []
+    for p in sorted(POTIONS, key=lambda x: x["level"]):
+        ing = ", ".join(f'{i["name"]}' + (f' x{i["qty"]}' if i["qty"] > 1 else "")
+                        for i in p["inputs"])
+        rows.append(
+            f'<tr class="pot" data-level="{p["level"]}" data-xp="{p["xp"]}" '
+            f'data-made="{p["made"]}" '
+            f'data-inputs="{e(json.dumps(p["inputs"], separators=(chr(44), chr(58))))}">'
+            f'<td class="req">{p["level"]}</td>'
+            f'<td class="tn">{wiki_link(p["name"], cased=False)}</td>'
+            f'<td class="notes">{e(ing)}</td>'
+            f'<td class="rate">{p["xp"]:g}</td>'
+            f'<td class="rate gpxp">-</td>'
+            f'<td class="rate profit">-</td></tr>')
+
+    return (
+        '<div class="potbar">'
+        f'<span class="k">Live GE prices</span>'
+        '<span class="espace"></span>'
+        '<label class="potfilter"><input type="checkbox" id="potmine" checked>'
+        f'Only what I can make at {lvl}</label>'
+        '<span class="estatus" id="potstatus">loading</span>'
+        '<button class="refresh" id="potrefresh" type="button" title="Refresh prices" '
+        'aria-label="Refresh prices">'
+        '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">'
+        '<path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" '
+        'stroke-width="1.7" stroke-linecap="round"/>'
+        '<path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" '
+        'stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
+        "</div>"
+        '<div class="potpick" id="potpick"></div>'
+        + potion_ladder()
+        + '<div class="tablewrap"><div class="tablescroll">'
+        f'<table class="pottable" id="pottable" data-level="{lvl}"><thead><tr><th>Lvl</th><th>Potion</th>'
+        '<th>Ingredients</th><th>XP</th><th>gp/xp</th><th>Profit each</th>'
+        '</tr></thead>'
+        f'<tbody>{"".join(rows)}</tbody></table></div></div>'
+        '<p class="lede2">Prices come straight from the official price API when the '
+        'page opens, so they are current rather than baked in. Profit assumes you '
+        'sell what you make.</p>'
+    )
+
+
 def slayer_summary():
     """Block / never-unlock / skip lists at a glance."""
     by = {}
@@ -2731,6 +2928,9 @@ def build_skill_page(skill, prev_skill, next_skill):
     parts.append(embed_panel(name, depth=1))
     if name == "Hunter":
         parts.append(birdhouse_box())
+    if name == "Herblore":
+        parts.append('<h2 id="potions">Potions, Priced Live</h2>')
+        parts.append(potion_section())
 
     parts.append('<div class="pillrow">')
     done_cls = " done" if skill.get("done") else ""

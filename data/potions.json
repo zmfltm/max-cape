@@ -1,0 +1,959 @@
+{
+ "potions": [
+  {
+   "level": 3,
+   "name": "Attack potion",
+   "unf": "Guam potion (unf)",
+   "secondary": "Eye of newt",
+   "xp": 25.0,
+   "rate": 62500,
+   "inputs": [
+    {
+     "id": 91,
+     "qty": 1,
+     "name": "Guam potion (unf)"
+    },
+    {
+     "id": 221,
+     "qty": 1,
+     "name": "Eye of newt"
+    }
+   ],
+   "made": 121
+  },
+  {
+   "level": 5,
+   "name": "Antipoison",
+   "unf": "Marrentill potion (unf)",
+   "secondary": "Unicorn horn dust",
+   "xp": 37.5,
+   "rate": 93750,
+   "inputs": [
+    {
+     "id": 93,
+     "qty": 1,
+     "name": "Marrentill potion (unf)"
+    },
+    {
+     "id": 235,
+     "qty": 1,
+     "name": "Unicorn horn dust"
+    }
+   ],
+   "made": 175
+  },
+  {
+   "level": 12,
+   "name": "Strength potion",
+   "unf": "Tarromin potion (unf)",
+   "secondary": "Limpwurt root",
+   "xp": 50.0,
+   "rate": 125000,
+   "inputs": [
+    {
+     "id": 95,
+     "qty": 1,
+     "name": "Tarromin potion (unf)"
+    },
+    {
+     "id": 225,
+     "qty": 1,
+     "name": "Limpwurt root"
+    }
+   ],
+   "made": 115
+  },
+  {
+   "level": 22,
+   "name": "Compost potion",
+   "unf": "Harralander potion (unf)",
+   "secondary": "Volcanic ash",
+   "xp": 60.0,
+   "rate": 150000,
+   "inputs": [
+    {
+     "id": 97,
+     "qty": 1,
+     "name": "Harralander potion (unf)"
+    },
+    {
+     "id": 21622,
+     "qty": 1,
+     "name": "Volcanic ash"
+    }
+   ],
+   "made": 6472
+  },
+  {
+   "level": 22,
+   "name": "Restore potion",
+   "unf": "Harralander potion (unf)",
+   "secondary": "Red spiders' eggs",
+   "xp": 62.5,
+   "rate": 156250,
+   "inputs": [
+    {
+     "id": 97,
+     "qty": 1,
+     "name": "Harralander potion (unf)"
+    },
+    {
+     "id": 223,
+     "qty": 1,
+     "name": "Red spiders' eggs"
+    }
+   ],
+   "made": 127
+  },
+  {
+   "level": 26,
+   "name": "Energy potion",
+   "unf": "Harralander potion (unf)",
+   "secondary": "Chocolate dust",
+   "xp": 67.5,
+   "rate": 168750,
+   "inputs": [
+    {
+     "id": 97,
+     "qty": 1,
+     "name": "Harralander potion (unf)"
+    },
+    {
+     "id": 1975,
+     "qty": 1,
+     "name": "Chocolate dust"
+    }
+   ],
+   "made": 3010
+  },
+  {
+   "level": 30,
+   "name": "Defence potion",
+   "unf": "Ranarr potion (unf)",
+   "secondary": "White berries",
+   "xp": 75.0,
+   "rate": 187500,
+   "inputs": [
+    {
+     "id": 99,
+     "qty": 1,
+     "name": "Ranarr potion (unf)"
+    },
+    {
+     "id": 239,
+     "qty": 1,
+     "name": "White berries"
+    }
+   ],
+   "made": 133
+  },
+  {
+   "level": 34,
+   "name": "Agility potion",
+   "unf": "Toadflax potion (unf)",
+   "secondary": "Toad's legs",
+   "xp": 80.0,
+   "rate": 200000,
+   "inputs": [
+    {
+     "id": 3002,
+     "qty": 1,
+     "name": "Toadflax potion (unf)"
+    },
+    {
+     "id": 2152,
+     "qty": 1,
+     "name": "Toad's legs"
+    }
+   ],
+   "made": 3034
+  },
+  {
+   "level": 36,
+   "name": "Combat potion",
+   "unf": "Harralander potion (unf)",
+   "secondary": "Goat horn dust",
+   "xp": 84.0,
+   "rate": 210000,
+   "inputs": [
+    {
+     "id": 97,
+     "qty": 1,
+     "name": "Harralander potion (unf)"
+    },
+    {
+     "id": 9736,
+     "qty": 1,
+     "name": "Goat horn dust"
+    }
+   ],
+   "made": 9741
+  },
+  {
+   "level": 38,
+   "name": "Prayer potion",
+   "unf": "Ranarr potion (unf)",
+   "secondary": "Snape grass",
+   "xp": 87.5,
+   "rate": 218750,
+   "inputs": [
+    {
+     "id": 99,
+     "qty": 1,
+     "name": "Ranarr potion (unf)"
+    },
+    {
+     "id": 231,
+     "qty": 1,
+     "name": "Snape grass"
+    }
+   ],
+   "made": 139
+  },
+  {
+   "level": 45,
+   "name": "Super attack",
+   "unf": "Irit potion (unf)",
+   "secondary": "Eye of newt",
+   "xp": 100.0,
+   "rate": 250000,
+   "inputs": [
+    {
+     "id": 101,
+     "qty": 1,
+     "name": "Irit potion (unf)"
+    },
+    {
+     "id": 221,
+     "qty": 1,
+     "name": "Eye of newt"
+    }
+   ],
+   "made": 145
+  },
+  {
+   "level": 48,
+   "name": "Superantipoison",
+   "unf": "Irit potion (unf)",
+   "secondary": "Unicorn horn dust",
+   "xp": 106.3,
+   "rate": 265750,
+   "inputs": [
+    {
+     "id": 101,
+     "qty": 1,
+     "name": "Irit potion (unf)"
+    },
+    {
+     "id": 235,
+     "qty": 1,
+     "name": "Unicorn horn dust"
+    }
+   ],
+   "made": 181
+  },
+  {
+   "level": 50,
+   "name": "Fishing potion",
+   "unf": "Avantoe potion (unf)",
+   "secondary": "Snape grass",
+   "xp": 112.5,
+   "rate": 281250,
+   "inputs": [
+    {
+     "id": 103,
+     "qty": 1,
+     "name": "Avantoe potion (unf)"
+    },
+    {
+     "id": 231,
+     "qty": 1,
+     "name": "Snape grass"
+    }
+   ],
+   "made": 151
+  },
+  {
+   "level": 52,
+   "name": "Super energy",
+   "unf": "Avantoe potion (unf)",
+   "secondary": "Mort myre fungus",
+   "xp": 117.5,
+   "rate": 293750,
+   "inputs": [
+    {
+     "id": 103,
+     "qty": 1,
+     "name": "Avantoe potion (unf)"
+    },
+    {
+     "id": 2970,
+     "qty": 1,
+     "name": "Mort myre fungus"
+    }
+   ],
+   "made": 3018
+  },
+  {
+   "level": 53,
+   "name": "Hunter potion",
+   "unf": "Avantoe potion (unf)",
+   "secondary": "Kebbit teeth dust",
+   "xp": 120.0,
+   "rate": 300000,
+   "inputs": [
+    {
+     "id": 103,
+     "qty": 1,
+     "name": "Avantoe potion (unf)"
+    },
+    {
+     "id": 10111,
+     "qty": 1,
+     "name": "Kebbit teeth dust"
+    }
+   ],
+   "made": 10000
+  },
+  {
+   "level": 54,
+   "name": "Goading potion",
+   "unf": "Harralander potion (unf)",
+   "secondary": "Aldarium",
+   "xp": 132.0,
+   "rate": 330000,
+   "inputs": [
+    {
+     "id": 97,
+     "qty": 1,
+     "name": "Harralander potion (unf)"
+    },
+    {
+     "id": 29993,
+     "qty": 1,
+     "name": "Aldarium"
+    }
+   ],
+   "made": 30140
+  },
+  {
+   "level": 55,
+   "name": "Super strength",
+   "unf": "Kwuarm potion (unf)",
+   "secondary": "Limpwurt root",
+   "xp": 125.0,
+   "rate": 312500,
+   "inputs": [
+    {
+     "id": 105,
+     "qty": 1,
+     "name": "Kwuarm potion (unf)"
+    },
+    {
+     "id": 225,
+     "qty": 1,
+     "name": "Limpwurt root"
+    }
+   ],
+   "made": 157
+  },
+  {
+   "level": 56,
+   "name": "Haemostatic poultice",
+   "unf": "Elkhorn potion (unf)",
+   "secondary": "Squid paste",
+   "xp": 27.0,
+   "rate": 67500,
+   "inputs": [
+    {
+     "id": 31662,
+     "qty": 1,
+     "name": "Elkhorn potion (unf)"
+    },
+    {
+     "id": 31569,
+     "qty": 1,
+     "name": "Squid paste"
+    }
+   ],
+   "made": 31587
+  },
+  {
+   "level": 58,
+   "name": "Prayer regeneration potion",
+   "unf": "Huasca potion (unf)",
+   "secondary": "Aldarium",
+   "xp": 132.0,
+   "rate": 330000,
+   "inputs": [
+    {
+     "id": 30100,
+     "qty": 1,
+     "name": "Huasca potion (unf)"
+    },
+    {
+     "id": 29993,
+     "qty": 1,
+     "name": "Aldarium"
+    }
+   ],
+   "made": 30128
+  },
+  {
+   "level": 62,
+   "name": "Super fishing potion",
+   "unf": "Pillar potion (unf)",
+   "secondary": "Haddock eye",
+   "xp": 140.5,
+   "rate": 351250,
+   "inputs": [
+    {
+     "id": 31665,
+     "qty": 1,
+     "name": "Pillar potion (unf)"
+    },
+    {
+     "id": 32357,
+     "qty": 1,
+     "name": "Haddock eye"
+    }
+   ],
+   "made": 31605
+  },
+  {
+   "level": 63,
+   "name": "Super restore",
+   "unf": "Snapdragon potion (unf)",
+   "secondary": "Red spiders' eggs",
+   "xp": 142.5,
+   "rate": 356000,
+   "inputs": [
+    {
+     "id": 3004,
+     "qty": 1,
+     "name": "Snapdragon potion (unf)"
+    },
+    {
+     "id": 223,
+     "qty": 1,
+     "name": "Red spiders' eggs"
+    }
+   ],
+   "made": 3026
+  },
+  {
+   "level": 66,
+   "name": "Extreme energy potion",
+   "unf": "Super energy(4)",
+   "secondary": "Yellow fin (x4)",
+   "xp": 84.0,
+   "rate": 210000,
+   "inputs": [
+    {
+     "id": 3016,
+     "qty": 1,
+     "name": "Super energy(4)"
+    },
+    {
+     "id": 32360,
+     "qty": 4,
+     "name": "Yellow fin"
+    }
+   ],
+   "made": 31614
+  },
+  {
+   "level": 66,
+   "name": "Super defence",
+   "unf": "Cadantine potion (unf)",
+   "secondary": "White berries",
+   "xp": 150.0,
+   "rate": 375000,
+   "inputs": [
+    {
+     "id": 107,
+     "qty": 1,
+     "name": "Cadantine potion (unf)"
+    },
+    {
+     "id": 239,
+     "qty": 1,
+     "name": "White berries"
+    }
+   ],
+   "made": 163
+  },
+  {
+   "level": 67,
+   "name": "Super hunter potion",
+   "unf": "Pillar potion (unf)",
+   "secondary": "Crab paste",
+   "xp": 154.0,
+   "rate": 385000,
+   "inputs": [
+    {
+     "id": 31665,
+     "qty": 1,
+     "name": "Pillar potion (unf)"
+    },
+    {
+     "id": 31708,
+     "qty": 1,
+     "name": "Crab paste"
+    }
+   ],
+   "made": 31629
+  },
+  {
+   "level": 69,
+   "name": "Antifire potion",
+   "unf": "Lantadyme potion (unf)",
+   "secondary": "Dragon scale dust",
+   "xp": 157.5,
+   "rate": 393750,
+   "inputs": [
+    {
+     "id": 2483,
+     "qty": 1,
+     "name": "Lantadyme potion (unf)"
+    },
+    {
+     "id": 241,
+     "qty": 1,
+     "name": "Dragon scale dust"
+    }
+   ],
+   "made": 2454
+  },
+  {
+   "level": 72,
+   "name": "Ranging potion",
+   "unf": "Dwarf weed potion (unf)",
+   "secondary": "Wine of zamorak",
+   "xp": 162.5,
+   "rate": 406250,
+   "inputs": [
+    {
+     "id": 109,
+     "qty": 1,
+     "name": "Dwarf weed potion (unf)"
+    },
+    {
+     "id": 245,
+     "qty": 1,
+     "name": "Wine of zamorak"
+    }
+   ],
+   "made": 169
+  },
+  {
+   "level": 76,
+   "name": "Magic potion",
+   "unf": "Lantadyme potion (unf)",
+   "secondary": "Potato cactus",
+   "xp": 172.5,
+   "rate": 431250,
+   "inputs": [
+    {
+     "id": 2483,
+     "qty": 1,
+     "name": "Lantadyme potion (unf)"
+    },
+    {
+     "id": 3138,
+     "qty": 1,
+     "name": "Potato cactus"
+    }
+   ],
+   "made": 3042
+  },
+  {
+   "level": 77,
+   "name": "Stamina potion",
+   "unf": "Super energy(4)",
+   "secondary": "Amylase crystal (x4)",
+   "xp": 102.0,
+   "rate": null,
+   "inputs": [
+    {
+     "id": 3016,
+     "qty": 1,
+     "name": "Super energy(4)"
+    },
+    {
+     "id": 12640,
+     "qty": 4,
+     "name": "Amylase crystal"
+    }
+   ],
+   "made": 12625
+  },
+  {
+   "level": 78,
+   "name": "Zamorak brew",
+   "unf": "Torstol potion (unf)",
+   "secondary": "Jangerberries",
+   "xp": 175.0,
+   "rate": 437500,
+   "inputs": [
+    {
+     "id": 111,
+     "qty": 1,
+     "name": "Torstol potion (unf)"
+    },
+    {
+     "id": 247,
+     "qty": 1,
+     "name": "Jangerberries"
+    }
+   ],
+   "made": 189
+  },
+  {
+   "level": 80,
+   "name": "Bastion potion",
+   "unf": "Cadantine blood potion (unf)",
+   "secondary": "Wine of zamorak",
+   "xp": 155.0,
+   "rate": 387500,
+   "inputs": [
+    {
+     "id": 22443,
+     "qty": 1,
+     "name": "Cadantine blood potion (unf)"
+    },
+    {
+     "id": 245,
+     "qty": 1,
+     "name": "Wine of zamorak"
+    }
+   ],
+   "made": 22464
+  },
+  {
+   "level": 80,
+   "name": "Battlemage potion",
+   "unf": "Cadantine blood potion (unf)",
+   "secondary": "Potato cactus",
+   "xp": 155.0,
+   "rate": 387500,
+   "inputs": [
+    {
+     "id": 22443,
+     "qty": 1,
+     "name": "Cadantine blood potion (unf)"
+    },
+    {
+     "id": 3138,
+     "qty": 1,
+     "name": "Potato cactus"
+    }
+   ],
+   "made": 22452
+  },
+  {
+   "level": 81,
+   "name": "Saradomin brew",
+   "unf": "Toadflax potion (unf)",
+   "secondary": "Crushed nest",
+   "xp": 180.0,
+   "rate": 450000,
+   "inputs": [
+    {
+     "id": 3002,
+     "qty": 1,
+     "name": "Toadflax potion (unf)"
+    },
+    {
+     "id": 6693,
+     "qty": 1,
+     "name": "Crushed nest"
+    }
+   ],
+   "made": 6687
+  },
+  {
+   "level": 84,
+   "name": "Extended antifire",
+   "unf": "Antifire potion (4)",
+   "secondary": "Lava scale shard (x4)",
+   "xp": 110.0,
+   "rate": null,
+   "inputs": [
+    {
+     "id": 2452,
+     "qty": 1,
+     "name": "Antifire potion(4)"
+    },
+    {
+     "id": 11994,
+     "qty": 4,
+     "name": "Lava scale shard"
+    }
+   ],
+   "made": 11951
+  },
+  {
+   "level": 85,
+   "name": "Ancient brew",
+   "unf": "Dwarf weed potion (unf)",
+   "secondary": "Nihil dust",
+   "xp": 190.0,
+   "rate": 522500,
+   "inputs": [
+    {
+     "id": 109,
+     "qty": 1,
+     "name": "Dwarf weed potion (unf)"
+    },
+    {
+     "id": 26368,
+     "qty": 1,
+     "name": "Nihil dust"
+    }
+   ],
+   "made": 26342
+  },
+  {
+   "level": 85,
+   "name": "Extended stamina potion",
+   "unf": "Stamina potion(4)",
+   "secondary": "Marlin scales (x4)",
+   "xp": 110.0,
+   "rate": 275000,
+   "inputs": [
+    {
+     "id": 12625,
+     "qty": 1,
+     "name": "Stamina potion(4)"
+    },
+    {
+     "id": 32362,
+     "qty": 4,
+     "name": "Marlin scales"
+    }
+   ],
+   "made": 31638
+  },
+  {
+   "level": 87,
+   "name": "Anti-venom",
+   "unf": "Antidote++(4)",
+   "secondary": "Zulrah's scales (x20)",
+   "xp": 120.0,
+   "rate": null,
+   "inputs": [
+    {
+     "id": 5952,
+     "qty": 1,
+     "name": "Antidote++(4)"
+    },
+    {
+     "id": 12934,
+     "qty": 20,
+     "name": "Zulrah's scales"
+    }
+   ],
+   "made": 12905
+  },
+  {
+   "level": 88,
+   "name": "Menaphite remedy",
+   "unf": "Dwarf weed potion (unf)",
+   "secondary": "Lily of the sands",
+   "xp": 200.0,
+   "rate": 500000,
+   "inputs": [
+    {
+     "id": 109,
+     "qty": 1,
+     "name": "Dwarf weed potion (unf)"
+    },
+    {
+     "id": 27272,
+     "qty": 1,
+     "name": "Lily of the sands"
+    }
+   ],
+   "made": 27205
+  },
+  {
+   "level": 89,
+   "name": "Armadyl brew",
+   "unf": "Umbral potion (unf)",
+   "secondary": "Rainbow crab paste",
+   "xp": 205.0,
+   "rate": 563750,
+   "inputs": [
+    {
+     "id": 31668,
+     "qty": 1,
+     "name": "Umbral potion (unf)"
+    },
+    {
+     "id": 31710,
+     "qty": 1,
+     "name": "Rainbow crab paste"
+    }
+   ],
+   "made": 31653
+  },
+  {
+   "level": 90,
+   "name": "Super combat potion",
+   "unf": "Super attack (4) Super strength (4) Super defence (4)",
+   "secondary": "Torstol",
+   "xp": 150.0,
+   "rate": 324900,
+   "inputs": [
+    {
+     "id": 2436,
+     "qty": 1,
+     "name": "Super attack(4)"
+    },
+    {
+     "id": 2440,
+     "qty": 1,
+     "name": "Super strength(4)"
+    },
+    {
+     "id": 2442,
+     "qty": 1,
+     "name": "Super defence(4)"
+    },
+    {
+     "id": 269,
+     "qty": 1,
+     "name": "Torstol"
+    }
+   ],
+   "made": 12695
+  },
+  {
+   "level": 91,
+   "name": "Forgotten brew",
+   "unf": "Ancient brew(4)",
+   "secondary": "Ancient essence (x80)",
+   "xp": 145.0,
+   "rate": 265785,
+   "inputs": [
+    {
+     "id": 26340,
+     "qty": 1,
+     "name": "Ancient brew(4)"
+    },
+    {
+     "id": 27616,
+     "qty": 80,
+     "name": "Ancient essence"
+    }
+   ],
+   "made": 27629
+  },
+  {
+   "level": 92,
+   "name": "Super antifire potion",
+   "unf": "Antifire potion (4)",
+   "secondary": "Crushed superior dragon bones",
+   "xp": 130.0,
+   "rate": 325000,
+   "inputs": [
+    {
+     "id": 2452,
+     "qty": 1,
+     "name": "Antifire potion(4)"
+    },
+    {
+     "id": 21975,
+     "qty": 1,
+     "name": "Crushed superior dragon bones"
+    }
+   ],
+   "made": 21978
+  },
+  {
+   "level": 94,
+   "name": "Anti-venom+",
+   "unf": "Anti-venom (4)",
+   "secondary": "Torstol",
+   "xp": 125.0,
+   "rate": 312500,
+   "inputs": [
+    {
+     "id": 12905,
+     "qty": 1,
+     "name": "Anti-venom(4)"
+    },
+    {
+     "id": 269,
+     "qty": 1,
+     "name": "Torstol"
+    }
+   ],
+   "made": 12913
+  },
+  {
+   "level": 94,
+   "name": "Extended anti-venom+",
+   "unf": "Anti-venom+(4)",
+   "secondary": "Araxyte venom sac (x4)",
+   "xp": 80.0,
+   "rate": 146640,
+   "inputs": [
+    {
+     "id": 12913,
+     "qty": 1,
+     "name": "Anti-venom+(4)"
+    },
+    {
+     "id": 29784,
+     "qty": 4,
+     "name": "Araxyte venom sac"
+    }
+   ],
+   "made": 29824
+  },
+  {
+   "level": 98,
+   "name": "Extended super antifire",
+   "unf": "Super antifire potion (4)",
+   "secondary": "Lava scale shard (x4)",
+   "xp": 160.0,
+   "rate": null,
+   "inputs": [
+    {
+     "id": 21978,
+     "qty": 1,
+     "name": "Super antifire potion(4)"
+    },
+    {
+     "id": 11994,
+     "qty": 4,
+     "name": "Lava scale shard"
+    }
+   ],
+   "made": 22209
+  },
+  {
+   "level": 98,
+   "name": "Extended super antifire",
+   "unf": "Extended antifire (4)",
+   "secondary": "Crushed superior dragon bones",
+   "xp": 180.0,
+   "rate": 450000,
+   "inputs": [
+    {
+     "id": 11951,
+     "qty": 1,
+     "name": "Extended antifire(4)"
+    },
+    {
+     "id": 21975,
+     "qty": 1,
+     "name": "Crushed superior dragon bones"
+    }
+   ],
+   "made": 22209
+  }
+ ]
+}

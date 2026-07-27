@@ -1496,6 +1496,58 @@ table.afktable .al {
 td.afkgap { color: var(--accent); }
 table.afktable th:nth-child(3), table.afktable td:nth-child(3) { font-weight: 500; }
 
+/* ------------------------------------------------------------ potion prices */
+
+.potbar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.potbar .k { color: var(--accent); }
+.potfilter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.potfilter input { accent-color: var(--accent); margin: 0; cursor: pointer; }
+
+.potpick {
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgba(255, 157, 46, 0.3);
+  border-radius: var(--r);
+  background: var(--accent-soft);
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+.potpick .k { font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
+.potpick b { font-size: 16px; font-weight: 500; letter-spacing: -0.02em; }
+.potpick .pdet { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
+.potpick .pwhy { font-size: 13px; color: var(--muted); }
+
+.ladder { margin-bottom: 16px; }
+.ladder .k { display: block; color: var(--accent); margin-bottom: 8px; }
+.rungs { display: flex; flex-wrap: wrap; gap: 6px; }
+.rung {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--fg-2);
+}
+.rung.now { border-color: rgba(74, 222, 128, 0.4); background: rgba(74, 222, 128, 0.07); }
+.rung .rl { font-family: var(--font-mono); font-size: 11px; color: var(--accent); }
+.rung.now .rl { color: var(--done); }
+.rung .rx { font-family: var(--font-mono); font-size: 10.5px; color: var(--dim); }
+
+table.pottable { min-width: 640px; font-size: 13.5px; }
+table.pottable td.notes { font-size: 12.5px; }
+table.pottable td.gpxp, table.pottable td.profit { text-align: right; }
+table.pottable td.gpxp.good, table.pottable td.profit.good { color: var(--done); }
+
 /* ------------------------------------------------------------- slayer guide */
 
 table.tasktable, table.mtable { min-width: 600px; font-size: 13.5px; }
