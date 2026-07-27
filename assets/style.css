@@ -1509,6 +1509,27 @@ table.pathtable td.tn a:hover { color: var(--accent); }
   color: var(--done);
   margin-top: 2px;
 }
+.alts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
+.alt {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 11.5px;
+  color: var(--muted);
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+.alt i {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.alt b { font-family: var(--font-mono); font-size: 10.5px; font-weight: 400; color: var(--accent); }
+
 .gives {
   display: block;
   font-family: var(--font-mono);

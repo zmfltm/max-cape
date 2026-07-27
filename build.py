@@ -3613,9 +3613,15 @@ def path_hours(key):
 
 
 def paths_page():
+    computed = {key: path_hours(key) for key, _, _ in PATH_META}
+    alt = {}
+    for key, (rows, _) in computed.items():
+        for r in rows:
+            alt.setdefault(r["skill"], {})[key] = (r["method"], r["hours"])
+
     cards, totals = [], {}
     for key, label, blurb in PATH_META:
-        rows, total = path_hours(key)
+        rows, total = computed[key]
         totals[key] = total
         cells = []
         for r in rows:
@@ -3623,6 +3629,18 @@ def paths_page():
                 continue
             rate = f'{r["rate"] // 1000}k' if r["rate"] else "free"
             hrs = f'{r["hours"]:.0f}h' if r["hours"] else "free"
+            others = []
+            for other, other_label, _ in PATH_META:
+                if other == key:
+                    continue
+                pair = alt.get(r["skill"], {}).get(other)
+                if not pair or pair[0] == r["method"]:
+                    continue
+                delta = pair[1] - r["hours"]
+                sign = "+" if delta >= 0 else ""
+                others.append(
+                    f'<span class="alt"><i>{e(other_label.lower())}</i> '
+                    f'{e(pair[0])} <b>{sign}{delta:.0f}h</b></span>')
             gives = ", ".join(f'{n} +{xp / 1e6:.1f}m' for n, xp in r["gives"] if xp > 50_000)
             got = (f'<span class="carried">carried {r["carried"] / 1e6:.1f}m</span>'
                    if r.get("carried") else "")
@@ -3631,6 +3649,7 @@ def paths_page():
                 f'{icon(r["skill"])}{e(r["skill"])}</a>{got}</td>'
                 f'<td>{e(r["method"])}'
                 + (f'<span class="gives">also {e(gives)}</span>' if gives else "")
+                + (f'<div class="alts">{"".join(others)}</div>' if others else "")
                 + "</td>"
                 f'<td class="rate">{rate}</td>'
                 f'<td class="rate afkgap">{hrs}</td></tr>')
