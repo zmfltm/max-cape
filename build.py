@@ -2239,7 +2239,8 @@ RAIL_JS = """
 """
 
 
-def page(title, body, active=None, depth=0, skill_name=None, head_extra=""):
+def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
+         wide=False):
     root = "../" if depth else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -2264,7 +2265,7 @@ def page(title, body, active=None, depth=0, skill_name=None, head_extra=""):
     <a class="navlink" href="{root}afk.html">AFK</a>
   </nav>
 </header>
-<div class="shell">
+<div class="shell{" wide" if wide else ""}">
 <main class="main">
 {body}
 </main>
@@ -3346,16 +3347,12 @@ def build_stars_page():
         embed_panel("Mining", full=True),
         '<h2 id="how">How the Tiers Work</h2>',
         '<ul>'
-        '<li>Star tier decides the Mining level you need: tier 1 at level 10, '
-        'rising every ten levels to tier 9 at 90. A tier 9 star can be mined all '
-        'the way down, so it lasts longest.</li>'
-        '<li>Each layer takes seven minutes to deplete with at least one person '
-        'mining, so a fresh star is worth travelling for and a nearly dead one is not.</li>'
-        '<li>Stardust buys the celestial ring (an invisible +4 Mining boost), '
-        'along with soft clay packs and bags of gems, at Dusuri\'s Star Shop by the '
-        'Mining Guild entrance in Falador.</li>'
-        '<li>A telescope in your house narrows the next landing to a 24, 9 or 2 minute '
-        'window depending on the wood you build it from.</li>'
+        '<li>Tier 1 needs 10 Mining, then ten levels per tier to tier 9 at 90.</li>'
+        '<li>Seven minutes per layer. Tier 9 lasts longest, a dying star is not '
+        'worth the hop.</li>'
+        '<li>Stardust buys the celestial ring, +4 Mining, at Dusuri\'s Star Shop.</li>'
+        '<li>A house telescope narrows the next landing to a 24, 9 or 2 minute '
+        'window.</li>'
         '</ul>',
     ]
     return page("Shooting Stars", "\n".join(body), depth=0,
@@ -4382,7 +4379,7 @@ def paths_page():
         f'data-path="{key}" aria-controls="path-{key}" '
         f'aria-pressed="{"true" if key == "hybrid" else "false"}">'
         f'<span class="l">{e(label)}</span>'
-        f'<span class="v">{totals[key]:,.0f}<small>h</small></span></button>'
+        f'<span class="v">{totals[key]:,.0f}<small>hours</small></span></button>'
         for key, label, _ in meta)
 
     left = sum(r["need"] for r in computed["fast"][0])
@@ -4423,6 +4420,8 @@ CALC_JS = """
     var from = document.getElementById('cfrom');
     var to = document.getElementById('cto');
     var group = document.getElementById('cgroup');
+    var find = document.getElementById('cfind');
+    var chosen = null;
     var gap = document.getElementById('cgap');
     var pick = document.getElementById('cpick');
     var status = document.getElementById('cstatus');
@@ -4538,8 +4537,10 @@ CALC_JS = """
 
       var only = group.value;
       var best = null;
+      var text = (find.value || '').trim().toLowerCase();
       var rows = actions.map(function (a) {
         if (only && a.type !== only) return null;
+        if (text && a.name.toLowerCase().indexOf(text) < 0) return null;
         var count = a.xp > 0 ? Math.ceil(need / a.xp) : null;
         var each = cost(a);
         var total = (each == null || count == null) ? null : each * count;
@@ -4558,7 +4559,9 @@ CALC_JS = """
       rows.forEach(function (r) {
         var locked = r.a.level > here;
         var tr = document.createElement('tr');
-        if (locked) tr.className = 'locked';
+        tr.className = (locked ? 'locked' : '')
+          + (r.a.name === chosen ? ' chosen' : '');
+        tr.setAttribute('data-name', r.a.name);
         tr.innerHTML =
           '<td class="req">' + r.a.level + '</td>' +
           '<td class="tn">' + esc(r.a.name) +
@@ -4597,6 +4600,7 @@ CALC_JS = """
 
     function choose(name) {
       skill = name;
+      chosen = null;
       tabs.forEach(function (t) {
         var on = t.getAttribute('data-skill') === name;
         t.classList.toggle('on', on);
@@ -4652,7 +4656,14 @@ CALC_JS = """
         choose(t.getAttribute('data-skill'));
       });
     });
-    [from, to].forEach(function (el) { el.addEventListener('input', draw); });
+    [from, to, find].forEach(function (el) { el.addEventListener('input', draw); });
+    body.addEventListener('click', function (ev) {
+      var row = ev.target.closest('tr[data-name]');
+      if (!row) return;
+      var name = row.getAttribute('data-name');
+      chosen = chosen === name ? null : name;
+      draw();
+    });
     group.addEventListener('change', draw);
     btn.addEventListener('click', prices);
     document.addEventListener('osrsplan:stats', function (ev) {
@@ -4763,6 +4774,9 @@ def calculators_page():
         '<span class="espace"></span>'
         '<label class="cfield sel"><span>Group</span>'
         '<select id="cgroup"><option value="">All</option></select></label>'
+        '<label class="cfield"><span>Find</span>'
+        '<input id="cfind" type="search" class="wide" placeholder="action name" '
+        'autocomplete="off"></label>'
         '<span class="estatus" id="cstatus">loading</span>'
         '<button class="refresh" id="crefresh" type="button" '
         'title="Refresh prices" aria-label="Refresh prices">'
@@ -4791,7 +4805,7 @@ def calculators_page():
         'coming.</p>',
     ]
     return page("Calculators", "\n".join(body), depth=0,
-                head_extra=CALC_JS)
+                head_extra=CALC_JS, wide=True)
 
 
 def gear_page():

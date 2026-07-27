@@ -248,6 +248,10 @@ p.tiernow b { color: var(--accent); font-weight: 500; }
 
 .main { min-width: 0; max-width: 780px; }
 
+/* Pages that are mostly table want the window, not the reading measure. */
+.shell.wide { max-width: 1680px; }
+.shell.wide .main { max-width: none; }
+
 /* ---------------------------------------------------------------- side index */
 
 .rail {
@@ -1781,23 +1785,30 @@ p.lede2 { color: var(--muted); font-size: 14.5px; max-width: 68ch; }
 
 /* -------------------------------------------------------------- calculators */
 
-.ctabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 22px 0 0; }
+.ctabs { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 22px 0 0; }
 .ctab {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   font: inherit;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--muted);
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 5px 12px 5px 8px;
+  background: none;
+  border: 0;
+  padding: 4px 0;
   cursor: pointer;
 }
-.ctab img { width: 16px; height: 16px; }
-.ctab:hover { color: var(--fg); border-color: var(--line-strong); }
-.ctab.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.ctab img.icon {
+  width: 16px;
+  height: 16px;
+  flex-basis: 16px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+}
+.ctab:hover { color: var(--fg); }
+.ctab.on { color: var(--accent); }
 
 .calcbar { display: flex; align-items: center; gap: 14px; margin: 18px 0 0; flex-wrap: wrap; }
 .cfield { display: inline-flex; align-items: center; gap: 7px; }
@@ -1809,6 +1820,7 @@ p.lede2 { color: var(--muted); font-size: 14.5px; max-width: 68ch; }
   color: var(--dim);
 }
 .cfield input, .cfield select {
+  color-scheme: dark;
   font: inherit;
   font-family: var(--font-mono);
   font-size: 13px;
@@ -1819,7 +1831,9 @@ p.lede2 { color: var(--muted); font-size: 14.5px; max-width: 68ch; }
   padding: 4px 8px;
   width: 64px;
 }
-.cfield.sel select { width: auto; max-width: 190px; }
+.cfield.sel select { width: auto; max-width: 230px; }
+.cfield select option { background: var(--panel); color: var(--fg); }
+.cfield input.wide { width: 150px; }
 .cfield input:focus, .cfield select:focus { outline: none; border-color: var(--accent); }
 .cgap { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
 
@@ -1909,3 +1923,7 @@ table.calctable td.good { color: var(--done); }
   margin-left: 9px;
   font-variant-numeric: tabular-nums;
 }
+table.calctable tbody tr { cursor: pointer; }
+table.calctable tbody tr:hover td { background: rgba(255, 255, 255, 0.03); }
+table.calctable tr.chosen td { background: var(--accent-soft); }
+table.calctable tr.chosen td.tn { color: var(--accent); }

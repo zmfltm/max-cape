@@ -202,6 +202,14 @@ def clean(entry, ids):
             "id": ids.get(label) or ids.get(mat.get("name", "")),
         })
 
+    # Burying bones or burning logs consumes the thing and makes nothing. The
+    # module names those actions after the item itself, so without this every
+    # one of them prices out at exactly zero and wins any cheapest-per-xp
+    # comparison outright.
+    made = ids.get(entry.get("name", "")) or ids.get(name)
+    if made and any(m["id"] == made for m in materials):
+        made = None
+
     return {
         "name": name,
         "level": int(entry["level"]),
@@ -209,7 +217,7 @@ def clean(entry, ids):
         "type": entry.get("type") or "Other",
         "members": entry.get("members") != "No",
         "materials": materials,
-        "made": ids.get(entry.get("name", "")) or ids.get(name),
+        "made": made,
     }
 
 
