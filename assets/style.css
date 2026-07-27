@@ -1468,6 +1468,28 @@ a.sloc:hover { color: var(--accent); text-decoration: underline; text-underline-
 
 /* -------------------------------------------------------------- path compare */
 
+.switcher { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+button.stat.pick {
+  display: block;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease);
+}
+button.stat.pick .l { display: block; font-size: 12px; color: var(--muted); }
+button.stat.pick .v {
+  display: block;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+button.stat.pick:hover { border-color: rgba(255, 255, 255, 0.22); background: var(--surface-hi); }
+button.stat.pick.on { border-color: var(--accent); background: var(--accent-soft); }
+button.stat.pick.on .v { color: var(--accent); }
+
 .pathcard { margin-top: 44px; }
 .phead { display: flex; align-items: baseline; gap: 12px; }
 .phead h2 { margin: 0 0 6px; border: 0; padding: 0; }

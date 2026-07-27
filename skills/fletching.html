@@ -850,5 +850,32 @@
 })();
 </script>
 
+<script>
+/* One route at a time; the panels are the switch. */
+(function () {
+  var picks = Array.prototype.slice.call(document.querySelectorAll('.stat.pick'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.pathcard'));
+  if (!picks.length || !cards.length) return;
+  var KEY = 'osrsplan.path';
+
+  function show(key) {
+    picks.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-path') === key); });
+    cards.forEach(function (c) { c.hidden = c.getAttribute('data-path') !== key; });
+    try { localStorage.setItem(KEY, key); } catch (err) { /* ignore */ }
+  }
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved && cards.some(function (c) { return c.getAttribute('data-path') === saved; })) {
+      show(saved);
+    }
+  } catch (err) { /* private mode */ }
+
+  picks.forEach(function (b) {
+    b.addEventListener('click', function () { show(b.getAttribute('data-path')); });
+  });
+})();
+</script>
+
 </body>
 </html>

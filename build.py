@@ -1478,6 +1478,35 @@ OWN_JS = """
 </script>
 """
 
+PATH_JS = """
+<script>
+/* One route at a time; the panels are the switch. */
+(function () {
+  var picks = Array.prototype.slice.call(document.querySelectorAll('.stat.pick'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.pathcard'));
+  if (!picks.length || !cards.length) return;
+  var KEY = 'osrsplan.path';
+
+  function show(key) {
+    picks.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-path') === key); });
+    cards.forEach(function (c) { c.hidden = c.getAttribute('data-path') !== key; });
+    try { localStorage.setItem(KEY, key); } catch (err) { /* ignore */ }
+  }
+
+  try {
+    var saved = localStorage.getItem(KEY);
+    if (saved && cards.some(function (c) { return c.getAttribute('data-path') === saved; })) {
+      show(saved);
+    }
+  } catch (err) { /* private mode */ }
+
+  picks.forEach(function (b) {
+    b.addEventListener('click', function () { show(b.getAttribute('data-path')); });
+  });
+})();
+</script>
+"""
+
 POTION_JS = """
 <script>
 /* Potion costs, priced from the official API. It allows cross-origin reads, so
@@ -2137,7 +2166,7 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
 </main>
 {rail(active=active, depth=depth)}
 </div>
-{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}{POTION_JS}
+{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}{POTION_JS}{PATH_JS}
 </body>
 </html>
 """
@@ -3550,7 +3579,8 @@ def paths_page():
                 f'<td class="rate afkgap">{hrs}</td></tr>')
         body = "".join(cells)
         cards.append(
-            f'<section class="pathcard" id="path-{key}">'
+            f'<section class="pathcard" id="path-{key}" data-path="{key}"'
+            f'{"" if key == "hybrid" else " hidden"}>'
             f'<div class="phead"><h2 id="{key}">{e(label)}</h2>'
             f'<span class="ptot">{total:,.0f} hours</span></div>'
             f'<p class="lede2">{e(blurb)}</p>'
@@ -3561,14 +3591,16 @@ def paths_page():
 
     fast, hybrid, afk = totals["fast"], totals["hybrid"], totals["afk"]
     summary = (
-        '<div class="stats">'
-        f'<div class="stat"><div class="l">Fastest</div>'
-        f'<div class="v">{fast:,.0f}<small>h</small></div></div>'
-        f'<div class="stat"><div class="l">Hybrid</div>'
-        f'<div class="v">{hybrid:,.0f}<small>h</small></div>'
-        f'</div>'
-        f'<div class="stat"><div class="l">AFK</div>'
-        f'<div class="v">{afk:,.0f}<small>h</small></div></div>'
+        '<div class="stats switcher">'
+        f'<button class="stat pick" type="button" data-path="fast">'
+        f'<span class="l">Fastest</span>'
+        f'<span class="v">{fast:,.0f}<small>h</small></span></button>'
+        f'<button class="stat pick on" type="button" data-path="hybrid">'
+        f'<span class="l">Hybrid</span>'
+        f'<span class="v">{hybrid:,.0f}<small>h</small></span></button>'
+        f'<button class="stat pick" type="button" data-path="afk">'
+        f'<span class="l">AFK</span>'
+        f'<span class="v">{afk:,.0f}<small>h</small></span></button>'
         f'<div class="stat"><div class="l">AFK costs you</div>'
         f'<div class="v">+{afk - fast:,.0f}<small>h</small></div></div>'
         "</div>")
