@@ -18,6 +18,8 @@ import time
 import urllib.parse
 import urllib.request
 
+from storage import atomic_json_dump
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "data", "diary_reqs.json")
 API = "https://oldschool.runescape.wiki/api.php"
@@ -100,9 +102,7 @@ def main():
             f"{t[0]}:{len(reqs[region].get(t, {}))}" for t in TIERS))
         time.sleep(0.3)
 
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
-        json.dump(reqs, f, indent=1, sort_keys=True)
+    atomic_json_dump(OUT, reqs, sort_keys=True)
 
     tiers = sum(1 for r in reqs.values() for t in r.values() if t)
     print(f"\n{tiers} tiers with skill requirements, written to data/diary_reqs.json")

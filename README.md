@@ -1,7 +1,8 @@
 # OSRS max time wasting plan
 
-Static site for the Slayer-first route to the Max Cape. One overview page plus a
-page per skill, with the chosen method and the popular alternatives for each.
+Static site for a Slayer-first route to the Max Cape. It includes an overview,
+a page per skill, route comparisons, an AFK reference, and a shooting-star
+tracker.
 
 ## Viewing it
 
@@ -13,7 +14,9 @@ Then open <http://localhost:8412>. `serve.py` also exposes `/api/stats`, which
 proxies the OSRS hiscores so the refresh button in the sidebar works (the
 hiscores send no CORS headers, so the page cannot call them directly).
 
-`python3 -m http.server 8412` works too; you just lose the refresh button.
+`python3 -m http.server 8412` works too; you just lose the live API features.
+The generated site itself has no Python dependencies. To regenerate shooting-star
+map images, install Pillow with `python3 -m pip install -r requirements.txt`.
 
 ## Live stats
 
@@ -30,8 +33,9 @@ shows plan targets instead.
 
 ## Editing it
 
-All content lives in `build.py` as plain data. Edit the `SKILLS` list (targets,
-picks, method tables, notes) or the plan constants at the top, then regenerate:
+Most plan content lives in `build.py` as plain data. Slayer task verdicts live
+in `slayer.py`, media mappings in `media.py`, and fetched snapshots in `data/`.
+Edit the appropriate source, then regenerate:
 
 ```bash
 python3 build.py
@@ -64,8 +68,8 @@ reads at a glance.
 ## Choosing a method
 
 Methods you cannot use yet are locked: the requirement column is parsed
-(including cross-skill and combat requirements) against your live levels, and
-those rows are dimmed with a padlock. The highest-rate method you *can* use is
+(including cross-skill, combat, named quest, and supported diary requirements)
+against your snapshots, and those rows are dimmed with a padlock. The highest-rate method you *can* use is
 tagged "best at your level" and named in the line above the table.
 
 Every method table has a circle at the end of each row. Clicking it makes that
@@ -81,8 +85,8 @@ and you can edit it by hand.
 
 `media.py` maps method rows and prose names to OSRS Wiki pages. `fetch_media.py`
 downloads each page's image into `assets/media/` and writes `manifest.json`;
-`build.py` reads that manifest and puts a thumbnail on every method row and an
-inline picture on the first mention of a skill, NPC, location or unlock.
+`build.py` reads that manifest and adds mapped method thumbnails plus inline
+pictures for selected skill, NPC, location, and unlock mentions.
 
 After adding entries to `media.py`:
 
@@ -93,11 +97,29 @@ python3 fetch_media.py && python3 build.py
 Titles the wiki has no image for are printed at the end of the fetch and simply
 render without a picture.
 
+## Other fetched data
+
+```bash
+python3 fetch_potions.py      # Herblore recipe/item IDs
+python3 fetch_diary_reqs.py   # diary skill requirements
+python3 fetch_star_maps.py    # local crash-site maps (needs Pillow)
+python3 fetch_stars.py        # current 07.gg calls for static hosting
+python3 build.py
+```
+
+`fetch_media.py` and the map fetcher make network requests and only need to run
+when their registries or upstream data change. The other snapshots can be
+refreshed regularly.
+
 ## Layout
 
 - `index.html` — plan overview, generated
 - `skills/*.html` — one page per skill, generated
-- `build.py` — data and generator
+- `stars.html`, `afk.html`, `paths.html` — reference pages, generated
+- `build.py` — primary plan data and site generator
+- `media.py`, `slayer.py` — media registry and Slayer task data
+- `fetch_*.py` — snapshot/media refresh commands
+- `data/*.json` — fetched and user-selected state
 - `assets/style.css` — theme
 - `assets/fonts/` — Geist Sans and Geist Mono (OFL, licence included)
 - `assets/icons/` — skill icons from the OSRS Wiki

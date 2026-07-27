@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: refresh-static-data
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -25,6 +29,9 @@ jobs:
 
       - name: Pull quests and diaries
         run: python3 fetch_quests.py || echo "WikiSync unavailable, keeping last snapshot"
+
+      - name: Pull shooting stars
+        run: python3 fetch_stars.py || echo "star tracker unavailable, keeping last snapshot"
 
       - name: Rebuild
         run: python3 build.py

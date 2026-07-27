@@ -17,20 +17,26 @@ import re
 import time
 import urllib.request
 import sys
+import threading
 import urllib.error
 
-from hiscores import fetch
+from hiscores import SKILL_ORDER, fetch
+from storage import atomic_json_dump
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STATS = os.path.join(HERE, "data", "stats.json")
 PICKS = os.path.join(HERE, "data", "picks.json")
 FOCUS = os.path.join(HERE, "data", "focus.json")
+MAX_BODY = 8 * 1024
+VALID_SKILLS = set(SKILL_ORDER) | {"Diaries"}
+_write_lock = threading.Lock()
 
 
 def remembered_name():
     try:
         with open(STATS, encoding="utf-8") as f:
-            return json.load(f).get("name")
+            data = json.load(f)
+        return data.get("name") if isinstance(data, dict) else None
     except (OSError, ValueError):
         return None
 
@@ -86,9 +92,8 @@ def shooting_stars(max_age=45):
     # keep a snapshot on disk: the published copy on GitHub Pages reads this,
     # since Pages has no server to proxy with
     try:
-        os.makedirs(os.path.join(HERE, "data"), exist_ok=True)
-        with open(os.path.join(HERE, "data", "stars.json"), "w", encoding="utf-8") as f:
-            json.dump({"stars": stars, "at": int(now * 1000), "source": STAR_URL}, f)
+        atomic_json_dump(os.path.join(HERE, "data", "stars.json"),
+                         {"stars": stars, "at": int(now * 1000), "source": STAR_URL})
     except OSError:
         pass
 
@@ -119,35 +124,47 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.json({"error": "unknown endpoint"}, 404)
         try:
             length = int(self.headers.get("Content-Length") or 0)
-            body = json.loads(self.rfile.read(length) or b"{}")
-            skill = str(body["skill"])[:40]
-            method = str(body["method"])[:120] if route == "/api/pick" else None
-        except (ValueError, KeyError, TypeError):
+        except ValueError:
+            return self.json({"error": "bad content length"}, 400)
+        if not 0 < length <= MAX_BODY:
+            return self.json({"error": "request body must be 1-8192 bytes"}, 413)
+        try:
+            body = json.loads(self.rfile.read(length))
+            if not isinstance(body, dict) or not isinstance(body.get("skill"), str):
+                raise ValueError
+            skill = body["skill"].strip()
+            if skill not in VALID_SKILLS:
+                raise ValueError
+            method = None
+            if route == "/api/pick":
+                if not isinstance(body.get("method"), str):
+                    raise ValueError
+                method = body["method"].strip()
+                if not method or len(method) > 120:
+                    raise ValueError
+        except (ValueError, json.JSONDecodeError):
             return self.json({"error": "bad request"}, 400)
 
         if route == "/api/focus":
             try:
-                os.makedirs(os.path.dirname(FOCUS), exist_ok=True)
-                with open(FOCUS, "w", encoding="utf-8") as f:
-                    json.dump({"skill": skill}, f, indent=1)
+                with _write_lock:
+                    atomic_json_dump(FOCUS, {"skill": skill})
             except OSError as exc:
                 return self.json({"error": str(exc)}, 500)
             print(f"focus: {skill}")
             return self.json({"ok": True, "skill": skill})
 
         try:
-            with open(PICKS, encoding="utf-8") as f:
-                picks = json.load(f)
-            if not isinstance(picks, dict):
-                picks = {}
-        except (OSError, ValueError):
-            picks = {}
-
-        picks[skill] = method
-        try:
-            os.makedirs(os.path.dirname(PICKS), exist_ok=True)
-            with open(PICKS, "w", encoding="utf-8") as f:
-                json.dump(picks, f, indent=1, sort_keys=True)
+            with _write_lock:
+                try:
+                    with open(PICKS, encoding="utf-8") as f:
+                        picks = json.load(f)
+                    if not isinstance(picks, dict):
+                        picks = {}
+                except (OSError, ValueError):
+                    picks = {}
+                picks[skill] = method
+                atomic_json_dump(PICKS, picks, sort_keys=True)
         except OSError as exc:
             return self.json({"error": str(exc)}, 500)
 
@@ -174,9 +191,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         try:
             import datetime
             data["fetched"] = datetime.datetime.now().astimezone().isoformat(timespec="minutes")
-            os.makedirs(os.path.dirname(STATS), exist_ok=True)
-            with open(STATS, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=1, sort_keys=True)
+            with _write_lock:
+                atomic_json_dump(STATS, data, sort_keys=True)
         except OSError:
             pass
 

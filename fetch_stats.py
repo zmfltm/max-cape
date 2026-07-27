@@ -19,6 +19,7 @@ import sys
 import urllib.error
 
 from hiscores import fetch
+from storage import atomic_json_dump
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "data", "stats.json")
@@ -53,9 +54,7 @@ def main():
 
     data["fetched"] = datetime.datetime.now().astimezone().isoformat(timespec="minutes")
 
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=1, sort_keys=True)
+    atomic_json_dump(OUT, data, sort_keys=True)
 
     lv = data["overall"]["level"]
     n99 = sum(1 for s in data["skills"].values() if s["level"] >= 99)

@@ -25,7 +25,7 @@
 <a class="backlink" href="../index.html" title="Back to the plan" aria-label="Back to the plan"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M9.5 3.5 5 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 <div class="kick">Combat</div>
 <div class="page-head"><img class="icon lg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAMAAACzvE1FAAAADFBMVEUAAADBpHYAAAFGPC8vY/5LAAAAAXRSTlMAQObYZgAAAFNJREFUeNqtjkkKxEAMxCzp/38emGzdOcfgg+Qq8PxHnXUU1I0JvBgiIJd7QHgGgCLIk4OOdQTqdt6NOnhGnlLOyziXqQCdNbL9CvUW4CYA5xvxA/dnAV4NB3bkAAAAAElFTkSuQmCC" alt="" width="22" height="22"><h1 class="page">Strength</h1></div>
-<p class="lede">~85 first among the melee stats, 99 in the combat block after the <span class="ment"><img class="mi pixel" src="../assets/icons/Diaries.png" alt="" loading="lazy">Diary Cape</span>.</p>
+<p class="lede">~85 first among the melee stats, 99 in the combat block after the <span class="ment"><img class="mi" src="../assets/media/achievement-diary-cape.png" alt="" loading="lazy">Diary Cape</span>.</p>
 <div class="glinks"><a class="glink" href="https://oldschool.runescape.wiki/w/Strength_training" rel="noopener" target="_blank">Wiki guide</a><a class="glink" href="https://www.osrsguide.com/osrs-combat-training-guide/" rel="noopener" target="_blank">OSRS Guide</a></div>
 <div class="livebox"><div class="k">Your Level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(56 76% 63%)" data-skill-level="Strength">70</b><span class="goal">of 85</span></div><span class="prog wide"><span class="fill lit" style="width:25%;--lc:hsl(56 76% 63%)" data-skill-bar="Strength" data-from="1" data-goal="85"></span></span><div class="facts"><span><i>XP</i> <b class="num">801,426</b></span><span><i>To 85</i> <b class="num">2,457,168</b></span></div></div>
 
@@ -803,11 +803,20 @@
       var verdict = best.gpxp <= 0
         ? 'It turns a profit while you train, so the only cost is your time.'
         : 'The cheapest experience open to you right now.';
-      pick.innerHTML = '<span class="k">Best at your level</span>'
-        + '<b>' + best.name + '</b>'
-        + '<span class="pdet">' + gp(best.gpxp) + ' gp per xp · '
-        + best.xp + ' xp each · ' + gp(best.profit) + ' gp profit each</span>'
-        + '<span class="pwhy">' + verdict + '</span>';
+      pick.replaceChildren();
+      var heading = document.createElement('span');
+      heading.className = 'k';
+      heading.textContent = 'Best at your level';
+      var name = document.createElement('b');
+      name.textContent = best.name;
+      var detail = document.createElement('span');
+      detail.className = 'pdet';
+      detail.textContent = gp(best.gpxp) + ' gp per xp · ' + best.xp
+        + ' xp each · ' + gp(best.profit) + ' gp profit each';
+      var why = document.createElement('span');
+      why.className = 'pwhy';
+      why.textContent = verdict;
+      pick.append(heading, name, detail, why);
       pick.hidden = false;
     }
     filter();
@@ -876,12 +885,17 @@
     try { localStorage.setItem(KEY, key); } catch (err) { /* ignore */ }
   }
 
-  try {
-    var saved = localStorage.getItem(KEY);
-    if (saved && cards.some(function (c) { return c.getAttribute('data-path') === saved; })) {
-      show(saved);
-    }
-  } catch (err) { /* private mode */ }
+  var hash = location.hash.replace(/^#(?:path-)?/, '');
+  if (hash && cards.some(function (c) { return c.getAttribute('data-path') === hash; })) {
+    show(hash);
+  } else {
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved && cards.some(function (c) { return c.getAttribute('data-path') === saved; })) {
+        show(saved);
+      }
+    } catch (err) { /* private mode */ }
+  }
 
   picks.forEach(function (b) {
     b.addEventListener('click', function () { show(b.getAttribute('data-path')); });

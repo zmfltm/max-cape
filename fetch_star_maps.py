@@ -20,6 +20,8 @@ import urllib.request
 from PIL import Image
 import io
 
+from storage import atomic_json_dump
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "assets", "media", "starmaps")
 API = "https://oldschool.runescape.wiki/api.php"
@@ -111,8 +113,7 @@ def main():
 
         manifest[name] = {"file": fname, "lat": entry["lat"], "lon": entry["lon"]}
 
-    with open(os.path.join(OUT, "manifest.json"), "w", encoding="utf-8") as f:
-        json.dump(manifest, f, indent=1, sort_keys=True)
+    atomic_json_dump(os.path.join(OUT, "manifest.json"), manifest, sort_keys=True)
 
     total = sum(os.path.getsize(os.path.join(OUT, m["file"])) for m in manifest.values())
     print(f"{len(manifest)} maps, {total // 1024} KB")

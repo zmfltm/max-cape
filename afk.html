@@ -774,11 +774,20 @@
       var verdict = best.gpxp <= 0
         ? 'It turns a profit while you train, so the only cost is your time.'
         : 'The cheapest experience open to you right now.';
-      pick.innerHTML = '<span class="k">Best at your level</span>'
-        + '<b>' + best.name + '</b>'
-        + '<span class="pdet">' + gp(best.gpxp) + ' gp per xp · '
-        + best.xp + ' xp each · ' + gp(best.profit) + ' gp profit each</span>'
-        + '<span class="pwhy">' + verdict + '</span>';
+      pick.replaceChildren();
+      var heading = document.createElement('span');
+      heading.className = 'k';
+      heading.textContent = 'Best at your level';
+      var name = document.createElement('b');
+      name.textContent = best.name;
+      var detail = document.createElement('span');
+      detail.className = 'pdet';
+      detail.textContent = gp(best.gpxp) + ' gp per xp · ' + best.xp
+        + ' xp each · ' + gp(best.profit) + ' gp profit each';
+      var why = document.createElement('span');
+      why.className = 'pwhy';
+      why.textContent = verdict;
+      pick.append(heading, name, detail, why);
       pick.hidden = false;
     }
     filter();
@@ -847,12 +856,17 @@
     try { localStorage.setItem(KEY, key); } catch (err) { /* ignore */ }
   }
 
-  try {
-    var saved = localStorage.getItem(KEY);
-    if (saved && cards.some(function (c) { return c.getAttribute('data-path') === saved; })) {
-      show(saved);
-    }
-  } catch (err) { /* private mode */ }
+  var hash = location.hash.replace(/^#(?:path-)?/, '');
+  if (hash && cards.some(function (c) { return c.getAttribute('data-path') === hash; })) {
+    show(hash);
+  } else {
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved && cards.some(function (c) { return c.getAttribute('data-path') === saved; })) {
+        show(saved);
+      }
+    } catch (err) { /* private mode */ }
+  }
 
   picks.forEach(function (b) {
     b.addEventListener('click', function () { show(b.getAttribute('data-path')); });

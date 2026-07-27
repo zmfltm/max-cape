@@ -15,6 +15,7 @@ import urllib.parse
 from hiscores import XP_TABLE, xp_for_level
 from media import METHOD_MEDIA, PROSE_ENTITIES
 from slayer import TASKS as SLAYER_TASKS
+from storage import atomic_text_dump
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 
@@ -585,20 +586,6 @@ VIDEOS = [
 ]
 
 
-# plain marks for the two entries that are not a thing in the game
-REF_SVG = {
-    "progression": ('<svg class="refsvg" viewBox="0 0 16 16" width="14" height="14" '
-                    'aria-hidden="true"><path d="M2 13h3V8H2zM6.5 13h3V5h-3zM11 13h3V2h-3z" '
-                    'fill="currentColor"/></svg>'),
-    "skills": ('<svg class="refsvg" viewBox="0 0 16 16" width="14" height="14" '
-               'aria-hidden="true"><rect x="2" y="2" width="5" height="5" rx="1.2" '
-               'fill="currentColor"/><rect x="9" y="2" width="5" height="5" rx="1.2" '
-               'fill="currentColor" opacity=".65"/><rect x="2" y="9" width="5" height="5" '
-               'rx="1.2" fill="currentColor" opacity=".65"/><rect x="9" y="9" width="5" '
-               'height="5" rx="1.2" fill="currentColor"/></svg>'),
-}
-
-
 PLAN_LINKS = [
     ("progression", "Progression", "assets/media/site/combat-achievements.png"),
     ("quests", "Quests", "assets/media/site/quests.png"),
@@ -626,9 +613,11 @@ MANIFEST_PATH = os.path.join(OUT, "assets", "media", "manifest.json")
 try:
     with open(MANIFEST_PATH, encoding="utf-8") as _f:
         MANIFEST = json.load(_f)
+    if not isinstance(MANIFEST, dict):
+        raise ValueError("media manifest must be an object")
 except (OSError, ValueError):
     MANIFEST = {}
-    print("warning: no assets/media/manifest.json, run fetch_media.py", file=sys.stderr)
+    print("warning: no valid assets/media/manifest.json, run fetch_media.py", file=sys.stderr)
 
 SKILL_NAMES = {s["name"] for s in SKILLS if s["group"] != SUPPORT}
 
@@ -638,7 +627,7 @@ _ALIASES = {}
 for _n in SKILL_NAMES:
     _ALIASES[_n] = ("skill", f"assets/icons/{_n}.png")
 for _d in ("Diary", "Diaries", "diary", "diaries", "Achievement Diary",
-           "Achievement Diaries", "Diary Cape"):
+           "Achievement Diaries"):
     _ALIASES[_d] = ("skill", "assets/icons/Diaries.png")
 for _alias, _title in PROSE_ENTITIES.items():
     _file = MANIFEST.get(_title)
@@ -724,33 +713,32 @@ def annotate(text, depth=0, skip=()):
 # Live stats (data/stats.json, written by fetch_stats.py)
 # --------------------------------------------------------------------------
 
+def load_object(path, default=None):
+    """Read a JSON object, rejecting valid JSON with the wrong top-level type."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            value = json.load(f)
+        return value if isinstance(value, dict) else default
+    except (OSError, ValueError):
+        return default
+
+
 QUESTS_PATH = os.path.join(OUT, "data", "quests.json")
-try:
-    with open(QUESTS_PATH, encoding="utf-8") as _f:
-        QUESTS = json.load(_f)
-except (OSError, ValueError):
+QUESTS = load_object(QUESTS_PATH)
+if QUESTS is not None and not isinstance(QUESTS.get("states"), dict):
     QUESTS = None
 
 DIARIES_PATH = os.path.join(OUT, "data", "diaries.json")
-try:
-    with open(DIARIES_PATH, encoding="utf-8") as _f:
-        DIARIES = json.load(_f)
-except (OSError, ValueError):
+DIARIES = load_object(DIARIES_PATH)
+if DIARIES is not None and not isinstance(DIARIES.get("regions"), list):
     DIARIES = None
 
 FOCUS_PATH = os.path.join(OUT, "data", "focus.json")
-try:
-    with open(FOCUS_PATH, encoding="utf-8") as _f:
-        FOCUS = (json.load(_f) or {}).get("skill")
-except (OSError, ValueError):
-    FOCUS = None
+_focus_data = load_object(FOCUS_PATH, {})
+FOCUS = _focus_data.get("skill") if isinstance(_focus_data.get("skill"), str) else None
 
 PICKS_PATH = os.path.join(OUT, "data", "picks.json")
-try:
-    with open(PICKS_PATH, encoding="utf-8") as _f:
-        PICKS = json.load(_f)
-except (OSError, ValueError):
-    PICKS = {}
+PICKS = load_object(PICKS_PATH, {})
 
 for _s in SKILLS:
     _chosen = PICKS.get(_s["name"])
@@ -759,10 +747,9 @@ for _s in SKILLS:
         _s.pop("pick_note", None)
 
 STATS_PATH = os.path.join(OUT, "data", "stats.json")
-try:
-    with open(STATS_PATH, encoding="utf-8") as _f:
-        STATS = json.load(_f)
-except (OSError, ValueError):
+STATS = load_object(STATS_PATH)
+if STATS is not None and (not isinstance(STATS.get("skills"), dict)
+                          or not isinstance(STATS.get("overall"), dict)):
     STATS = None
 
 
@@ -900,7 +887,9 @@ def quest_panel():
         is_next = step is not None and step.get("name") == nxt_step.get("name") \
             and step.get("tier") == nxt_step.get("tier")
         kind = step["kind"]
-        label = step["name"] + (f' &middot; {step["tier"]}' if step.get("tier") else "")
+        label = e(step["name"]) + (f' &middot; {e(step["tier"])}'
+                                   if step.get("tier") else "")
+        wiki = urllib.parse.quote(str(step.get("wiki", "")), safe="/#")
         tag = ""
         if is_next:
             tag = '<span class="qtag">on deck</span>'
@@ -911,7 +900,7 @@ def quest_panel():
             tag = '<span class="qtag wip">started</span>'
         cls = " now" if is_next else (" wip" if step["state"] == 1 else "")
         rows.append(f'<li class="q{cls}"><span class="qn">{n}</span>'
-                    f'<a href="{WIKI}{step["wiki"]}" rel="noopener" target="_blank">'
+                    f'<a href="{WIKI}{wiki}" rel="noopener" target="_blank">'
                     f'{label}</a>{tag}</li>')
 
     remaining = [s for s in route if s["state"] in (0, 1)]
@@ -919,7 +908,8 @@ def quest_panel():
            (f' ({nxt_step["tier"]})' if nxt_step.get("tier") else ""))
     started = [s for s in route if s["state"] == 1]
 
-    synced = (QUESTS.get("synced") or "")[:10]
+    synced = str(QUESTS.get("synced") or "")[:10]
+    next_wiki = urllib.parse.quote(str(nxt_step.get("wiki", "")), safe="/#")
     return (
         '<div class="questbox">'
         '<div class="qhead">'
@@ -931,7 +921,7 @@ def quest_panel():
         "</div>"
         f'<span class="prog wide"><span class="fill" style="width:{pct}%"></span></span>'
         + (f'<p class="qnow">Next in the guide: '
-           f'<a href="{WIKI}{nxt_step.get("wiki", "")}" rel="noopener" '
+           f'<a href="{WIKI}{next_wiki}" rel="noopener" '
            f'target="_blank"><b>{e(nxt)}</b></a>'
            + (f' &middot; {len(started)} part-finished' if started else "")
            + "</p>" if nxt else
@@ -1272,8 +1262,7 @@ def rail(active=None, depth=0):
          '  <nav class="rail-body">',
          '  <div class="rail-kick">Reference</div>']
     for anchor, label, ico in PLAN_LINKS:
-        mark = (REF_SVG[ico[4:]] if ico.startswith("svg:")
-                else f'<img class="refico" src="{root}{ico}" alt="" width="15" height="15">')
+        mark = f'<img class="refico" src="{root}{ico}" alt="" width="15" height="15">'
         p.append(f'  <a href="{root}index.html#{anchor}">{mark}'
                  f'<span class="t">{e(label)}</span></a>')
 
@@ -1487,12 +1476,17 @@ PATH_JS = """
     try { localStorage.setItem(KEY, key); } catch (err) { /* ignore */ }
   }
 
-  try {
-    var saved = localStorage.getItem(KEY);
-    if (saved && cards.some(function (c) { return c.getAttribute('data-path') === saved; })) {
-      show(saved);
-    }
-  } catch (err) { /* private mode */ }
+  var hash = location.hash.replace(/^#(?:path-)?/, '');
+  if (hash && cards.some(function (c) { return c.getAttribute('data-path') === hash; })) {
+    show(hash);
+  } else {
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved && cards.some(function (c) { return c.getAttribute('data-path') === saved; })) {
+        show(saved);
+      }
+    } catch (err) { /* private mode */ }
+  }
 
   picks.forEach(function (b) {
     b.addEventListener('click', function () { show(b.getAttribute('data-path')); });
@@ -1553,11 +1547,20 @@ POTION_JS = """
       var verdict = best.gpxp <= 0
         ? 'It turns a profit while you train, so the only cost is your time.'
         : 'The cheapest experience open to you right now.';
-      pick.innerHTML = '<span class="k">Best at your level</span>'
-        + '<b>' + best.name + '</b>'
-        + '<span class="pdet">' + gp(best.gpxp) + ' gp per xp \u00b7 '
-        + best.xp + ' xp each \u00b7 ' + gp(best.profit) + ' gp profit each</span>'
-        + '<span class="pwhy">' + verdict + '</span>';
+      pick.replaceChildren();
+      var heading = document.createElement('span');
+      heading.className = 'k';
+      heading.textContent = 'Best at your level';
+      var name = document.createElement('b');
+      name.textContent = best.name;
+      var detail = document.createElement('span');
+      detail.className = 'pdet';
+      detail.textContent = gp(best.gpxp) + ' gp per xp \u00b7 ' + best.xp
+        + ' xp each \u00b7 ' + gp(best.profit) + ' gp profit each';
+      var why = document.createElement('span');
+      why.className = 'pwhy';
+      why.textContent = verdict;
+      pick.append(heading, name, detail, why);
       pick.hidden = false;
     }
     filter();
@@ -2198,7 +2201,7 @@ def parse_reqs(req, own_skill):
     out, bare = [], []
     text = req.replace("–", "-")
 
-    for m in re.finditer(r"(\d{1,3})\s*\+?\s*([A-Za-z']+)?", text):
+    for m in re.finditer(r"(?<![A-Za-z0-9])(\d{1,3})\s*\+?\s*([A-Za-z']+)?", text):
         num = int(m.group(1))
         word = (m.group(2) or "").strip("'").lower()
         if not 1 <= num <= 126:
@@ -2223,8 +2226,43 @@ def parse_reqs(req, own_skill):
     return out
 
 
+QUEST_ALIASES = {
+    "mm2": "Monkey Madness II",
+    "blood moon rises": "The Blood Moon Rises",
+    "lunars": "Lunar Diplomacy",
+    "fossil island": "Bone Voyage",
+}
+
+
+def quest_unmet(req):
+    """An explicitly named quest or diary requirement that is still locked."""
+    if not QUESTS or not req:
+        return None
+    states = QUESTS["states"]
+    lower = req.lower()
+    names = {name.lower(): name for name in states}
+    for alias, quest in QUEST_ALIASES.items():
+        if re.search(rf"(?<![a-z0-9]){re.escape(alias)}(?![a-z0-9])", lower):
+            if states.get(quest) != 2:
+                return quest
+    for key, quest in sorted(names.items(), key=lambda item: -len(item[0])):
+        if re.search(rf"(?<![a-z0-9]){re.escape(key)}(?![a-z0-9])", lower):
+            if states.get(quest) != 2:
+                return quest
+    if "ardy medium" in lower and DIARIES:
+        ardougne = next((r for r in DIARIES["regions"]
+                         if r.get("name") == "Ardougne"), {})
+        medium = (ardougne.get("tiers") or {}).get("Medium") or {}
+        if not medium.get("complete"):
+            return "Ardougne medium diary"
+    return None
+
+
 def unmet(req, own_skill):
     """First requirement your account does not meet, or None."""
+    locked_quest = quest_unmet(req)
+    if locked_quest:
+        return locked_quest
     if not STATS:
         return None
     for skill, lvl in parse_reqs(req, own_skill):
@@ -2233,7 +2271,7 @@ def unmet(req, own_skill):
                 return f"{lvl} combat"
             continue
         st = stat_of(skill)
-        if st and st["level"] < lvl:
+        if not st or st["level"] < lvl:
             return f"{lvl} {skill}"
     return None
 
@@ -2549,10 +2587,9 @@ EMBEDS = {
 def starmap_script(depth=0):
     """Crash-site maps plus the tracker icon path for the client."""
     path = os.path.join(OUT, "assets", "media", "starmaps", "manifest.json")
-    try:
-        with open(path, encoding="utf-8") as f:
-            maps = json.load(f)
-    except (OSError, ValueError):
+    maps = load_object(path)
+    if not maps or not all(isinstance(v, dict) and isinstance(v.get("file"), str)
+                           for v in maps.values()):
         return ""
     slim = {k: {"f": v["file"]} for k, v in maps.items()}
     root = "../" if depth else ""
@@ -2636,11 +2673,13 @@ def wiki_link(name, page=None, cls="wl", cased=True):
 
 
 POTIONS_PATH = os.path.join(OUT, "data", "potions.json")
-try:
-    with open(POTIONS_PATH, encoding="utf-8") as _f:
-        POTIONS = json.load(_f).get("potions", [])
-except (OSError, ValueError):
+_potion_data = load_object(POTIONS_PATH, {})
+POTIONS = _potion_data.get("potions", [])
+if not isinstance(POTIONS, list):
     POTIONS = []
+POTIONS = [p for p in POTIONS if isinstance(p, dict)
+           and all(key in p for key in ("name", "level", "xp", "inputs", "made"))
+           and isinstance(p["inputs"], list) and p["inputs"]]
 
 
 def potion_ladder():
@@ -2682,15 +2721,20 @@ def potion_section():
     lvl = (stat_of("Herblore") or {}).get("level", 1)
 
     rows = []
+    duplicate_names = {p["name"] for p in POTIONS
+                       if sum(q["name"] == p["name"] for q in POTIONS) > 1}
     for p in sorted(POTIONS, key=lambda x: x["level"]):
         ing = ", ".join(f'{i["name"]}' + (f' x{i["qty"]}' if i["qty"] > 1 else "")
                         for i in p["inputs"])
+        label = p["name"]
+        if label in duplicate_names:
+            label += f' — {p["inputs"][-1]["name"]}'
         rows.append(
             f'<tr class="pot" data-level="{p["level"]}" data-xp="{p["xp"]}" '
             f'data-made="{p["made"]}" '
             f'data-inputs="{e(json.dumps(p["inputs"], separators=(chr(44), chr(58))))}">'
             f'<td class="req">{p["level"]}</td>'
-            f'<td class="tn">{wiki_link(p["name"], cased=False)}</td>'
+            f'<td class="tn">{wiki_link(label, page=p["name"], cased=False)}</td>'
             f'<td class="notes">{e(ing)}</td>'
             f'<td class="rate">{p["xp"]:g}</td>'
             f'<td class="rate gpxp">-</td>'
@@ -3380,8 +3424,9 @@ def max_order_block(phase):
             f'href="skills/{slug(name)}.html">{icon(name)}'
             f'<span class="mn">{e(name)}</span>'
             + (f'<span class="ml">{st["level"]}</span>' if st else "")
-            + (f'<span class="mh">{hrs:.0f}h</span>' if hrs else
-               '<span class="mh done">99</span>')
+            + ('<span class="mh done">99</span>' if done else
+               (f'<span class="mh">{hrs:.0f}h</span>' if hrs is not None else
+                '<span class="mh">passive</span>'))
             + "</a>")
     head = (f'<b>{e(phase["title"])}</b>'
             + (f'<span class="mtot">{total:.0f} hours</span>' if total else ""))
@@ -3631,11 +3676,7 @@ CARRIES = {
 MAX_XP = xp_for_level(99)
 
 DIARY_REQS_PATH = os.path.join(OUT, "data", "diary_reqs.json")
-try:
-    with open(DIARY_REQS_PATH, encoding="utf-8") as _f:
-        DIARY_REQS = json.load(_f)
-except FileNotFoundError:                    # run fetch_diary_reqs.py
-    DIARY_REQS = {}
+DIARY_REQS = load_object(DIARY_REQS_PATH, {})
 
 
 def level_at(xp):
@@ -3649,7 +3690,18 @@ def level_at(xp):
     return lv
 
 
-def order_rows(rows):
+PLAN_BLOCK = {}
+for _i, _blk in enumerate(MAX_ORDER):
+    for _j, _sk in enumerate(_blk.get("skills") or []):
+        PLAN_BLOCK[_sk] = (_i, _j, _blk["title"])
+
+
+def plan_order(rows):
+    """The order the Max Order blocks on the front page lay out."""
+    return sorted(rows, key=lambda r: PLAN_BLOCK.get(r["skill"], (99, 99, ""))[:2])
+
+
+def carrier_order(rows):
     """Carriers first, then longest first.
 
     A method that hands XP to another skill is worth doing before the skill
@@ -3666,8 +3718,50 @@ def order_rows(rows):
                          if name != r["skill"])
         return (0 if hands_over else 1, -naive[r["skill"]])
 
-    rows.sort(key=rank)
-    return rows
+    return sorted(rows, key=rank)
+
+
+def total_of(order):
+    """Hours for one ordering. No diary work: this runs inside the search."""
+    return walk(list(order), diaries=False)[1]
+
+
+def best_order(rows, within_plan=False):
+    """Move one skill at a time until nothing gets cheaper.
+
+    Order changes the bill because carried XP only counts if it arrives before
+    you would have paid for those levels. Seeded from both the plan order and
+    the carriers-first rule, since either can be the better start.
+    """
+    seeds = [plan_order(rows), carrier_order(rows)]
+    if within_plan:                      # reshuffle inside each block only
+        seeds = [sorted(seed, key=lambda r: PLAN_BLOCK.get(r["skill"], (99,))[0])
+                 for seed in seeds]
+
+    best_seq, best = None, None
+    for seed in seeds:
+        order = list(seed)
+        score = total_of(order)
+        for _ in range(6):
+            moved = False
+            for i in range(len(order)):
+                for j in range(len(order)):
+                    if i == j:
+                        continue
+                    trial = list(order)
+                    trial.insert(j, trial.pop(i))
+                    if within_plan and [PLAN_BLOCK.get(r["skill"], (99,))[0]
+                                        for r in trial] != sorted(
+                            PLAN_BLOCK.get(r["skill"], (99,))[0] for r in trial):
+                        continue
+                    got = total_of(trial)
+                    if got < score - 0.01:
+                        order, score, moved = trial, got, True
+            if not moved:
+                break
+        if best is None or score < best:
+            best_seq, best = order, score
+    return best_seq, best
 
 
 # the wiki lists quest points alongside the skills; nothing here knows how many
@@ -3687,7 +3781,7 @@ def diary_state(levels):
     return ok
 
 
-def walk(rows):
+def walk(rows, diaries=True):
     """Train the list in order and record where every skill ends up.
 
     Sequential rather than an average: a skill trained late has already been
@@ -3698,7 +3792,7 @@ def walk(rows):
     # tier can hang on a 99 that is already banked
     levels = {name: (stat_of(name) or {}).get("level", 0) for name in SKILL_NAMES}
     levels.update({r["skill"]: r["level"] for r in rows})
-    have = diary_state(levels)
+    have = diary_state(levels) if diaries else set()
 
     total = 0
     for i, r in enumerate(rows, 1):
@@ -3725,14 +3819,15 @@ def walk(rows):
                 gives.append((name, levels[name]))
         r["gives"] = gives
 
-        unlocked = diary_state(levels) - have
-        have |= unlocked
-        r["diaries"] = sorted(unlocked)
+        if diaries:
+            unlocked = diary_state(levels) - have
+            have |= unlocked
+            r["diaries"] = sorted(unlocked)
 
     return rows, total, have
 
 
-def rows_for(choice):
+def rows_for(choice, order="carrier", diaries=False):
     """Hours to 99 per skill, given a route key per skill."""
     out = []
     for name, opts in PATHS.items():
@@ -3746,13 +3841,20 @@ def rows_for(choice):
                         xp=st["xp"] or 0, hours=0, left=0, carried=0,
                         gives=[], diaries=[], order=0, arrive=st["level"]))
 
-    order_rows(out)
-    rows, total, _ = walk(out)
+    if order == "best":
+        out, _ = best_order(out)
+    elif order == "plan":
+        out = plan_order(out)
+    elif order == "plan-best":
+        out, _ = best_order(out, within_plan=True)
+    else:
+        out = carrier_order(out)
+    rows, total, _ = walk(out, diaries=diaries)
     return rows, total
 
 
-def path_hours(key):
-    return rows_for({name: key for name in PATHS})
+def path_hours(key, **kw):
+    return rows_for({name: key for name in PATHS}, **kw)
 
 
 def optimal_mix():
@@ -3853,12 +3955,40 @@ def optimal_card(choice, computed):
         f'<tbody>{rows}</tbody></table></div></div></section>')
 
 
-def paths_page():
-    computed = {key: path_hours(key) for key, _, _ in PATH_META}
-    choice, _ = optimal_mix()
-    computed["opt"] = rows_for(choice)
+SHORT_BLOCK = {"Slayer to 99": "slayer", "Finish combat": "combat",
+               "The grinds that pay": "grinds", "Slow gatherers": "gatherers",
+               "Buyables last": "buyables"}
 
-    label_of = {k: lab for k, lab, _ in PATH_META}
+
+def order_note(key, rows, total):
+    """What the front page's block order would cost on this route."""
+    plan_rows, plan_total = path_hours(key, order="plan", diaries=True)
+    gap = plan_total - total
+    if gap < 1:
+        return ('<p class="note nt">No ordering beats the Max Order from the '
+                'front page on this route: its blocks already put the skills '
+                'that carry others first.</p>')
+
+    best_hours = {r["skill"]: r["hours"] for r in rows}
+    moves = sorted(((r["hours"] - best_hours.get(r["skill"], 0), r["skill"])
+                    for r in plan_rows), reverse=True)
+    named = ", ".join(f"{e(name)} pays {cost:.0f}h" for cost, name in moves[:3]
+                      if cost >= 1)
+    return (f'<p class="note nt">The Max Order on the front page costs '
+            f'<b>{plan_total:,.0f}h</b> on this route, {gap:,.0f} more. It '
+            f'trains skills before the ones that would have carried them, so '
+            f'{named} more than here. The order below fixes that by crossing '
+            f'the blocks; the '
+            f'blocks themselves are still worth keeping, because they are '
+            f'about money and this is only about hours.</p>')
+
+
+def paths_page():
+    computed = {key: path_hours(key, order="best", diaries=True)
+                for key, _, _ in PATH_META}
+    choice, _ = optimal_mix()
+    computed["opt"] = rows_for(choice, order="best", diaries=True)
+
     alt = {}
     for key, _, _ in PATH_META:
         for r in computed[key][0]:
@@ -3890,6 +4020,9 @@ def paths_page():
             gives = " · ".join(f"{n} {lv}" for n, lv in r["gives"])
             got = (f'<span class="carried">arrive at {r["arrive"]}</span>'
                    if r["arrive"] > r["level"] else "")
+            blk = PLAN_BLOCK.get(r["skill"])
+            got += (f'<span class="blk">{e(SHORT_BLOCK.get(blk[2], blk[2]))}</span>'
+                    if blk else "")
             unlocks = "".join(f'<span class="dia">{e(d)}</span>'
                               for d in r["diaries"])
             cells.append(
@@ -3910,7 +4043,8 @@ def paths_page():
             f'<div class="phead"><h2 id="{key}">{e(label)}</h2>'
             f'<span class="ptot">{total:,.0f} hours</span></div>'
             f'<p class="lede2">{e(blurb)}</p>'
-            '<div class="tablewrap"><div class="tablescroll">'
+            + order_note(key, rows, total)
+            + '<div class="tablewrap"><div class="tablescroll">'
             '<table class="pathtable"><thead><tr><th>#</th><th>Skill</th>'
             '<th>Method</th><th>XP/hr</th><th>Hours</th></tr></thead>'
             f'<tbody>{"".join(cells)}</tbody></table></div></div></section>')
@@ -4021,26 +4155,23 @@ def main():
     os.makedirs(os.path.join(OUT, "skills"), exist_ok=True)
 
     ordered = [s for g in GROUP_ORDER for s in SKILLS if s["group"] == g]
+    outputs = {}
     for i, s in enumerate(ordered):
         prev_s = ordered[i - 1] if i else None
         next_s = ordered[i + 1] if i + 1 < len(ordered) else None
         path = os.path.join(OUT, "skills", slug(s["name"]) + ".html")
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(build_skill_page(s, prev_s, next_s))
+        outputs[path] = build_skill_page(s, prev_s, next_s)
 
-    with open(os.path.join(OUT, "stars.html"), "w", encoding="utf-8") as f:
-        f.write(build_stars_page())
+    outputs.update({
+        os.path.join(OUT, "stars.html"): build_stars_page(),
+        os.path.join(OUT, "afk.html"): build_afk_page(),
+        os.path.join(OUT, "paths.html"): paths_page(),
+        os.path.join(OUT, "index.html"): build_index(),
+    })
+    for path, content in outputs.items():
+        atomic_text_dump(path, content)
 
-    with open(os.path.join(OUT, "afk.html"), "w", encoding="utf-8") as f:
-        f.write(build_afk_page())
-
-    with open(os.path.join(OUT, "paths.html"), "w", encoding="utf-8") as f:
-        f.write(paths_page())
-
-    with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
-        f.write(build_index())
-
-    print(f"wrote index.html + {len(ordered)} pages")
+    print(f"wrote index.html + {len(ordered)} skill pages + 3 reference pages")
 
 
 if __name__ == "__main__":

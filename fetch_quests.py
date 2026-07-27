@@ -18,6 +18,7 @@ import sys
 import urllib.error
 
 from quests import collect, collect_diaries, sync_state
+from storage import atomic_json_dump
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "data", "quests.json")
@@ -61,11 +62,8 @@ def main():
     stamp = datetime.datetime.now().astimezone().isoformat(timespec="minutes")
     data["fetched"] = stamp
     diaries["fetched"] = stamp
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=1)
-    with open(DIARY_OUT, "w", encoding="utf-8") as f:
-        json.dump(diaries, f, indent=1)
+    atomic_json_dump(OUT, data)
+    atomic_json_dump(DIARY_OUT, diaries)
 
     print(f"{data['name']}: {data['done']}/{data['total']} quests done, "
           f"{len(data['remaining'])} to go")

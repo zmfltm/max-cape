@@ -15,6 +15,8 @@ import re
 import urllib.parse
 import urllib.request
 
+from storage import atomic_json_dump
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "data", "potions.json")
 WIKI_API = "https://oldschool.runescape.wiki/api.php"
@@ -126,9 +128,7 @@ def main():
         p["made"] = made
         priced.append(p)
 
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
-        json.dump({"potions": priced}, f, indent=1)
+    atomic_json_dump(OUT, {"potions": priced})
 
     print(f"{len(priced)} priceable, written to data/potions.json")
     if skipped:

@@ -81,10 +81,10 @@ def normalise(rid):
     return "quest", rid, None
 
 
-def guide_order(known):
+def guide_order(known, route=None):
     """Quest names only, in guide order, for anything that needs a flat list."""
     order, seen = [], set()
-    for rid in guide_route():
+    for rid in route if route is not None else guide_route():
         kind, name, _ = normalise(rid)
         if kind == "quest" and name in known and name not in seen:
             seen.add(name)
@@ -130,10 +130,10 @@ def collect_diaries(raw, player=None):
     }
 
 
-def route_steps(quests, diaries):
+def route_steps(quests, diaries, route=None):
     """The guide route with each step marked done, started or outstanding."""
     steps = []
-    for rid in guide_route():
+    for rid in route if route is not None else guide_route():
         kind, name, tier = normalise(rid)
         if kind == "diary":
             entry = (diaries.get(name) or {}).get(tier) or {}
@@ -166,12 +166,13 @@ def collect(player, raw=None):
         "username": raw.get("username") or player,
     }
     quests = state["quests"]
-    order = guide_order(set(quests))
+    route = guide_route()
+    order = guide_order(set(quests), route)
     done = [n for n in order if quests.get(n) == DONE]
     started = [n for n in order if quests.get(n) == IN_PROGRESS]
     todo = [n for n in order if quests.get(n) != DONE]
     diaries = raw.get("achievement_diaries") or {}
-    steps = route_steps(quests, diaries)
+    steps = route_steps(quests, diaries, route)
     # untracked steps (Tutorial Island, balloon routes) have no state, so they
     # never count as outstanding
     outstanding = [s for s in steps if s["state"] in (0, 1)]

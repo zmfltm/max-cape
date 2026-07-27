@@ -18,6 +18,7 @@ import urllib.parse
 import urllib.request
 
 from media import all_titles
+from storage import atomic_json_dump
 
 API = "https://oldschool.runescape.wiki/api.php"
 UA = "mudkip-osrs-plan/1.0 (personal static site; contact: local)"
@@ -93,8 +94,7 @@ def main():
             time.sleep(0.15)
         manifest[t] = name
 
-    with open(os.path.join(OUT, "manifest.json"), "w", encoding="utf-8") as f:
-        json.dump(manifest, f, indent=1, sort_keys=True)
+    atomic_json_dump(os.path.join(OUT, "manifest.json"), manifest, sort_keys=True)
 
     print(f"{len(manifest)} images in assets/media/")
     if missing:
