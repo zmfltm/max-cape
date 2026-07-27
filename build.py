@@ -3497,9 +3497,8 @@ MAX_ORDER = [
          why="Whatever Slayer did not already carry. Ranged and Magic go fast on "
              "chins and barrage, Prayer burns the bones you banked, Hitpoints "
              "arrives on its own.",
-         caveat="Counted as if you trained each one alone. Most of it lands "
-                "during the 235 hours above, so treat this as the ceiling, not "
-                "the bill.",
+         caveat="Slayer's carry is already subtracted, which is why Hitpoints "
+                "is free and Magic is nearly so.",
          skills=["Attack", "Strength", "Defence", "Ranged", "Magic", "Prayer",
                  "Hitpoints"]),
     dict(title="The grinds that pay",
@@ -3527,16 +3526,41 @@ def hours_left(skill_name):
     return left / rate if left else 0
 
 
-def max_order_block(phase):
+def post_diary_rows(key="hybrid"):
+    """Where every skill stands once the Diary Cape is done, and what is left.
+
+    The block is titled post-diary-cape, so it has no business costing the
+    levels you buy on the way there. The floor for each skill is the higher of
+    where you are now and what the hardest elite tier asks of it. Rates and
+    carries are the route model's, so this and Which Path cannot disagree.
+    """
+    wall = dict(diary_wall("Elite"))
+    out = []
+    for name, opts in PATHS.items():
+        st = stat_of(name)
+        if not st:
+            continue
+        floor = min(99, wall.get(name, 1))
+        xp = max(st["xp"] or 0, XP_TABLE[floor])
+        out.append(dict(skill=name, level=level_at(xp), route=opts[key], key=key,
+                        method=opts[key][0][1], rate=opts[key][0][2], legs=[],
+                        need=max(0, MAX_XP - xp), xp=xp, hours=0, left=0,
+                        carried=0, gives=[], diaries=[], order=0,
+                        arrive=level_at(xp)))
+    rows, total, _ = walk(plan_order(out), diaries=False)
+    return {r["skill"]: r for r in rows}, total
+
+
+def max_order_block(phase, after):
     chips = []
     total = 0
     for name in phase["skills"]:
         sk = next((x for x in SKILLS if x["name"] == name), None)
         if not sk:
             continue
-        st = stat_of(name)
-        hrs = hours_left(name)
-        done = st and st["level"] >= 99
+        row = after.get(name)
+        hrs = row["hours"] if row else None
+        done = row is not None and row["need"] <= 0
         if hrs:
             total += hrs
         money = SKILL_RATE.get(name, (0, ""))[1]
@@ -3544,10 +3568,10 @@ def max_order_block(phase):
             f'<a class="mo {money}{" met" if done else ""}" '
             f'href="skills/{slug(name)}.html">{icon(name)}'
             f'<span class="mn">{e(name)}</span>'
-            + (f'<span class="ml">{st["level"]}</span>' if st else "")
+            + (f'<span class="ml">{row["level"]}</span>' if row else "")
             + ('<span class="mh done">99</span>' if done else
-               (f'<span class="mh">{hrs:.0f}h</span>' if hrs is not None else
-                '<span class="mh">passive</span>'))
+               (f'<span class="mh">{hrs:.0f}h</span>' if hrs else
+                '<span class="mh">free</span>'))
             + "</a>")
     head = (f'<b>{e(phase["title"])}</b>'
             + (f'<span class="mtot">{total:.0f} hours</span>' if total else ""))
@@ -4727,12 +4751,17 @@ def build_index():
 
     parts.append(h2("max-order", "Post-Diary-Cape Maxing Order",
                     "assets/media/max-cape.png"))
-    parts.append('<p class="lede2">Ordered so the hours that pay come before the '
-                 'hours that cost, and so nothing waits on something later. '
-                 'Estimates use your live XP at the rates on each skill page.</p>')
+    after, left = post_diary_rows()
+    parts.append(f'<p class="lede2">Levels start from where the Diary Cape '
+                 f'leaves them, not from today, so nothing here is counted '
+                 f'twice. <b>{left:,.0f} hours</b> on the hybrid route, at the '
+                 f'same rates and shared XP the '
+                 f'<a class="wl" href="paths.html">route tables</a> use. '
+                 f'Ordered so the hours that pay come before the hours that '
+                 f'cost; searching every reordering finds nothing cheaper.</p>')
     parts.append('<ol class="phases maxorder">')
     for phase in MAX_ORDER:
-        parts.append(max_order_block(phase))
+        parts.append(max_order_block(phase, after))
     parts.append("</ol>")
 
     return page("OSRS max time wasting plan", "\n".join(parts))
