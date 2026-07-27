@@ -115,6 +115,7 @@ rebuilds, runs the checks, and commits changes every six hours.
 ## Checks
 
 ```bash
+python3 -m pip install -r requirements-dev.txt
 ruff check . --exclude skills --exclude assets
 python3 -m unittest discover -s tests -v
 ```

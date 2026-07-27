@@ -102,13 +102,16 @@ def main():
             f"{t[0]}:{len(reqs[region].get(t, {}))}" for t in TIERS))
         time.sleep(0.3)
 
-    atomic_json_dump(OUT, reqs, sort_keys=True)
-
-    tiers = sum(1 for r in reqs.values() for t in r.values() if t)
-    print(f"\n{tiers} tiers with skill requirements, written to data/diary_reqs.json")
     if thin:
         print("fewer than four blocks on: " + ", ".join(thin))
+        print("keeping the previous data/diary_reqs.json")
+        return 1
+
+    atomic_json_dump(OUT, reqs, sort_keys=True)
+    tiers = sum(1 for r in reqs.values() for t in r.values() if t)
+    print(f"\n{tiers} tiers with skill requirements, written to data/diary_reqs.json")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

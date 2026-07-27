@@ -20,7 +20,7 @@ import urllib.request
 from PIL import Image
 import io
 
-from storage import atomic_json_dump
+from storage import atomic_binary_dump, atomic_json_dump
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "assets", "media", "starmaps")
@@ -109,7 +109,9 @@ def main():
             if img is None:
                 missed.append(name)
                 continue
-            img.save(path, optimize=True)
+            data = io.BytesIO()
+            img.save(data, format="PNG", optimize=True)
+            atomic_binary_dump(path, data.getvalue())
 
         manifest[name] = {"file": fname, "lat": entry["lat"], "lon": entry["lon"]}
 

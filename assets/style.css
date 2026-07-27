@@ -90,6 +90,7 @@ body::before {
 
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--accent-soft); }
+[hidden] { display: none !important; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
 img.icon {
@@ -1287,7 +1288,7 @@ tr.rec td:nth-child(2) { color: var(--fg); }
   transition: border-color var(--fast) var(--ease), color var(--fast) var(--ease);
 }
 .tierpick:hover { color: var(--fg); border-color: rgba(255, 157, 46, 0.4); }
-.tierpick:focus { outline: none; border-color: var(--accent); }
+.tierpick:focus-visible { border-color: var(--accent); }
 
 
 .starlist { display: grid; gap: 1px; background: var(--line-soft); border-radius: var(--r-sm); overflow: hidden; }
@@ -1754,4 +1755,76 @@ p.lede2 { color: var(--muted); font-size: 14.5px; max-width: 68ch; }
   html { scroll-behavior: auto; }
   /* the spinner is feedback, not decoration, so it keeps turning */
   .refresh.busy svg { animation: spin 700ms linear infinite !important; }
+}
+
+/* -------------------------------------------------------------- calculators */
+
+.ctabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 22px 0 0; }
+.ctab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 12px 5px 8px;
+  cursor: pointer;
+}
+.ctab img { width: 16px; height: 16px; }
+.ctab:hover { color: var(--fg); border-color: var(--line-strong); }
+.ctab.on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+
+.calcbar { display: flex; align-items: center; gap: 14px; margin: 18px 0 0; flex-wrap: wrap; }
+.cfield { display: inline-flex; align-items: center; gap: 7px; }
+.cfield span {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.cfield input, .cfield select {
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 8px;
+  width: 64px;
+}
+.cfield.sel select { width: auto; max-width: 190px; }
+.cfield input:focus, .cfield select:focus { outline: none; border-color: var(--accent); }
+.cgap { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+
+.cpick {
+  display: grid;
+  gap: 3px;
+  margin: 16px 0 0;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+.cpick b { font-size: 16px; font-weight: 500; }
+.cpick .pdet { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.cpick .pwhy { font-size: 12.5px; color: var(--dim); }
+
+table.calctable { min-width: 700px; font-size: 13px; }
+table.calctable td.tn { color: var(--fg); }
+table.calctable tr.locked td { opacity: 0.4; }
+table.calctable td.good { color: var(--done); }
+.thin {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--warn, #e0913a);
+  border: 1px solid color-mix(in srgb, var(--warn, #e0913a) 35%, transparent);
+  border-radius: 999px;
+  padding: 1px 7px;
+  margin-left: 8px;
 }

@@ -15,6 +15,7 @@ import json
 import os
 import re
 import time
+import urllib.parse
 import urllib.request
 import sys
 import threading
@@ -44,22 +45,22 @@ def remembered_name():
 STAR_URL = "https://07.gg/trackers/shooting-star"
 STAR_UA = "mudkip-osrs-plan/1.0 (personal planning page)"
 _star_cache = {"at": 0.0, "data": None}
+_star_lock = threading.Lock()
 
 
 def clean_star_text(text, limit=60):
     """Keep crowd-sourced fields plain and bounded before storing them."""
     text = re.sub(r"[<>&\"'\\\\]", "", text or "")
-    return re.sub(r"\\s+", " ", text).strip()[:limit]
+    return re.sub(r"\s+", " ", text).strip()[:limit]
 
 
-def clean_caller(text):
-    if re.search(r"[^A-Za-z0-9 _-]", text or ""):
-        return "anonymous"
-    caller = clean_star_text(text, 12)
-    return caller if re.fullmatch(r"[A-Za-z0-9 _-]{1,12}", caller) else "anonymous"
+def shooting_stars(max_age=45, require_snapshot=False):
+    """Serialize refreshes so simultaneous tabs do not duplicate the scrape."""
+    with _star_lock:
+        return _shooting_stars(max_age, require_snapshot)
 
 
-def shooting_stars(max_age=45):
+def _shooting_stars(max_age=45, require_snapshot=False):
     """Active stars from 07.gg, parsed out of their server-rendered payload.
 
     They publish no JSON API, so this reads the `initialCalls` array the page
@@ -79,7 +80,7 @@ def shooting_stars(max_age=45):
             r'calledAt\\?":(\d+),\\?"caller\\?":\\?"(.*?)\\?",\\?"world\\?":(\d+),'
             r'\\?"tier\\?":(\d+),\\?"locationKey\\?":\\?"(.*?)\\?",'
             r'\\?"rawLocation\\?":\\?"(.*?)\\?",\\?"estimatedEnd\\?":(\d+)', page):
-        called, caller, world, tier, _key, loc, end = m.groups()
+        called, _caller, world, tier, _key, loc, end = m.groups()
         if world in seen:
             continue
         seen.add(world)
@@ -87,23 +88,34 @@ def shooting_stars(max_age=45):
             "world": int(world),
             "tier": int(tier),
             "location": clean_star_text(loc),
-            "caller": clean_caller(caller),
             "calledAt": int(called),
             "endsAt": int(end),
         })
 
     stars.sort(key=lambda x: (-x["tier"], x["endsAt"]))
-    _star_cache.update(at=now, data=stars)
+    refreshed = time.time()
+    _star_cache.update(at=refreshed, data=stars)
 
     # keep a snapshot on disk: the published copy on GitHub Pages reads this,
     # since Pages has no server to proxy with
-    try:
-        atomic_json_dump(os.path.join(HERE, "data", "stars.json"),
-                         {"stars": stars, "at": int(now * 1000), "source": STAR_URL})
-    except OSError:
-        pass
+    if stars:
+        try:
+            atomic_json_dump(os.path.join(HERE, "data", "stars.json"),
+                             {"stars": stars, "at": int(refreshed * 1000),
+                              "source": STAR_URL})
+        except OSError:
+            if require_snapshot:
+                raise
 
     return stars
+
+
+def valid_method(skill, method):
+    """Only persist choices the generator can actually render."""
+    from build import SKILLS
+
+    return any(row["name"] == skill and any(m[0] == method for m in row["methods"])
+               for row in SKILLS)
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -129,6 +141,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         route = self.path.split("?")[0]
         if route not in ("/api/pick", "/api/focus"):
             return self.json({"error": "unknown endpoint"}, 404)
+        content_type = self.headers.get_content_type()
+        if content_type != "application/json":
+            return self.json({"error": "content type must be application/json"}, 415)
+        origin = self.headers.get("Origin")
+        if origin and urllib.parse.urlparse(origin).hostname not in {
+                "127.0.0.1", "localhost", "::1"}:
+            return self.json({"error": "cross-origin request refused"}, 403)
         try:
             length = int(self.headers.get("Content-Length") or 0)
         except ValueError:
@@ -147,7 +166,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 if not isinstance(body.get("method"), str):
                     raise ValueError
                 method = body["method"].strip()
-                if not method or len(method) > 120:
+                if not valid_method(skill, method):
                     raise ValueError
         except (ValueError, json.JSONDecodeError):
             return self.json({"error": "bad request"}, 400)
@@ -179,12 +198,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         return self.json({"ok": True, "skill": skill, "method": method})
 
     def hiscores(self):
-        from urllib.parse import parse_qs, urlparse
-
-        q = parse_qs(urlparse(self.path).query)
-        player = (q.get("player", [None])[0] or remembered_name() or "").strip()
+        player = (remembered_name() or "").strip()
         if not player:
             return self.json({"error": "no player linked yet"}, 400)
+        if not re.fullmatch(r"[A-Za-z0-9 _-]{1,12}", player):
+            return self.json({"error": "invalid player name"}, 400)
 
         try:
             data = fetch(player)

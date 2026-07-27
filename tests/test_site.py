@@ -1,4 +1,5 @@
 import collections
+import re
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -36,7 +37,7 @@ class GeneratedSiteTests(unittest.TestCase):
             cls.parsed[page] = parser
 
     def test_expected_page_count(self):
-        self.assertEqual(len(self.pages), 29)
+        self.assertEqual(len(self.pages), 30)
 
     def test_no_duplicate_ids(self):
         for page, parser in self.parsed.items():
@@ -56,6 +57,19 @@ class GeneratedSiteTests(unittest.TestCase):
                 if split.fragment and target.suffix == ".html":
                     self.assertIn(unquote(split.fragment), ids.get(target, set()),
                                   f"{page}: missing anchor {ref}")
+
+    def test_url_attributes_escape_ampersands(self):
+        attr = re.compile(r'\b(?:href|src)="([^"]*)"')
+        raw_amp = re.compile(r'&(?!#\d+;|#x[\da-fA-F]+;|[A-Za-z][A-Za-z0-9]+;)')
+        for page in self.pages:
+            for value in attr.findall(page.read_text(encoding="utf-8")):
+                self.assertIsNone(raw_amp.search(value), f"{page}: unescaped &: {value}")
+
+    def test_live_stats_uses_its_own_refresh_button(self):
+        for page in self.pages:
+            source = page.read_text(encoding="utf-8")
+            self.assertIn("querySelector('.stats-refresh')", source, page)
+            self.assertEqual(source.count('class="refresh stats-refresh"'), 1, page)
 
     def test_generator_matches_tracked_html(self):
         ordered = [s for group in build.GROUP_ORDER

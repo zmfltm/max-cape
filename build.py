@@ -732,6 +732,10 @@ DIARIES_PATH = os.path.join(OUT, "data", "diaries.json")
 DIARIES = load_object(DIARIES_PATH)
 if DIARIES is not None and not isinstance(DIARIES.get("regions"), list):
     DIARIES = None
+if (QUESTS and DIARIES and QUESTS.get("fetched") and DIARIES.get("fetched")
+        and QUESTS["fetched"] != DIARIES["fetched"]):
+    print("warning: quest and diary snapshots are from different refreshes", file=sys.stderr)
+    QUESTS = DIARIES = None
 
 FOCUS_PATH = os.path.join(OUT, "data", "focus.json")
 _focus_data = load_object(FOCUS_PATH, {})
@@ -903,7 +907,7 @@ def quest_panel():
                     f'<a href="{WIKI}{wiki}" rel="noopener" target="_blank">'
                     f'{label}</a>{tag}</li>')
 
-    remaining = [s for s in route if s["state"] in (0, 1)]
+    quest_left = max(0, total - done)
     nxt = (nxt_step.get("name", "") +
            (f' ({nxt_step["tier"]})' if nxt_step.get("tier") else ""))
     started = [s for s in route if s["state"] == 1]
@@ -916,8 +920,8 @@ def quest_panel():
         f'<div><div class="k">Quest Cape</div>'
         f'<div class="qcount"><b class="num">{done}</b>'
         f'<span>of {total} done</span></div></div>'
-        f'<div class="qright"><b class="num">{len(remaining)}</b>'
-        '<span>to go</span></div>'
+        f'<div class="qright"><b class="num">{quest_left}</b>'
+        '<span>quests to go</span></div>'
         "</div>"
         f'<span class="prog wide"><span class="fill" style="width:{pct}%"></span></span>'
         + (f'<p class="qnow">Next in the guide: '
@@ -1230,7 +1234,7 @@ MAX_COMBAT = 126
 
 def rail_meter():
     """Account line at the top of the index: total level and combat."""
-    spin = ('<button class="refresh" type="button" hidden '
+    spin = ('<button class="refresh stats-refresh" type="button" hidden '
             'title="Refresh from the hiscores" aria-label="Refresh from the hiscores">'
             '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">'
             '<path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" '
@@ -1311,7 +1315,7 @@ def rail(active=None, depth=0):
             f'rel="noopener" title="{e(channel)} on YouTube">'
             f'<img src="{root}assets/media/yt/{avatar}" alt="{e(channel)}" loading="lazy">'
             f'</a>'
-            f'<a class="vid" href="https://www.youtube.com/watch?v={vid}{extra}" '
+            f'<a class="vid" href="{e(f"https://www.youtube.com/watch?v={vid}{extra}")}" '
             f'target="_blank" rel="noopener">'
             f'<span class="vt">{e(title)}</span>'
             f'<span class="vc">{e(channel)}</span></a></span>')
@@ -1347,7 +1351,12 @@ PICK_JS = """
 
   function show(row, announce) {
     var method = row.getAttribute('data-method');
-    rows.forEach(function (r) { r.classList.toggle('chosen', r === row); });
+    rows.forEach(function (r) {
+      var active = r === row;
+      r.classList.toggle('chosen', active);
+      var button = r.querySelector('.pickbtn');
+      if (button) button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
     if (pname) pname.textContent = method;
     if (pdetail) {
       var cell = row.querySelector('td.notes');
@@ -1521,7 +1530,7 @@ POTION_JS = """
     if (n == null || !isFinite(n)) return '-';
     var sign = n < 0 ? '-' : '';
     var v = Math.abs(Math.round(n));
-    return sign + v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return sign + v.toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
   }
 
   function apply(prices) {
@@ -1636,7 +1645,7 @@ BONUS_JS = """
 
   function scale(text, mult) {
     if (mult === 1) return text;
-    return text.replace(/(\d[\d,]*(?:\.\d+)?)(\s*k)?/gi, function (all, num, k) {
+    return text.replace(/(\\d[\\d,]*(?:\\.\\d+)?)(\\s*k)?/gi, function (all, num, k) {
       var v = parseFloat(num.replace(/,/g, ''));
       if (!isFinite(v)) return all;
       var out = v * mult;
@@ -1749,7 +1758,7 @@ STARS_JS = """
         + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
         + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
         + '<button class="sview" type="button" data-loc="' + loc + '" '
-        + 'title="Map area. Click to open the tracker">view</button>'
+        + 'title="Show a map of this area">view</button>'
         + '<span class="sreq" title="Mining level for this tier">' + req + '</span>'
         + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
@@ -1852,8 +1861,8 @@ STARS_JS = """
   }
 
   function norm(t) {
-    return String(t).toLowerCase().replace(/\(.*?\)/g, ' ')
-      .replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+    return String(t).toLowerCase().replace(/\\(.*?\\)/g, ' ')
+      .replace(/[^a-z0-9 ]/g, ' ').replace(/\\s+/g, ' ').trim();
   }
 
   /* names 07.gg uses that the wiki files under something else */
@@ -1922,9 +1931,14 @@ STARS_JS = """
   });
   list.addEventListener('focusout', function () { pop.hidden = true; });
   list.addEventListener('click', function (ev) {
-    if (ev.target.closest('.sview')) {
-      window.open('https://07.gg/trackers/shooting-star', '_blank', 'noopener');
+    var view = ev.target.closest('.sview');
+    if (!view) return;
+    if (window.matchMedia('(hover: none)').matches) {
+      ev.preventDefault();
+      showPop(view);
+      return;
     }
+    window.open('https://07.gg/trackers/shooting-star', '_blank', 'noopener');
   });
 
   btn.addEventListener('click', load);
@@ -1949,7 +1963,11 @@ TASKS_JS = """
   filters.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var want = btn.getAttribute('data-f');
-      filters.forEach(function (b) { b.classList.toggle('on', b === btn); });
+      filters.forEach(function (b) {
+        var active = b === btn;
+        b.classList.toggle('on', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
       rows.forEach(function (r) {
         r.hidden = want !== 'all' && r.getAttribute('data-tag') !== want;
       });
@@ -1959,7 +1977,11 @@ TASKS_JS = """
   sorts.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var key = btn.getAttribute('data-s');
-      sorts.forEach(function (b) { b.classList.toggle('on', b === btn); });
+      sorts.forEach(function (b) {
+        var active = b === btn;
+        b.classList.toggle('on', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
       var sorted = rows.slice().sort(function (a, b) {
         if (key === 'verdict') {
           return num(a, 'order') - num(b, 'order') || num(b, 'weight') - num(a, 'weight');
@@ -1987,7 +2009,7 @@ FOCUS_JS = """
   var panel = document.getElementById('focus');
 
   function fmt(n) {
-    return n == null ? '--' : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return n == null ? '--' : String(n).replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
   }
 
   function set(id, val) {
@@ -2062,7 +2084,7 @@ LIVE_JS = """
 /* Pulls the hiscores through serve.py's /api/stats proxy. The hiscores send no
    CORS headers, so a static page cannot call them directly. */
 (function () {
-  var btn = document.querySelector('.refresh');
+  var btn = document.querySelector('.stats-refresh');
   if (!btn || !/^https?:$/.test(location.protocol)) return;
   btn.hidden = false;
 
@@ -2073,26 +2095,41 @@ LIVE_JS = """
   }
 
   function apply(d) {
-    var skills = d.skills || {}, left = 0;
+    var skills = d.skills || {};
     document.querySelectorAll('[data-skill-level]').forEach(function (el) {
       var s = skills[el.getAttribute('data-skill-level')];
       if (s) el.textContent = s.level;
     });
+    function band(el, level) {
+      var goals = (el.getAttribute('data-goals') || '').split(',')
+        .map(function (x) { return parseInt(x, 10); })
+        .filter(function (x) { return x > 1 && x <= 99; });
+      var from = 1, goal = 99;
+      goals.forEach(function (x) { if (x <= level) from = x; });
+      var next = goals.filter(function (x) { return x > level; })[0];
+      if (next) goal = next;
+      return { from: from, goal: goal, next: next };
+    }
     document.querySelectorAll('[data-skill-bar]').forEach(function (el) {
       var s = skills[el.getAttribute('data-skill-bar')];
       if (!s) return;
-      var from = parseInt(el.getAttribute('data-from'), 10) || 1;
-      var goal = parseInt(el.getAttribute('data-goal'), 10) || 99;
-      var lo = xpFor(from), hi = xpFor(goal);
+      var b = band(el, s.level);
+      var lo = xpFor(b.from), hi = xpFor(b.goal);
       var pct = hi <= lo ? 100 : Math.round(100 * (s.xp - lo) / (hi - lo));
       el.style.width = Math.max(0, Math.min(100, pct)) + '%';
     });
-    Object.keys(skills).forEach(function (k) { if (skills[k].level < 99) left++; });
+    document.querySelectorAll('[data-skill-goal]').forEach(function (el) {
+      var s = skills[el.getAttribute('data-skill-goal')];
+      if (!s) return;
+      var b = band(el, s.level);
+      el.textContent = b.next ? (el.getAttribute('data-prefix') || '') + b.next
+        : (el.getAttribute('data-done') || '99');
+      el.classList.toggle('done', !b.next);
+    });
     var set = function (key, val) {
       var el = document.querySelector('[data-stat="' + key + '"]');
       if (el && val != null) el.textContent = val;
     };
-    set('left', left);
     set('total', d.overall && d.overall.level);
     set('combat', d.combat);
     document.dispatchEvent(new CustomEvent('osrsplan:stats', { detail: d }));
@@ -2138,7 +2175,9 @@ RAIL_JS = """
   var rail = document.querySelector('.rail-body');
   if (!rail) return;
   var here = rail.querySelector('a.here');
-  if (here && here.scrollIntoView) here.scrollIntoView({ block: 'nearest' });
+  if (here && rail.scrollHeight > rail.clientHeight + 1) {
+    rail.scrollTop = Math.max(0, here.offsetTop - rail.clientHeight / 2);
+  }
 })();
 </script>
 """
@@ -2165,6 +2204,7 @@ def page(title, body, active=None, depth=0, skill_name=None, head_extra=""):
   <nav class="topnav">
     <a class="navlink" href="{root}stars.html">{COMET_SVG}Shooting Stars</a>
     <a class="navlink" href="{root}paths.html">Paths</a>
+    <a class="navlink" href="{root}calculators.html">Calculators</a>
     <a class="navlink" href="{root}afk.html">AFK</a>
   </nav>
 </header>
@@ -2451,12 +2491,14 @@ def method_table(methods, pick, skill_name=None):
         pic = (f'<img class="thumb" src="{src}" alt="" loading="lazy">'
                if src else '<span class="thumb blank"></span>')
         if blocker:
-            btn = (f'<button class="pickbtn" type="button" disabled '
+            btn = (f'<button class="pickbtn" type="button" disabled aria-pressed="false" '
                    f'title="Needs {e(blocker)}" aria-label="Locked: needs '
                    f'{e(blocker)}">{LOCK_SVG}</button>')
         else:
-            btn = (f'<button class="pickbtn" type="button" title="Use this method" '
-                   f'aria-label="Use {e(name)}">{CHECK_SVG}</button>')
+            pressed = "true" if pick and name == pick else "false"
+            btn = (f'<button class="pickbtn" type="button" aria-pressed="{pressed}" '
+                   f'title="Use this method" aria-label="Use {e(name)}">'
+                   f'{CHECK_SVG}</button>')
         tag = ""
         if blocker:
             tag = f'<span class="rtag lock">needs {e(blocker)}</span>'
@@ -2677,9 +2719,10 @@ def wiki_search(name):
 def wiki_link(name, page=None, cls="wl", cased=True):
     """`cased` title-cases the label; our own copy is already written properly,
     the wiki task table is not."""
-    href = f"{WIKI}{page.replace(' ', '_')}" if page else wiki_search(name)
+    href = (f"{WIKI}{urllib.parse.quote(page.replace(' ', '_'), safe='/#')}"
+            if page else wiki_search(name))
     label = title_case(name) if cased else name
-    return (f'<a class="{cls}" href="{href}" target="_blank" rel="noopener">'
+    return (f'<a class="{cls}" href="{e(href)}" target="_blank" rel="noopener">'
             f'{e(label)}</a>')
 
 
@@ -2742,7 +2785,7 @@ def potion_section():
             label += f' — {p["inputs"][-1]["name"]}'
         rows.append(
             f'<tr class="pot" data-level="{p["level"]}" data-xp="{p["xp"]}" '
-            f'data-made="{p["made"]}" '
+            f'data-made="{e(p["made"])}" '
             f'data-inputs="{e(json.dumps(p["inputs"], separators=(chr(44), chr(58))))}">'
             f'<td class="req">{p["level"]}</td>'
             f'<td class="tn">{wiki_link(label, page=p["name"], cased=False)}</td>'
@@ -2753,7 +2796,7 @@ def potion_section():
 
     return (
         '<div class="potbar">'
-        f'<span class="k">Live GE prices</span>'
+        '<span class="k">Live GE prices</span>'
         '<span class="espace"></span>'
         '<span class="estatus" id="potstatus">loading</span>'
         '<button class="refresh" id="potrefresh" type="button" title="Refresh prices" '
@@ -2785,7 +2828,7 @@ def slayer_summary():
 
     def chips(tag):
         return "".join(
-            f'<a class="tchip {tag}" href="{wiki_search(t["name"])}" target="_blank" '
+            f'<a class="tchip {tag}" href="{e(wiki_search(t["name"]))}" target="_blank" '
             f'rel="noopener" title="{e(t["rec"])}">{e(title_case(t["name"]))}'
             f'<span>w{t["weight"]}</span></a>'
             for t in sorted(by.get(tag, []), key=lambda x: -int(x["weight"] or 0)))
@@ -2827,18 +2870,19 @@ def slayer_sections():
 
     counts = {k: sum(1 for t in SLAYER_TASKS if t["tag"] == k) for k in order}
     filters = "".join(
-        f'<button class="tf" type="button" data-f="{k}">{label[k]}'
-        f'<span>{counts[k]}</span></button>' for k in order if counts[k])
+        f'<button class="tf" type="button" data-f="{k}" aria-pressed="false">'
+        f'{label[k]}<span>{counts[k]}</span></button>' for k in order if counts[k])
     controls = (
         '<div class="tcontrols">'
-        f'<button class="tf on" type="button" data-f="all">all<span>{len(SLAYER_TASKS)}</span></button>'
+        f'<button class="tf on" type="button" data-f="all" aria-pressed="true">'
+        f'all<span>{len(SLAYER_TASKS)}</span></button>'
         f'{filters}'
         '<span class="tspace"></span>'
         '<span class="tsortlbl">sort</span>'
-        '<button class="ts on" type="button" data-s="verdict">verdict</button>'
-        '<button class="ts" type="button" data-s="weight">how often</button>'
-        '<button class="ts" type="button" data-s="xp">xp/hr</button>'
-        '<button class="ts" type="button" data-s="level">level</button>'
+        '<button class="ts on" type="button" data-s="verdict" aria-pressed="true">verdict</button>'
+        '<button class="ts" type="button" data-s="weight" aria-pressed="false">how often</button>'
+        '<button class="ts" type="button" data-s="xp" aria-pressed="false">xp/hr</button>'
+        '<button class="ts" type="button" data-s="level" aria-pressed="false">level</button>'
         "</div>")
 
     tasks_table = (
@@ -3077,10 +3121,13 @@ def build_skill_page(skill, prev_skill, next_skill):
         frm = max([g for g in goals if g <= cur] or [1])
         head = (f'<b class="big num lit"{level_style(cur)} '
                 f'data-skill-level="{e(name)}">{cur}</b>'
-                + (f'<span class="goal">of {nxt}</span>' if nxt else
+                + (f'<span class="goal" data-skill-goal="{e(name)}" '
+                   f'data-goals="{e(",".join(map(str, goals)))}" data-prefix="of " '
+                   f'data-done="target met">of {nxt}</span>' if nxt else
                    '<span class="goal done">target met</span>'))
         bar = (f'<span class="prog wide"><span class="fill lit" '
                f'style="width:{pct}%;--lc:{level_color(cur)}" data-skill-bar="{e(name)}" '
+               f'data-goals="{e(",".join(map(str, goals)))}" '
                f'data-from="{frm}" data-goal="{nxt or 99}"></span></span>')
         facts = [f'<span><i>XP</i> <b class="num">{xp:,}</b></span>']
         if nxt:
@@ -3199,11 +3246,13 @@ def card_head(s, tag="span"):
         lstyle = level_style(cur)
         right = (f'<span class="lvl lit"{lstyle} data-skill-level="{e(s["name"])}">{cur}</span>'
                  f'<span class="arrow">&rarr;</span>'
-                 f'<span class="target{done_cls}" data-skill-goal="{e(s["name"])}">{nxt}</span>'
+                 f'<span class="target{done_cls}" data-skill-goal="{e(s["name"])}" '
+                 f'data-goals="{e(",".join(map(str, goals)))}">{nxt}</span>'
                  if not done else
                  f'<span class="lvl lit"{lstyle} data-skill-level="{e(s["name"])}">{cur}</span>')
         bar = (f'<span class="prog"><span class="fill lit" '
                f'style="width:{pct}%;--lc:{level_color(cur)}" data-skill-bar="{e(s["name"])}" '
+               f'data-goals="{e(",".join(map(str, goals)))}" '
                f'data-from="{frm}" data-goal="{nxt or 99}"></span></span>')
     else:
         right = f'<span class="target{done_cls}">{e(card_target)}</span>'
@@ -3716,8 +3765,6 @@ PATH_META = [
 # What a method hands to other skills per hour. Rough, but ignoring it makes
 # every total wrong: drift net trains two skills at once, Slayer trains six.
 CARRIES = {
-    "Drift Net Fishing": {"Hunter": 50_000},
-    "Hunter Rumours": {},
     "Duradel, barrage tasks": {"Attack": 20_000, "Strength": 20_000,
                                "Defence": 20_000, "Hitpoints": 25_000,
                                "Magic": 35_000},
@@ -3729,11 +3776,9 @@ CARRIES = {
                              "Ranged": 15_000},
     "Slayer with best gear": {"Hitpoints": 23_000},
     "Slayer": {"Hitpoints": 20_000},
-    "Nightmare Zone": {"Hitpoints": 15_000},
     "Guardians of the Rift": {"Magic": 8_000},
     "Gemstone Crab": {"Hitpoints": 28_000},
-    "Barbarian Fishing": {"Strength": 12_000, "Agility": 12_000},
-    "Zalcano": {"Smithing": 20_000},
+    "Barbarian Fishing, 3-tick": {"Strength": 12_000, "Agility": 12_000},
 }
 
 
@@ -3787,10 +3832,10 @@ def carrier_order(rows):
     """Carriers first, then longest first.
 
     A method that hands XP to another skill is worth doing before the skill
-    that receives it. Train Hunter first and drift net's 11m lands on a 99 you
-    already paid for; train Fishing first and Hunter is nearly done for free.
+    that receives it. Slayer, for example, should land its combat XP before
+    the calculator charges separately for those combat levels.
     """
-    naive = {r["skill"]: (r["need"] / r["rate"] if r["rate"] and r["need"] else 0)
+    naive = {r["skill"]: sum(leg["hours"] for leg in legs_for(r["route"], r["xp"]))
              for r in rows}
     need = {r["skill"]: r["need"] for r in rows}
 
@@ -3952,10 +3997,10 @@ def path_hours(key, **kw):
 def optimal_mix():
     """The best method per skill once cross-skill XP is priced in.
 
-    Picking each skill's fastest method in isolation is not the best plan:
-    2-tick harpooning beats drift net for Fishing, but drift net hands Hunter
-    most of a 99 and could win on the total. Local search over the three
-    routes' options, one skill at a time, until nothing improves.
+    Picking each skill's fastest method in isolation need not be the best plan:
+    a slower method can still win overall when it hands enough XP to another
+    skill. Search the three routes' options one skill at a time until nothing
+    improves.
     """
     keys = [k for k, _, _ in PATH_META]
     choice = {name: "fast" for name in PATHS}
@@ -4014,7 +4059,7 @@ def optimal_card(choice, computed):
             if k == choice[name]:
                 continue
             trial = dict(choice, **{name: k})
-            cost = rows_for(trial)[1] - best
+            cost = rows_for(trial, order="best")[1] - best
             # the AFK table names these "X, nothing is idle here" to explain
             # itself; out of that context the suffix is just noise
             method = route_label(PATHS[name][k])
@@ -4034,7 +4079,7 @@ def optimal_card(choice, computed):
         f'{icon(name)}{e(name)}</a></td>'
         f'<td>{e(method)}</td>'
         f'<td class="route">{e(lab)}</td>'
-        f'<td class="rate afkgap">+{cost:.0f}h</td></tr>'
+        f'<td class="rate afkgap">{"+" if cost >= 0 else "−"}{abs(cost):.0f}h</td></tr>'
         for cost, name, method, lab in shortlist[:12])
 
     if winner:
@@ -4197,8 +4242,372 @@ def paths_page():
     return page("Which Path", "\n".join(body), depth=0)
 
 
+
+CALC_JS = """
+<script>
+/* Skill calculators. Action tables are the wiki's, prices are the live GE
+   feed, the starting level is whatever the hiscores last said. */
+(function () {
+  var DATA = null, PRICES = null, VOLUMES = null, STATS = null, skill = null;
+  var MAX_LEVEL = 126;
+
+  function ready() {
+    var body = document.getElementById('calcbody');
+    if (!body) return;
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.ctab'));
+    var from = document.getElementById('cfrom');
+    var to = document.getElementById('cto');
+    var group = document.getElementById('cgroup');
+    var gap = document.getElementById('cgap');
+    var pick = document.getElementById('cpick');
+    var status = document.getElementById('cstatus');
+    var btn = document.getElementById('crefresh');
+
+    function esc(text) {
+      var d = document.createElement('div');
+      d.textContent = text == null ? '' : String(text);
+      return d.innerHTML;
+    }
+
+    function xpFor(l) {
+      if (l <= 1) return 0;
+      var t = 0;
+      for (var i = 1; i < l; i++) t += Math.floor(i + 300 * Math.pow(2, i / 7));
+      return Math.floor(t / 4);
+    }
+
+    function num(n) {
+      if (n == null || !isFinite(n)) return '-';
+      var sign = n < 0 ? '-' : '';
+      return sign + Math.abs(Math.round(n)).toString()
+        .replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
+    }
+
+    function level(el, fallback) {
+      var v = parseInt(el.value, 10);
+      return isFinite(v) && v >= 1 && v <= MAX_LEVEL ? v : fallback;
+    }
+
+    function currentXp() {
+      var typed = parseInt(from.value, 10);
+      var live = STATS && STATS.skills && STATS.skills[skill];
+      if (live && typed === live.level) return live.xp;   // keep the part level
+      return xpFor(level(from, 1));
+    }
+
+    function groups() {
+      var seen = {}, out = [];
+      (DATA[skill] || []).forEach(function (a) {
+        if (!seen[a.type]) { seen[a.type] = 1; out.push(a.type); }
+      });
+      out.sort();
+      var keep = group.value;
+      group.replaceChildren();
+      var all = document.createElement('option');
+      all.value = ''; all.textContent = 'All';
+      group.append(all);
+      out.forEach(function (name) {
+        var o = document.createElement('option');
+        o.value = name; o.textContent = name;
+        group.append(o);
+      });
+      group.value = out.indexOf(keep) >= 0 ? keep : '';
+    }
+
+    /* An item nobody has traded in days still carries a last price, and for
+       the thin ones that price is fiction. Anything older than three days is
+       treated as unpriced rather than believed. */
+    var STALE = 3 * 24 * 3600;
+
+    function priceOf(id) {
+      var row = id == null ? null : PRICES[id];
+      if (!row) return null;
+      var age = (Date.now() / 1000) - row.t;
+      return age > STALE ? null : row.p;
+    }
+
+    /* Barely-traded items still carry a price, and for the thinnest ones it is
+       a number nobody could actually transact at. Under a thousand a day is
+       the line: the barbarian mixes sit at 0 or 1, the real materials are in
+       the tens of thousands. */
+    var THIN = 1000;
+
+    function flow(action) {
+      if (!VOLUMES) return null;
+      var least = null;
+      var ids = action.materials.map(function (m) { return m.id; });
+      if (action.made != null) ids.push(action.made);
+      for (var i = 0; i < ids.length; i++) {
+        if (ids[i] == null) continue;
+        var v = VOLUMES[ids[i]] || 0;
+        if (least === null || v < least) least = v;
+      }
+      return least;
+    }
+
+    function cost(action) {
+      if (!PRICES || !action.materials.length) return null;
+      var total = 0;
+      for (var i = 0; i < action.materials.length; i++) {
+        var m = action.materials[i];
+        var p = priceOf(m.id);
+        if (p == null) return null;
+        total += p * m.qty;
+      }
+      var made = 0;
+      if (action.made != null) {
+        made = priceOf(action.made);
+        if (made == null) return null;
+      }
+      return total - made;
+    }
+
+    function draw() {
+      var actions = DATA[skill] || [];
+      var start = currentXp();
+      var target = xpFor(level(to, 99));
+      var need = Math.max(0, target - start);
+      var here = level(from, 1);
+
+      gap.textContent = need ? num(need) + ' xp to go' : 'already there';
+
+      var only = group.value;
+      var best = null;
+      var rows = actions.map(function (a) {
+        if (only && a.type !== only) return null;
+        var count = a.xp > 0 ? Math.ceil(need / a.xp) : null;
+        var each = cost(a);
+        var total = (each == null || count == null) ? null : each * count;
+        var gpxp = each == null ? null : each / a.xp;
+        var daily = flow(a);
+        var thin = daily != null && daily < THIN;
+        if (need && a.level <= here && gpxp != null && !thin
+            && (best === null || gpxp < best.gpxp)) {
+          best = { name: a.name, gpxp: gpxp, count: count, total: total, xp: a.xp };
+        }
+        return { a: a, count: count, each: each, total: total, gpxp: gpxp,
+                 thin: thin, daily: daily };
+      }).filter(Boolean);
+
+      body.replaceChildren();
+      rows.forEach(function (r) {
+        var locked = r.a.level > here;
+        var tr = document.createElement('tr');
+        if (locked) tr.className = 'locked';
+        tr.innerHTML =
+          '<td class="req">' + r.a.level + '</td>' +
+          '<td class="tn">' + esc(r.a.name) +
+            (r.thin ? '<span class="thin">' + num(r.daily)
+              + ' traded a day</span>' : '') +
+            '<span class="gives">' + esc(r.a.type) + '</span></td>' +
+          '<td class="rate">' + (r.a.xp % 1 ? r.a.xp.toFixed(1) : r.a.xp) + '</td>' +
+          '<td class="rate afkgap">' + (r.count == null ? '-' : num(r.count)) + '</td>' +
+          '<td class="rate">' + (r.each == null ? '-' : num(r.each)) + '</td>' +
+          '<td class="rate">' + (r.total == null ? '-' : num(r.total)) + '</td>' +
+          '<td class="rate' + (r.gpxp != null && r.gpxp <= 0 ? ' good' : '') + '">'
+            + (r.gpxp == null ? '-' : num(r.gpxp)) + '</td>';
+        body.append(tr);
+      });
+
+      if (best) {
+        pick.replaceChildren();
+        var k = document.createElement('span');
+        k.className = 'k'; k.textContent = 'Cheapest open to you';
+        var b = document.createElement('b'); b.textContent = best.name;
+        var d = document.createElement('span');
+        d.className = 'pdet';
+        d.textContent = num(best.count) + ' \\u00d7 at ' + num(best.gpxp)
+          + ' gp per xp \\u00b7 ' + num(best.total) + ' gp all in';
+        var w = document.createElement('span');
+        w.className = 'pwhy';
+        w.textContent = best.gpxp <= 0
+          ? 'It pays you to train, so the only cost is the time.'
+          : 'Lowest cost per point of experience at your level.';
+        pick.append(k, b, d, w);
+        pick.hidden = false;
+      } else {
+        pick.hidden = true;
+      }
+    }
+
+    function choose(name) {
+      skill = name;
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-skill') === name;
+        t.classList.toggle('on', on);
+        t.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      var live = STATS && STATS.skills && STATS.skills[name];
+      from.value = live ? live.level : 1;
+      groups();
+      draw();
+      try { localStorage.setItem('osrsplan.calc', name); } catch (err) { /* ignore */ }
+    }
+
+    function prices() {
+      if (btn.classList.contains('busy')) return;
+      btn.classList.add('busy');
+      btn.classList.remove('ok', 'bad');
+      var started = Date.now();
+      var settle = function (fn, bad) {
+        setTimeout(function () {
+          btn.classList.remove('busy');
+          btn.classList.add(bad ? 'bad' : 'ok');
+          setTimeout(function () { btn.classList.remove('ok', 'bad'); }, 2500);
+          fn();
+        }, Math.max(0, 900 - (Date.now() - started)));
+      };
+      Promise.all([
+        fetch('https://prices.runescape.wiki/api/v1/osrs/latest', { cache: 'no-store' })
+          .then(function (r) { return r.json(); }),
+        fetch('https://prices.runescape.wiki/api/v1/osrs/volumes')
+          .then(function (r) { return r.json(); })
+          .catch(function () { return null; })
+      ])
+        .then(function (both) {
+          var d = both[0];
+          VOLUMES = both[1] && (both[1].data || both[1]);
+          var out = {};
+          Object.keys(d.data || {}).forEach(function (id) {
+            var row = d.data[id];
+            var price = row.high || row.low;
+            var seen = Math.max(row.highTime || 0, row.lowTime || 0);
+            if (price) out[id] = { p: price, t: seen };
+          });
+          PRICES = out;
+          settle(function () { status.textContent = 'priced just now'; draw(); });
+        })
+        .catch(function () {
+          settle(function () { status.textContent = 'prices unavailable'; }, true);
+        });
+    }
+
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        choose(t.getAttribute('data-skill'));
+      });
+    });
+    [from, to].forEach(function (el) { el.addEventListener('input', draw); });
+    group.addEventListener('change', draw);
+    btn.addEventListener('click', prices);
+    document.addEventListener('osrsplan:stats', function (ev) {
+      STATS = ev.detail;
+      var live = STATS.skills && STATS.skills[skill];
+      if (live) { from.value = live.level; draw(); }
+    });
+
+    Promise.all([
+      fetch('data/calculators.json').then(function (r) { return r.json(); }),
+      fetch('data/stats.json').then(function (r) { return r.json(); })
+        .catch(function () { return null; })
+    ]).then(function (got) {
+      DATA = got[0];
+      STATS = got[1];
+      var saved = null;
+      try { saved = localStorage.getItem('osrsplan.calc'); } catch (err) { /* ignore */ }
+      choose(DATA[saved] ? saved : tabs[0].getAttribute('data-skill'));
+      prices();
+    }).catch(function () {
+      status.textContent = 'calculator data unavailable';
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ready);
+  } else {
+    ready();
+  }
+})();
+</script>
+"""
+
+
+CALC_PATH = os.path.join(OUT, "data", "calculators.json")
+
+
+def calculator_skills():
+    """Skills the wiki publishes an action table for, in our own order."""
+    try:
+        with open(CALC_PATH, encoding="utf-8") as f:
+            have = set(json.load(f))
+    except (OSError, ValueError):
+        return []
+    ordered = [s["name"] for g in GROUP_ORDER for s in SKILLS
+               if s["group"] == g and s["name"] in have]
+    return ordered + sorted(have - set(ordered))
+
+
+def calculators_page():
+    """One calculator per skill: how many of a thing to reach a level.
+
+    The action tables are the wiki's own (Module:Skill calc), so this agrees
+    with the wiki's calculators rather than being a second opinion. Prices are
+    live, the current level comes from the hiscores, and both can be typed over.
+    """
+    skills = calculator_skills()
+    if not skills:
+        return page("Calculators", '<p class="lede">No calculator data yet. Run '
+                    '<code>python3 fetch_calculators.py</code>.</p>', depth=0)
+
+    tabs = "".join(
+        f'<button class="ctab{" on" if i == 0 else ""}" type="button" '
+        f'data-skill="{e(name)}" aria-pressed="{"true" if i == 0 else "false"}">'
+        f'{icon(name)}{e(name)}</button>'
+        for i, name in enumerate(skills))
+
+    body = [
+        '<div class="kick">Every skill, every action</div>',
+        '<div class="page-head">'
+        '<img class="icon lg" src="assets/media/site/combat-achievements.png" alt="">'
+        '<h1 class="page">Calculators</h1></div>',
+        '<p class="lede">How many of a thing stands between you and a level, '
+        'what it costs at today\'s prices, and which option is cheapest per '
+        'point of XP.</p>',
+        f'<div class="ctabs">{tabs}</div>',
+        '<div class="calcbar">'
+        '<label class="cfield"><span>From</span>'
+        '<input id="cfrom" type="number" min="1" max="126" inputmode="numeric">'
+        '</label>'
+        '<label class="cfield"><span>To</span>'
+        '<input id="cto" type="number" min="2" max="126" value="99" '
+        'inputmode="numeric"></label>'
+        '<span class="cgap" id="cgap">—</span>'
+        '<span class="espace"></span>'
+        '<label class="cfield sel"><span>Group</span>'
+        '<select id="cgroup"><option value="">All</option></select></label>'
+        '<span class="estatus" id="cstatus">loading</span>'
+        '<button class="refresh" id="crefresh" type="button" '
+        'title="Refresh prices" aria-label="Refresh prices">'
+        '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">'
+        '<path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" '
+        'stroke-width="1.7" stroke-linecap="round"/>'
+        '<path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" '
+        'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>'
+        '</svg></button>'
+        '</div>',
+        '<div class="cpick" id="cpick" hidden></div>',
+        '<div class="tablewrap"><div class="tablescroll">'
+        '<table class="pathtable calctable" id="calctable"><thead><tr>'
+        '<th>Lvl</th><th>Action</th><th>XP each</th><th>Needed</th>'
+        '<th>Each</th><th>Total</th><th>gp/xp</th></tr></thead>'
+        '<tbody id="calcbody"></tbody></table></div></div>',
+        '<p class="lede2">Action tables come from the wiki\'s own skill '
+        'calculator modules, so the XP figures match the wiki. Prices are the '
+        'live Grand Exchange feed, with anything that has not traded in three '
+        'days left unpriced rather than believed. A row flagged with a trade '
+        'count is one almost nobody buys or sells, so its price is not a number '
+        'you could transact at and it never wins the recommendation. Rows above '
+        'your level are '
+        'dimmed rather '
+        'than hidden, since half of choosing a method is seeing what is '
+        'coming.</p>',
+    ]
+    return page("Calculators", "\n".join(body), depth=0,
+                head_extra=CALC_JS)
+
+
 def build_index():
-    parts = []
+    parts = ['<h1 class="sr">OSRS Max Cape Plan</h1>']
     art = focus_panel()
     parts.append('<section class="hero">')
     parts.append(art)
@@ -4281,12 +4690,13 @@ def main():
         os.path.join(OUT, "stars.html"): build_stars_page(),
         os.path.join(OUT, "afk.html"): build_afk_page(),
         os.path.join(OUT, "paths.html"): paths_page(),
+        os.path.join(OUT, "calculators.html"): calculators_page(),
         os.path.join(OUT, "index.html"): build_index(),
     })
     for path, content in outputs.items():
         atomic_text_dump(path, content)
 
-    print(f"wrote index.html + {len(ordered)} skill pages + 3 reference pages")
+    print(f"wrote index.html + {len(ordered)} skill pages + 4 reference pages")
 
 
 if __name__ == "__main__":

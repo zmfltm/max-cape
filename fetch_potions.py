@@ -115,6 +115,9 @@ def recipe_ids(ids, potion):
 
 def main():
     rows = potion_rows()
+    if len(rows) < 20:
+        print(f"only {len(rows)} potion rows parsed; keeping the previous snapshot")
+        return 1
     ids = price_ids()
     print(f"{len(rows)} potions from the wiki, {len(ids)} tradeable items")
 
@@ -128,12 +131,16 @@ def main():
         p["made"] = made
         priced.append(p)
 
-    atomic_json_dump(OUT, {"potions": priced})
+    if len(priced) < 20:
+        print(f"only {len(priced)} recipes mapped; keeping the previous snapshot")
+        return 1
 
+    atomic_json_dump(OUT, {"potions": priced})
     print(f"{len(priced)} priceable, written to data/potions.json")
     if skipped:
         print("no tradeable match for: " + ", ".join(skipped))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

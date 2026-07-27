@@ -1,6 +1,7 @@
 import http.client
 import http.server
 import json
+import os
 import tempfile
 import threading
 import unittest
@@ -11,7 +12,7 @@ import build
 import quests
 import serve
 from hiscores import xp_for_level
-from storage import atomic_json_dump
+from storage import atomic_binary_dump, atomic_json_dump
 
 
 class FormulaTests(unittest.TestCase):
@@ -46,6 +47,23 @@ class RequirementTests(unittest.TestCase):
 
     def test_missing_skill_snapshot_is_not_treated_as_unlocked(self):
         self.assertEqual(build.unmet("60 Sailing", "Mining"), "60 Sailing")
+
+
+class RouteTests(unittest.TestCase):
+    def test_staged_routes_are_contiguous_and_ordered(self):
+        for skill, choices in build.PATHS.items():
+            for name, route in choices.items():
+                levels = [leg[0] for leg in route]
+                self.assertEqual(levels[0], 1, (skill, name))
+                self.assertEqual(levels, sorted(set(levels)), (skill, name))
+                self.assertTrue(all(rate >= 0 for _, _, rate in route), (skill, name))
+
+    def test_barbarian_fishing_carries_strength_and_agility(self):
+        _, carried = build.climb(
+            build.PATHS["Fishing"]["fast"], xp_for_level(61), xp_for_level(71)
+        )
+        self.assertGreater(carried.get("Strength", 0), 0)
+        self.assertGreater(carried.get("Agility", 0), 0)
 
 
 class QuestTests(unittest.TestCase):
@@ -83,18 +101,25 @@ class QuestTests(unittest.TestCase):
         self.assertNotIn("<img src=x", panel)
         self.assertNotIn(' onclick="', panel)
         self.assertIn("%22%20onclick%3D%22alert%281%29", panel)
+        self.assertIn("1</b><span>quests to go", panel)
 
 
 class ServerTests(unittest.TestCase):
-    def test_crowd_sourced_caller_is_strictly_sanitized(self):
-        self.assertEqual(serve.clean_caller("valid name"), "valid name")
-        self.assertEqual(serve.clean_caller("name,world:622,tier:8"), "anonymous")
-        self.assertEqual(serve.clean_caller("<script>"), "anonymous")
+    def test_crowd_sourced_star_text_is_sanitized(self):
+        self.assertEqual(serve.clean_star_text("  two\n words  "), "two words")
+        self.assertEqual(serve.clean_star_text("<script> & text"), "script text")
+
+    def test_method_choices_must_exist_for_the_skill(self):
+        self.assertTrue(serve.valid_method("Fishing", "Drift Net Fishing"))
+        self.assertFalse(serve.valid_method("Fishing", "not a real method"))
+        self.assertFalse(serve.valid_method("not a skill", "Drift Net Fishing"))
 
     def test_post_validation_and_atomic_focus_write(self):
         with tempfile.TemporaryDirectory() as directory:
             focus = str(Path(directory) / "focus.json")
+            picks = str(Path(directory) / "picks.json")
             with mock.patch.object(serve, "FOCUS", focus), \
+                    mock.patch.object(serve, "PICKS", picks), \
                     mock.patch.object(serve.Handler, "log_message", lambda *args: None), \
                     mock.patch("builtins.print"):
                 server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), serve.Handler)
@@ -108,6 +133,24 @@ class ServerTests(unittest.TestCase):
                     self.assertEqual(response.status, 400)
                     response.read()
                     conn.close()
+
+                    conn = http.client.HTTPConnection("127.0.0.1", server.server_port)
+                    conn.request("POST", "/api/focus", body=b'{"skill":"Fishing"}',
+                                 headers={"Content-Type": "text/plain"})
+                    response = conn.getresponse()
+                    self.assertEqual(response.status, 415)
+                    response.read()
+                    conn.close()
+
+                    conn = http.client.HTTPConnection("127.0.0.1", server.server_port)
+                    conn.request("POST", "/api/pick",
+                                 body=b'{"skill":"Fishing","method":"not real"}',
+                                 headers={"Content-Type": "application/json"})
+                    response = conn.getresponse()
+                    self.assertEqual(response.status, 400)
+                    response.read()
+                    conn.close()
+                    self.assertFalse(Path(picks).exists())
 
                     conn = http.client.HTTPConnection("127.0.0.1", server.server_port)
                     conn.request("POST", "/api/focus", body=b'{"skill":"Fishing"}',
@@ -130,6 +173,12 @@ class StorageTests(unittest.TestCase):
             path.write_text('{"old": true}', encoding="utf-8")
             atomic_json_dump(path, {"new": True}, sort_keys=True)
             self.assertEqual(json.loads(path.read_text(encoding="utf-8")), {"new": True})
+            binary = Path(directory) / "image.bin"
+            atomic_binary_dump(binary, b"\x00\xffpayload")
+            self.assertEqual(binary.read_bytes(), b"\x00\xffpayload")
+            if os.name == "posix":
+                self.assertEqual(path.stat().st_mode & 0o777, 0o644)
+                self.assertEqual(binary.stat().st_mode & 0o777, 0o644)
             self.assertEqual(list(Path(directory).glob(".tmp-*")), [])
 
 

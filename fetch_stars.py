@@ -10,7 +10,10 @@ from serve import shooting_stars
 
 
 def main():
-    stars = shooting_stars(max_age=0)
+    stars = shooting_stars(max_age=0, require_snapshot=True)
+    if not stars:
+        print("no active stars parsed; keeping the previous snapshot")
+        return 1
     print(f"wrote data/stars.json with {len(stars)} active stars")
     return 0
 

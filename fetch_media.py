@@ -18,7 +18,7 @@ import urllib.parse
 import urllib.request
 
 from media import all_titles
-from storage import atomic_json_dump
+from storage import atomic_binary_dump, atomic_json_dump
 
 API = "https://oldschool.runescape.wiki/api.php"
 UA = "mudkip-osrs-plan/1.0 (personal static site; contact: local)"
@@ -70,12 +70,27 @@ def main():
     print(f"{len(titles)} titles")
 
     found = thumbnails(titles)
+    try:
+        with open(os.path.join(OUT, "manifest.json"), encoding="utf-8") as f:
+            previous = json.load(f)
+        if not isinstance(previous, dict):
+            previous = {}
+    except (OSError, ValueError):
+        previous = {}
     manifest, missing = {}, []
+
+    def keep_previous(title):
+        old = previous.get(title)
+        if old and os.path.isfile(os.path.join(OUT, old)):
+            manifest[title] = old
+            return True
+        return False
 
     for t in titles:
         src = found.get(t)
         if not src:
-            missing.append(t)
+            if not keep_previous(t):
+                missing.append(t)
             continue
         ext = os.path.splitext(urllib.parse.urlparse(src).path)[1].lower() or ".png"
         if ext not in (".png", ".jpg", ".jpeg", ".gif", ".webp"):
@@ -87,10 +102,10 @@ def main():
                 data = get(src)
             except Exception as exc:                      # noqa: BLE001
                 print(f"  failed {t}: {exc}", file=sys.stderr)
-                missing.append(t)
+                if not keep_previous(t):
+                    missing.append(t)
                 continue
-            with open(path, "wb") as f:
-                f.write(data)
+            atomic_binary_dump(path, data)
             time.sleep(0.15)
         manifest[t] = name
 

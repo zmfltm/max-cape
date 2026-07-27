@@ -17,6 +17,7 @@
   <nav class="topnav">
     <a class="navlink" href="../stars.html"><svg class="comet" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="10.5" cy="5.5" r="3.2" fill="currentColor"/><path d="M7.4 8.6 2 14M6.2 6.1 3.1 7M9.9 9.8 9 12.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Shooting Stars</a>
     <a class="navlink" href="../paths.html">Paths</a>
+    <a class="navlink" href="../calculators.html">Calculators</a>
     <a class="navlink" href="../afk.html">AFK</a>
   </nav>
 </header>
@@ -27,7 +28,7 @@
 <div class="page-head"><img class="icon lg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAAADFBMVEUAAAAAAAF1e3xGPC/Lr9t+AAAAAXRSTlMAQObYZgAAAGRJREFUeNp10kEKxEAMA8Hu0f//vGBMmKBNH0v4ZjYnptvOpPDsnis10WW9bpI4rEy7uC5POygg1ADvTMab4wzNOF7MDsW0y+TtRmk3Qvlwuy/GZRNpN+MXH4vXPxn/M/YXAPwA3cIBiMrALJMAAAAASUVORK5CYII=" alt="" width="22" height="22"><h1 class="page">Mining</h1></div>
 <p class="lede">Slow-skills block, after <span class="ment"><img class="mi pixel" src="../assets/icons/Runecraft.png" alt="" loading="lazy">Runecraft</span> and <span class="ment"><img class="mi pixel" src="../assets/icons/Agility.png" alt="" loading="lazy">Agility</span>.</p>
 <div class="glinks"><a class="glink" href="https://oldschool.runescape.wiki/w/Mining_training" rel="noopener" target="_blank">Wiki guide</a><a class="glink" href="https://www.osrsguide.com/osrs-mining-guide/" rel="noopener" target="_blank">OSRS Guide</a></div>
-<div class="livebox"><div class="k">Your Level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(58 76% 63%)" data-skill-level="Mining">72</b><span class="goal">of 99</span></div><span class="prog wide"><span class="fill lit" style="width:7%;--lc:hsl(58 76% 63%)" data-skill-bar="Mining" data-from="1" data-goal="99"></span></span><div class="facts"><span><i>XP</i> <b class="num">918,742</b></span><span><i>To 99</i> <b class="num">12,115,689</b></span></div></div>
+<div class="livebox"><div class="k">Your Level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(58 76% 63%)" data-skill-level="Mining">72</b><span class="goal" data-skill-goal="Mining" data-goals="99" data-prefix="of " data-done="target met">of 99</span></div><span class="prog wide"><span class="fill lit" style="width:7%;--lc:hsl(58 76% 63%)" data-skill-bar="Mining" data-goals="99" data-from="1" data-goal="99"></span></span><div class="facts"><span><i>XP</i> <b class="num">918,742</b></span><span><i>To 99</i> <b class="num">12,115,689</b></span></div></div>
 <div class="embed" id="stars" data-root="../" data-mining="72"><div class="ehead"><a class="cometlink" href="../stars.html" title="Open the Shooting Stars page"><svg class="comet" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="10.5" cy="5.5" r="3.2" fill="currentColor"/><path d="M7.4 8.6 2 14M6.2 6.1 3.1 7M9.9 9.8 9 12.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><span class="k">Shooting Stars</span><span class="espace"></span><span class="tierlbl">tier</span><select class="tierpick" id="tiermin" aria-label="Minimum star tier"><option value="1">10 Mining &middot; T1</option><option value="2">20 Mining &middot; T2</option><option value="3">30 Mining &middot; T3</option><option value="4">40 Mining &middot; T4</option><option value="5">50 Mining &middot; T5</option><option value="6">60 Mining &middot; T6</option><option value="7">70 Mining &middot; T7</option><option value="8">80 Mining &middot; T8</option><option value="9">90 Mining &middot; T9</option></select><span class="tierto">to</span><select class="tierpick" id="tiermax" aria-label="Maximum star tier"><option value="1">10 Mining &middot; T1</option><option value="2">20 Mining &middot; T2</option><option value="3">30 Mining &middot; T3</option><option value="4">40 Mining &middot; T4</option><option value="5">50 Mining &middot; T5</option><option value="6">60 Mining &middot; T6</option><option value="7">70 Mining &middot; T7</option><option value="8">80 Mining &middot; T8</option><option value="9">90 Mining &middot; T9</option></select><span class="estatus" id="starstatus">loading</span><button class="refresh" id="starrefresh" type="button" title="Refresh stars" aria-label="Refresh stars"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><p class="enote">Crashed stars land about every 90 minutes per world. Mining stardust is the most AFK training in the skill and buys the celestial ring.</p><div class="starhead"><span>tier</span><span>world</span><span>location</span><span>map</span><span>mining</span><span>ends</span></div><div class="starlist" id="starlist" data-limit="12"></div><div class="qfoot one"><a class="srclink" href="https://07.gg/trackers/shooting-star" target="_blank" rel="noopener"><img src="../assets/media/site/07gg.png" alt="" width="14" height="14">Stars called on 07.gg &#8599;</a></div></div>
 <div class="pillrow">
 <span class="pill"><span class="pl">Target</span><span class="pv">99 (slow-skills block)</span></span>
@@ -45,16 +46,16 @@
   <th>Requirement</th><th>XP/hr</th><th>Notes</th>
   <th class="choose"><span class="sr">Choose</span></th></tr></thead>
   <tbody>
-    <tr class="m" id="m-motherlode-mine" data-method="Motherlode Mine"><td class="pic"><img class="thumb" src="../assets/media/motherlode-mine.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Motherlode_Mine" target="_blank" rel="noopener">Motherlode Mine</a></td><td class="req">30</td><td class="rate" data-base="30–65k">30–65k</td><td class="notes">The AFK standard. <span class="ment"><img class="mi" src="../assets/media/prospector-kit.png" alt="" loading="lazy">Prospector kit</span>, upper level at 72, pay-dirt sack upgrades. Gives free ores and nuggets.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Motherlode Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-shooting-stars" data-method="Shooting Stars"><td class="pic"><img class="thumb" src="../assets/media/shooting-stars.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Shooting_Stars" target="_blank" rel="noopener">Shooting Stars</a></td><td class="req">10 (60+ useful)</td><td class="rate" data-base="20–40k">20–40k</td><td class="notes">Crashed stars, a Distraction and Diversion. One click every 7 minutes, so it is the most AFK Mining there is, and stardust buys the celestial ring (+4 invisible Mining boost). Star tier scales with your level.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Shooting Stars"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m rec" id="m-volcanic-mine" data-method="Volcanic Mine"><td class="pic"><img class="thumb" src="../assets/media/volcanic-mine.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Volcanic_Mine" target="_blank" rel="noopener">Volcanic Mine</a><span class="rtag rec">best at your level</span></td><td class="req">70 (+ quests)</td><td class="rate" data-base="70–100k">70–100k</td><td class="notes">Fastest non-tick-manipulated Mining. Group activity, needs attention.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Volcanic Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m" id="m-3-tick-iron-granite" data-method="3-tick iron / granite"><td class="pic"><img class="thumb" src="../assets/media/iron-ore.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Iron_ore" target="_blank" rel="noopener">3-tick iron / granite</a></td><td class="req">15 / 45</td><td class="rate" data-base="60–100k">60–100k</td><td class="notes">Top rates if you're willing to tick-manipulate. Granite at the Quarry, iron at the <span class="ment"><img class="mi" src="../assets/media/mining-guild.png" alt="" loading="lazy">Mining Guild</span>.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use 3-tick iron / granite"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-rubium-rocks" data-method="Rubium rocks"><td class="pic"><img class="thumb" src="../assets/media/rubium-rocks.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Rubium_rocks" target="_blank" rel="noopener">Rubium rocks</a><span class="rtag lock">needs 60 Sailing</span></td><td class="req">48 Mining, 60 Sailing</td><td class="rate" data-base="50-80k">50-80k</td><td class="notes">Charred Dungeon, reached by docking at Charred Island. Higher XP than the nearby deposits but much more attention; the deposits at 68 are the AFK version.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 60 Sailing" aria-label="Locked: needs 60 Sailing"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m locked" id="m-amethyst" data-method="Amethyst"><td class="pic"><img class="thumb" src="../assets/media/amethyst.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Amethyst" target="_blank" rel="noopener">Amethyst</a><span class="rtag lock">needs 92 Mining</span></td><td class="req">92</td><td class="rate" data-base="~20k">~20k</td><td class="notes">Very AFK and profitable; used mainly for the last stretch or while doing something else.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 92 Mining" aria-label="Locked: needs 92 Mining"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m" id="m-calcified-rocks" data-method="Calcified rocks"><td class="pic"><img class="thumb" src="../assets/media/calcified-deposit.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Calcified_deposit" target="_blank" rel="noopener">Calcified rocks</a></td><td class="req">41 (+ Fossil Island)</td><td class="rate" data-base="25–45k">25–45k</td><td class="notes">Underwater at <span class="ment"><img class="mi" src="../assets/media/fossil-island.png" alt="" loading="lazy">Fossil Island</span>. Very low attention and no competition for rocks.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Calcified rocks"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
-    <tr class="m locked" id="m-zalcano" data-method="Zalcano"><td class="pic"><img class="thumb" src="../assets/media/zalcano.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Zalcano" target="_blank" rel="noopener">Zalcano</a><span class="rtag lock">needs Song of the Elves</span></td><td class="req">70 (+ Song of the Elves)</td><td class="rate" data-base="40–60k">40–60k</td><td class="notes">Group boss that pays in crystal shards and Zalcano shards alongside the XP.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs Song of the Elves" aria-label="Locked: needs Song of the Elves"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m locked" id="m-infernal-shale" data-method="Infernal shale"><td class="pic"><img class="thumb" src="../assets/media/infernal-shale.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Infernal_shale" target="_blank" rel="noopener">Infernal shale</a><span class="rtag lock">needs 78 Mining</span></td><td class="req">78</td><td class="rate" data-base="verify">verify</td><td class="notes">Chasm of Fire. The crushed shale is what oathplate armour is made from, so the value is in the drops rather than the rate.</td><td class="choose"><button class="pickbtn" type="button" disabled title="Needs 78 Mining" aria-label="Locked: needs 78 Mining"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
-    <tr class="m" id="m-blast-mine" data-method="Blast Mine"><td class="pic"><img class="thumb" src="../assets/media/blast-mine.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Blast_mine" target="_blank" rel="noopener">Blast Mine</a></td><td class="req">Lovakengj</td><td class="rate" data-base="40–60k">40–60k</td><td class="notes">Good GP, decent XP, high click intensity.</td><td class="choose"><button class="pickbtn" type="button" title="Use this method" aria-label="Use Blast Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-motherlode-mine" data-method="Motherlode Mine"><td class="pic"><img class="thumb" src="../assets/media/motherlode-mine.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Motherlode_Mine" target="_blank" rel="noopener">Motherlode Mine</a></td><td class="req">30</td><td class="rate" data-base="30–65k">30–65k</td><td class="notes">The AFK standard. <span class="ment"><img class="mi" src="../assets/media/prospector-kit.png" alt="" loading="lazy">Prospector kit</span>, upper level at 72, pay-dirt sack upgrades. Gives free ores and nuggets.</td><td class="choose"><button class="pickbtn" type="button" aria-pressed="false" title="Use this method" aria-label="Use Motherlode Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-shooting-stars" data-method="Shooting Stars"><td class="pic"><img class="thumb" src="../assets/media/shooting-stars.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Shooting_Stars" target="_blank" rel="noopener">Shooting Stars</a></td><td class="req">10 (60+ useful)</td><td class="rate" data-base="20–40k">20–40k</td><td class="notes">Crashed stars, a Distraction and Diversion. One click every 7 minutes, so it is the most AFK Mining there is, and stardust buys the celestial ring (+4 invisible Mining boost). Star tier scales with your level.</td><td class="choose"><button class="pickbtn" type="button" aria-pressed="false" title="Use this method" aria-label="Use Shooting Stars"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m rec" id="m-volcanic-mine" data-method="Volcanic Mine"><td class="pic"><img class="thumb" src="../assets/media/volcanic-mine.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Volcanic_Mine" target="_blank" rel="noopener">Volcanic Mine</a><span class="rtag rec">best at your level</span></td><td class="req">70 (+ quests)</td><td class="rate" data-base="70–100k">70–100k</td><td class="notes">Fastest non-tick-manipulated Mining. Group activity, needs attention.</td><td class="choose"><button class="pickbtn" type="button" aria-pressed="false" title="Use this method" aria-label="Use Volcanic Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m" id="m-3-tick-iron-granite" data-method="3-tick iron / granite"><td class="pic"><img class="thumb" src="../assets/media/iron-ore.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Iron_ore" target="_blank" rel="noopener">3-tick iron / granite</a></td><td class="req">15 / 45</td><td class="rate" data-base="60–100k">60–100k</td><td class="notes">Top rates if you're willing to tick-manipulate. Granite at the Quarry, iron at the <span class="ment"><img class="mi" src="../assets/media/mining-guild.png" alt="" loading="lazy">Mining Guild</span>.</td><td class="choose"><button class="pickbtn" type="button" aria-pressed="false" title="Use this method" aria-label="Use 3-tick iron / granite"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-rubium-rocks" data-method="Rubium rocks"><td class="pic"><img class="thumb" src="../assets/media/rubium-rocks.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Rubium_rocks" target="_blank" rel="noopener">Rubium rocks</a><span class="rtag lock">needs 60 Sailing</span></td><td class="req">48 Mining, 60 Sailing</td><td class="rate" data-base="50-80k">50-80k</td><td class="notes">Charred Dungeon, reached by docking at Charred Island. Higher XP than the nearby deposits but much more attention; the deposits at 68 are the AFK version.</td><td class="choose"><button class="pickbtn" type="button" disabled aria-pressed="false" title="Needs 60 Sailing" aria-label="Locked: needs 60 Sailing"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m locked" id="m-amethyst" data-method="Amethyst"><td class="pic"><img class="thumb" src="../assets/media/amethyst.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Amethyst" target="_blank" rel="noopener">Amethyst</a><span class="rtag lock">needs 92 Mining</span></td><td class="req">92</td><td class="rate" data-base="~20k">~20k</td><td class="notes">Very AFK and profitable; used mainly for the last stretch or while doing something else.</td><td class="choose"><button class="pickbtn" type="button" disabled aria-pressed="false" title="Needs 92 Mining" aria-label="Locked: needs 92 Mining"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-calcified-rocks" data-method="Calcified rocks"><td class="pic"><img class="thumb" src="../assets/media/calcified-deposit.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Calcified_deposit" target="_blank" rel="noopener">Calcified rocks</a></td><td class="req">41 (+ Fossil Island)</td><td class="rate" data-base="25–45k">25–45k</td><td class="notes">Underwater at <span class="ment"><img class="mi" src="../assets/media/fossil-island.png" alt="" loading="lazy">Fossil Island</span>. Very low attention and no competition for rocks.</td><td class="choose"><button class="pickbtn" type="button" aria-pressed="false" title="Use this method" aria-label="Use Calcified rocks"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
+    <tr class="m locked" id="m-zalcano" data-method="Zalcano"><td class="pic"><img class="thumb" src="../assets/media/zalcano.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Zalcano" target="_blank" rel="noopener">Zalcano</a><span class="rtag lock">needs Song of the Elves</span></td><td class="req">70 (+ Song of the Elves)</td><td class="rate" data-base="40–60k">40–60k</td><td class="notes">Group boss that pays in crystal shards and Zalcano shards alongside the XP.</td><td class="choose"><button class="pickbtn" type="button" disabled aria-pressed="false" title="Needs Song of the Elves" aria-label="Locked: needs Song of the Elves"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m locked" id="m-infernal-shale" data-method="Infernal shale"><td class="pic"><img class="thumb" src="../assets/media/infernal-shale.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Infernal_shale" target="_blank" rel="noopener">Infernal shale</a><span class="rtag lock">needs 78 Mining</span></td><td class="req">78</td><td class="rate" data-base="verify">verify</td><td class="notes">Chasm of Fire. The crushed shale is what oathplate armour is made from, so the value is in the drops rather than the rate.</td><td class="choose"><button class="pickbtn" type="button" disabled aria-pressed="false" title="Needs 78 Mining" aria-label="Locked: needs 78 Mining"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 7V5.2a2.4 2.4 0 0 1 4.8 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></td></tr>
+    <tr class="m" id="m-blast-mine" data-method="Blast Mine"><td class="pic"><img class="thumb" src="../assets/media/blast-mine.png" alt="" loading="lazy"></td><td><a class="wl" href="https://oldschool.runescape.wiki/w/Blast_mine" target="_blank" rel="noopener">Blast Mine</a></td><td class="req">Lovakengj</td><td class="rate" data-base="40–60k">40–60k</td><td class="notes">Good GP, decent XP, high click intensity.</td><td class="choose"><button class="pickbtn" type="button" aria-pressed="false" title="Use this method" aria-label="Use Blast Mine"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td></tr>
   </tbody>
 </table>
 </div></div>
@@ -66,7 +67,7 @@
 <div class="prevnext"><a class="prev" href="thieving.html"><span class="d">Previous</span><span class="n">Thieving</span></a><a class="next" href="woodcutting.html"><span class="d">Next</span><span class="n">Woodcutting</span></a></div>
 </main>
 <aside class="rail" aria-label="Site index">
-  <div class="meter"><span class="mrow"><span>Total Level</span><b class="num" data-stat="total">1637</b><span class="mmax">/2376</span><button class="refresh" type="button" hidden title="Refresh from the hiscores" aria-label="Refresh from the hiscores"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mrow"><span>Combat</span><b class="num" data-stat="combat">89</b><span class="mmax">/126</span><span class="spacer"></span></span></div>
+  <div class="meter"><span class="mrow"><span>Total Level</span><b class="num" data-stat="total">1637</b><span class="mmax">/2376</span><button class="refresh stats-refresh" type="button" hidden title="Refresh from the hiscores" aria-label="Refresh from the hiscores"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mrow"><span>Combat</span><b class="num" data-stat="combat">89</b><span class="mmax">/126</span><span class="spacer"></span></span></div>
   <nav class="rail-body">
   <div class="rail-kick">Reference</div>
   <a href="../index.html#progression"><img class="refico" src="../assets/media/site/combat-achievements.png" alt="" width="15" height="15"><span class="t">Progression</span></a>
@@ -108,7 +109,7 @@
   <span class="rrow"><a class="r" href="../skills/construction.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAPFBMVEUAAAAAAAFJLx1cSTd2VDV8b15TODBxWlSMV1VcW1gLCwtKRk14dnQfCApFOTepqJuSkYyPg3UlICNQjlZUNdwuAAAAAXRSTlMAQObYZgAAAL1JREFUeF5tz8lyAyEMRVE/DUDPdvL//5on4aRxkbvR4hQq8ZhCxDlDraqK/0ALm+kwKwWYCQmc5BmKJuETtKgGTVL4hELCOQquIqeIBBXBCK9dZNskOQVZwL5kf2DNW1sDPADZ+9Rm6/XcWcr4CcNVvQMwCkHMrS6L+8exXFW50d3MDgwEXE9jzTwaiLBbpxYdGD7o1unU6JcA3tRFI46UTt+d1JR8C2kBvrqwQUh4YKUo+Zab9d2ZMtJdwg91awdGR2OY5QAAAABJRU5ErkJggg==" alt="" width="22" height="22"><span class="t">Construction</span><span class="r-lvl lit" style="--lc:hsl(67 76% 63%)">77</span></a><button class="focusbtn" type="button" data-skill="Construction" title="Set as the skill you are levelling" aria-label="Focus Construction"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
   <span class="rrow"><a class="r" href="../skills/sailing.html"><img class="icon sm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAMAAADX9CSSAAABcWlDQ1BpY2MAAHjaldE5SANBGIbhN1FRPLDQQsRiCxUEbVTEMkQxCAZCEiFRC/fIBdlN2E2wSSnYBiw8GqMWNtbaWtgKguABYi9YKdpIWGcImiBEcKZ5+Gb+YeYf8Fayuum0+sC0CnY44Fdi8RWl/Zku2sQcZUzVnXwwshCl6fi4xQNwMyHP4n+jx0g4OngUwKfn7YLwOjCzUchL7wL9elo1hE+BcVtcUPhe5lrNL9IpabxI29HwnHA/oKQarDVYT9um8DQwbJiWIRyr2ZAuSZvZog4AeIDuhLUckTkwRIBFgoRQ0CiSIUuBCTJYKDiECeBvUj+IrA9RRCNLBh2FeXKYqMh65B/87q2TnJoEwNPth7Yn130bgfZtqJZd9/PQdatH0PIIF1a9PleB2XeRl+vZ8AH0bsLZZT3TduB8CwYe8qqtAtACeJNJeD2Bnjj0XUPnquzbzzrHdxAtwdIV7O3DaAp615q8u6Oxb3/t+e7fF7ntcsMvXATQAAAAD1BMVEUAAAAAAAGSmpVVXFp1e3yFTXRwAAAAAXRSTlMAQObYZgAAAIxJREFUeNpl0gEKxDAMA0GvpP+/+aA2NuEEJXiaRgRa/wGeaUYksbwjMRb7IUm7+J6CXux8q0RCsQfgCCTH/T7TgxPJ0Nticd2mOgSdO5zDsnOHUstTPn78zdKsHDesD7fb7RHNHZgCSc2X9Tx8t5zOTj3XobdI67YTCSARXL+dji3qArZtwJxv5f0MP2ZAAlUKS1qzAAAAAElFTkSuQmCC" alt="" width="22" height="22"><span class="t">Sailing</span><span class="r-lvl lit" style="--lc:hsl(36 74% 62%)">50</span></a><button class="focusbtn" type="button" data-skill="Sailing" title="Set as the skill you are levelling" aria-label="Focus Sailing"><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></button></span>
   <div class="rail-kick spaced">Videos</div>
-  <span class="vidrow"><a class="vch" href="https://www.youtube.com/@patyfatycake_OSRS" target="_blank" rel="noopener" title="Patyfatycake on YouTube"><img src="../assets/media/yt/ch-patyfatycake.jpg" alt="Patyfatycake" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=EgerHcjR0VI&t=934s" target="_blank" rel="noopener"><span class="vt">How to max in 2026</span><span class="vc">Patyfatycake</span></a></span>
+  <span class="vidrow"><a class="vch" href="https://www.youtube.com/@patyfatycake_OSRS" target="_blank" rel="noopener" title="Patyfatycake on YouTube"><img src="../assets/media/yt/ch-patyfatycake.jpg" alt="Patyfatycake" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=EgerHcjR0VI&amp;t=934s" target="_blank" rel="noopener"><span class="vt">How to max in 2026</span><span class="vc">Patyfatycake</span></a></span>
   <span class="vidrow"><a class="vch" href="https://www.youtube.com/@LocalOSRS" target="_blank" rel="noopener" title="Local OSRS on YouTube"><img src="../assets/media/yt/ch-localosrs.jpg" alt="Local OSRS" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=LZRbhpS5J3c" target="_blank" rel="noopener"><span class="vt">What order to max</span><span class="vc">Local OSRS</span></a></span>
   <span class="vidrow"><a class="vch" href="https://www.youtube.com/@Gissoia" target="_blank" rel="noopener" title="Gissoia on YouTube"><img src="../assets/media/yt/ch-gissoia.jpg" alt="Gissoia" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=LqMvToAkWkQ" target="_blank" rel="noopener"><span class="vt">Maxing in 2026</span><span class="vc">Gissoia</span></a></span>
   <span class="vidrow"><a class="vch" href="https://www.youtube.com/@Gissoia" target="_blank" rel="noopener" title="Gissoia on YouTube"><img src="../assets/media/yt/ch-gissoia.jpg" alt="Gissoia" loading="lazy"></a><a class="vid" href="https://www.youtube.com/watch?v=AI_d03Xj_LE" target="_blank" rel="noopener"><span class="vt">Best AFK methods</span><span class="vc">Gissoia</span></a></span>
@@ -121,7 +122,9 @@
   var rail = document.querySelector('.rail-body');
   if (!rail) return;
   var here = rail.querySelector('a.here');
-  if (here && here.scrollIntoView) here.scrollIntoView({ block: 'nearest' });
+  if (here && rail.scrollHeight > rail.clientHeight + 1) {
+    rail.scrollTop = Math.max(0, here.offsetTop - rail.clientHeight / 2);
+  }
 })();
 </script>
 
@@ -129,7 +132,7 @@
 /* Pulls the hiscores through serve.py's /api/stats proxy. The hiscores send no
    CORS headers, so a static page cannot call them directly. */
 (function () {
-  var btn = document.querySelector('.refresh');
+  var btn = document.querySelector('.stats-refresh');
   if (!btn || !/^https?:$/.test(location.protocol)) return;
   btn.hidden = false;
 
@@ -140,26 +143,41 @@
   }
 
   function apply(d) {
-    var skills = d.skills || {}, left = 0;
+    var skills = d.skills || {};
     document.querySelectorAll('[data-skill-level]').forEach(function (el) {
       var s = skills[el.getAttribute('data-skill-level')];
       if (s) el.textContent = s.level;
     });
+    function band(el, level) {
+      var goals = (el.getAttribute('data-goals') || '').split(',')
+        .map(function (x) { return parseInt(x, 10); })
+        .filter(function (x) { return x > 1 && x <= 99; });
+      var from = 1, goal = 99;
+      goals.forEach(function (x) { if (x <= level) from = x; });
+      var next = goals.filter(function (x) { return x > level; })[0];
+      if (next) goal = next;
+      return { from: from, goal: goal, next: next };
+    }
     document.querySelectorAll('[data-skill-bar]').forEach(function (el) {
       var s = skills[el.getAttribute('data-skill-bar')];
       if (!s) return;
-      var from = parseInt(el.getAttribute('data-from'), 10) || 1;
-      var goal = parseInt(el.getAttribute('data-goal'), 10) || 99;
-      var lo = xpFor(from), hi = xpFor(goal);
+      var b = band(el, s.level);
+      var lo = xpFor(b.from), hi = xpFor(b.goal);
       var pct = hi <= lo ? 100 : Math.round(100 * (s.xp - lo) / (hi - lo));
       el.style.width = Math.max(0, Math.min(100, pct)) + '%';
     });
-    Object.keys(skills).forEach(function (k) { if (skills[k].level < 99) left++; });
+    document.querySelectorAll('[data-skill-goal]').forEach(function (el) {
+      var s = skills[el.getAttribute('data-skill-goal')];
+      if (!s) return;
+      var b = band(el, s.level);
+      el.textContent = b.next ? (el.getAttribute('data-prefix') || '') + b.next
+        : (el.getAttribute('data-done') || '99');
+      el.classList.toggle('done', !b.next);
+    });
     var set = function (key, val) {
       var el = document.querySelector('[data-stat="' + key + '"]');
       if (el && val != null) el.textContent = val;
     };
-    set('left', left);
     set('total', d.overall && d.overall.level);
     set('combat', d.combat);
     document.dispatchEvent(new CustomEvent('osrsplan:stats', { detail: d }));
@@ -223,7 +241,12 @@
 
   function show(row, announce) {
     var method = row.getAttribute('data-method');
-    rows.forEach(function (r) { r.classList.toggle('chosen', r === row); });
+    rows.forEach(function (r) {
+      var active = r === row;
+      r.classList.toggle('chosen', active);
+      var button = r.querySelector('.pickbtn');
+      if (button) button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
     if (pname) pname.textContent = method;
     if (pdetail) {
       var cell = row.querySelector('td.notes');
@@ -366,7 +389,11 @@
   filters.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var want = btn.getAttribute('data-f');
-      filters.forEach(function (b) { b.classList.toggle('on', b === btn); });
+      filters.forEach(function (b) {
+        var active = b === btn;
+        b.classList.toggle('on', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
       rows.forEach(function (r) {
         r.hidden = want !== 'all' && r.getAttribute('data-tag') !== want;
       });
@@ -376,7 +403,11 @@
   sorts.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var key = btn.getAttribute('data-s');
-      sorts.forEach(function (b) { b.classList.toggle('on', b === btn); });
+      sorts.forEach(function (b) {
+        var active = b === btn;
+        b.classList.toggle('on', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
       var sorted = rows.slice().sort(function (a, b) {
         if (key === 'verdict') {
           return num(a, 'order') - num(b, 'order') || num(b, 'weight') - num(a, 'weight');
@@ -453,7 +484,7 @@
         + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
         + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
         + '<button class="sview" type="button" data-loc="' + loc + '" '
-        + 'title="Map area. Click to open the tracker">view</button>'
+        + 'title="Show a map of this area">view</button>'
         + '<span class="sreq" title="Mining level for this tier">' + req + '</span>'
         + '<span class="sends">' + esc(mins(s.endsAt)) + '</span></div>';
     }).join('');
@@ -626,9 +657,14 @@
   });
   list.addEventListener('focusout', function () { pop.hidden = true; });
   list.addEventListener('click', function (ev) {
-    if (ev.target.closest('.sview')) {
-      window.open('https://07.gg/trackers/shooting-star', '_blank', 'noopener');
+    var view = ev.target.closest('.sview');
+    if (!view) return;
+    if (window.matchMedia('(hover: none)').matches) {
+      ev.preventDefault();
+      showPop(view);
+      return;
     }
+    window.open('https://07.gg/trackers/shooting-star', '_blank', 'noopener');
   });
 
   btn.addEventListener('click', load);
