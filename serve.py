@@ -46,6 +46,19 @@ STAR_UA = "mudkip-osrs-plan/1.0 (personal planning page)"
 _star_cache = {"at": 0.0, "data": None}
 
 
+def clean_star_text(text, limit=60):
+    """Keep crowd-sourced fields plain and bounded before storing them."""
+    text = re.sub(r"[<>&\"'\\\\]", "", text or "")
+    return re.sub(r"\\s+", " ", text).strip()[:limit]
+
+
+def clean_caller(text):
+    if re.search(r"[^A-Za-z0-9 _-]", text or ""):
+        return "anonymous"
+    caller = clean_star_text(text, 12)
+    return caller if re.fullmatch(r"[A-Za-z0-9 _-]{1,12}", caller) else "anonymous"
+
+
 def shooting_stars(max_age=45):
     """Active stars from 07.gg, parsed out of their server-rendered payload.
 
@@ -61,13 +74,6 @@ def shooting_stars(max_age=45):
     with urllib.request.urlopen(req, timeout=25) as r:
         page = r.read().decode("utf-8", "replace")
 
-    def clean(text, limit=60):
-        """Third-party, crowd-sourced text: keep it plain before it ever reaches
-        a page."""
-        text = re.sub(r"[<>&\"'\\\\]", "", text or "")
-        text = re.sub(r"\\s+", " ", text).strip()
-        return text[:limit]
-
     stars, seen = [], set()
     for m in re.finditer(
             r'calledAt\\?":(\d+),\\?"caller\\?":\\?"(.*?)\\?",\\?"world\\?":(\d+),'
@@ -80,8 +86,8 @@ def shooting_stars(max_age=45):
         stars.append({
             "world": int(world),
             "tier": int(tier),
-            "location": clean(loc),
-            "caller": clean(caller, 20),
+            "location": clean_star_text(loc),
+            "caller": clean_caller(caller),
             "calledAt": int(called),
             "endsAt": int(end),
         })
@@ -112,8 +118,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.hiscores()
         if route == "/api/stars":
             try:
-                return self.json({"stars": shooting_stars(),
-                                  "source": STAR_URL, "at": int(time.time() * 1000)})
+                stars = shooting_stars()
+                return self.json({"stars": stars, "source": STAR_URL,
+                                  "at": int(_star_cache["at"] * 1000)})
             except Exception as exc:                              # noqa: BLE001
                 return self.json({"error": str(exc)}, 502)
         return super().do_GET()

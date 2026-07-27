@@ -109,7 +109,18 @@ python3 build.py
 
 `fetch_media.py` and the map fetcher make network requests and only need to run
 when their registries or upstream data change. The other snapshots can be
-refreshed regularly.
+refreshed regularly. `.github/workflows/refresh.yml` refreshes live snapshots,
+rebuilds, runs the checks, and commits changes every six hours.
+
+## Checks
+
+```bash
+ruff check . --exclude skills --exclude assets
+python3 -m unittest discover -s tests -v
+```
+
+The tests cover formulas, requirement gating, API validation, atomic snapshots,
+generator drift, duplicate IDs, and local links/anchors.
 
 ## Layout
 

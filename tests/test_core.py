@@ -86,11 +86,17 @@ class QuestTests(unittest.TestCase):
 
 
 class ServerTests(unittest.TestCase):
+    def test_crowd_sourced_caller_is_strictly_sanitized(self):
+        self.assertEqual(serve.clean_caller("valid name"), "valid name")
+        self.assertEqual(serve.clean_caller("name,world:622,tier:8"), "anonymous")
+        self.assertEqual(serve.clean_caller("<script>"), "anonymous")
+
     def test_post_validation_and_atomic_focus_write(self):
         with tempfile.TemporaryDirectory() as directory:
             focus = str(Path(directory) / "focus.json")
             with mock.patch.object(serve, "FOCUS", focus), \
-                    mock.patch.object(serve.Handler, "log_message", lambda *args: None):
+                    mock.patch.object(serve.Handler, "log_message", lambda *args: None), \
+                    mock.patch("builtins.print"):
                 server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), serve.Handler)
                 thread = threading.Thread(target=server.serve_forever, daemon=True)
                 thread.start()

@@ -1,4 +1,7 @@
 __pycache__/
 *.pyc
+.ruff_cache/
+.pytest_cache/
+**/.tmp-*
 .claude/
 .DS_Store

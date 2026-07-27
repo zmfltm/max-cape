@@ -1459,6 +1459,15 @@ table.pathtable td.tn a:hover { color: var(--accent); }
   color: var(--done);
   margin-top: 2px;
 }
+.leg { display: block; }
+.leg + .leg { margin-top: 3px; }
+.leg i {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--dim);
+  margin-left: 8px;
+}
 .blk {
   display: block;
   font-family: var(--font-mono);
@@ -1532,15 +1541,6 @@ table.afktable th:nth-child(3), table.afktable td:nth-child(3) { font-weight: 50
 
 .potbar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .potbar .k { color: var(--accent); }
-.potfilter {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-  color: var(--muted);
-  cursor: pointer;
-}
-.potfilter input { accent-color: var(--accent); margin: 0; cursor: pointer; }
 
 .potpick {
   display: grid;

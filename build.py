@@ -225,17 +225,17 @@ SKILLS = [
     ),
     # ---------------- gathering ----------------
     dict(
-        name="Fishing", group=GATHER, target="70 → 99", pick="Drift Net Fishing",
+        name="Fishing", group=GATHER, target="70 → 99", pick="Tempoross",
         phase="70 for the quest cape block (paired with Hunter), 99 in the slow-skills block.",
-        summary="Drift Net Fishing with Hunter.",
+        summary="Tempoross, then Leechfin fishing at 78.",
         methods=[
-            ("Drift Net Fishing", "47 Fish / 44 Hunt", "40–60k each", "Your Pick. Trains Fishing and Hunter simultaneously on Fossil Island. Exactly why it's in the plan for the 70/70 requirement."),
-            ("Barbarian Fishing", "48 (+ quest)", "30–55k", "3-tick variant is much faster; also drips Strength and Agility XP."),
-            ("2-tick harpooning", "71", "90–110k",
+            ("Drift Net Fishing", "47 Fish / 44 Hunt", "53–88k Fishing", "Trains Fishing and Hunter at once on Fossil Island, which is what makes it the shortest way to the 70/70 the quest cape wants. Not the route to 99: faster options open above it in both skills."),
+            ("Barbarian Fishing", "48 (+ quest)", "23–57k, 55–144k 3-tick", "Your Pick above 58 on the fastest route. The 3-tick cut-eat is the highest rate in the skill; plain clicking is far slower. Drips Strength, Agility and Cooking either way."),
+            ("2-tick harpooning", "71", "78–133k",
              "Swordfish and tuna with tick manipulation. The genuine fastest Fishing, and the most demanding."),
-            ("Minnows", "82", "50–60k", "Converts to sharks for Tempoross-adjacent profit. Fairly click-heavy."),
-            ("Tempoross", "35", "40–60k", "Reward XP plus free food and permits. Sociable, low risk."),
-            ("Karambwans", "65", "25–35k", "3-tick; feeds 1-tick Cooking later."),
+            ("Minnows", "82", "40–56k", "Converts to sharks for Tempoross-adjacent profit. Fairly click-heavy."),
+            ("Tempoross", "35", "30–95k", "Reward XP plus free food and permits. Sociable, low risk."),
+            ("Karambwans", "65", "27–40k", "3-tick; feeds 1-tick Cooking later."),
             ("Monkfish", "62", "~30k",
              "Piscatoris. Modest XP but steady, and the fish are worth banking for Slayer trips."),
             ("Aerial fishing", "43 (+ 35 Hunter)", "35–50k",
@@ -244,7 +244,7 @@ SKILLS = [
              "Newer method from the Varlamore content. Check the wiki for current rates before committing."),
             ("Dark crabs", "85 (+ Wilderness)", "~25k",
              "The best fishing GP in the game, at the cost of being in the deep Wilderness with a lobster pot."),
-            ("Anglerfish", "82", "~30k", "Slow but good money and the best non-boss food."),
+            ("Anglerfish", "82", "15–39k", "Slow but good money and the best non-boss food."),
         ],
         notes=[
             "Drift Net is clearly right for the 70/70 requirement. For the eventual 99, most people switch to 3-tick Barbarian Fishing or minnows.",
@@ -252,20 +252,20 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Hunter", group=GATHER, target="70 → 99", pick="Drift Net Fishing",
+        name="Hunter", group=GATHER, target="70 → 99", pick="Hunter Rumours (Hunters' Guild)",
         phase="70 for the quest cape block (paired with Fishing). Not in the explicit post-Diary list. Slot it with the gathering skills.",
-        summary="Drift Net Fishing with Fishing.",
+        summary="Red chinchompas, then Hunters' Rumours at 72.",
         methods=[
-            ("Drift Net Fishing", "44 Hunt / 47 Fish", "40–60k each", "Your Pick for the 70/70 requirement."),
-            ("Hunter Rumours (Hunters' Guild)", "Varlamore", "80–120k", "Varlamore contract system. Strong XP with useful rewards; the modern default for high Hunter."),
-            ("Black chinchompas", "73", "150–250k", "Best XP in the skill and excellent GP, but deep Wilderness. High risk, high reward."),
+            ("Drift Net Fishing", "44 Hunt / 47 Fish", "50–113k Hunter", "The shortest way to the 70/70 the quest cape wants, since it trains both at once. Rumours and chinchompas beat it comfortably after that."),
+            ("Hunter Rumours (Hunters' Guild)", "72 / 91", "160–250k", "Varlamore contract system. Strong XP with useful rewards; the modern default for high Hunter."),
+            ("Black chinchompas", "73", "up to 265k", "Best XP in the skill and excellent GP, but deep Wilderness. High risk, high reward."),
             ("Red chinchompas", "63", "100–150k", "Safer, still good, and it stockpiles the chins you'll want for 99 Ranged."),
             ("Letvek and stymphikes", "76 / 82 (+ Blood Moon Rises)", "~145k",
              "Vampyrium. Box-trap letvek at 76 as bait, then hunt stymphikes at 82. With 3-tick manipulation this is the fastest Hunter in the game."),
-            ("Razor-backed kebbits", "49", "80–100k",
+            ("Razor-backed kebbits", "49", "~130k",
              "Deadfall trapping in the Piscatoris hunter area. The standard bridge between falconry and chinning."),
-            ("Herbiboar", "80 (+ 31 Herb)", "60–80k", "Slower XP, but pays out herbs continuously. Requires Fossil Island access and Bone Voyage."),
-            ("Falconry", "43", "60–80k",
+            ("Herbiboar", "80 (+ 31 Herb)", "137–171k", "Slower XP, but pays out herbs continuously. Requires Fossil Island access and Bone Voyage."),
+            ("Falconry", "43", "60–70k",
              "Spotted and dark kebbits at Piscatoris. No traps, just clicking, and it is the fastest option in its band."),
             ("Birdhouse runs", "5+", "passive", "Two minutes every 50 minutes. Free XP forever. Start doing these now regardless of method."),
         ],
@@ -373,15 +373,15 @@ SKILLS = [
         phase="65 for the quest cape block, ~77 relatively early (blood runes), 99 first in the slow-skills block.",
         summary="GOTR, then blood runes or ZMI.",
         methods=[
-            ("Guardians of the Rift", "27", "40–80k", "Your Pick. XP scales with level, plus pouches, the Abyssal needle, outfit and eventually the pet. The default modern Runecraft."),
+            ("Guardians of the Rift", "27", "25–70k", "Your Pick. XP scales with level, plus pouches, the Abyssal needle, outfit and eventually the pet. The default modern Runecraft."),
             ("ZMI altar", "50 (+ Lunar Diplomacy)", "40–70k", "Consistent, solo, no minigame timer. Needs pouches and the Ourania teleport."),
-            ("Blood runes (Arceuus)", "77", "~40k", "Low attention, strong profit. This is why the plan wants 77 early. It turns Runecraft into passive income."),
+            ("Blood runes (Arceuus)", "77", "~36k", "Low attention, strong profit. This is why the plan wants 77 early. It turns Runecraft into passive income."),
             ("Lava runes with runners", "23", "80–130k",
              "The classic runner method. Far faster than solo lavas, but you depend on other players showing up."),
-            ("Lava runes (binding necklace)", "23", "50–80k", "Cheap and fast; requires a lot of clicking through the abyss."),
+            ("Lava runes (binding necklace)", "23", "43–102k", "Cheap and fast; requires a lot of clicking through the abyss."),
             ("Mud runes", "23 (+ Lunars)", "60–100k",
              "Binding necklace runs like lavas but with the Magic Imbue spell instead of an earth talisman staff. Similar rate; take whichever is cheaper."),
-            ("Aether runes with runners", "90", "verify",
+            ("Aether runes with runners", "90", "165–445k",
              "The top-end runner method. Newer, so check current rates on the wiki."),
             ("Wrath runes", "95", "~60k", "Best XP and money at the very top end."),
             ("Daeyalt essence", "Sins of the Father", "+XP", "Straight multiplier on any essence-based method. Get it before long Runecraft sessions."),
@@ -1505,10 +1505,17 @@ POTION_JS = """
   var rows = Array.prototype.slice.call(table.querySelectorAll('tr.pot'));
   var status = document.getElementById('potstatus');
   var btn = document.getElementById('potrefresh');
-  var mine = document.getElementById('potmine');
   var pick = document.getElementById('potpick');
-  var level = parseInt(table.getAttribute('data-level'), 10)
-    || parseInt(document.body.getAttribute('data-hlevel'), 10) || 0;
+  var priced = null;
+
+  /* Read the level off the live panel every time, so a refresh that moves it
+     moves this too. The build-time value is only the fallback. */
+  function level() {
+    var el = document.querySelector('[data-skill-level="'
+      + table.getAttribute('data-skill') + '"]');
+    return parseInt(el && el.textContent, 10)
+      || parseInt(table.getAttribute('data-level'), 10) || 0;
+  }
 
   function gp(n) {
     if (n == null || !isFinite(n)) return '-';
@@ -1518,7 +1525,8 @@ POTION_JS = """
   }
 
   function apply(prices) {
-    var best = null;
+    var best = null, lvl = level();
+    priced = prices;
     rows.forEach(function (row) {
       var inputs = JSON.parse(row.getAttribute('data-inputs'));
       var made = prices[row.getAttribute('data-made')];
@@ -1536,7 +1544,7 @@ POTION_JS = """
       row.querySelector('.profit').classList.toggle('good', ok && profit > 0);
       row.querySelector('.gpxp').classList.toggle('good', ok && gpxp <= 0);
       row.dataset.gpxp = ok ? gpxp : '';
-      var usable = parseInt(row.getAttribute('data-level'), 10) <= level;
+      var usable = parseInt(row.getAttribute('data-level'), 10) <= lvl;
       if (ok && usable && (best === null || gpxp < best.gpxp)) {
         best = { gpxp: gpxp, name: row.querySelector('.tn').textContent.trim(),
                  xp: xp, profit: profit, level: row.getAttribute('data-level') };
@@ -1567,9 +1575,9 @@ POTION_JS = """
   }
 
   function filter() {
-    var only = mine && mine.checked;
+    var lvl = level();
     rows.forEach(function (row) {
-      row.hidden = only && parseInt(row.getAttribute('data-level'), 10) > level;
+      row.hidden = parseInt(row.getAttribute('data-level'), 10) > lvl;
     });
   }
 
@@ -1605,7 +1613,9 @@ POTION_JS = """
       });
   }
 
-  if (mine) mine.addEventListener('change', filter);
+  document.addEventListener('osrsplan:stats', function () {
+    if (priced) apply(priced); else filter();
+  });
   btn.addEventListener('click', load);
   load();
 })();
@@ -2085,6 +2095,7 @@ LIVE_JS = """
     set('left', left);
     set('total', d.overall && d.overall.level);
     set('combat', d.combat);
+    document.dispatchEvent(new CustomEvent('osrsplan:stats', { detail: d }));
   }
 
   btn.addEventListener('click', function (ev) {
@@ -2744,8 +2755,6 @@ def potion_section():
         '<div class="potbar">'
         f'<span class="k">Live GE prices</span>'
         '<span class="espace"></span>'
-        '<label class="potfilter"><input type="checkbox" id="potmine" checked>'
-        f'Only what I can make at {lvl}</label>'
         '<span class="estatus" id="potstatus">loading</span>'
         '<button class="refresh" id="potrefresh" type="button" title="Refresh prices" '
         'aria-label="Refresh prices">'
@@ -2758,7 +2767,7 @@ def potion_section():
         '<div class="potpick" id="potpick"></div>'
         + potion_ladder()
         + '<div class="tablewrap"><div class="tablescroll">'
-        f'<table class="pottable" id="pottable" data-level="{lvl}"><thead><tr><th>Lvl</th><th>Potion</th>'
+        f'<table class="pottable" id="pottable" data-level="{lvl}" data-skill="Herblore"><thead><tr><th>Lvl</th><th>Potion</th>'
         '<th>Ingredients</th><th>XP</th><th>gp/xp</th><th>Profit each</th>'
         '</tr></thead>'
         f'<tbody>{"".join(rows)}</tbody></table></div></div>'
@@ -2960,11 +2969,26 @@ SHORT = {"Attack": "Att", "Strength": "Str", "Defence": "Def", "Hitpoints": "HP"
          "Agility": "Agi"}
 
 
+def climb(route, xp_now, xp_target):
+    """Hours and carried XP for one stretch of a route."""
+    hours, carried, pos = 0.0, {}, xp_now
+    for leg in legs_for(route, xp_now):
+        span = min(leg["xp"], max(0, xp_target - pos))
+        if span <= 0:
+            break
+        got = (span / leg["rate"]) if leg["rate"] else 0
+        hours += got
+        for name, rate in CARRIES.get(leg["method"], {}).items():
+            carried[name] = carried.get(name, 0) + got * rate
+        pos += span
+    return hours, carried
+
+
 def carry_panel(skill_name, pick=None):
     """Where the other skills end up while you train this one.
 
-    Only for methods that train more than one thing. The rates are the ones
-    the route tables use, so these numbers agree with Which Path.
+    Only for routes that train more than one thing. The rates are the ones the
+    route tables use, so these numbers agree with Which Path.
     """
     from hiscores import combat_level
 
@@ -2973,14 +2997,15 @@ def carry_panel(skill_name, pick=None):
     if not st or not opts:
         return ""
 
-    method = pick if pick in CARRIES else opts["hybrid"][0]
-    carries = {k: v for k, v in (CARRIES.get(method) or {}).items()
-               if k != skill_name and stat_of(k)}
-    rate = next((r for m, r in opts.values() if m == method), opts["hybrid"][1])
-    if not carries or not rate:
+    route = opts["hybrid"]
+    carries = {}
+    for _, method, _ in route:
+        for name, rate in (CARRIES.get(method) or {}).items():
+            if name != skill_name and stat_of(name):
+                carries[name] = max(carries.get(name, 0), rate)
+    if not carries:
         return ""
 
-    # combat skills in the order the stats tab shows them, then the rest
     others = ([n for n in COMBAT_SKILLS if n in carries]
               + sorted(n for n in carries if n not in COMBAT_SKILLS))
     combat = any(n in COMBAT_SKILLS for n in others)
@@ -2999,11 +3024,11 @@ def carry_panel(skill_name, pick=None):
     for goal in MILESTONES:
         if goal <= st["level"]:
             continue
-        hours = max(0, XP_TABLE[goal] - (st["xp"] or 0)) / rate
+        hours, carried = climb(route, st["xp"] or 0, XP_TABLE[goal])
         xp = dict(base)
         xp[skill_name] = max(xp[skill_name], XP_TABLE[goal])
-        for name, r in carries.items():
-            xp[name] = min(xp[name] + hours * r, MAX_XP)
+        for name, amount in carried.items():
+            xp[name] = min(xp[name] + amount, MAX_XP)
         rows.append(row(f"{skill_name} {goal}", hours, xp))
 
     if len(rows) < 2:
@@ -3011,12 +3036,13 @@ def carry_panel(skill_name, pick=None):
 
     heads = "".join(f"<th>{e(SHORT.get(n, n))}</th>" for n in others)
     return (
-        f'<h2 id="alongtheway">Along the Way</h2>'
-        f'<p class="savednote">{e(method)} trains '
+        '<h2 id="alongtheway">Along the Way</h2>'
+        f'<p class="savednote">{e(route_label(route))} trains '
         + e(", ".join(others[:-1]) + (" and " if len(others) > 1 else "")
             + others[-1])
-        + ' alongside it. Where those land as you go, and what your combat '
-        'level reads at each point.</p>'
+        + ' alongside it. Where those land as you go'
+        + (', and what your combat level reads at each point.'
+           if combat else '.') + '</p>'
         '<div class="tablewrap"><div class="tablescroll">'
         '<table class="pathtable carry"><thead><tr><th>At</th><th>Hours</th>'
         f'{heads}{"<th>Cmb</th>" if combat else ""}</tr></thead>'
@@ -3568,74 +3594,112 @@ def build_afk_page():
 # Three ways to spend the remaining XP. Each entry is (method, sustained rate).
 # "afk" is the lowest-attention option that still trains the skill; where a
 # skill has none, it holds the least demanding thing available and says so.
+# Each route is a list of legs: (unlocked at, method, xp/hr). Real training is
+# staged, so one method to 99 was always a fiction. A leg is used from its level
+# until the next one opens.
+#
+# fast   the best rate there is, tick manipulation and runners included
+# hybrid the best rate that does not need tick manipulation. Not a slower plan,
+#        the same plan without the frame-perfect clicking
+# afk    the least attention that still trains the skill
 PATHS = {
-    "Slayer":       dict(fast=("Duradel, barrage tasks", 60_000),
-                         afk=("Cannon on long tasks", 30_000),
-                         hybrid=("Duradel, cannon and barrage", 50_000)),
-    "Attack":       dict(fast=("Slayer with best gear", 70_000),
-                         afk=("Nightmare Zone", 45_000),
-                         hybrid=("Slayer", 60_000)),
-    "Strength":     dict(fast=("Slayer with best gear", 70_000),
-                         afk=("Nightmare Zone", 45_000),
-                         hybrid=("Slayer", 60_000)),
-    "Defence":      dict(fast=("Slayer with best gear", 70_000),
-                         afk=("Nightmare Zone", 45_000),
-                         hybrid=("Slayer", 60_000)),
-    "Hitpoints":    dict(fast=("Arrives with combat", 0),
-                         afk=("Arrives with combat", 0),
-                         hybrid=("Arrives with combat", 0)),
-    "Ranged":       dict(fast=("Chinning maniacal monkeys", 250_000),
-                         afk=("Gemstone Crab", 45_000),
-                         hybrid=("Cannon on Slayer tasks", 80_000)),
-    "Magic":        dict(fast=("Bursting maniacal monkeys", 250_000),
-                         afk=("Splashing", 20_000),
-                         hybrid=("Barrage on Slayer tasks", 110_000)),
-    "Prayer":       dict(fast=("Superior bones, gilded altar", 500_000),
-                         afk=("Bonecrusher while you fight", 25_000),
-                         hybrid=("Chaos altar, dragon bones", 300_000)),
-    "Runecraft":    dict(fast=("Lava runes with runners", 110_000),
-                         afk=("Blood runes at Arceuus", 40_000),
-                         hybrid=("Guardians of the Rift", 60_000)),
-    "Agility":      dict(fast=("Hallowed Sepulchre, top floors", 90_000),
-                         afk=("Rooftops, nothing is idle here", 55_000),
-                         hybrid=("Hallowed Sepulchre", 70_000)),
-    "Thieving":     dict(fast=("Blackjacking", 250_000),
-                         afk=("Stealing artefacts", 70_000),
-                         hybrid=("Pyramid Plunder", 200_000)),
-    "Mining":       dict(fast=("Volcanic Mine, 3-tick iron", 90_000),
-                         afk=("Shooting Stars", 30_000),
-                         hybrid=("Motherlode Mine", 60_000)),
-    "Fishing":      dict(fast=("2-tick harpooning", 100_000),
-                         afk=("Anglerfish", 30_000),
-                         hybrid=("Drift Net Fishing", 55_000)),
-    "Woodcutting":  dict(fast=("2-tick teaks", 130_000),
-                         afk=("Redwoods", 65_000),
-                         hybrid=("Forestry teaks", 95_000)),
-    "Firemaking":   dict(fast=("Burning logs at a bank", 350_000),
-                         afk=("Bonfires", 250_000),
-                         hybrid=("Wintertodt", 250_000)),
-    "Cooking":      dict(fast=("1-tick karambwans", 700_000),
-                         afk=("Range cooking", 200_000),
-                         hybrid=("Jugs of wine", 400_000)),
-    "Crafting":     dict(fast=("Black d'hide bodies", 300_000),
-                         afk=("Cutting amethyst", 30_000),
-                         hybrid=("Battlestaves", 250_000)),
-    "Smithing":     dict(fast=("Blast Furnace gold bars", 350_000),
-                         afk=("Cannonballs", 20_000),
-                         hybrid=("Giants' Foundry", 250_000)),
-    "Herblore":     dict(fast=("Unfinished potions", 300_000),
-                         afk=("Potions, nothing is idle here", 250_000),
-                         hybrid=("Super combats", 250_000)),
-    "Construction": dict(fast=("Mahogany tables", 350_000),
-                         afk=("Mahogany Homes, nothing is idle here", 120_000),
-                         hybrid=("Mahogany Homes", 120_000)),
-    "Hunter":       dict(fast=("Letvek and stymphikes", 145_000),
-                         afk=("Birdhouse runs", 5_000),
-                         hybrid=("Hunter Rumours", 90_000)),
-    "Sailing":      dict(fast=("Barracuda Trials", 200_000),
-                         afk=("Shipwreck salvaging", 8_000),
-                         hybrid=("Courier tasks", 120_000)),
+    "Slayer": dict(
+        fast=[(1, "Duradel, barrage tasks", 60_000)],
+        hybrid=[(1, "Duradel, cannon and barrage", 50_000)],
+        afk=[(1, "Cannon on long tasks", 30_000)]),
+    "Attack": dict(
+        fast=[(1, "Slayer with best gear", 70_000)],
+        hybrid=[(1, "Slayer", 60_000)],
+        afk=[(1, "Gemstone Crab", 85_000)]),
+    "Strength": dict(
+        fast=[(1, "Slayer with best gear", 70_000)],
+        hybrid=[(1, "Slayer", 60_000)],
+        afk=[(1, "Gemstone Crab", 85_000)]),
+    "Defence": dict(
+        fast=[(1, "Slayer with best gear", 70_000)],
+        hybrid=[(1, "Slayer", 60_000)],
+        afk=[(1, "Gemstone Crab", 85_000)]),
+    "Hitpoints": dict(
+        fast=[(1, "Arrives with combat", 0)],
+        hybrid=[(1, "Arrives with combat", 0)],
+        afk=[(1, "Arrives with combat", 0)]),
+    "Ranged": dict(
+        fast=[(1, "Chinning maniacal monkeys", 250_000)],
+        hybrid=[(1, "Chinning maniacal monkeys", 200_000)],
+        afk=[(1, "Gemstone Crab", 80_000)]),
+    "Magic": dict(
+        fast=[(1, "Bursting maniacal monkeys", 250_000)],
+        hybrid=[(1, "Barrage on Slayer tasks", 110_000)],
+        afk=[(1, "Gemstone Crab", 60_000)]),
+    "Prayer": dict(
+        fast=[(1, "Superior bones, gilded altar", 500_000)],
+        hybrid=[(1, "Chaos altar, dragon bones", 300_000)],
+        afk=[(1, "Bonecrusher while you fight", 25_000)]),
+    "Runecraft": dict(
+        fast=[(1, "Lava runes with runners", 110_000),
+              (90, "Aether runes with runners", 250_000)],
+        hybrid=[(1, "Lava runes (binding necklace)", 85_000)],
+        afk=[(1, "Guardians of the Rift", 55_000),
+             (77, "Blood runes at Arceuus", 36_000),
+             (90, "Soul runes", 44_000)]),
+    "Agility": dict(
+        fast=[(1, "Hallowed Sepulchre, top floors", 90_000)],
+        hybrid=[(1, "Hallowed Sepulchre", 70_000)],
+        afk=[(1, "Rooftops, nothing is idle here", 55_000)]),
+    "Thieving": dict(
+        fast=[(1, "Blackjacking", 250_000)],
+        hybrid=[(1, "Pyramid Plunder", 200_000)],
+        afk=[(1, "Stealing artefacts", 70_000)]),
+    "Mining": dict(
+        fast=[(1, "Volcanic Mine, 3-tick iron", 90_000)],
+        hybrid=[(1, "Motherlode Mine", 60_000)],
+        afk=[(1, "Shooting Stars", 30_000)]),
+    "Fishing": dict(
+        fast=[(1, "Barbarian Fishing, 3-tick", 90_000),
+              (71, "2-tick harpooning", 115_000)],
+        hybrid=[(1, "Tempoross", 60_000),
+                (78, "Leechfin fishing", 120_000)],
+        afk=[(1, "Karambwans", 33_000), (82, "Minnows", 48_000)]),
+    "Woodcutting": dict(
+        fast=[(1, "2-tick teaks", 130_000)],
+        hybrid=[(1, "Forestry teaks", 95_000)],
+        afk=[(1, "Redwoods", 65_000)]),
+    "Firemaking": dict(
+        fast=[(1, "Burning logs at a bank", 350_000)],
+        hybrid=[(1, "Wintertodt", 250_000)],
+        afk=[(1, "Bonfires", 250_000)]),
+    "Cooking": dict(
+        fast=[(1, "1-tick karambwans", 700_000)],
+        hybrid=[(1, "Jugs of wine", 400_000)],
+        afk=[(1, "Range cooking", 200_000)]),
+    "Crafting": dict(
+        fast=[(1, "Black d'hide bodies", 300_000)],
+        hybrid=[(1, "Battlestaves", 250_000)],
+        afk=[(1, "Cutting amethyst", 30_000)]),
+    "Smithing": dict(
+        fast=[(1, "Blast Furnace gold bars", 350_000)],
+        hybrid=[(1, "Giants' Foundry", 250_000)],
+        afk=[(1, "Cannonballs", 20_000)]),
+    "Herblore": dict(
+        fast=[(1, "Unfinished potions", 300_000)],
+        hybrid=[(1, "Super combats", 250_000)],
+        afk=[(1, "Potions, nothing is idle here", 250_000)]),
+    "Construction": dict(
+        fast=[(1, "Mahogany tables", 350_000)],
+        hybrid=[(1, "Mahogany tables", 300_000)],
+        afk=[(1, "Mahogany Homes, nothing is idle here", 120_000)]),
+    "Hunter": dict(
+        fast=[(1, "Red chinchompas", 120_000),
+              (73, "Black chinchompas", 220_000)],
+        hybrid=[(1, "Red chinchompas", 120_000),
+                (72, "Hunters' Rumours", 190_000)],
+        afk=[(1, "Birdhouse runs", 5_000), (80, "Herbiboar", 150_000)]),
+    "Sailing": dict(
+        fast=[(1, "Barracuda Trials", 200_000)],
+        hybrid=[(1, "Courier tasks", 120_000)],
+        afk=[(1, "Shipwreck salvaging", 8_000)]),
 }
+
 
 PATH_META = [
     ("fast", "Fastest", "Every hour is the best rate available, tick manipulation "
@@ -3666,8 +3730,8 @@ CARRIES = {
     "Slayer with best gear": {"Hitpoints": 23_000},
     "Slayer": {"Hitpoints": 20_000},
     "Nightmare Zone": {"Hitpoints": 15_000},
-    "Gemstone Crab": {"Hitpoints": 15_000},
     "Guardians of the Rift": {"Magic": 8_000},
+    "Gemstone Crab": {"Hitpoints": 28_000},
     "Barbarian Fishing": {"Strength": 12_000, "Agility": 12_000},
     "Zalcano": {"Smithing": 20_000},
 }
@@ -3688,6 +3752,24 @@ def level_at(xp):
         else:
             break
     return lv
+
+
+def legs_for(route, xp_now):
+    """Split the climb to 99 at each point the route changes method."""
+    legs = []
+    for i, (from_level, method, rate) in enumerate(route):
+        start = max(xp_now, XP_TABLE[from_level] if from_level > 1 else 0)
+        nxt = route[i + 1][0] if i + 1 < len(route) else None
+        stop = min(XP_TABLE[nxt] if nxt else MAX_XP, MAX_XP)
+        if stop <= start:
+            continue
+        gained = stop - start
+        legs.append({
+            "method": method, "rate": rate, "xp": gained,
+            "from": level_at(start), "to": level_at(stop),
+            "hours": (gained / rate) if rate else 0,
+        })
+    return legs
 
 
 PLAN_BLOCK = {}
@@ -3714,7 +3796,8 @@ def carrier_order(rows):
 
     def rank(r):
         hands_over = any(need.get(name, 0) > 0
-                         for name in CARRIES.get(r["method"], {})
+                         for _, method, _ in r["route"]
+                         for name in CARRIES.get(method, {})
                          if name != r["skill"])
         return (0 if hands_over else 1, -naive[r["skill"]])
 
@@ -3800,20 +3883,28 @@ def walk(rows, diaries=True):
         r["arrive"] = level_at(min(xp[r["skill"]], MAX_XP))
         r["carried"] = max(0, min(xp[r["skill"]], MAX_XP) - r["xp"])
 
-        left = max(0, MAX_XP - xp[r["skill"]])
-        r["left"] = left
-        r["hours"] = (left / r["rate"]) if (r["rate"] and left) else 0
+        r["left"] = max(0, MAX_XP - xp[r["skill"]])
+        r["legs"] = legs_for(r["route"], xp[r["skill"]])
+        r["hours"] = sum(leg["hours"] for leg in r["legs"])
+        r["method"] = (" → ".join(leg["method"] for leg in r["legs"])
+                       or "Carried to 99 by the steps above")
+        r["rate"] = r["legs"][0]["rate"] if r["legs"] else 0
         total += r["hours"]
 
         xp[r["skill"]] = max(xp[r["skill"]], MAX_XP)
         levels[r["skill"]] = 99
 
+        handed = {}
+        for leg in r["legs"]:
+            for name, rate in CARRIES.get(leg["method"], {}).items():
+                if name == r["skill"] or name not in xp:
+                    continue
+                handed[name] = handed.get(name, 0) + leg["hours"] * rate
+
         gives = []
-        for name, rate in CARRIES.get(r["method"], {}).items():
-            if name == r["skill"] or name not in xp:
-                continue
+        for name, amount in handed.items():
             before = levels[name]
-            xp[name] += r["hours"] * rate
+            xp[name] += amount
             levels[name] = level_at(min(xp[name], MAX_XP))
             if levels[name] > before:
                 gives.append((name, levels[name]))
@@ -3834,9 +3925,10 @@ def rows_for(choice, order="carrier", diaries=False):
         st = stat_of(name)
         if not st:
             continue
-        method, rate = opts[choice.get(name, "hybrid")]
-        out.append(dict(skill=name, level=st["level"], method=method,
-                        key=choice.get(name, "hybrid"), rate=rate,
+        key = choice.get(name, "hybrid")
+        route = opts[key]
+        out.append(dict(skill=name, level=st["level"], route=route, key=key,
+                        method=route[0][1], rate=route[0][2], legs=[],
                         need=max(0, MAX_XP - (st["xp"] or 0)),
                         xp=st["xp"] or 0, hours=0, left=0, carried=0,
                         gives=[], diaries=[], order=0, arrive=st["level"]))
@@ -3884,6 +3976,25 @@ def optimal_mix():
     return choice, best
 
 
+def legs_cell(row):
+    """The method, or the staged list of them with the band each one covers."""
+    legs = row["legs"]
+    if not legs:
+        return f'<span class="one">{e(row["method"])}</span>'
+    if len(legs) == 1:
+        return f'<span class="one">{e(legs[0]["method"])}</span>'
+    return "".join(
+        f'<span class="leg">{e(leg["method"])}'
+        f'<i>{leg["from"]}–{leg["to"]} · {leg["hours"]:.0f}h</i></span>'
+        for leg in legs)
+
+
+def route_label(route):
+    """A route as one line. The AFK table's 'nothing is idle here' tail is there
+    to explain that table; anywhere else it is noise."""
+    return " → ".join(m.split(", nothing is idle here")[0] for _, m, _ in route)
+
+
 def optimal_card(choice, computed):
     """What the search actually found, and how close the runners-up came.
 
@@ -3906,8 +4017,8 @@ def optimal_card(choice, computed):
             cost = rows_for(trial)[1] - best
             # the AFK table names these "X, nothing is idle here" to explain
             # itself; out of that context the suffix is just noise
-            method = PATHS[name][k][0].split(", nothing is idle here")[0]
-            if method == PATHS[name][choice[name]][0]:
+            method = route_label(PATHS[name][k])
+            if method == route_label(PATHS[name][choice[name]]):
                 continue
             swaps.append((cost, name, method, lab))
     swaps.sort()
@@ -4003,7 +4114,10 @@ def paths_page():
         for r in rows:
             if not r["left"] and not r["need"]:
                 continue
-            rate = f'{r["rate"] // 1000}k' if r["rate"] else "free"
+            rates = [leg["rate"] for leg in r["legs"] if leg["rate"]]
+            rate = (f'{rates[0] // 1000}k' if len(set(rates)) == 1
+                    else f'{rates[0] // 1000}k→{rates[-1] // 1000}k'
+                    if rates else "free")
             hrs = f'{r["hours"]:.0f}h' if r["hours"] else "free"
             others = []
             for other, other_label, _ in PATH_META:
@@ -4013,10 +4127,11 @@ def paths_page():
                 if not pair or pair[0] == r["method"]:
                     continue
                 delta = pair[1] - r["hours"]
-                sign = "+" if delta >= 0 else ""
+                cost = ("even" if abs(delta) < 0.5
+                        else f'{"+" if delta > 0 else ""}{delta:.0f}h')
                 others.append(
                     f'<span class="alt"><i>{e(other_label.lower())}</i> '
-                    f'{e(pair[0])} <b>{sign}{delta:.0f}h</b></span>')
+                    f'{e(pair[0])} <b>{cost}</b></span>')
             gives = " · ".join(f"{n} {lv}" for n, lv in r["gives"])
             got = (f'<span class="carried">arrive at {r["arrive"]}</span>'
                    if r["arrive"] > r["level"] else "")
@@ -4029,7 +4144,7 @@ def paths_page():
                 f'<tr><td class="num">{r["order"]}</td>'
                 f'<td class="tn"><a href="skills/{slug(r["skill"])}.html">'
                 f'{icon(r["skill"])}{e(r["skill"])}</a>{got}</td>'
-                f'<td>{e(r["method"])}'
+                f'<td>{legs_cell(r)}'
                 + (f'<span class="gives">leaves {e(gives)}</span>' if gives else "")
                 + (f'<div class="alts">{"".join(others)}</div>' if others else "")
                 + (f'<div class="dias"><i>unlocks</i>{unlocks}</div>'
