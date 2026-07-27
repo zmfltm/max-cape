@@ -3683,7 +3683,9 @@ def optimal_card(choice, computed):
                 continue
             trial = dict(choice, **{name: k})
             cost = rows_for(trial)[1] - best
-            method = PATHS[name][k][0]
+            # the AFK table names these "X, nothing is idle here" to explain
+            # itself; out of that context the suffix is just noise
+            method = PATHS[name][k][0].split(", nothing is idle here")[0]
             if method == PATHS[name][choice[name]][0]:
                 continue
             swaps.append((cost, name, method, lab))
@@ -3698,7 +3700,8 @@ def optimal_card(choice, computed):
     rows = "".join(
         f'<tr><td class="tn"><a href="skills/{slug(name)}.html">'
         f'{icon(name)}{e(name)}</a></td>'
-        f'<td>{e(method)}<span class="src">{e(lab.lower())}</span></td>'
+        f'<td>{e(method)}</td>'
+        f'<td class="route">{e(lab)}</td>'
         f'<td class="rate afkgap">+{cost:.0f}h</td></tr>'
         for cost, name, method, lab in shortlist[:12])
 
@@ -3727,7 +3730,7 @@ def optimal_card(choice, computed):
         'is the better buy.</p>'
         '<div class="tablewrap"><div class="tablescroll">'
         '<table class="pathtable swaps"><thead><tr><th>Skill</th>'
-        '<th>Swap to</th><th>Costs</th></tr></thead>'
+        '<th>Swap to</th><th>Route</th><th>Costs</th></tr></thead>'
         f'<tbody>{rows}</tbody></table></div></div></section>')
 
 
@@ -3769,12 +3772,11 @@ def paths_page():
                               for n, xp in r["gives"] if xp > 50_000)
             got = (f'<span class="carried">carried {r["carried"] / 1e6:.1f}m</span>'
                    if r.get("carried") else "")
-            src = ""
             cells.append(
                 f'<tr><td class="num">{r["order"]}</td>'
                 f'<td class="tn"><a href="skills/{slug(r["skill"])}.html">'
                 f'{icon(r["skill"])}{e(r["skill"])}</a>{got}</td>'
-                f'<td>{e(r["method"])}{src}'
+                f'<td>{e(r["method"])}'
                 + (f'<span class="gives">also {e(gives)}</span>' if gives else "")
                 + (f'<div class="alts">{"".join(others)}</div>' if others else "")
                 + "</td>"

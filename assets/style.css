@@ -1502,7 +1502,12 @@ button.stat.pick.on .v { color: var(--accent); }
   color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
-table.pathtable.swaps { min-width: 420px; }
+table.pathtable.swaps { min-width: 460px; }
+table.pathtable.swaps td.route {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--dim);
+}
 table.pathtable {  min-width: 600px; font-size: 13.5px; }
 table.pathtable td.num, table.pathtable th:first-child {
   width: 28px;
@@ -1514,15 +1519,6 @@ table.pathtable td.num, table.pathtable th:first-child {
   vertical-align: top;
 }
 table.pathtable td.num { padding-top: 15px; }
-.src {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-left: 8px;
-  vertical-align: 1px;
-}
 table.pathtable td.tn a { display: inline-flex; align-items: center; gap: 7px; }
 table.pathtable td.tn a:hover { color: var(--accent); }
 .carried {
