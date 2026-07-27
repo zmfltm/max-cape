@@ -381,11 +381,8 @@ s.metreq {
   color: var(--dim);
 }
 
-.req-chip.met .rq, .req-chip.met .rl, .req-chip.met .rt {
-  text-decoration: line-through;
-  text-decoration-thickness: 1px;
-  text-decoration-color: rgba(74, 222, 128, 0.7);
-}
+/* A met requirement reads as met from its green tint and level alone; the rule
+   through it made a wall of chips harder to scan, not easier. */
 
 /* ---------------------------------------------------------------- typography */
 
@@ -986,9 +983,12 @@ th {
 }
 
 th.pic, td.pic { width: 60px; padding-right: 0; }
-table.methods th:nth-child(2), table.methods td:nth-child(2) { width: 27%; }
+table.methods th:nth-child(2), table.methods td:nth-child(2) { width: 25%; }
 table.methods th:nth-child(3), table.methods td:nth-child(3) { width: 17%; }
-table.methods th:nth-child(4), table.methods td:nth-child(4) { width: 11%; }
+table.methods th:nth-child(4), table.methods td:nth-child(4) { width: 15%; }
+/* Rates outgrew one line once they carried a second figure, and the table is
+   fixed-layout, so nowrap put them under the notes column. */
+table.methods td.rate { white-space: normal; }
 table.methods th:nth-child(5), table.methods td:nth-child(5) { width: auto; }
 th.choose, td.choose { width: 42px; }
 table.methods td:nth-child(2) { font-weight: 500; letter-spacing: -0.012em; }
@@ -1070,7 +1070,9 @@ tr.chosen td:nth-child(2)::after {
 .req-chip .rt { font-family: var(--font-mono); font-size: 11px; color: var(--dim); }
 .req-chip .prog.mini { flex: 0 0 100%; width: 100%; margin-top: 2px; }
 .req-chip.met { border-color: rgba(74, 222, 128, 0.22); background: rgba(74, 222, 128, 0.05); }
-.req-chip.met .rt { color: var(--done); }
+/* Once the requirement is met the level-gradient colour stops meaning
+   anything here, so both numbers go green. */
+.req-chip.met .rl, .req-chip.met .rt { color: var(--done); }
 .req-chip.met .prog.mini { display: none; }
 
 /* ---------------------------------------------------------------- gear list */

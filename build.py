@@ -231,7 +231,7 @@ SKILLS = [
         summary="Tempoross, then Leechfin fishing at 78.",
         methods=[
             ("Drift Net Fishing", "47 Fish / 44 Hunt", "53–88k Fishing", "Trains Fishing and Hunter at once on Fossil Island, which is what makes it the shortest way to the 70/70 the quest cape wants. Not the route to 99: faster options open above it in both skills."),
-            ("Barbarian Fishing", "48 (+ quest)", "23–57k, 55–144k 3-tick", "Your Pick above 58 on the fastest route. The 3-tick cut-eat is the highest rate in the skill; plain clicking is far slower. Drips Strength, Agility and Cooking either way."),
+            ("Barbarian Fishing", "48 (+ quest)", "23–57k, 55–144k 3-tick", "What the fastest route runs above 58. The 3-tick cut-eat is the highest rate in the skill; plain clicking is far slower. Drips Strength, Agility and Cooking either way."),
             ("2-tick harpooning", "71", "78–133k",
              "Swordfish and tuna with tick manipulation. The genuine fastest Fishing, and the most demanding."),
             ("Minnows", "82", "40–56k", "Converts to sharks for Tempoross-adjacent profit. Fairly click-heavy."),
