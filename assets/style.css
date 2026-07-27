@@ -1468,7 +1468,7 @@ a.sloc:hover { color: var(--accent); text-decoration: underline; text-underline-
 
 /* -------------------------------------------------------------- path compare */
 
-.switcher { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+.switcher { grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); margin-top: 26px; }
 button.stat.pick {
   display: block;
   text-align: left;
@@ -1490,7 +1490,10 @@ button.stat.pick:hover { border-color: rgba(255, 255, 255, 0.22); background: va
 button.stat.pick.on { border-color: var(--accent); background: var(--accent-soft); }
 button.stat.pick.on .v { color: var(--accent); }
 
-.pathcard { margin-top: 44px; }
+.pathcard { margin-top: 40px; }
+.sub { margin: 30px 0 0; font-size: 15px; font-weight: 500; }
+.note.nt { margin-top: 8px; margin-bottom: 14px; }
+.note { max-width: 62ch; margin: 18px 0 0; font-size: 13px; line-height: 1.6; color: var(--dim); }
 .phead { display: flex; align-items: baseline; gap: 12px; }
 .phead h2 { margin: 0 0 6px; border: 0; padding: 0; }
 .ptot {
@@ -1499,7 +1502,27 @@ button.stat.pick.on .v { color: var(--accent); }
   color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
-table.pathtable { min-width: 560px; font-size: 13.5px; }
+table.pathtable.swaps { min-width: 420px; }
+table.pathtable {  min-width: 600px; font-size: 13.5px; }
+table.pathtable td.num, table.pathtable th:first-child {
+  width: 28px;
+  padding-right: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--dim);
+  text-align: right;
+  vertical-align: top;
+}
+table.pathtable td.num { padding-top: 15px; }
+.src {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-left: 8px;
+  vertical-align: 1px;
+}
 table.pathtable td.tn a { display: inline-flex; align-items: center; gap: 7px; }
 table.pathtable td.tn a:hover { color: var(--accent); }
 .carried {

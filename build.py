@@ -3590,42 +3590,166 @@ def apply_carries(rows, by_skill):
     return rows
 
 
-def path_hours(key):
-    """Hours to 99 per skill on one path, from live XP."""
-    out, total = [], 0
+def order_rows(rows):
+    """Carriers first, then longest first.
+
+    A method that hands XP to another skill is worth doing before the skill
+    that receives it. Train Hunter first and drift net's 11m lands on a 99 you
+    already paid for; train Fishing first and Hunter is nearly done for free.
+    """
+    def rank(r):
+        useful = any(r["recv"].get(name, 0) > 0 for name, _ in r["gives"])
+        return (0 if useful else 1, -r["hours"])
+
+    rows.sort(key=rank)
+    for i, r in enumerate(rows, 1):
+        r["order"] = i
+    return rows
+
+
+def rows_for(choice):
+    """Hours to 99 per skill, given a route key per skill."""
+    out = []
     for name, opts in PATHS.items():
         st = stat_of(name)
         if not st:
             continue
         left = max(0, xp_for_level(99) - (st["xp"] or 0))
+        key = choice.get(name, "hybrid")
         method, rate = opts[key]
-        hrs = (left / rate) if (rate and left) else 0
-        total += hrs
-        out.append(dict(skill=name, level=st["level"], method=method,
-                        rate=rate, hours=hrs, left=left, carried=0, gives=[],
+        out.append(dict(skill=name, level=st["level"], method=method, key=key,
+                        rate=rate, hours=(left / rate) if (rate and left) else 0,
+                        left=left, need=left, carried=0, gives=[],
                         xp=st["xp"] or 0))
 
     by_skill = {r["skill"]: r for r in out}
     apply_carries(out, by_skill)
-    total = sum(r["hours"] for r in out)
-    out.sort(key=lambda x: -x["hours"])
-    return out, total
+    # what each receiver still needed before anyone carried it, so the ordering
+    # rule can tell a real handover from a gift to an already-maxed skill
+    need = {r["skill"]: r["need"] for r in out}
+    for r in out:
+        r["recv"] = need
+    return order_rows(out), sum(r["hours"] for r in out)
+
+
+def path_hours(key):
+    return rows_for({name: key for name in PATHS})
+
+
+def optimal_mix():
+    """The best method per skill once cross-skill XP is priced in.
+
+    Picking each skill's fastest method in isolation is not the best plan:
+    2-tick harpooning beats drift net for Fishing, but drift net hands Hunter
+    most of a 99 and wins on the total. Local search over the three routes'
+    options, one skill at a time, until nothing improves.
+    """
+    keys = [k for k, _, _ in PATH_META]
+    choice = {name: "fast" for name in PATHS}
+    best = rows_for(choice)[1]
+
+    for _ in range(8):
+        moved = False
+        for name in PATHS:
+            for k in keys:
+                if k == choice[name]:
+                    continue
+                trial = dict(choice, **{name: k})
+                total = rows_for(trial)[1]
+                if total < best - 0.01:
+                    best, choice, moved = total, trial, True
+        if not moved:
+            break
+    return choice, best
+
+
+def optimal_card(choice, computed):
+    """What the search actually found, and how close the runners-up came.
+
+    When the optimum is just one of the three routes wholesale, a fourth table
+    would be a copy of it. The useful thing is the margin: which swaps cost
+    almost nothing, because those are the ones worth taking for a calmer
+    method.
+    """
+    best = computed["opt"][1]
+    winner = next((lab for k, lab, _ in PATH_META
+                   if all(v == k for v in choice.values())), None)
+    label_of = {k: lab for k, lab, _ in PATH_META}
+
+    swaps = []
+    for name in PATHS:
+        for k, lab, _ in PATH_META:
+            if k == choice[name]:
+                continue
+            trial = dict(choice, **{name: k})
+            cost = rows_for(trial)[1] - best
+            method = PATHS[name][k][0]
+            if method == PATHS[name][choice[name]][0]:
+                continue
+            swaps.append((cost, name, method, lab))
+    swaps.sort()
+    seen, shortlist = set(), []
+    for row in swaps:                      # cheapest option per skill only
+        if row[1] in seen:
+            continue
+        seen.add(row[1])
+        shortlist.append(row)
+
+    rows = "".join(
+        f'<tr><td class="tn"><a href="skills/{slug(name)}.html">'
+        f'{icon(name)}{e(name)}</a></td>'
+        f'<td>{e(method)}<span class="src">{e(lab.lower())}</span></td>'
+        f'<td class="rate afkgap">+{cost:.0f}h</td></tr>'
+        for cost, name, method, lab in shortlist[:12])
+
+    if winner:
+        verdict = (f'Every swap was tried against every other route, one skill '
+                   f'at a time. Nothing beat <b>{e(winner)}</b> on any of them, '
+                   f'so the optimum is that route whole. Carrying a slower '
+                   f'method for the XP it hands another skill never quite pays '
+                   f'here.')
+    else:
+        diffs = ", ".join(f'{e(n)} takes the {e(label_of[k].lower())} method'
+                          for n, k in sorted(choice.items())
+                          if k != PATH_META[0][0])
+        verdict = ('The best mix is not any one route: ' + diffs +
+                   '. Those methods are slower for their own skill and still '
+                   'win, because of what they hand the others.')
+
+    return (
+        '<section class="pathcard" id="path-opt" data-path="opt" hidden>'
+        '<div class="phead"><h2 id="opt">Optimal</h2>'
+        f'<span class="ptot">{best:,.0f} hours</span></div>'
+        f'<p class="lede2">{verdict}</p>'
+        '<h3 class="sub">Cheapest swaps</h3>'
+        '<p class="note nt">What each change would cost on top of the total. '
+        'The ones near the top are close enough to free that the calmer method '
+        'is the better buy.</p>'
+        '<div class="tablewrap"><div class="tablescroll">'
+        '<table class="pathtable swaps"><thead><tr><th>Skill</th>'
+        '<th>Swap to</th><th>Costs</th></tr></thead>'
+        f'<tbody>{rows}</tbody></table></div></div></section>')
 
 
 def paths_page():
     computed = {key: path_hours(key) for key, _, _ in PATH_META}
+    choice, _ = optimal_mix()
+    computed["opt"] = rows_for(choice)
+
+    label_of = {k: lab for k, lab, _ in PATH_META}
     alt = {}
-    for key, (rows, _) in computed.items():
-        for r in rows:
+    for key, _, _ in PATH_META:
+        for r in computed[key][0]:
             alt.setdefault(r["skill"], {})[key] = (r["method"], r["hours"])
 
     cards, totals = [], {}
+    totals["opt"] = computed["opt"][1]
     for key, label, blurb in PATH_META:
         rows, total = computed[key]
         totals[key] = total
         cells = []
         for r in rows:
-            if not r["left"]:
+            if not r["left"] and not r["need"]:
                 continue
             rate = f'{r["rate"] // 1000}k' if r["rate"] else "free"
             hrs = f'{r["hours"]:.0f}h' if r["hours"] else "free"
@@ -3641,19 +3765,21 @@ def paths_page():
                 others.append(
                     f'<span class="alt"><i>{e(other_label.lower())}</i> '
                     f'{e(pair[0])} <b>{sign}{delta:.0f}h</b></span>')
-            gives = ", ".join(f'{n} +{xp / 1e6:.1f}m' for n, xp in r["gives"] if xp > 50_000)
+            gives = ", ".join(f'{n} +{xp / 1e6:.1f}m'
+                              for n, xp in r["gives"] if xp > 50_000)
             got = (f'<span class="carried">carried {r["carried"] / 1e6:.1f}m</span>'
                    if r.get("carried") else "")
+            src = ""
             cells.append(
-                f'<tr><td class="tn"><a href="skills/{slug(r["skill"])}.html">'
+                f'<tr><td class="num">{r["order"]}</td>'
+                f'<td class="tn"><a href="skills/{slug(r["skill"])}.html">'
                 f'{icon(r["skill"])}{e(r["skill"])}</a>{got}</td>'
-                f'<td>{e(r["method"])}'
+                f'<td>{e(r["method"])}{src}'
                 + (f'<span class="gives">also {e(gives)}</span>' if gives else "")
                 + (f'<div class="alts">{"".join(others)}</div>' if others else "")
                 + "</td>"
                 f'<td class="rate">{rate}</td>'
                 f'<td class="rate afkgap">{hrs}</td></tr>')
-        body = "".join(cells)
         cards.append(
             f'<section class="pathcard" id="path-{key}" data-path="{key}"'
             f'{"" if key == "hybrid" else " hidden"}>'
@@ -3661,42 +3787,34 @@ def paths_page():
             f'<span class="ptot">{total:,.0f} hours</span></div>'
             f'<p class="lede2">{e(blurb)}</p>'
             '<div class="tablewrap"><div class="tablescroll">'
-            '<table class="pathtable"><thead><tr><th>Skill</th><th>Method</th>'
-            '<th>XP/hr</th><th>Hours</th></tr></thead>'
-            f'<tbody>{body}</tbody></table></div></div></section>')
+            '<table class="pathtable"><thead><tr><th>#</th><th>Skill</th>'
+            '<th>Method</th><th>XP/hr</th><th>Hours</th></tr></thead>'
+            f'<tbody>{"".join(cells)}</tbody></table></div></div></section>')
 
-    fast, hybrid, afk = totals["fast"], totals["hybrid"], totals["afk"]
-    summary = (
-        '<div class="stats switcher">'
-        f'<button class="stat pick" type="button" data-path="fast" '
-        f'aria-controls="path-fast" aria-pressed="false">'
-        f'<span class="l">Fastest</span>'
-        f'<span class="v">{fast:,.0f}<small>h</small></span></button>'
-        f'<button class="stat pick on" type="button" data-path="hybrid" '
-        f'aria-controls="path-hybrid" aria-pressed="true">'
-        f'<span class="l">Hybrid</span>'
-        f'<span class="v">{hybrid:,.0f}<small>h</small></span></button>'
-        f'<button class="stat pick" type="button" data-path="afk" '
-        f'aria-controls="path-afk" aria-pressed="false">'
-        f'<span class="l">AFK</span>'
-        f'<span class="v">{afk:,.0f}<small>h</small></span></button>'
-        f'<div class="stat"><div class="l">AFK costs you</div>'
-        f'<div class="v">+{afk - fast:,.0f}<small>h</small></div></div>'
-        "</div>")
+    cards.append(optimal_card(choice, computed))
 
+    meta = PATH_META + [("opt", "Optimal", "")]
+    buttons = "".join(
+        f'<button class="stat pick{" on" if key == "hybrid" else ""}" type="button" '
+        f'data-path="{key}" aria-controls="path-{key}" '
+        f'aria-pressed="{"true" if key == "hybrid" else "false"}">'
+        f'<span class="l">{e(label)}</span>'
+        f'<span class="v">{totals[key]:,.0f}<small>h</small></span></button>'
+        for key, label, _ in meta)
+
+    left = sum(r["need"] for r in computed["fast"][0])
     body = [
-        '<div class="kick">Three routes, same cape</div>',
+        '<div class="kick">Four routes, same cape</div>',
         '<div class="page-head">'
         '<img class="icon lg" src="assets/media/max-cape.png" alt="">'
         '<h1 class="page">Which Path</h1></div>',
-        f'<p class="lede">You have {sum(r["left"] for r in path_hours("fast")[0]):,} '
-        'XP left. What that costs in hours depends entirely on how much attention '
-        'you are willing to pay.</p>',
-        summary,
-        '<p class="lede2">Skills that train together are counted once. Drift net '
-        'hands Hunter most of a 99, Slayer hands combat several, and the totals '
-        'above already subtract that. Carried XP is credited one step deep, so '
-        'treat these as close rather than exact.</p>',
+        f'<p class="lede">{left:,.0f} XP left. What that costs in hours is '
+        'entirely a question of how much attention you are willing to pay.</p>',
+        f'<div class="stats switcher">{buttons}</div>',
+        '<p class="note">Numbered in the order worth doing them: skills that '
+        'hand XP to other skills come first, so the gift lands before you pay '
+        'for those levels. Shared XP is counted once and credited one step '
+        'deep, so read the totals as close rather than exact.</p>',
     ] + cards
     return page("Which Path", "\n".join(body), depth=0)
 
