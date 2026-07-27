@@ -30,20 +30,12 @@ PLAN_PHASES = [
                ("Agility", 71), ("Thieving", 75), ("Slayer", 72)],
          combat=100,
          subs=["Hunter and Fishing come together through Drift Net Fishing"]),
-    dict(title="Quest Cape",
-         track="quests",
-         subs=["Continue following the Optimal Quest Guide",
-               "Use quest XP before manually finishing skill requirements where possible"]),
+    dict(title="Quest Cape", track="quests", subs=[]),
     dict(title="All Hard Diaries", track="diary_hard", diary_tier="Hard",
          subs=[]),
-    dict(title="Slayer to 95",
-         track="slayer",
-         subs=["Slayer remains the default activity for combat training",
-               "Complete elite-diary skill requirements as you reach them"]),
+    dict(title="Slayer to 95", track="slayer", subs=[]),
     dict(title="Elite diary skill walls",
-         track="diary_elite", diary_tier="Elite",
-         subs=["Train whatever individual requirements remain",
-               "Finish the Diary Cape"]),
+         track="diary_elite", diary_tier="Elite", subs=[]),
     dict(title="Max Cape", track="max", subs=[]),
 ]
 
@@ -593,8 +585,7 @@ PLAN_LINKS = [
     ("diaries", "Diaries", "assets/icons/Diaries.png"),
     ("approach", "Slayer", "assets/icons/Slayer.png"),
     ("max-order", "Max Order", "assets/media/max-cape.png"),
-    ("outfits", "Gear", "assets/media/site/gear-icon.png"),
-    ("skills", "Skills", "assets/media/site/skills-icon.png"),
+    ("gear.html", "Gear", "assets/media/site/gear-icon.png"),
 ]
 
 
@@ -822,6 +813,12 @@ def level_style(level):
     return f' style="--lc:{level_color(level)}"'
 
 
+def bar_colours(from_level, level):
+    """Both ends of a progress bar, so the fill sweeps the level scale rather
+    than sitting on one flat colour."""
+    return f"--lc0:{level_color(from_level)};--lc:{level_color(level)}"
+
+
 def short_target(skill):
     """Compact level tag for the right-hand index."""
     if skill.get("done"):
@@ -1012,10 +1009,12 @@ def diary_panel():
     )
 
 
-def mini_bar(pct, colour=None):
+def mini_bar(pct, colour=None, from_level=1, level=None):
     style = f"width:{max(0, min(100, pct))}%"
     if colour:
         style += f";--lc:{colour}"
+    elif level:
+        style += ";" + bar_colours(from_level, level)
     return f'<span class="prog mini"><span class="fill lit" style="{style}"></span></span>'
 
 
@@ -1042,7 +1041,7 @@ def req_chip(skill_name, target):
             f'<span class="rq">{e(skill_name)}</span>'
             f'<b class="rl" style="--lc:{level_color(cur)}">{cur}</b>'
             f'<span class="rt">/{target}</span></a>{dot}'
-            f'{mini_bar(pct, level_color(cur))}</span>')
+            f'{mini_bar(pct, level=cur)}</span>')
 
 
 def combat_chip(target):
@@ -1055,7 +1054,7 @@ def combat_chip(target):
             f'<span class="rq">Combat</span>'
             f'<b class="rl" style="--lc:{level_color(min(99, cb))}">{cb}</b>'
             f'<span class="rt">/{target}</span>'
-            f'{mini_bar(pct, level_color(min(99, cb)))}</span>')
+            f'{mini_bar(pct, level=min(99, cb))}</span>')
 
 
 def phase_meter(kind):
@@ -1084,7 +1083,7 @@ def phase_meter(kind):
         cur, goal = st["level"], 95
         pct = 100 if cur >= goal else round(100 * st["xp"] / xp_for_level(goal))
         return (f'<div class="pmeter"><b style="--lc:{level_color(cur)}" class="lit">{cur}</b>'
-                f'<span>of {goal} Slayer</span>{mini_bar(pct, level_color(cur))}</div>')
+                f'<span>of {goal} Slayer</span>{mini_bar(pct, level=cur)}</div>')
 
     if kind == "max" and STATS:
         skills_only = [x for x in SKILLS if x["group"] != SUPPORT]
@@ -1268,7 +1267,9 @@ def rail(active=None, depth=0):
          '  <div class="rail-kick">Reference</div>']
     for anchor, label, ico in PLAN_LINKS:
         mark = f'<img class="refico" src="{root}{ico}" alt="" width="15" height="15">'
-        p.append(f'  <a href="{root}index.html#{anchor}">{mark}'
+        href = (f"{root}{anchor}" if anchor.endswith(".html")
+                else f"{root}index.html#{anchor}")
+        p.append(f'  <a href="{href}">{mark}'
                  f'<span class="t">{e(label)}</span></a>')
 
     p.append('  <div class="rail-kick">Links</div>')
@@ -1744,7 +1745,11 @@ STARS_JS = """
       return s.endsAt > Date.now() && t >= min && t <= max;
     });
     if (!live.length) return false;
+    /* Soonest to fall first: a star with eight minutes left is the one worth
+       reading, not the one at the top of whatever order 07.gg returned. */
+    live.sort(function (a, b) { return a.endsAt - b.endsAt; });
     list.innerHTML = live.slice(0, limit).map(function (s) {
+      var left = Math.round((s.endsAt - Date.now()) / 60000);
       var tier = int(s.tier), world = int(s.world);
       var req = tier * 10;
       var can = !mining || mining >= req;
@@ -1752,10 +1757,12 @@ STARS_JS = """
       var loc = esc(tidy(hit && hit.n ? hit.n : s.location));
       var map = 'https://oldschool.runescape.wiki/w/Special:Search?go=Go&search='
         + encodeURIComponent(hit && hit.n ? hit.n : s.location);
-      return '<div class="star' + (can ? '' : ' locked') + '">'
+      return '<div class="star' + (can ? '' : ' locked')
+        + (left <= 5 ? ' soon' : '') + '">'
         + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '" title="Tier ' + tier
         + ', needs ' + req + ' Mining">T' + tier + '</span>'
-        + '<span class="sworld">' + world + '</span>'
+        + '<span class="sworld" title="Hop to world ' + world + '">'
+        + world + '</span>'
         + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
         + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
         + '<button class="sview" type="button" data-loc="' + loc + '" '
@@ -3127,7 +3134,7 @@ def build_skill_page(skill, prev_skill, next_skill):
                    f'data-done="target met">of {nxt}</span>' if nxt else
                    '<span class="goal done">target met</span>'))
         bar = (f'<span class="prog wide"><span class="fill lit" '
-               f'style="width:{pct}%;--lc:{level_color(cur)}" data-skill-bar="{e(name)}" '
+               f'style="width:{pct}%;{bar_colours(frm, cur)}" data-skill-bar="{e(name)}" '
                f'data-goals="{e(",".join(map(str, goals)))}" '
                f'data-from="{frm}" data-goal="{nxt or 99}"></span></span>')
         facts = [f'<span><i>XP</i> <b class="num">{xp:,}</b></span>']
@@ -3252,7 +3259,7 @@ def card_head(s, tag="span"):
                  if not done else
                  f'<span class="lvl lit"{lstyle} data-skill-level="{e(s["name"])}">{cur}</span>')
         bar = (f'<span class="prog"><span class="fill lit" '
-               f'style="width:{pct}%;--lc:{level_color(cur)}" data-skill-bar="{e(s["name"])}" '
+               f'style="width:{pct}%;{bar_colours(frm, cur)}" data-skill-bar="{e(s["name"])}" '
                f'data-goals="{e(",".join(map(str, goals)))}" '
                f'data-from="{frm}" data-goal="{nxt or 99}"></span></span>')
     else:
@@ -4630,6 +4637,21 @@ def calculators_page():
                 head_extra=CALC_JS)
 
 
+def gear_page():
+    """Skilling outfits on their own page, since ticking pieces off is its own
+    job rather than something to scroll past on the way down the plan."""
+    body = [
+        '<div class="kick">What you wear to train</div>',
+        '<div class="page-head">'
+        '<img class="icon lg" src="assets/media/site/gear-icon.png" alt="">'
+        '<h1 class="page">Gear</h1></div>',
+        '<p class="lede">Every skilling outfit, what it actually does, and '
+        'where it comes from.</p>',
+        outfit_section(),
+    ]
+    return page("Gear", "\n".join(body), depth=0)
+
+
 def build_index():
     parts = ['<h1 class="sr">OSRS Max Cape Plan</h1>']
     art = focus_panel()
@@ -4675,29 +4697,6 @@ def build_index():
         parts.append(max_order_block(phase))
     parts.append("</ol>")
 
-    parts.append(h2("outfits", "Gear", "assets/media/site/gear-icon.png"))
-    parts.append(outfit_section())
-
-    parts.append(h2("skills", "All Skills", "assets/media/site/skills-icon.png"))
-    for group in GROUP_ORDER:
-        members = [s for s in SKILLS if s["group"] == group]
-        if not members:
-            continue
-        parts.append(f'<div class="group-title">{e(group)}</div>')
-        parts.append('<div class="grid">')
-        skipped = set()
-        for s in members:
-            if s["name"] in skipped:
-                continue
-            partner = PAIRS.get(s["name"])
-            twin = next((m for m in members if m["name"] == partner), None)
-            if twin:
-                skipped.add(twin["name"])
-                parts.append(pair_card(s, twin))
-                continue
-            parts.append(skill_card(s))
-        parts.append("</div>")
-
     return page("OSRS max time wasting plan", "\n".join(parts))
 
 
@@ -4717,12 +4716,13 @@ def main():
         os.path.join(OUT, "afk.html"): build_afk_page(),
         os.path.join(OUT, "paths.html"): paths_page(),
         os.path.join(OUT, "calculators.html"): calculators_page(),
+        os.path.join(OUT, "gear.html"): gear_page(),
         os.path.join(OUT, "index.html"): build_index(),
     })
     for path, content in outputs.items():
         atomic_text_dump(path, content)
 
-    print(f"wrote index.html + {len(ordered)} skill pages + 4 reference pages")
+    print(f"wrote index.html + {len(ordered)} skill pages + 5 reference pages")
 
 
 if __name__ == "__main__":

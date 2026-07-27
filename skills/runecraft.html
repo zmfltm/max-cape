@@ -28,7 +28,7 @@
 <div class="page-head"><img class="icon lg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAFVBMVEUAAAAAAAF4d3ZZWFWLNwmUko+wOQR2sZzsAAAAAXRSTlMAQObYZgAAAIFJREFUeNqN0kEKwCAMRFF/JvH+Ry6EoYpU6Oz0MbpIxh7GJUxuMCcX+CYg54SToKqlCo77gkyoiFhGVVXQEh0W9DEzCdMGQAIW0XI2LJTF31iEK8dzsphWTS2DOESGQeyAZHlJJzRJIZGZCxyQtg6G18iZSHCbz/+ZmvizO/d9ewCFeAOFN5sfDAAAAABJRU5ErkJggg==" alt="" width="22" height="22"><h1 class="page">Runecraft</h1></div>
 <p class="lede">65 for the quest cape block, ~77 relatively early (blood runes), 99 first in the slow-skills block.</p>
 <div class="glinks"><a class="glink" href="https://oldschool.runescape.wiki/w/Runecraft_training" rel="noopener" target="_blank">Wiki guide</a><a class="glink" href="https://www.osrsguide.com/osrs-runecrafting-guide/" rel="noopener" target="_blank">OSRS Guide</a></div>
-<div class="livebox"><div class="k">Your Level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(42 75% 62%)" data-skill-level="Runecraft">57</b><span class="goal" data-skill-goal="Runecraft" data-goals="65,77,99" data-prefix="of " data-done="target met">of 65</span></div><span class="prog wide"><span class="fill lit" style="width:49%;--lc:hsl(42 75% 62%)" data-skill-bar="Runecraft" data-goals="65,77,99" data-from="1" data-goal="65"></span></span><div class="facts"><span><i>XP</i> <b class="num">221,778</b></span><span><i>To 65</i> <b class="num">227,650</b></span></div></div>
+<div class="livebox"><div class="k">Your Level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(42 75% 62%)" data-skill-level="Runecraft">57</b><span class="goal" data-skill-goal="Runecraft" data-goals="65,77,99" data-prefix="of " data-done="target met">of 65</span></div><span class="prog wide"><span class="fill lit" style="width:49%;--lc0:hsl(12 70% 58%);--lc:hsl(42 75% 62%)" data-skill-bar="Runecraft" data-goals="65,77,99" data-from="1" data-goal="65"></span></span><div class="facts"><span><i>XP</i> <b class="num">221,778</b></span><span><i>To 65</i> <b class="num">227,650</b></span></div></div>
 
 <div class="pillrow">
 <span class="pill"><span class="pl">Target</span><span class="pv">65 → 77 → 99</span></span>
@@ -75,8 +75,7 @@
   <a href="../index.html#diaries"><img class="refico" src="../assets/icons/Diaries.png" alt="" width="15" height="15"><span class="t">Diaries</span></a>
   <a href="../index.html#approach"><img class="refico" src="../assets/icons/Slayer.png" alt="" width="15" height="15"><span class="t">Slayer</span></a>
   <a href="../index.html#max-order"><img class="refico" src="../assets/media/max-cape.png" alt="" width="15" height="15"><span class="t">Max Order</span></a>
-  <a href="../index.html#outfits"><img class="refico" src="../assets/media/site/gear-icon.png" alt="" width="15" height="15"><span class="t">Gear</span></a>
-  <a href="../index.html#skills"><img class="refico" src="../assets/media/site/skills-icon.png" alt="" width="15" height="15"><span class="t">Skills</span></a>
+  <a href="../gear.html"><img class="refico" src="../assets/media/site/gear-icon.png" alt="" width="15" height="15"><span class="t">Gear</span></a>
   <div class="rail-kick">Links</div>
   <a class="slink" href="https://www.osrsguide.com/skilling-guides/" target="_blank" rel="noopener"><span class="t">OSRS Guide</span><span class="ext">&#8599;</span></a>
   <a class="slink" href="https://07.gg/calculators" target="_blank" rel="noopener"><span class="t">Calculators</span><span class="ext">&#8599;</span></a>
@@ -469,7 +468,11 @@
       return s.endsAt > Date.now() && t >= min && t <= max;
     });
     if (!live.length) return false;
+    /* Soonest to fall first: a star with eight minutes left is the one worth
+       reading, not the one at the top of whatever order 07.gg returned. */
+    live.sort(function (a, b) { return a.endsAt - b.endsAt; });
     list.innerHTML = live.slice(0, limit).map(function (s) {
+      var left = Math.round((s.endsAt - Date.now()) / 60000);
       var tier = int(s.tier), world = int(s.world);
       var req = tier * 10;
       var can = !mining || mining >= req;
@@ -477,10 +480,12 @@
       var loc = esc(tidy(hit && hit.n ? hit.n : s.location));
       var map = 'https://oldschool.runescape.wiki/w/Special:Search?go=Go&search='
         + encodeURIComponent(hit && hit.n ? hit.n : s.location);
-      return '<div class="star' + (can ? '' : ' locked') + '">'
+      return '<div class="star' + (can ? '' : ' locked')
+        + (left <= 5 ? ' soon' : '') + '">'
         + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '" title="Tier ' + tier
         + ', needs ' + req + ' Mining">T' + tier + '</span>'
-        + '<span class="sworld">' + world + '</span>'
+        + '<span class="sworld" title="Hop to world ' + world + '">'
+        + world + '</span>'
         + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
         + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
         + '<button class="sview" type="button" data-loc="' + loc + '" '

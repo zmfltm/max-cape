@@ -28,7 +28,7 @@
 <div class="page-head"><img class="icon lg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAVCAMAAACT1yXjAAAAElBMVEUAAAAAAAF6awlYOgy0qwbh79essedQAAAAAXRSTlMAQObYZgAAAFtJREFUeNp10EEKxEAIBVGrZ7z/lYO1+EiHlLsHIlgTUFd0N1MB22bopkzEaTQjVp/G3djPzjl/0xgxiRKJIanZVSQkjU0LXdRyRFomvu1oYorJsYUhcUXZ/ZUHIk4C0T3Uvo8AAAAASUVORK5CYII=" alt="" width="22" height="22"><h1 class="page">Cooking</h1></div>
 <p class="lede">Buyables block, near the end.</p>
 <div class="glinks"><a class="glink" href="https://oldschool.runescape.wiki/w/Cooking_training" rel="noopener" target="_blank">Wiki guide</a><a class="glink" href="https://www.osrsguide.com/osrs-cooking-guide/" rel="noopener" target="_blank">OSRS Guide</a></div>
-<div class="livebox"><div class="k">Your Level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(56 76% 63%)" data-skill-level="Cooking">70</b><span class="goal" data-skill-goal="Cooking" data-goals="99" data-prefix="of " data-done="target met">of 99</span></div><span class="prog wide"><span class="fill lit" style="width:6%;--lc:hsl(56 76% 63%)" data-skill-bar="Cooking" data-goals="99" data-from="1" data-goal="99"></span></span><div class="facts"><span><i>XP</i> <b class="num">742,944</b></span><span><i>To 99</i> <b class="num">12,291,487</b></span></div></div>
+<div class="livebox"><div class="k">Your Level</div><div class="lvlrow"><b class="big num lit" style="--lc:hsl(56 76% 63%)" data-skill-level="Cooking">70</b><span class="goal" data-skill-goal="Cooking" data-goals="99" data-prefix="of " data-done="target met">of 99</span></div><span class="prog wide"><span class="fill lit" style="width:6%;--lc0:hsl(12 70% 58%);--lc:hsl(56 76% 63%)" data-skill-bar="Cooking" data-goals="99" data-from="1" data-goal="99"></span></span><div class="facts"><span><i>XP</i> <b class="num">742,944</b></span><span><i>To 99</i> <b class="num">12,291,487</b></span></div></div>
 
 <div class="pillrow">
 <span class="pill"><span class="pl">Target</span><span class="pv">99 (buyables block)</span></span>
@@ -69,8 +69,7 @@
   <a href="../index.html#diaries"><img class="refico" src="../assets/icons/Diaries.png" alt="" width="15" height="15"><span class="t">Diaries</span></a>
   <a href="../index.html#approach"><img class="refico" src="../assets/icons/Slayer.png" alt="" width="15" height="15"><span class="t">Slayer</span></a>
   <a href="../index.html#max-order"><img class="refico" src="../assets/media/max-cape.png" alt="" width="15" height="15"><span class="t">Max Order</span></a>
-  <a href="../index.html#outfits"><img class="refico" src="../assets/media/site/gear-icon.png" alt="" width="15" height="15"><span class="t">Gear</span></a>
-  <a href="../index.html#skills"><img class="refico" src="../assets/media/site/skills-icon.png" alt="" width="15" height="15"><span class="t">Skills</span></a>
+  <a href="../gear.html"><img class="refico" src="../assets/media/site/gear-icon.png" alt="" width="15" height="15"><span class="t">Gear</span></a>
   <div class="rail-kick">Links</div>
   <a class="slink" href="https://www.osrsguide.com/skilling-guides/" target="_blank" rel="noopener"><span class="t">OSRS Guide</span><span class="ext">&#8599;</span></a>
   <a class="slink" href="https://07.gg/calculators" target="_blank" rel="noopener"><span class="t">Calculators</span><span class="ext">&#8599;</span></a>
@@ -463,7 +462,11 @@
       return s.endsAt > Date.now() && t >= min && t <= max;
     });
     if (!live.length) return false;
+    /* Soonest to fall first: a star with eight minutes left is the one worth
+       reading, not the one at the top of whatever order 07.gg returned. */
+    live.sort(function (a, b) { return a.endsAt - b.endsAt; });
     list.innerHTML = live.slice(0, limit).map(function (s) {
+      var left = Math.round((s.endsAt - Date.now()) / 60000);
       var tier = int(s.tier), world = int(s.world);
       var req = tier * 10;
       var can = !mining || mining >= req;
@@ -471,10 +474,12 @@
       var loc = esc(tidy(hit && hit.n ? hit.n : s.location));
       var map = 'https://oldschool.runescape.wiki/w/Special:Search?go=Go&search='
         + encodeURIComponent(hit && hit.n ? hit.n : s.location);
-      return '<div class="star' + (can ? '' : ' locked') + '">'
+      return '<div class="star' + (can ? '' : ' locked')
+        + (left <= 5 ? ' soon' : '') + '">'
         + '<span class="stier' + (tier >= 7 ? ' hot' : '') + '" title="Tier ' + tier
         + ', needs ' + req + ' Mining">T' + tier + '</span>'
-        + '<span class="sworld">' + world + '</span>'
+        + '<span class="sworld" title="Hop to world ' + world + '">'
+        + world + '</span>'
         + '<a class="sloc" href="' + map + '" target="_blank" rel="noopener" '
         + 'title="Find ' + loc + ' on the wiki">' + loc + '</a>'
         + '<button class="sview" type="button" data-loc="' + loc + '" '

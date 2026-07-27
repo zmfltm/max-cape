@@ -37,7 +37,7 @@ class GeneratedSiteTests(unittest.TestCase):
             cls.parsed[page] = parser
 
     def test_expected_page_count(self):
-        self.assertEqual(len(self.pages), 30)
+        self.assertEqual(len(self.pages), 31)
 
     def test_no_duplicate_ids(self):
         for page, parser in self.parsed.items():
