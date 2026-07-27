@@ -86,8 +86,6 @@ SKILLS = [
             ("Gemstone Crab", "1", "30–60k",
              "Shared-health crab in Varlamore. The modern replacement for sand crabs when you want to do nothing."),
             ("Ammonite / sand crabs", "—", "20–40k", "Free, safe, extremely AFK. Fine for early levels, poor once you have Slayer flowing."),
-            ("Gemstone Crab", "1", "30–60k",
-             "Shared-health crab in Varlamore. The modern AFK option, better rates than sand crabs."),
             ("Bossing", "Varies", "40–80k", "Vorkath, Muspah, ToA. Slower than pure XP methods but pays for the rest of the account."),
         ],
         notes=[
@@ -879,10 +877,6 @@ WIKI = "https://oldschool.runescape.wiki/w/"
 OQG_URL = WIKI + "Optimal_quest_guide"
 
 
-def quest_link(name):
-    return WIKI + urllib.parse.quote(name.replace(" ", "_"))
-
-
 def quest_panel():
     """Where you are in the optimal quest guide, and what is left."""
     if not QUESTS:
@@ -895,10 +889,6 @@ def quest_panel():
 
     done, total = QUESTS["done"], QUESTS["total"]
     pct = round(100 * done / total) if total else 0
-    started = set(QUESTS.get("in_progress") or [])
-    nxt = QUESTS.get("next")
-    remaining = QUESTS.get("remaining") or []
-
     route = QUESTS.get("route") or []
     nxt_step = QUESTS.get("route_next") or {}
     rows = []
@@ -1248,7 +1238,7 @@ MAX_TOTAL = sum(1 for x in SKILLS if x["group"] != SUPPORT) * 99
 MAX_COMBAT = 126
 
 
-def rail_meter(root=""):
+def rail_meter():
     """Account line at the top of the index: total level and combat."""
     spin = ('<button class="refresh" type="button" hidden '
             'title="Refresh from the hiscores" aria-label="Refresh from the hiscores">'
@@ -1278,7 +1268,7 @@ def rail(active=None, depth=0):
     """Sticky right-hand index: the plan on top, then every skill by group."""
     root = "../" if depth else ""
     p = ['<aside class="rail" aria-label="Site index">',
-         rail_meter(root),
+         rail_meter(),
          '  <nav class="rail-body">',
          '  <div class="rail-kick">Reference</div>']
     for anchor, label, ico in PLAN_LINKS:
@@ -1488,7 +1478,11 @@ PATH_JS = """
   var KEY = 'osrsplan.path';
 
   function show(key) {
-    picks.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-path') === key); });
+    picks.forEach(function (b) {
+      var active = b.getAttribute('data-path') === key;
+      b.classList.toggle('on', active);
+      b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
     cards.forEach(function (c) { c.hidden = c.getAttribute('data-path') !== key; });
     try { localStorage.setItem(KEY, key); } catch (err) { /* ignore */ }
   }
@@ -2136,9 +2130,8 @@ RAIL_JS = """
 """
 
 
-def page(title, where, body, active=None, depth=0, skill_name=None):
+def page(title, body, active=None, depth=0, skill_name=None, head_extra=""):
     root = "../" if depth else ""
-    del where  # the header no longer shows a breadcrumb
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2150,6 +2143,7 @@ def page(title, where, body, active=None, depth=0, skill_name=None):
 <link rel="stylesheet" href="{root}assets/style.css">
 {f'<script>window.SKILL={json.dumps(skill_name)};</script>' if skill_name else ""}
 {focus_data_script()}
+{head_extra}
 </head>
 <body>
 <header class="topbar">
@@ -2544,10 +2538,8 @@ def guide_links(skill_name):
 # styling, not ours.
 EMBEDS = {
     "Mining": dict(
-        title="Shooting Star tracker",
         url="https://07.gg/trackers/shooting-star",
         host="07.gg",
-        height=620,
         note="Crashed stars land about every 90 minutes per world. Mining stardust "
              "is the most AFK training in the skill and buys the celestial ring.",
     ),
@@ -2566,7 +2558,6 @@ def starmap_script(depth=0):
     root = "../" if depth else ""
     return ("<script>window.STARMAPS=" + json.dumps(slim, separators=(",", ":"))
             + ";window.STARMAPROOT=" + json.dumps(root + "assets/media/starmaps/")
-            + ";window.SRCICON=" + json.dumps(root + "assets/media/site/07gg.png")
             + ";</script>")
 
 
@@ -2684,7 +2675,7 @@ def potion_ladder():
             'unlock worth switching to.</p></div>')
 
 
-def potion_section(depth=1):
+def potion_section():
     """Every potion you can make, priced live in the browser."""
     if not POTIONS:
         return ""
@@ -2770,8 +2761,12 @@ def slayer_sections():
     for t in sorted(SLAYER_TASKS, key=lambda x: (order[x["tag"]], -int(x["weight"] or 0))):
         why = t["cons"] if t["tag"] in ("skip", "block", "lock") else t["pros"]
         meta = f'lvl {t["level"]} &middot; weight {t["weight"]}'
+        level_match = re.search(r"\d+", t["level"])
+        level = int(level_match.group()) if level_match else 0
         rows.append(
-            f'<tr class="tk {t["tag"]}">'
+            f'<tr class="tk {t["tag"]}" data-tag="{t["tag"]}" '
+            f'data-order="{order[t["tag"]]}" data-weight="{int(t["weight"] or 0)}" '
+            f'data-xp="{rate_value(t["xp"]):g}" data-level="{level}">'
             f'<td class="tv"><span class="verdict {t["tag"]}">{label[t["tag"]]}</span></td>'
             f'<td class="tn">{wiki_link(t["name"])}<span class="tmeta">{meta}</span>'
             f'<span class="tmeta xp">{e(t["xp"])}</span></td>'
@@ -3041,17 +3036,12 @@ def build_skill_page(skill, prev_skill, next_skill):
         nav.append('<span class="ghost"></span>')
     parts.append(f'<div class="prevnext">{"".join(nav)}</div>')
 
-    return page(name, name, "\n".join(parts), active=slug(name), depth=1,
-                skill_name=name)
+    maps = starmap_script(depth=1) if name == "Mining" else ""
+    return page(name, "\n".join(parts), active=slug(name), depth=1,
+                skill_name=name, head_extra=maps)
 
 
 PAIRS = {"Fishing": "Hunter", "Hunter": "Fishing"}
-
-PAIR_NOTE = {
-    frozenset({"Fishing", "Hunter"}):
-        "Drift Net Fishing trains both at once, which is exactly why the plan "
-        "pairs the 70/70 requirement.",
-}
 
 
 def card_head(s, tag="span"):
@@ -3090,14 +3080,12 @@ def skill_card(s):
 
 def pair_card(a, b):
     """Two skills trained by one method live in a single panel."""
-    note = PAIR_NOTE.get(frozenset({a["name"], b["name"]}), "")
     halves = []
     for s in (a, b):
         halves.append(
             f'    <a class="half" href="skills/{slug(s["name"])}.html">'
             f'{card_head(s)}</a>'
         )
-    del note
     return '  <div class="card pair">\n' + "\n".join(halves) + "\n  </div>"
 
 
@@ -3123,7 +3111,8 @@ def build_stars_page():
         'window depending on the wood you build it from.</li>'
         '</ul>',
     ]
-    return page("Shooting Stars", "Shooting Stars", "\n".join(body), depth=0)
+    return page("Shooting Stars", "\n".join(body), depth=0,
+                head_extra=starmap_script())
 
 
 # Skilling outfits: what each piece is called, what the set does, and where it
@@ -3301,7 +3290,7 @@ def hours_left(skill_name):
     return left / rate if left else 0
 
 
-def max_order_block(phase, index):
+def max_order_block(phase):
     chips = []
     total = 0
     for name in phase["skills"]:
@@ -3430,7 +3419,7 @@ def build_afk_page():
     body = [
         '<div class="kick">Least attention wins</div>',
         '<div class="page-head">'
-        + f'<img class="icon lg" src="assets/media/site/skills-icon.png" alt="">'
+        + '<img class="icon lg" src="assets/media/site/skills-icon.png" alt="">'
         + '<h1 class="page">The AFK Path</h1></div>',
         '<p class="lede">Sorted by how long you can leave it alone, which is the '
         'only measure that matters here. XP rates are the price you pay for that.</p>',
@@ -3456,7 +3445,7 @@ def build_afk_page():
         'run fits inside its downtime.</li>'
         "</ul>",
     ]
-    return page("The AFK Path", "AFK", "\n".join(body), depth=0)
+    return page("The AFK Path", "\n".join(body), depth=0)
 
 
 # Three ways to spend the remaining XP. Each entry is (method, sustained rate).
@@ -3543,6 +3532,64 @@ PATH_META = [
 ]
 
 
+# What a method hands to other skills per hour. Rough, but ignoring it makes
+# every total wrong: drift net trains two skills at once, Slayer trains six.
+CARRIES = {
+    "Drift Net Fishing": {"Hunter": 50_000},
+    "Hunter Rumours": {},
+    "Duradel, barrage tasks": {"Attack": 20_000, "Strength": 20_000,
+                               "Defence": 20_000, "Hitpoints": 25_000,
+                               "Magic": 35_000},
+    "Duradel, cannon and barrage": {"Attack": 18_000, "Strength": 18_000,
+                                    "Defence": 18_000, "Hitpoints": 22_000,
+                                    "Magic": 25_000, "Ranged": 20_000},
+    "Cannon on long tasks": {"Attack": 12_000, "Strength": 12_000,
+                             "Defence": 12_000, "Hitpoints": 15_000,
+                             "Ranged": 15_000},
+    "Slayer with best gear": {"Hitpoints": 23_000},
+    "Slayer": {"Hitpoints": 20_000},
+    "Nightmare Zone": {"Hitpoints": 15_000},
+    "Gemstone Crab": {"Hitpoints": 15_000},
+    "Guardians of the Rift": {"Magic": 8_000},
+    "Barbarian Fishing": {"Strength": 12_000, "Agility": 12_000},
+    "Zalcano": {"Smithing": 20_000},
+}
+
+
+def apply_carries(rows, by_skill):
+    """Credit the XP a method hands to other skills, then recost those skills.
+
+    One pass only: a skill that gets carried does not then carry others. Good
+    enough to stop the totals double-counting, and flagged on the page."""
+    gained = {}
+    for r in rows:
+        for skill, rate in CARRIES.get(r["method"], {}).items():
+            if skill == r["skill"]:
+                continue
+            gained[skill] = gained.get(skill, 0) + r["hours"] * rate
+
+    for r in rows:
+        extra = gained.get(r["skill"], 0)
+        if not extra:
+            continue
+        r["carried"] = min(extra, r["left"])
+        r["left"] = max(0, r["left"] - extra)
+        r["hours"] = (r["left"] / r["rate"]) if r["rate"] else 0
+
+    for r in rows:
+        gives = []
+        for skill, rate in CARRIES.get(r["method"], {}).items():
+            if skill == r["skill"]:
+                continue
+            xp = r["hours"] * rate
+            target = by_skill.get(skill)
+            if not target:
+                continue
+            gives.append((skill, xp))
+        r["gives"] = gives
+    return rows
+
+
 def path_hours(key):
     """Hours to 99 per skill on one path, from live XP."""
     out, total = [], 0
@@ -3555,7 +3602,12 @@ def path_hours(key):
         hrs = (left / rate) if (rate and left) else 0
         total += hrs
         out.append(dict(skill=name, level=st["level"], method=method,
-                        rate=rate, hours=hrs, left=left))
+                        rate=rate, hours=hrs, left=left, carried=0, gives=[],
+                        xp=st["xp"] or 0))
+
+    by_skill = {r["skill"]: r for r in out}
+    apply_carries(out, by_skill)
+    total = sum(r["hours"] for r in out)
     out.sort(key=lambda x: -x["hours"])
     return out, total
 
@@ -3571,10 +3623,15 @@ def paths_page():
                 continue
             rate = f'{r["rate"] // 1000}k' if r["rate"] else "free"
             hrs = f'{r["hours"]:.0f}h' if r["hours"] else "free"
+            gives = ", ".join(f'{n} +{xp / 1e6:.1f}m' for n, xp in r["gives"] if xp > 50_000)
+            got = (f'<span class="carried">carried {r["carried"] / 1e6:.1f}m</span>'
+                   if r.get("carried") else "")
             cells.append(
                 f'<tr><td class="tn"><a href="skills/{slug(r["skill"])}.html">'
-                f'{icon(r["skill"])}{e(r["skill"])}</a></td>'
-                f'<td>{e(r["method"])}</td>'
+                f'{icon(r["skill"])}{e(r["skill"])}</a>{got}</td>'
+                f'<td>{e(r["method"])}'
+                + (f'<span class="gives">also {e(gives)}</span>' if gives else "")
+                + "</td>"
                 f'<td class="rate">{rate}</td>'
                 f'<td class="rate afkgap">{hrs}</td></tr>')
         body = "".join(cells)
@@ -3592,13 +3649,16 @@ def paths_page():
     fast, hybrid, afk = totals["fast"], totals["hybrid"], totals["afk"]
     summary = (
         '<div class="stats switcher">'
-        f'<button class="stat pick" type="button" data-path="fast">'
+        f'<button class="stat pick" type="button" data-path="fast" '
+        f'aria-controls="path-fast" aria-pressed="false">'
         f'<span class="l">Fastest</span>'
         f'<span class="v">{fast:,.0f}<small>h</small></span></button>'
-        f'<button class="stat pick on" type="button" data-path="hybrid">'
+        f'<button class="stat pick on" type="button" data-path="hybrid" '
+        f'aria-controls="path-hybrid" aria-pressed="true">'
         f'<span class="l">Hybrid</span>'
         f'<span class="v">{hybrid:,.0f}<small>h</small></span></button>'
-        f'<button class="stat pick" type="button" data-path="afk">'
+        f'<button class="stat pick" type="button" data-path="afk" '
+        f'aria-controls="path-afk" aria-pressed="false">'
         f'<span class="l">AFK</span>'
         f'<span class="v">{afk:,.0f}<small>h</small></span></button>'
         f'<div class="stat"><div class="l">AFK costs you</div>'
@@ -3614,10 +3674,12 @@ def paths_page():
         'XP left. What that costs in hours depends entirely on how much attention '
         'you are willing to pay.</p>',
         summary,
-        '<p class="lede2">Hitpoints is missing from every table because it arrives '
-        'with combat. Fletching and Farming are already done.</p>',
+        '<p class="lede2">Skills that train together are counted once. Drift net '
+        'hands Hunter most of a 99, Slayer hands combat several, and the totals '
+        'above already subtract that. Carried XP is credited one step deep, so '
+        'treat these as close rather than exact.</p>',
     ] + cards
-    return page("Which Path", "Paths", "\n".join(body), depth=0)
+    return page("Which Path", "\n".join(body), depth=0)
 
 
 def build_index():
@@ -3659,13 +3721,9 @@ def build_index():
                  'hours that cost, and so nothing waits on something later. '
                  'Estimates use your live XP at the rates on each skill page.</p>')
     parts.append('<ol class="phases maxorder">')
-    for i, phase in enumerate(MAX_ORDER, 1):
-        parts.append(max_order_block(phase, i))
+    for phase in MAX_ORDER:
+        parts.append(max_order_block(phase))
     parts.append("</ol>")
-    parts.append('<div class="panel"><div class="k">Gaps Worth Noting</div>'
-                 '<p>Fletching and Farming are already 99, so they sit outside the order above. '
-                 'Thieving and Hunter are not listed in either block, so decide where they land: '
-                 'Thieving fits with the faster skills, Hunter with the slow gathering ones.</p></div>')
 
     parts.append(h2("outfits", "Gear", "assets/media/site/gear-icon.png"))
     parts.append(outfit_section())
@@ -3690,7 +3748,7 @@ def build_index():
             parts.append(skill_card(s))
         parts.append("</div>")
 
-    return page("OSRS max time wasting plan", "Overview", "\n".join(parts))
+    return page("OSRS max time wasting plan", "\n".join(parts))
 
 
 def main():

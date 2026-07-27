@@ -177,17 +177,11 @@ METHOD_MEDIA = {
     # afk page
     "Bonecrusher and ash sanctifier": "Bonecrusher necklace",
     "Nightmare Zone, absorptions": "Nightmare Zone",
-    "Gemstone Crab": "Gemstone Crab",
     "Bonfires": "Bonfire",
     "Range cooking": "Shark",
     "Cutting amethyst": "Amethyst",
     "Blood runes at Arceuus": "Blood rune",
-    "Anglerfish": "Raw anglerfish",
     "Shipwreck salvaging with crew": "Shipwreck salvaging",
-    "Birdhouse runs": "Oak bird house",
-    "Splashing": "Splashing",
-    "Redwoods": "Redwood tree",
-    "Cannonballs": "Dwarf multicannon",
     # diaries
     "Hard diaries": "Achievement Diary",
     "Elite diaries": "Achievement Diary",

@@ -1502,6 +1502,20 @@ button.stat.pick.on .v { color: var(--accent); }
 table.pathtable { min-width: 560px; font-size: 13.5px; }
 table.pathtable td.tn a { display: inline-flex; align-items: center; gap: 7px; }
 table.pathtable td.tn a:hover { color: var(--accent); }
+.carried {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--done);
+  margin-top: 2px;
+}
+.gives {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--dim);
+  margin-top: 2px;
+}
 table.pathtable th:last-child, table.pathtable td:last-child { text-align: right; }
 
 /* ---------------------------------------------------------------- afk table */
