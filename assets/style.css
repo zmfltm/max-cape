@@ -1022,7 +1022,7 @@ tr.chosen td:nth-child(2)::after {
 
 /* --------------------------------------------------- phase trackers (index) */
 
-.prog.mini { height: 3px; margin-top: 0; width: 74px; display: inline-block; vertical-align: middle; }
+.prog.mini { height: 2px; margin-top: 0; width: 74px; display: inline-block; vertical-align: middle; }
 
 .pmeter {
   display: flex;
@@ -1057,7 +1057,7 @@ tr.chosen td:nth-child(2)::after {
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  padding: 6px 8px 6px 10px;
+  padding: 5px 8px 5px 9px;
   border: 1px solid var(--line-soft);
   border-radius: var(--r-sm);
   background: rgba(255, 255, 255, 0.02);
@@ -1073,12 +1073,14 @@ tr.chosen td:nth-child(2)::after {
 .req-chip.focused .focusbtn { color: var(--accent); }
 .req-chip .rl { font-family: var(--font-mono); font-size: 12.5px; color: var(--lc, var(--fg)); font-variant-numeric: tabular-nums; }
 .req-chip .rt { font-family: var(--font-mono); font-size: 11px; color: var(--dim); }
-.req-chip .prog.mini { flex: 0 0 100%; width: 100%; margin-top: 2px; }
+.req-chip .prog.mini { flex: 0 0 100%; width: 100%; margin-top: 4px; }
 .req-chip.met { border-color: rgba(74, 222, 128, 0.22); background: rgba(74, 222, 128, 0.05); }
 /* Once the requirement is met the level-gradient colour stops meaning
    anything here, so both numbers go green. */
 .req-chip.met .rl, .req-chip.met .rt { color: var(--done); }
-.req-chip.met .prog.mini { display: none; }
+/* Kept, not hidden: dropping the bar on met chips made them shorter than the
+   rest and the grid stopped lining up. Full and green says the same thing. */
+.req-chip.met .prog .fill { background: var(--done); }
 
 /* ---------------------------------------------------------------- gear list */
 
