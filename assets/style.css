@@ -1848,3 +1848,55 @@ table.calctable td.good { color: var(--done); }
   padding: 1px 7px;
   margin-left: 8px;
 }
+
+/* ------------------------------------------------------------------ feeders */
+
+.feeders { display: grid; gap: 6px; }
+.feeder {
+  display: grid;
+  grid-template-columns: minmax(150px, 190px) minmax(170px, 210px) minmax(130px, auto) 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--surface);
+}
+.feeder.locked { opacity: 0.62; }
+.feeder .fname { font-size: 13.5px; color: var(--fg); font-weight: 500; }
+.feeder .fname:hover { color: var(--accent); }
+.fpays { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--fg-2); }
+.fpays i { font-style: normal; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+.fneeds { display: inline-flex; flex-wrap: wrap; gap: 5px; }
+.fneed {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+.fneed img { width: 13px; height: 13px; }
+.fneed.ok { color: var(--done); border-color: color-mix(in srgb, var(--done) 30%, transparent); }
+.fneed.short { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+.fneed.quest { color: var(--muted); }
+.fnote { font-size: 12px; color: var(--dim); line-height: 1.5; }
+
+.feed {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--done);
+  border: 1px solid color-mix(in srgb, var(--done) 30%, transparent);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.feed.short { color: var(--muted); border-color: var(--line-soft); }
+.feed i { font-style: normal; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); }
+
+@media (max-width: 860px) {
+  .feeder { grid-template-columns: 1fr; gap: 6px; }
+}

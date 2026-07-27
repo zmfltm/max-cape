@@ -585,6 +585,7 @@ PLAN_LINKS = [
     ("diaries", "Diaries", "assets/icons/Diaries.png"),
     ("approach", "Slayer", "assets/icons/Slayer.png"),
     ("max-order", "Max Order", "assets/media/max-cape.png"),
+    ("feeders", "Feeders", "assets/media/site/skills-icon.png"),
     ("gear.html", "Gear", "assets/media/site/gear-icon.png"),
 ]
 
@@ -3582,6 +3583,85 @@ def max_order_block(phase, after):
             f'<div class="mochips">{"".join(chips)}</div></li>')
 
 
+# Things that make one grind pay into another. Requirements are the wiki's,
+# checked rather than remembered: the infernal tools are all "not boostable",
+# which is why they have to be planned for rather than boosted into.
+FEEDERS = [
+    dict(name="Infernal pickaxe", wiki="Infernal_pickaxe", skill="Mining",
+         gives="Smithing", needs=[("Smithing", 85), ("Mining", 61)],
+         note="A third of the ore you mine combusts for about half the "
+              "smelting XP. Wants ore, so it does nothing at Motherlode."),
+    dict(name="Infernal axe", wiki="Infernal_axe", skill="Woodcutting",
+         gives="Firemaking", needs=[("Firemaking", 85), ("Woodcutting", 61)],
+         note="A third of your logs burn as you cut them, for half the "
+              "Firemaking XP. On teaks that is most of a Firemaking 99."),
+    dict(name="Infernal harpoon", wiki="Infernal_harpoon", skill="Fishing",
+         gives="Cooking", needs=[("Cooking", 85), ("Fishing", 75)],
+         note="A third of your catch cooks itself for half the Cooking XP."),
+    dict(name="Daeyalt essence", wiki="Daeyalt_essence", skill="Runecraft",
+         gives="Runecraft", needs=[("Mining", 60)], quest="Sins of the Father",
+         note="Mine it yourself, it does not trade. Fifty per cent more "
+              "Runecraft XP per essence, and it stacks with Ourania."),
+    dict(name="Guardians of the Rift", wiki="Guardians_of_the_Rift",
+         skill="Runecraft", gives="Mining and Crafting", needs=[("Runecraft", 27)],
+         note="Pays passive Mining and Crafting the whole time you are in it."),
+    dict(name="Zalcano", wiki="Zalcano", skill="Mining", gives="Smithing",
+         needs=[("Mining", 70), ("Smithing", 70)], quest="Song of the Elves",
+         note="Mining and Smithing off the same fight, plus crystal shards."),
+    dict(name="Tempoross", wiki="Tempoross", skill="Fishing", gives="Cooking",
+         needs=[("Fishing", 35)],
+         note="The fish it pays out cook straight into a Cooking 99."),
+    dict(name="Wintertodt", wiki="Wintertodt", skill="Firemaking",
+         gives="supplies", needs=[("Firemaking", 50)],
+         note="Herbs, ore and gems in the reward crates, which feed the "
+              "buyables you would otherwise pay for."),
+    dict(name="Birdhouse runs", wiki="Bird_house_trapping", skill="Hunter",
+         gives="Hunter", needs=[("Hunter", 5), ("Crafting", 5)],
+         note="Runs on its own clock while you do something else. Most of a "
+              "Hunter 99 for a few minutes every fifty."),
+    dict(name="Herb runs", wiki="Herb_patch", skill="Farming", gives="Herblore",
+         needs=[("Farming", 32)],
+         note="The cheapest Herblore there is: grow the second ingredient "
+              "instead of buying it."),
+]
+
+
+def feeder_state(f):
+    """Whether the levels are there, and what is missing if not."""
+    short = []
+    for name, level in f["needs"]:
+        st = stat_of(name)
+        if not st or st["level"] < level:
+            short.append((name, level, st["level"] if st else 0))
+    return short
+
+
+def feeders_section():
+    rows = []
+    for f in FEEDERS:
+        short = feeder_state(f)
+        needs = " · ".join(
+            f'<span class="fneed{" short" if (n, lv) in [(a, b) for a, b, _ in short] else " ok"}">'
+            f'{icon(n)}{lv}</span>' for n, lv in f["needs"])
+        quest = (f'<span class="fneed quest">{e(f["quest"])}</span>'
+                 if f.get("quest") else "")
+        rows.append(
+            f'<div class="feeder{" locked" if short else ""}">'
+            f'<a class="fname" href="{WIKI}{f["wiki"]}" target="_blank" '
+            f'rel="noopener">{e(f["name"])}</a>'
+            f'<span class="fpays">{icon(f["skill"])}{e(f["skill"])} '
+            f'<i>pays</i> {e(f["gives"])}</span>'
+            f'<span class="fneeds">{needs}{quest}</span>'
+            f'<span class="fnote">{annotate(f["note"])}</span>'
+            "</div>")
+    open_now = sum(1 for f in FEEDERS if not feeder_state(f))
+    return (f'<p class="lede2">{open_now} of {len(FEEDERS)} are open to you now. '
+            'These are the reason the order matters: reach the requirement '
+            'before the grind it pays into, not after, or the free XP lands on '
+            'levels you already bought.</p>'
+            f'<div class="feeders">{"".join(rows)}</div>')
+
+
 def h2(anchor, title, ico=None):
     """Section heading, with the matching game icon where there is one."""
     mark = (f'<img class="h2ico" src="{ico}" alt="" width="20" height="20">'
@@ -4255,6 +4335,10 @@ def paths_page():
                     if blk else "")
             unlocks = "".join(f'<span class="dia">{e(d)}</span>'
                               for d in r["diaries"])
+            feeds = "".join(
+                f'<span class="feed{" short" if feeder_state(f) else ""}">'
+                f'{e(f["name"])}<i>pays {e(f["gives"])}</i></span>'
+                for f in FEEDERS if f["skill"] == r["skill"])
             cells.append(
                 f'<tr><td class="num">{r["order"]}</td>'
                 f'<td class="tn"><a href="skills/{slug(r["skill"])}.html">'
@@ -4264,6 +4348,8 @@ def paths_page():
                 + (f'<div class="alts">{"".join(others)}</div>' if others else "")
                 + (f'<div class="dias"><i>unlocks</i>{unlocks}</div>'
                    if unlocks else "")
+                + (f'<div class="dias"><i>feeds</i>{feeds}</div>'
+                   if feeds else "")
                 + "</td>"
                 f'<td class="rate">{rate}</td>'
                 f'<td class="rate afkgap">{hrs}</td></tr>')
@@ -4763,6 +4849,10 @@ def build_index():
     for phase in MAX_ORDER:
         parts.append(max_order_block(phase, after))
     parts.append("</ol>")
+
+    parts.append(h2("feeders", "Feeders and Unlocks",
+                    "assets/media/site/skills-icon.png"))
+    parts.append(feeders_section())
 
     return page("OSRS max time wasting plan", "\n".join(parts))
 
