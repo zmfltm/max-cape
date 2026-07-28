@@ -11,7 +11,7 @@ from unittest import mock
 import build
 import quests
 import serve
-from hiscores import xp_for_level
+from hiscores import XP_TABLE, combat_level, xp_for_level
 from storage import atomic_binary_dump, atomic_json_dump
 
 
@@ -49,6 +49,85 @@ class RequirementTests(unittest.TestCase):
         self.assertEqual(build.unmet("60 Sailing", "Mining"), "60 Sailing")
 
 
+class QuestCapeRequirementTests(unittest.TestCase):
+    def test_regular_cape_table_is_not_confused_with_master_cape(self):
+        source = """==Minimum skill levels==
+{{DiarySkillStats
+|Attack = 50
+|Hitpoints = 50
+|Mining = 70
+|Strength = 60
+|Agility = 70
+|Smithing = 72
+|Defence = 65
+|Herblore = 70
+|Fishing = 60
+|Ranged = 62
+|Thieving = 72
+|Cooking = 72
+|Prayer = 50
+|Crafting = 70
+|Firemaking = 75
+|Magic = 75
+|Fletching = 70
+|Woodcutting = 74
+|Runecraft = 60
+|Slayer = 74
+|Farming = 70
+|Construction = 70
+|Hunter = 70
+|Sailing = 52
+|Combat = 85
+|MiningNotes=(72)|FishingNotes=(62)}}}
+
+Two skills can be boosted.
+{{DiarySkillStats
+|Attack = 99
+|Hitpoints = 99
+|Mining = 99
+|Strength = 99
+|Agility = 99
+|Smithing = 99
+|Defence = 99
+|Herblore = 99
+|Fishing = 99
+|Ranged = 99
+|Thieving = 99
+|Cooking = 99
+|Prayer = 99
+|Crafting = 99
+|Firemaking = 99
+|Magic = 99
+|Fletching = 99
+|Woodcutting = 99
+|Runecraft = 99
+|Slayer = 95
+|Farming = 99
+|Construction = 99
+|Hunter = 99
+|Sailing = 99
+|Combat = 100}}
+"""
+        result = quests._parse_quest_cape_requirements(source)
+        self.assertEqual(result["combat"], 85)
+        self.assertEqual(result["skills"]["Slayer"], 74)
+        self.assertEqual(result["skills"]["Smithing"], 72)
+        self.assertEqual(result["boostable"], {"Mining": 72, "Fishing": 62})
+
+    def test_plan_uses_current_quest_cape_targets(self):
+        self.assertEqual(build.QUEST_CAPE_COMBAT, 85)
+        self.assertEqual(build.QUEST_CAPE_REQUIREMENTS["Slayer"], 74)
+        self.assertEqual(build.QUEST_CAPE_REQUIREMENTS["Ranged"], 62)
+        self.assertEqual(build.QUEST_CAPE_REQUIREMENTS["Runecraft"], 60)
+        self.assertEqual(build.QUEST_CAPE_REQUIREMENTS,
+                         build.QUESTS["requirements"]["skills"])
+
+    def test_boostable_fishing_step_is_not_a_training_goal(self):
+        fishing = next(s for s in build.SKILLS if s["name"] == "Fishing")
+        self.assertEqual(build.milestones(fishing), [60, 99])
+        self.assertNotIn(("Fishing", 62), build.PLAN_PHASES[0]["reqs"])
+
+
 class RouteTests(unittest.TestCase):
     def test_staged_routes_are_contiguous_and_ordered(self):
         for skill, choices in build.PATHS.items():
@@ -64,6 +143,34 @@ class RouteTests(unittest.TestCase):
         )
         self.assertGreater(carried.get("Strength", 0), 0)
         self.assertGreater(carried.get("Agility", 0), 0)
+
+    def test_slayer_starts_on_nieve_before_duradel(self):
+        route = build.PATHS["Slayer"]["hybrid"]
+        self.assertIn("Nieve", route[0][1])
+        self.assertEqual(route[0][2], 30_000)
+        self.assertEqual(route[1][0], 85)
+        self.assertIn("Duradel", route[1][1])
+
+    def test_slayer_routes_reach_100_combat_before_duradel(self):
+        base = {name: (build.stat_of(name) or {}).get("xp", 0)
+                for name in build.SKILL_NAMES}
+        slayer = build.stat_of("Slayer")
+        for route in build.PATHS["Slayer"].values():
+            switch = route[1][0]
+            _, carried = build.climb(route, slayer["xp"], XP_TABLE[switch])
+            projected = dict(base)
+            projected["Slayer"] = XP_TABLE[switch]
+            for name, amount in carried.items():
+                projected[name] += amount
+            levels = {name: build.level_at(xp) for name, xp in projected.items()}
+            self.assertGreaterEqual(combat_level(levels), 100, route)
+
+    def test_smiths_uniform_models_both_speedups(self):
+        foundry, anvil = build.BONUSES["Smithing"][:2]
+        self.assertEqual(foundry["pct"], 20)
+        self.assertIn("Giants' Foundry", foundry["applies"])
+        self.assertEqual(anvil["pct"], 25)
+        self.assertIn("Cannonballs", anvil["applies"])
 
 
 class QuestTests(unittest.TestCase):

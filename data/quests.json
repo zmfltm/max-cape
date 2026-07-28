@@ -1,6 +1,6 @@
 {
  "name": "gxexe",
- "synced": "2026-07-26T18:23:05.044Z",
+ "synced": "2026-07-28T01:08:45.799Z",
  "route": [
   {
    "kind": "task",
@@ -1715,7 +1715,7 @@
   "Animal Magnetism": 2,
   "Another Slice of H.A.M.": 0,
   "At First Light": 0,
-  "Barbarian Training": 0,
+  "Barbarian Training": 1,
   "Bear Your Soul": 0,
   "Below Ice Mountain": 2,
   "Beneath Cursed Sands": 0,
@@ -1924,6 +1924,7 @@
   "Rag and Bone Man II",
   "Legends' Quest",
   "Fairytale II - Cure a Queen",
+  "Barbarian Training",
   "The Enchanted Key",
   "The Frozen Door"
  ],
@@ -2021,5 +2022,38 @@
   "The Frozen Door",
   "Vale Totems"
  ],
- "fetched": "2026-07-27T03:23+09:00"
+ "requirements": {
+  "skills": {
+   "Attack": 50,
+   "Hitpoints": 50,
+   "Mining": 70,
+   "Strength": 60,
+   "Agility": 70,
+   "Smithing": 72,
+   "Defence": 65,
+   "Herblore": 70,
+   "Fishing": 60,
+   "Ranged": 62,
+   "Thieving": 72,
+   "Cooking": 72,
+   "Prayer": 50,
+   "Crafting": 70,
+   "Firemaking": 75,
+   "Magic": 75,
+   "Fletching": 70,
+   "Woodcutting": 74,
+   "Runecraft": 60,
+   "Slayer": 74,
+   "Farming": 70,
+   "Construction": 70,
+   "Hunter": 70,
+   "Sailing": 52
+  },
+  "combat": 85,
+  "boostable": {
+   "Mining": 72,
+   "Fishing": 62
+  }
+ },
+ "fetched": "2026-07-28T10:08+09:00"
 }

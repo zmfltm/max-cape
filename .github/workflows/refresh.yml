@@ -1,0 +1,59 @@
+name: Refresh stats and rebuild
+
+# GitHub Pages serves static files, so the live endpoints in serve.py do not
+# exist there. This re-pulls the hiscores and WikiSync, rebuilds the pages and
+# commits, which keeps the published site current without a backend.
+on:
+  schedule:
+    # Stars crash and burn out inside a couple of hours, so a six-hourly run
+    # would publish a list that is already dead. Everything else here is cheap
+    # enough to ride along, and the commit step is a no-op when nothing moved.
+    - cron: "*/20 * * * *"   # every twenty minutes
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-static-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install checks
+        run: python3 -m pip install -r requirements-dev.txt
+
+      - name: Pull hiscores
+        run: python3 fetch_stats.py || echo "hiscores unavailable, keeping last snapshot"
+
+      - name: Pull quests and diaries
+        run: python3 fetch_quests.py || echo "WikiSync unavailable, keeping last snapshot"
+
+      - name: Pull shooting stars
+        run: python3 fetch_stars.py || echo "star tracker unavailable, keeping last snapshot"
+
+      - name: Rebuild
+        run: python3 build.py
+
+      - name: Check
+        run: |
+          ruff check . --exclude skills --exclude assets
+          python3 -m unittest discover -s tests -v
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: refresh stats and rebuild"
+          git push

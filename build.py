@@ -23,13 +23,38 @@ OUT = os.path.dirname(os.path.abspath(__file__))
 # The plan
 # --------------------------------------------------------------------------
 
+# Current minimum base levels from the OSRS Wiki's Quest point cape page when
+# the two permitted temporary boosts are used.
+# fetch_quests.py snapshots the same table into data/quests.json; these values
+# are the offline fallback and the single source for the plan's early targets.
+QUEST_CAPE_REQUIREMENTS = {
+    "Attack": 50, "Hitpoints": 50, "Mining": 70, "Strength": 60,
+    "Agility": 70, "Smithing": 72, "Defence": 65, "Herblore": 70,
+    "Fishing": 60, "Ranged": 62, "Thieving": 72, "Cooking": 72,
+    "Prayer": 50, "Crafting": 70, "Firemaking": 75, "Magic": 75,
+    "Fletching": 70, "Woodcutting": 74, "Runecraft": 60, "Slayer": 74,
+    "Farming": 70, "Construction": 70, "Hunter": 70, "Sailing": 52,
+}
+QUEST_CAPE_COMBAT = 85
+QUEST_CAPE_BOOSTABLE = {"Mining": 72, "Fishing": 62}
+QUEST_CAPE_COMPOSITE = "While Guthix Sleeps also needs Attack + Strength 130 (already 140), or 99 in either skill."
+
+# The account already meets the omitted minimums. Keeping only live blockers
+# makes the overview useful without presenting the hard-diary targets as QPC
+# requirements (the source of the old 100-combat/70-Ranged error).
+QUEST_CAPE_BLOCKERS = [
+    "Ranged", "Magic", "Smithing", "Firemaking", "Runecraft", "Hunter",
+    "Agility", "Thieving", "Slayer", "Woodcutting", "Cooking", "Sailing",
+]
+
 PLAN_PHASES = [
     dict(title="Quest-cape preparation",
-         reqs=[("Defence", 70), ("Ranged", 70), ("Magic", 75), ("Smithing", 75),
-               ("Firemaking", 75), ("Runecraft", 65), ("Hunter", 70), ("Fishing", 70),
-               ("Agility", 71), ("Thieving", 75), ("Slayer", 72)],
-         combat=100,
-         subs=["Hunter and Fishing come together through Drift Net Fishing"]),
+         reqs=[(name, QUEST_CAPE_REQUIREMENTS[name])
+               for name in QUEST_CAPE_BLOCKERS],
+         combat=QUEST_CAPE_COMBAT,
+         subs=["Follow the optimal quest route until it reaches a real level gate; train only enough to clear the next group of blocked quests.",
+               "Do Slayer before separate combat training because cannon and burst tasks carry Ranged and Magic alongside it.",
+               QUEST_CAPE_COMPOSITE]),
     dict(title="Quest Cape", track="quests", subs=[]),
     dict(title="All Hard Diaries", track="diary_hard", diary_tier="Hard",
          subs=[]),
@@ -53,6 +78,8 @@ COMBAT_APPROACH = [
 # --------------------------------------------------------------------------
 # Skills.  Each entry:
 #   target  - short label shown on the index card
+#   goals   - optional numeric milestones when explanatory numbers in target
+#             (such as a boostable quest check) are not training goals
 #   done    - already 99
 #   phase   - where it sits in the plan
 #   pick    - the method chosen in the plan (name must match a methods row to
@@ -106,8 +133,8 @@ SKILLS = [
     ),
     dict(
         name="Defence", group=COMBAT, target="70 → 75–80 → 99", pick="Slayer tasks",
-        phase="70 for the quest cape block; 75–80 after Strength and Attack; 99 in the post-Diary combat block.",
-        summary="70 for quests, then 75–80, then 99.",
+        phase="The quest-cape minimum is 65 and is already met. Reach 70 through Slayer for the useful armour breakpoint, then 75–80 after Strength and Attack.",
+        summary="Quest requirement met; 70 through Slayer for gear.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Defensive or Controlled style on tasks you would be doing anyway."),
             ("Nightmare Zone", "Quest reqs", "40–80k", "Defensive style; the standard AFK route."),
@@ -117,8 +144,8 @@ SKILLS = [
             ("Bossing", "Varies", "30–60k", "Defensive style on long boss trips."),
         ],
         notes=[
-            "Defence 70 unlocks most of the armour that matters (Bandos, Barrows, Karil's), so the early target is well placed.",
-            "Check your remaining quests before overshooting. Several late quests want 70–75 Defence and nothing more.",
+            "Defence 70 unlocks most of the armour that matters (Bandos, Barrows, Karil's), so it is a useful optional breakpoint.",
+            "No current quest needs more than 65 Defence. Let Slayer carry 66→70 rather than delaying quests for it.",
         ],
     ),
     dict(
@@ -135,8 +162,8 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Ranged", group=COMBAT, target="70 → 99", pick="Cannon on Slayer tasks",
-        phase="70 for the quest cape block; 99 in the combat block after the Diary Cape.",
+        name="Ranged", group=COMBAT, target="62 → 70 → 99", pick="Cannon on Slayer tasks",
+        phase="62 is the quest-cape requirement. Let cannoned Slayer tasks carry it there, continue to 70 as an early combat breakpoint, then finish 99 after the Diary Cape.",
         summary="Cannon on Slayer tasks; chinning later.",
         methods=[
             ("Cannon on Slayer tasks", "—", "40–80k", "Your Pick. Cannon the multi-friendly tasks (dust devils, jellies, nechryael, greater demons) and it trains Ranged while the task still counts."),
@@ -198,14 +225,14 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Slayer", group=COMBAT, target="72 → 95 → 99", pick="Duradel",
-        pick_note="Start on Nieve/Steve, use Konar when you want milestone points, and move to Duradel once you have 100 combat, 50 Slayer and Shilo Village.",
-        phase="72 for the quest cape block, 95 before the Diary Cape, 99 first in the post-Diary maxing order.",
+        name="Slayer", group=COMBAT, target="74 → 95 → 99", pick="Duradel",
+        pick_note="Start on Nieve/Steve, use Konar when you want milestone points, and move to Duradel once you have 100 combat, 50 Slayer and Shilo Village. Combat 100 unlocks Duradel; it is not a Quest Cape requirement.",
+        phase="74 for The Blood Moon Rises and the quest cape, 95 before the Diary Cape, then 99 first in the post-Diary maxing order.",
         summary="The spine of the whole plan.",
         methods=[
-            ("Nieve / Steve", "85 combat", "—", "Your starting master. Good task variety, reachable early."),
+            ("Nieve / Steve", "85 combat", "—", "Your starting master. Good task variety, reachable now. Level 99 Slayer bypasses the combat requirement."),
             ("Konar quo Maten", "75 combat", "—", "Location-locked tasks. Worth using for milestone points and for Hydra access later."),
-            ("Duradel", "100 combat, 50 Slayer", "—", "Your main master once you hit 100 combat and have Shilo Village. Highest task XP in the game."),
+            ("Duradel", "100 combat, 50 Slayer", "—", "Your main master after Shilo Village once you have 100 combat and 50 Slayer; 99 Slayer bypasses those two levels. Generally best for fast Slayer XP, though task weighting still matters."),
             ("Krystilia (Wilderness)", "—", "—", "Wilderness-only tasks. Fast points and good drops, but risky. Optional."),
             ("Turael/Spria skipping", "—", "—", "Turael-skip trick to reroll bad tasks without spending points. Useful when point-starved."),
         ],
@@ -214,15 +241,17 @@ SKILLS = [
             "Extend the tasks you'll want to farm later (nechryael, abyssal demons, gargoyles) once points allow.",
             "Superior slayer encounters (Bigger and Badder) are worth the point cost. They carry the imbue-tier drops.",
             "Everything else in the plan is downstream of Slayer: it carries Attack, Strength, Defence, Hitpoints, and via cannon/barrage it carries Ranged and Magic too.",
+            "The Along the Way table uses a neutral average split across melee styles. In play, prioritise Strength, then Attack, then Defence rather than expecting those three levels to land evenly.",
+            "The task verdict table uses Duradel's weights. Nieve has different weights and extra assignments, and block lists do not carry between masters; revisit blocks when you switch.",
         ],
     ),
     # ---------------- gathering ----------------
     dict(
-        name="Fishing", group=GATHER, target="70 → 99", pick="Tempoross",
-        phase="70 for the quest cape block (paired with Hunter), 99 in the slow-skills block.",
-        summary="Tempoross, then Leechfin fishing at 78.",
+        name="Fishing", group=GATHER, target="60 → 99 (62 quest step boostable)", goals=[60, 99], pick="Tempoross",
+        phase="The quest-cape minimum is 60 unboosted, with 62 needed only for a boostable step; both are already in range. Train it later in the slow-skills block.",
+        summary="Quest requirement met; Tempoross, then Leechfin at 78.",
         methods=[
-            ("Drift Net Fishing", "47 Fish / 44 Hunt", "53–88k Fishing", "Trains Fishing and Hunter at once on Fossil Island, which is what makes it the shortest way to the 70/70 the quest cape wants. Not the route to 99: faster options open above it in both skills."),
+            ("Drift Net Fishing", "47 Fish / 44 Hunt", "53–88k Fishing", "Trains Fishing and Hunter at once on Fossil Island. It remains a useful maxing overlap, but Fishing 70 is not a quest-cape requirement and red chinchompas are faster if Hunter 70 is the only immediate goal."),
             ("Barbarian Fishing", "48 (+ quest)", "23–57k, 55–144k 3-tick", "What the fastest route runs above 58. The 3-tick cut-eat is the highest rate in the skill; plain clicking is far slower. Drips Strength, Agility and Cooking either way."),
             ("2-tick harpooning", "71", "78–133k",
              "Swordfish and tuna with tick manipulation. The genuine fastest Fishing, and the most demanding."),
@@ -240,16 +269,16 @@ SKILLS = [
             ("Anglerfish", "82", "15–39k", "Slow but good money and the best non-boss food."),
         ],
         notes=[
-            "Drift Net is clearly right for the 70/70 requirement. For the eventual 99, most people switch to 3-tick Barbarian Fishing or minnows.",
+            "Do not train Fishing to 70 just for the quest cape: 60 unboosted is enough and the level-62 step is boostable. Drift Net is an optional maxing overlap with Hunter, not a QPC gate.",
             "If you'd rather not tick-manipulate for hours, Tempoross to 99 is slower but far more pleasant.",
         ],
     ),
     dict(
         name="Hunter", group=GATHER, target="70 → 99", pick="Hunter Rumours (Hunters' Guild)",
-        phase="70 for the quest cape block (paired with Fishing). Not in the explicit post-Diary list. Slot it with the gathering skills.",
+        phase="70 for the quest cape. Red chinchompas are the shortest direct route from 65 and bank ammunition for Ranged; Drift Net is the optional Fishing overlap.",
         summary="Red chinchompas, then Hunters' Rumours at 72.",
         methods=[
-            ("Drift Net Fishing", "44 Hunt / 47 Fish", "50–113k Hunter", "The shortest way to the 70/70 the quest cape wants, since it trains both at once. Rumours and chinchompas beat it comfortably after that."),
+            ("Drift Net Fishing", "44 Hunt / 47 Fish", "50–113k Hunter", "Trains Hunter and Fishing together. It is efficient when both skills matter, but red chinchompas are the faster direct route to the Hunter 70 quest requirement from the current levels."),
             ("Hunter Rumours (Hunters' Guild)", "72 / 91", "160–250k", "Varlamore contract system. Strong XP with useful rewards; the modern default for high Hunter."),
             ("Black chinchompas", "73", "up to 265k", "Best XP in the skill and excellent GP, but deep Wilderness. High risk, high reward."),
             ("Red chinchompas", "63", "100–150k", "Safer, still good, and it stockpiles the chins you'll want for 99 Ranged."),
@@ -268,8 +297,8 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Agility", group=GATHER, target="71 → 99", pick=None,
-        phase="71 for the quest cape block, 99 in the slow-skills block.",
+        name="Agility", group=GATHER, target="70 → 99", pick=None,
+        phase="70 for the quest cape, then 99 in the slow-skills block.",
         summary="Rooftops, then Hallowed Sepulchre.",
         methods=[
             ("Rooftop courses", "10–90", "20–60k", "Canifis 40, Seers' 60, Pollnivneach 70, Rellekka 80, Ardougne 90. Marks of grace fund graceful."),
@@ -284,13 +313,13 @@ SKILLS = [
         ],
         notes=[
             "Your plan doesn't name a method. Rooftops to 52, then Hallowed Sepulchre the rest of the way, is the standard and pays for itself.",
-            "Agility is one of the true slow skills. The plan correctly puts 99 late. Do the 71 requirement, then leave it.",
+            "Agility is one of the true slow skills. The plan correctly puts 99 late. Do the 70 quest requirement, then leave it.",
             "Get full graceful early; the run-energy restore compounds across every other skill you train.",
         ],
     ),
     dict(
-        name="Thieving", group=GATHER, target="75 → 99", pick=None,
-        phase="75 for the quest cape block. Not listed in the post-Diary maxing order, so slot the 99 in with the faster skills.",
+        name="Thieving", group=GATHER, target="72 → 99", pick=None,
+        phase="72 for the quest cape. Slot the eventual 99 in with the faster skills.",
         summary="Blackjacking or Pyramid Plunder.",
         methods=[
             ("Blackjacking", "The Feud, 45/65", "200–300k", "Bearded bandits at 45, Menaphite thugs at 65. The fastest Thieving in the game and the most tick-intensive."),
@@ -309,7 +338,7 @@ SKILLS = [
         notes=[
             "Rogue's outfit (Rogues' Den) gives double loot and is worth grabbing before any long stint.",
             "Ardougne medium diary is the single biggest quality-of-life unlock here: knights become far more reliable.",
-            "Your plan needs 75 for quests, which Pyramid Plunder reaches comfortably without tick manipulation.",
+            "The quest cape needs 72, which Pyramid Plunder reaches comfortably without tick manipulation.",
         ],
     ),
     dict(
@@ -339,8 +368,8 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Woodcutting", group=GATHER, target="99 (slow-skills block)", pick="Forestry teaks",
-        phase="Slow-skills block.",
+        name="Woodcutting", group=GATHER, target="74 → 99", pick="Forestry teaks",
+        phase="74 for the quest cape, then 99 in the slow-skills block.",
         summary="Forestry teaks (2-tick).",
         methods=[
             ("Forestry teaks", "35", "80–150k", "Your Pick. 2-tick teaks with Forestry events layered on top is the top sustained rate; the events also fund the Forestry shop."),
@@ -361,12 +390,12 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Runecraft", group=GATHER, target="65 → 77 → 99", pick="Guardians of the Rift",
+        name="Runecraft", group=GATHER, target="60 → 77 → 99", pick="Guardians of the Rift",
         pick_note="ZMI is the named fallback in the plan if you would rather train solo without the minigame timer.",
-        phase="65 for the quest cape block, ~77 relatively early (blood runes), 99 first in the slow-skills block.",
+        phase="60 for the quest cape, ~77 relatively early for blood runes, then 99 first in the slow-skills block.",
         summary="GOTR, then blood runes or ZMI.",
         methods=[
-            ("Guardians of the Rift", "27", "25–70k", "Your Pick. XP scales with level, plus pouches, the Abyssal needle, outfit and eventually the pet. The default modern Runecraft."),
+            ("Guardians of the Rift", "27", "25–70k", "Your Pick. XP scales with level and the rewards include pouches, the Abyssal needle, Raiments of the Eye and eventually the pet. The robes give up to 60% more runes but no bonus XP."),
             ("ZMI altar", "50 (+ Lunar Diplomacy)", "40–70k", "Consistent, solo, no minigame timer. Needs pouches and the Ourania teleport."),
             ("Blood runes (Arceuus)", "77", "~36k", "Low attention, strong profit. This is why the plan wants 77 early. It turns Runecraft into passive income."),
             ("Lava runes with runners", "23", "80–130k",
@@ -381,7 +410,7 @@ SKILLS = [
         ],
         notes=[
             "Reaching 77 early is the highest-value part of this skill's plan: blood runes then run in the background for the rest of the account.",
-            "Get all four pouches and the Abyssal needle/outfit from GOTR before committing to the long grind.",
+            "The QPC step from 57 to 60 is only about an hour at GOTR and will not produce a full outfit. Raiments cost 1,350 pearls (roughly 180 games on average) and increase rune output, not XP; treat them as a long-term maxing/profit goal.",
         ],
     ),
     dict(
@@ -397,8 +426,8 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Sailing", group=GATHER, target="99 (slow-skills block)", pick=None,
-        phase="Listed last in the slow-skills block. Pandemonium has to be done before any Sailing XP is possible, so it also belongs in your quest list.",
+        name="Sailing", group=GATHER, target="52 → 99", pick=None,
+        phase="52 for the quest cape, then last in the slow-skills block. Pandemonium must be completed before any Sailing XP is possible.",
         summary="Barracuda Trials, or courier runs.",
         methods=[
             ("Barracuda Trials", "30 / 55 / 72", "80–200k", "The fastest Sailing from 30 onwards. Tempor Tantrum at 30, Jubbly Jive at 55, Gwenith Glide at 72; each has Swordfish/Shark/Marlin ranks with tighter timers. Gwenith Glide at Marlin rank reaches 200k+ with a rosewood hull and a crystal extractor running."),
@@ -423,8 +452,8 @@ SKILLS = [
     ),
     # ---------------- artisan ----------------
     dict(
-        name="Smithing", group=ARTISAN, target="75 → 99", pick=None,
-        phase="75 for the quest cape block, then the buyables block at the end.",
+        name="Smithing", group=ARTISAN, target="72 → 99", pick=None,
+        phase="72 for the quest cape, then the buyables block at the end.",
         summary="Blast Furnace or Giants' Foundry.",
         methods=[
             ("Blast Furnace – gold bars", "40 (60 for best rate)", "~350k", "With goldsmith gauntlets, the fastest Smithing XP in the game. Loses GP; you're buying levels."),
@@ -436,8 +465,8 @@ SKILLS = [
             ("Anvil smithing (plates/darts)", "varies", "50–150k", "Mostly obsolete since Giants' Foundry."),
         ],
         notes=[
-            "Get the Smiths' uniform from Giants' Foundry early. It is not an XP bonus: each piece gives a 20% chance to cut anvil actions from 5 ticks to 4, so the full set is effectively a quarter faster at the anvil, plus better preform progress in the Foundry.",
-            "For the 75 requirement, Giants' Foundry is the cheapest sane route. Save gold-bar blasting for the final push to 99 when you have GP to burn.",
+            "Buy the useful moulds before the Smiths' uniform. The full 15,000-reputation set cuts anvil actions from 5 ticks to 4 and averages about 20% more XP per hour inside the Foundry.",
+            "The 60→72 quest-cape stretch is only about 606k XP, so it will not fund the full uniform after moulds. Giants' Foundry is still the cheapest sane route; finish the set during the later 99 grind.",
         ],
     ),
     dict(
@@ -471,11 +500,11 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Construction", group=ARTISAN, target="83–85 → 99", pick=None,
-        phase="83–85 early for the house upgrades that matter, 99 in the buyables block.",
+        name="Construction", group=ARTISAN, target="80 → 83 → 99", pick=None,
+        phase="The level-70 quest requirement is already met. Reach 80 for immediate questing conveniences, then 83 when you want to boost for the practical max-house upgrades.",
         summary="Mahogany Homes, then oak/mahogany builds.",
         methods=[
-            ("Mahogany Homes", "20+", "50–120k", "Contracts. By far the cheapest GP per XP, plus the carpenter's outfit and plank sack. The right way to reach your 83–85 target."),
+            ("Mahogany Homes", "20+", "50–120k", "Contracts. By far the cheapest GP per XP, plus the carpenter's outfit and plank sack. The economical route to 80–83 and eventually 99."),
             ("Oak larders", "33", "~180k", "Classic butler-based training; cheap planks, high clicks."),
             ("Oak dungeon doors", "74", "~250k", "The mid-game standard once you pass 74."),
             ("Mounted mythical capes", "50 (+ Dragon Slayer II)", "~200k",
@@ -486,8 +515,9 @@ SKILLS = [
             ("Teak garden benches", "66", "~350k", "Similar rate to mahogany tables, usually cheaper per XP."),
         ],
         notes=[
-            "83–85 is a sensible early target. Gilded altar (75), the ornate pool, and the spirit tree/fairy ring portals pay for themselves across the rest of the plan.",
-            "Do Mahogany Homes for the outfit and plank sack first even if you then switch methods; both cut the eventual 99 cost noticeably.",
+            "At the current 77 Construction, build a portal nexus and spirit tree now. Boost to 80 for a fairy ring, rejuvenation pool and achievement gallery/spellbook altars, or train to 80 to avoid repeated stew boosts.",
+            "Level 83 is the famous practical max-house target: crystal saw plus a +5 spicy-stew boost reaches the ornate pool, occult altar and ornate jewellery box requirements where the saw applies.",
+            "Do Mahogany Homes for the outfit and plank sack before the long 99 grind, but do not delay questing solely to finish the set.",
             "Unlock the demon butler before any bulk-building session.",
         ],
     ),
@@ -511,8 +541,8 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Cooking", group=ARTISAN, target="99 (buyables block)", pick=None,
-        phase="Buyables block, near the end.",
+        name="Cooking", group=ARTISAN, target="72 → 99", pick=None,
+        phase="72 for the quest cape, then finish this fast buyable near the end.",
         summary="Wines or 1-tick karambwans.",
         methods=[
             ("Jugs of wine", "35", "300–450k", "The fastest and cheapest 99 Cooking. Mind-numbing but short."),
@@ -538,14 +568,14 @@ SKILLS = [
         ],
         notes=[
             "Wintertodt for the 75 requirement and then again for 99 is the obvious call; the supply drops effectively pay you to train.",
-            "The pyromancer outfit gives an XP bonus. Get the full set early in the grind, not late.",
+            "The full pyromancer outfit gives 2.5% bonus Firemaking XP, but its pieces are random. Collect what drops on the 68→75 stretch; do not assume the short QPC grind will complete the set.",
         ],
     ),
 ]
 
 DIARY = dict(
     name="Diaries", group=SUPPORT, target="Hard → Elite", pick=None,
-    phase="All Hard diaries after the Quest Cape; elite skill requirements cleared during the Slayer 72→95 stretch.",
+    phase="All Hard diaries after the Quest Cape; elite skill requirements cleared during the Slayer 74→95 stretch.",
     summary="Hard diaries, then elite skill walls.",
     methods=[
         ("Hard diaries", "—", "—", "Do these as a block after the Quest Cape. Most requirements will already be met by then."),
@@ -721,6 +751,24 @@ QUESTS = load_object(QUESTS_PATH)
 if QUESTS is not None and not isinstance(QUESTS.get("states"), dict):
     QUESTS = None
 
+# The quest refresh snapshots the Wiki's current minimum-level table. Use it
+# for the overview so a newly released quest cannot silently leave the block
+# stale; the constants above remain the offline fallback for old snapshots.
+if QUESTS and isinstance(QUESTS.get("requirements"), dict):
+    _qpc = QUESTS["requirements"]
+    _qpc_skills = _qpc.get("skills")
+    if (isinstance(_qpc_skills, dict)
+            and all(isinstance(_qpc_skills.get(n), int)
+                    for n in QUEST_CAPE_REQUIREMENTS)
+            and isinstance(_qpc.get("combat"), int)):
+        QUEST_CAPE_REQUIREMENTS.update(_qpc_skills)
+        QUEST_CAPE_COMBAT = _qpc["combat"]
+        QUEST_CAPE_BOOSTABLE = _qpc.get("boostable") or QUEST_CAPE_BOOSTABLE
+        PLAN_PHASES[0]["reqs"] = [
+            (name, QUEST_CAPE_REQUIREMENTS[name]) for name in QUEST_CAPE_BLOCKERS
+        ]
+        PLAN_PHASES[0]["combat"] = QUEST_CAPE_COMBAT
+
 DIARIES_PATH = os.path.join(OUT, "data", "diaries.json")
 DIARIES = load_object(DIARIES_PATH)
 if DIARIES is not None and not isinstance(DIARIES.get("regions"), list):
@@ -749,6 +797,19 @@ if STATS is not None and (not isinstance(STATS.get("skills"), dict)
                           or not isinstance(STATS.get("overall"), dict)):
     STATS = None
 
+# Show every current QPC requirement the account has not met. This also makes a
+# future quest requirement appear automatically after fetch_quests.py refreshes
+# the Wiki table, even if that skill was not a blocker when this plan was made.
+if STATS:
+    _qpc_order = QUEST_CAPE_BLOCKERS + [
+        name for name in QUEST_CAPE_REQUIREMENTS if name not in QUEST_CAPE_BLOCKERS
+    ]
+    PLAN_PHASES[0]["reqs"] = [
+        (name, QUEST_CAPE_REQUIREMENTS[name]) for name in _qpc_order
+        if ((STATS.get("skills", {}).get(name) or {}).get("level", 0)
+            < QUEST_CAPE_REQUIREMENTS[name])
+    ]
+
 
 def stat_of(skill_name):
     if not STATS:
@@ -757,7 +818,9 @@ def stat_of(skill_name):
 
 
 def milestones(skill):
-    """Numeric level targets pulled from the plan's target string."""
+    """Numeric training targets, excluding explanatory numbers when supplied."""
+    if skill.get("goals"):
+        return skill["goals"]
     return [int(n) for n in re.findall(r"\b(\d{1,2})\b", skill["target"])
             if 2 <= int(n) <= 99]
 
@@ -1458,8 +1521,10 @@ OWN_JS = """
       row.classList.toggle('have', have === total);
       row.classList.toggle('part', have > 0 && have < total);
       if (write) {
-        setBonus(row.getAttribute('data-skill'),
-                 parseInt(row.getAttribute('data-bonus'), 10), have === total);
+        (row.getAttribute('data-bonuses') || '').split('|').forEach(function (raw) {
+          if (raw !== '') setBonus(row.getAttribute('data-skill'), parseInt(raw, 10),
+                                   have === total);
+        });
       }
     }
 
@@ -1472,7 +1537,7 @@ OWN_JS = """
         refresh(true);
       });
     });
-    refresh(false);
+    refresh(true);
   });
 })();
 </script>
@@ -1518,8 +1583,8 @@ PATH_JS = """
 
 POTION_JS = """
 <script>
-/* Potion costs, priced from the official API. It allows cross-origin reads, so
-   this works on the published copy as well as locally. */
+/* Potion costs, priced from the OSRS Wiki real-time price API. It allows
+   cross-origin reads, so this works on the published copy as well as locally. */
 (function () {
   var table = document.getElementById('pottable');
   if (!table) return;
@@ -2469,8 +2534,13 @@ def tier_line(method, skill_name):
 BONUSES = {
     "Mining": [dict(name="Prospector kit", pct=2.5, applies=None,
                     note="Full set, +2.5% Mining XP.")],
-    "Fishing": [dict(name="Angler's outfit", pct=2.5, applies=None,
-                     note="Full set, +2.5% XP from all Fishing.")],
+    "Fishing": [dict(name="Angler's outfit", pct=2.5,
+                     applies=["Barbarian Fishing", "2-tick harpooning", "Minnows",
+                              "Tempoross", "Karambwans", "Monkfish",
+                              "Aerial fishing", "Leechfin fishing", "Dark crabs",
+                              "Anglerfish"],
+                     note="Full set, +2.5% Fishing XP where supported. It does not "
+                          "boost Drift Net Fishing or deep-sea trawling.")],
     "Woodcutting": [dict(name="Lumberjack outfit", pct=2.5, applies=None,
                          note="Full set, +2.5% Woodcutting XP.")],
     "Firemaking": [dict(name="Pyromancer outfit", pct=2.5, applies=None,
@@ -2479,13 +2549,18 @@ BONUSES = {
                           note="Full set, +2.5% Construction XP.")],
     "Farming": [dict(name="Farmer's outfit", pct=2.5, applies=None,
                      note="Full set, +2.5% Farming XP.")],
-    "Hunter": [dict(name="Guild hunter outfit", pct=2.5, applies=None,
-                    note="Full set, +2.5% catch rate, which is close enough to +2.5% XP per hour.")],
+    "Hunter": [dict(name="Guild hunter outfit", pct=0, applies=None,
+                    note="Full set gives +2.5% catch rate, but its exact XP/hr effect "
+                         "is not established, so the calculator does not inflate rates.")],
     "Smithing": [
-        dict(name="Smiths' uniform", pct=25, applies=["Anvil smithing (plates/darts)",
-                                                      "Cannonballs", "Rune items (3-bar)"],
-             note="Each piece is a 20% chance to cut an anvil action from 5 ticks to 4; "
-                  "the full set is about a quarter faster at the anvil."),
+        dict(name="Smiths' uniform — Foundry", pct=20,
+             applies=["Giants' Foundry"],
+             note="The full set averages about +20% XP/hr inside Giants' Foundry."),
+        dict(name="Smiths' uniform — anvil", pct=25,
+             applies=["Anvil smithing (plates/darts)", "Cannonballs",
+                      "Rune items (3-bar)"],
+             note="The full set cuts ordinary anvil actions from 5 ticks to 4, "
+                  "which is +25% throughput."),
         dict(name="Goldsmith gauntlets", pct=150, applies=["Blast Furnace – gold bars"],
              note="Gold bars go from 22.5 to 56.2 XP each. This is the whole reason the "
                   "method exists."),
@@ -2597,14 +2672,14 @@ MASTERS = [
     ("Vannaka", "Edgeville Dungeon", "40 combat", "8", "60"),
     ("Chaeldar", "Zanaris", "Lost City, 70 combat", "10", "70"),
     ("Konar quo Maten", "Mount Karuulm", "75 combat", "18", "80"),
-    ("Nieve / Steve", "Tree Gnome Stronghold", "85 combat", "12", "90"),
-    ("Duradel / Kuradal", "Shilo Village", "Shilo Village, 100 combat + 50 Slayer", "15", "100"),
+    ("Nieve / Steve", "Tree Gnome Stronghold", "85 combat or 99 Slayer", "12", "90"),
+    ("Duradel / Kuradal", "Shilo Village", "Shilo Village; 100 combat + 50 Slayer, or 99 Slayer", "15", "100"),
     ("Krystilia", "Edgeville", "Any level, Wilderness tasks", "25", "100"),
     ("Mortimer", "Wyrmscraig caverns", "The Fallen From Grace, 100 combat + 70 Slayer", "varies", "120"),
 ]
 
 POINT_ORDER = [
-    ("Block slots", "The single biggest lever. Blocking costs 100 points at Duradel and you get seven slots, one per 50 quest points, with the seventh behind the elite Lumbridge and Draynor diary."),
+    ("Block slots", "The single biggest lever. Blocks cost 90 points at Nieve and 100 at Duradel. The lists are master-specific, so rebuild yours when you switch; you get seven slots, one per 50 quest points, with the seventh behind the elite Lumbridge and Draynor diary."),
     ("Bigger and Badder", "50 points. Superior encounters carry the imbued heart and eternal gem, and can be toggled off freely."),
     ("Slayer helmet", "400 points for the helm plus the components. The imbued version is the best melee and magic head slot on task."),
     ("Extensions", "Only on tasks that already pay. Araxytes go from 60-80 to 200-250, which is worth it; metal dragons are not."),
@@ -2874,7 +2949,7 @@ def potion_section():
         '<th>Ingredients</th><th>XP</th><th>gp/xp</th><th>Profit each</th>'
         '</tr></thead>'
         f'<tbody>{"".join(rows)}</tbody></table></div></div>'
-        '<p class="lede2">Prices come straight from the official price API when the '
+        '<p class="lede2">Prices come straight from the OSRS Wiki real-time price API when the '
         'page opens, so they are current rather than baked in. Profit assumes you '
         'sell what you make.</p>'
     )
@@ -2901,9 +2976,10 @@ def slayer_summary():
         f'<div class="vchips">{chips("lock")}</div></div>'
         '<div class="vrow"><span class="verdict skip">skip</span>'
         f'<div class="vchips">{chips("skip")}</div></div>'
-        '<p class="vnote">Blocks are permanent and cost 100 points at Duradel; skips cost '
-        '30 points each time. w is the task weight, so blocking a heavy task saves more '
-        'rolls than blocking a rare one.</p>'
+        '<p class="vnote">This table is for Duradel: blocks cost 100 points and skips cost '
+        '30. Nieve has different task weights, extra assignments and 90-point blocks; '
+        'block lists do not transfer. w is the task weight, so blocking a heavy task saves '
+        'more rolls than blocking a rare one.</p>'
         "</div>"
     )
 
@@ -3066,7 +3142,7 @@ def birdhouse_box():
     )
 
 
-MILESTONES = [60, 70, 75, 80, 85, 90, 95, 99]
+MILESTONES = [60, 62, 70, 72, 74, 75, 80, 85, 90, 95, 99]
 COMBAT_SKILLS = ["Attack", "Strength", "Defence", "Hitpoints", "Ranged", "Magic"]
 SHORT = {"Attack": "Att", "Strength": "Str", "Defence": "Def", "Hitpoints": "HP",
          "Ranged": "Rng", "Magic": "Mag", "Hunter": "Hunter", "Smithing": "Smith",
@@ -3372,7 +3448,7 @@ OUTFITS = [
          pieces=["Prospector helmet", "Prospector jacket", "Prospector legs",
                  "Prospector boots"]),
     dict(name="Angler's Outfit", skill="Fishing", wiki="Angler%27s_outfit", bonus=0,
-         icon="angler", effect="+2.5% XP from all Fishing",
+         icon="angler", effect="+2.5% Fishing XP, excluding Drift Net and deep-sea trawling",
          source="Fishing Trawler",
          pieces=["Angler hat", "Angler top", "Angler waders", "Angler boots"]),
     dict(name="Lumberjack Outfit", skill="Woodcutting", wiki="Lumberjack_outfit", bonus=0,
@@ -3387,22 +3463,22 @@ OUTFITS = [
                  "Pyromancer boots"]),
     dict(name="Carpenter's Outfit", skill="Construction", wiki="Carpenter%27s_outfit",
          bonus=0, icon="carpenter", effect="+2.5% Construction XP",
-         source="Mahogany Homes contracts",
+         source="2,000 carpenter points from Mahogany Homes",
          pieces=["Carpenter's helmet", "Carpenter's shirt", "Carpenter's trousers",
                  "Carpenter's boots"]),
-    dict(name="Smiths' Uniform", skill="Smithing", wiki="Smiths%27_Uniform", bonus=0,
+    dict(name="Smiths' Uniform", skill="Smithing", wiki="Smiths%27_Uniform", bonus=[0, 1],
          icon="worn-equipment",
-         effect="Anvil actions 5 ticks to 4, about a quarter faster",
+         effect="About +20% Foundry XP/hr; anvil actions 5 ticks to 4",
          source="15,000 Foundry Reputation at Giants' Foundry",
          pieces=["Smiths tunic", "Smiths trousers", "Smiths gloves", "Smiths boots"]),
     dict(name="Guild Hunter Outfit", skill="Hunter", wiki="Guild_hunter_outfit", bonus=0,
-         icon="hunterguild", effect="+2.5% catch rate",
-         source="1/50 from Hunters' Rumour loot sacks",
+         icon="hunterguild", effect="+2.5% catch rate; exact XP/hr effect unknown",
+         source="1/50 from non-basic Hunters' Rumour loot sacks",
          pieces=["Guild hunter headwear", "Guild hunter top", "Guild hunter legs",
                  "Guild hunter boots"]),
     dict(name="Raiments of the Eye", skill="Runecraft", wiki="Raiments_of_the_Eye",
          bonus=0, icon="eye", effect="Up to 60% bonus runes, no extra XP",
-         source="Guardians of the Rift",
+         source="1,350 abyssal pearls from Guardians of the Rift",
          pieces=["Hat of the eye", "Robe top of the eye", "Robe bottoms of the eye",
                  "Boots of the eye"]),
     dict(name="Rogue's Outfit", skill="Thieving", wiki="Rogue_equipment", bonus=0,
@@ -3458,7 +3534,9 @@ def outfit_section():
             f'data-set="{e(o["name"])}" data-piece="{e(pc)}" '
             f'title="{e(pc)}"><span>{e(piece_label(o["name"], pc))}</span></label>'
             for pc in o["pieces"])
-        bonus_attr = (f' data-skill="{e(sk)}" data-bonus="{o["bonus"]}"'
+        bonuses = o["bonus"] if isinstance(o["bonus"], list) else [o["bonus"]]
+        bonus_attr = (f' data-skill="{e(sk)}" data-bonuses="'
+                      f'{"|".join(str(x) for x in bonuses)}"'
                       if o["bonus"] is not None else "")
         rows.append(
             f'<div class="outfit{" spent" if maxed else ""}" '
@@ -3473,9 +3551,9 @@ def outfit_section():
             f'<span class="osource">{e(o["source"])}</span>'
             f'<span class="opieces">{pieces}</span>'
             "</div>")
-    return ('<p class="lede2">Tick each piece as you get it. Completing a set switches '
-            "on that skill's rate toggle, so the XP numbers match what you actually "
-            'wear.</p>'
+    return ('<p class="lede2">Tick each piece as you get it. The calculator models '
+            "full-set effects only; partial-set bonuses stay a checklist until the "
+            'set is complete.</p>'
             f'<div class="outfits">{"".join(rows)}</div>')
 
 
@@ -3812,9 +3890,15 @@ def build_afk_page():
 # afk    the least attention that still trains the skill
 PATHS = {
     "Slayer": dict(
-        fast=[(1, "Duradel, barrage tasks", 60_000)],
-        hybrid=[(1, "Duradel, cannon and barrage", 50_000)],
-        afk=[(1, "Cannon on long tasks", 30_000)]),
+        # The account starts at 89 combat, so Nieve/Steve is the real first
+        # master. Slayer ~85 is the carry model's approximate 100-combat point;
+        # only then do the Duradel rates become available.
+        fast=[(1, "Nieve, aggressive cannon and burst", 35_000),
+              (85, "Duradel, barrage tasks", 60_000)],
+        hybrid=[(1, "Nieve, cannon and burst", 30_000),
+                (85, "Duradel, cannon and barrage", 50_000)],
+        afk=[(1, "Nieve on long tasks", 25_000),
+             (83, "Duradel on long tasks", 30_000)]),
     "Attack": dict(
         fast=[(1, "Slayer with best gear", 70_000)],
         hybrid=[(1, "Slayer", 60_000)],
@@ -3924,15 +4008,25 @@ PATH_META = [
 # What a method hands to other skills per hour. Rough, but ignoring it makes
 # every total wrong: drift net trains two skills at once, Slayer trains six.
 CARRIES = {
+    "Nieve, aggressive cannon and burst": {
+        "Attack": 12_000, "Strength": 12_000, "Defence": 12_000,
+        "Hitpoints": 15_000, "Magic": 16_000, "Ranged": 16_000,
+    },
+    "Nieve, cannon and burst": {"Attack": 10_000, "Strength": 10_000,
+                                 "Defence": 10_000, "Hitpoints": 13_000,
+                                 "Magic": 14_000, "Ranged": 14_000},
+    "Nieve on long tasks": {"Attack": 10_000, "Strength": 10_000,
+                             "Defence": 10_000, "Hitpoints": 13_000,
+                             "Ranged": 12_000},
     "Duradel, barrage tasks": {"Attack": 20_000, "Strength": 20_000,
                                "Defence": 20_000, "Hitpoints": 25_000,
                                "Magic": 35_000},
     "Duradel, cannon and barrage": {"Attack": 18_000, "Strength": 18_000,
                                     "Defence": 18_000, "Hitpoints": 22_000,
                                     "Magic": 25_000, "Ranged": 20_000},
-    "Cannon on long tasks": {"Attack": 12_000, "Strength": 12_000,
-                             "Defence": 12_000, "Hitpoints": 15_000,
-                             "Ranged": 15_000},
+    "Duradel on long tasks": {"Attack": 12_000, "Strength": 12_000,
+                              "Defence": 12_000, "Hitpoints": 15_000,
+                              "Ranged": 15_000},
     "Slayer with best gear": {"Hitpoints": 23_000},
     "Slayer": {"Hitpoints": 20_000},
     "Guardians of the Rift": {"Magic": 8_000},

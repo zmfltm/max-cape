@@ -17,7 +17,7 @@ import os
 import sys
 import urllib.error
 
-from quests import collect, collect_diaries, sync_state
+from quests import collect, collect_diaries, quest_cape_requirements, sync_state
 from storage import atomic_json_dump
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -47,6 +47,7 @@ def main():
     try:
         raw = sync_state(player)
         data = collect(player, raw)
+        data["requirements"] = quest_cape_requirements()
         diaries = collect_diaries(raw, player)
     except urllib.error.HTTPError as exc:
         if exc.code == 404:

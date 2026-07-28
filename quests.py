@@ -15,9 +15,17 @@ import urllib.request
 SYNC = "https://sync.runescape.wiki/runelite/player/{}/STANDARD"
 WIKI_API = "https://oldschool.runescape.wiki/api.php"
 GUIDE = "Optimal quest guide"
+QUEST_CAPE = "Quest point cape"
 UA = "mudkip-osrs-plan/1.0 (personal planning page)"
 
 NOT_STARTED, IN_PROGRESS, DONE = 0, 1, 2
+
+SKILLS = {
+    "Attack", "Hitpoints", "Mining", "Strength", "Agility", "Smithing",
+    "Defence", "Herblore", "Fishing", "Ranged", "Thieving", "Cooking",
+    "Prayer", "Crafting", "Firemaking", "Magic", "Fletching", "Woodcutting",
+    "Runecraft", "Slayer", "Farming", "Construction", "Hunter", "Sailing",
+}
 
 
 def _get(url):
@@ -44,6 +52,50 @@ RFD_MAP = {
     "Freeing King Awowogei": "King Awowogei",
     "Defeating the Culinaromancer": "Culinaromancer",
 }
+
+
+def _parse_quest_cape_requirements(wikitext):
+    """Read the first (regular QPC) skill table, not the Master QPC table."""
+    section = wikitext.split("==Minimum skill levels==", 1)
+    if len(section) != 2:
+        raise ValueError("Quest point cape page has no minimum-level section")
+    start = section[1].find("{{DiarySkillStats")
+    if start < 0:
+        raise ValueError("Quest point cape minimum-level table was not found")
+    end = section[1].find("\n\n", start)
+    if end < 0:
+        raise ValueError("Quest point cape minimum-level table was not terminated")
+    body = section[1][start:end]
+    values = {}
+    for raw_name, level in re.findall(
+            r"^\|([^=\n]+?)\s*=\s*(\d+)\s*$", body, re.MULTILINE):
+        name = raw_name.strip()
+        if name in SKILLS:
+            values[name] = int(level)
+    combat = re.search(r"^\|Combat\s*=\s*(\d+)\s*$", body, re.MULTILINE)
+    if values.keys() != SKILLS or not combat:
+        missing = sorted(SKILLS - values.keys())
+        raise ValueError(f"incomplete Quest Cape requirements; missing {missing}")
+
+    boostable = {
+        name: int(level)
+        for name, level in re.findall(
+            r"\|([A-Za-z]+)Notes\s*=\s*\((\d+)\)", body
+        )
+        if name in SKILLS
+    }
+    return {"skills": values, "combat": int(combat.group(1)),
+            "boostable": boostable}
+
+
+def quest_cape_requirements():
+    """Current minimum QPC levels from the OSRS Wiki."""
+    q = urllib.parse.urlencode({
+        "action": "parse", "page": QUEST_CAPE, "prop": "wikitext",
+        "format": "json", "formatversion": "2",
+    })
+    body = json.loads(_get(f"{WIKI_API}?{q}"))["parse"]["wikitext"]
+    return _parse_quest_cape_requirements(body)
 
 
 def guide_route():

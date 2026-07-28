@@ -53,7 +53,10 @@ python3 build.py
 Quest completion comes from WikiSync (`sync.runescape.wiki`), which the RuneLite
 WikiSync plugin uploads. The hiscores do not carry quest state, so the plugin
 has to have run on the account at least once. Order comes from the wiki's
-optimal quest guide, parsed at fetch time.
+optimal quest guide, parsed at fetch time. The refresh also snapshots the
+Quest point cape's current minimum skill and combat requirements, so newly
+released quests update the preparation block instead of leaving hard-coded
+levels behind.
 
 The overview then shows how many quests are done, which one is next in the
 guide, and a scrollable list of everything still outstanding.
@@ -110,7 +113,8 @@ python3 build.py
 `fetch_media.py` and the map fetcher make network requests and only need to run
 when their registries or upstream data change. The other snapshots can be
 refreshed regularly. `.github/workflows/refresh.yml` refreshes live snapshots,
-rebuilds, runs the checks, and commits changes every six hours.
+rebuilds, runs the checks, and commits changes every twenty minutes. Local
+shooting-star pages are fresher still because `serve.py` polls once a minute.
 
 ## Checks
 
