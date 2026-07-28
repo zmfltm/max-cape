@@ -2,7 +2,7 @@
 """Refresh data/stars.json for static hosting.
 
 The parser and cache live in serve.py because the local API uses the same data.
-This command forces a network refresh and lets scheduled builds update the
+This command forces a network refresh and lets scheduled jobs update the
 snapshot without starting the server.
 """
 

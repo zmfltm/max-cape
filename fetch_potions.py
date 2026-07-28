@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Builds data/potions.json: every potion, with the item ids needed to price it.
+"""Builds data/potions.json: every potion, with the item IDs needed to price it.
 
 Levels, XP and rates come from the wiki's Herblore training table. Prices do
 not: the page's numbers go stale, so the site fetches them live from the
-official price API instead, which is why we only need the ids here.
+OSRS Wiki real-time prices API instead, which is why we only need the IDs here.
 
     python3 fetch_potions.py
 """
@@ -96,7 +96,7 @@ def find_id(ids, *candidates):
 
 
 def recipe_ids(ids, potion):
-    """Ingredient ids with quantities, and the id of what comes out."""
+    """Ingredient IDs with quantities, plus the output item ID."""
     inputs = []
     for source in (potion["unf"], potion["secondary"]):
         for name, qty in split_items(source):

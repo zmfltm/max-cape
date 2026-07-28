@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds data/diary_reqs.json: the skill levels each diary tier asks for.
+"""Builds data/diary_reqs.json: the skill levels each diary tier requires.
 
 Every diary page carries one {{DiarySkillStats}} block per tier, in tier order,
 with the levels as plain parameters. That is far steadier to read than the
@@ -26,7 +26,7 @@ API = "https://oldschool.runescape.wiki/api.php"
 UA = "mudkip-osrs-plan/1.0 (personal planning page)"
 TIERS = ["Easy", "Medium", "Hard", "Elite"]
 
-# WikiSync's region names against the wiki's page titles
+# Map WikiSync's region names to the Wiki's page titles.
 PAGES = {
     "Ardougne": "Ardougne Diary",
     "Desert": "Desert Diary",
@@ -103,7 +103,7 @@ def main():
         time.sleep(0.3)
 
     if thin:
-        print("fewer than four blocks on: " + ", ".join(thin))
+        print("fewer than four blocks found for: " + ", ".join(thin))
         print("keeping the previous data/diary_reqs.json")
         return 1
 

@@ -5,8 +5,8 @@ Run once, or again after adding entries to media.py:
 
     python3 fetch_media.py
 
-Writes assets/media/manifest.json (wiki title -> local filename). Titles the
-wiki has no image for are reported and simply get no thumbnail on the site.
+Writes assets/media/manifest.json (Wiki title -> local filename). Titles
+without Wiki images are reported and receive no site thumbnail.
 """
 
 import json
@@ -33,7 +33,7 @@ def get(url):
 
 
 def thumbnails(titles):
-    """Batch the pageimages query; returns {title: thumb url}."""
+    """Batch the pageimages query; return {title: thumbnail URL}."""
     out = {}
     for i in range(0, len(titles), 20):
         batch = titles[i:i + 20]

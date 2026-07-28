@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Serves the site and proxies the OSRS hiscores so the page can refresh live.
+"""Serves the site and proxies the OSRS Hiscores so the page can refresh live.
 
     python3 serve.py            # http://localhost:8412
     python3 serve.py 9000       # different port
 
 Plain `python3 -m http.server` also works; you just lose the live refresh
 button and see the levels as of the last `fetch_stats.py` run. The proxy exists
-because the hiscores send no CORS headers, so a browser cannot call them
-directly from a file:// or static page.
+because the Hiscores send no CORS headers, so a browser cannot call them
+directly from a `file://` URL or a static page.
 """
 
 import http.server
@@ -64,7 +64,8 @@ def _shooting_stars(max_age=45, require_snapshot=False):
     """Active stars from 07.gg, parsed out of their server-rendered payload.
 
     They publish no JSON API, so this reads the `initialCalls` array the page
-    ships with. Cached, so a page open does not hammer their site. If they
+    ships with. The result is cached so opening a page does not hammer their
+    site. If they
     change the page shape this returns an empty list rather than breaking.
     """
     now = time.time()
@@ -143,7 +144,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.json({"error": "unknown endpoint"}, 404)
         content_type = self.headers.get_content_type()
         if content_type != "application/json":
-            return self.json({"error": "content type must be application/json"}, 415)
+            return self.json({"error": "Content-Type must be application/json"}, 415)
         origin = self.headers.get("Origin")
         if origin and urllib.parse.urlparse(origin).hostname not in {
                 "127.0.0.1", "localhost", "::1"}:
@@ -153,7 +154,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         except ValueError:
             return self.json({"error": "bad content length"}, 400)
         if not 0 < length <= MAX_BODY:
-            return self.json({"error": "request body must be 1-8192 bytes"}, 413)
+            return self.json({"error": "request body must be between 1 and 8,192 bytes"}, 413)
         try:
             body = json.loads(self.rfile.read(length))
             if not isinstance(body, dict) or not isinstance(body.get("skill"), str):
@@ -207,7 +208,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         try:
             data = fetch(player)
         except urllib.error.HTTPError as exc:
-            msg = "not on the hiscores" if exc.code == 404 else f"hiscores error {exc.code}"
+            msg = "not on the Hiscores" if exc.code == 404 else f"Hiscores error {exc.code}"
             return self.json({"error": msg}, 502)
         except Exception as exc:                                  # noqa: BLE001
             return self.json({"error": str(exc)}, 502)

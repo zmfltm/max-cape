@@ -1,4 +1,4 @@
-"""OSRS hiscores helpers: fetch a player, plus the XP and combat formulas."""
+"""OSRS Hiscores helpers: fetch a player's stats, plus XP and combat formulas."""
 
 import json
 import urllib.parse
@@ -7,7 +7,7 @@ import urllib.request
 ENDPOINT = "https://secure.runescape.com/m=hiscore_oldschool/index_lite.json"
 UA = "mudkip-osrs-plan/1.0 (personal planning page)"
 
-# Skills the plan tracks, in hiscores order
+# Skills the plan tracks, in Hiscores order
 SKILL_ORDER = [
     "Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic",
     "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting",
@@ -17,7 +17,7 @@ SKILL_ORDER = [
 
 
 def xp_for_level(level):
-    """Total XP required to reach `level` (level 1 = 0 xp)."""
+    """Total XP required to reach `level` (level 1 = 0 XP)."""
     if level <= 1:
         return 0
     total = 0

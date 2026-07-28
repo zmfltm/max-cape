@@ -4,7 +4,7 @@
 The wiki's Shooting Stars page renders each location with a Kartographer map:
 the cell carries the rendered tile URLs, their offsets, and the game
 coordinates. This stitches those tiles into one small PNG per location so the
-site can show a map preview without calling out to anyone at view time.
+site can show a map preview without making external requests when viewed.
 
     python3 fetch_star_maps.py
 
@@ -42,7 +42,8 @@ def slug(name):
 def strip_tags(html_text):
     text = re.sub(r"<sup.*?</sup>", "", html_text, flags=re.S)
     text = re.sub(r"<[^>]+>", " ", text)
-    return re.sub(r"\s+", " ", text).replace("&#160;", " ").strip()
+    text = re.sub(r"\s+", " ", text).replace("&#160;", " ").strip()
+    return re.sub(r"\s+([,)])", r"\1", re.sub(r"([(])\s+", r"\1", text))
 
 
 def locations():

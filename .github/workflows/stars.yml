@@ -1,10 +1,10 @@
 name: Refresh shooting stars
 
-# Stars crash and burn out inside a couple of hours, so the published list has
-# to be re-pulled on a much shorter cycle than the rest of the plan data.
+# Stars land and deplete within a couple of hours, so the published list must be
+# refreshed much more often than the rest of the plan data.
 #
 # stars.html fetches data/stars.json in the browser rather than baking the list
-# in at build time, so this only has to move that one file: no rebuild, no
+# in at build time, so this workflow only updates that file: no rebuild, no
 # dependencies, and a diff that touches nothing else on the site.
 on:
   schedule:
@@ -14,7 +14,7 @@ on:
 permissions:
   contents: write
 
-# Shared with refresh.yml so the two jobs never race each other to push.
+# Shared with refresh.yml so the two workflows never race each other to push.
 concurrency:
   group: refresh-static-data
   cancel-in-progress: false

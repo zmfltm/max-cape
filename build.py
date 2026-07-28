@@ -71,7 +71,7 @@ COMBAT_APPROACH = [
     "Cannon tasks to train Ranged.",
     "Burst appropriate tasks to train Magic.",
     "Melee priority: Strength to ~85 first, then Attack 80, then Defence 75–80.",
-    "Let Slayer and later bossing carry most combat XP rather than separately grinding combats early.",
+    "Let Slayer and later bossing carry most combat XP rather than separately grinding combat skills early.",
 ]
 
 
@@ -166,10 +166,10 @@ SKILLS = [
         phase="62 is the quest-cape requirement. Let cannoned Slayer tasks carry it there, continue to 70 as an early combat breakpoint, then finish 99 after the Diary Cape.",
         summary="Cannon on Slayer tasks; chinning later.",
         methods=[
-            ("Cannon on Slayer tasks", "—", "40–80k", "Your Pick. Cannon the multi-friendly tasks (dust devils, jellies, nechryael, greater demons) and it trains Ranged while the task still counts."),
+            ("Cannon on Slayer tasks", "—", "40–80k", "Your pick. Cannon the multi-friendly tasks (dust devils, jellies, nechryael, greater demons) and it trains Ranged while the task still counts."),
             ("Chinning – maniacal monkeys", "MM2", "250–400k+", "The fastest Ranged in the game. Expensive, click-intensive, needs Monkey Madness II. This is the usual 99 route once you can afford chins."),
             ("Chinning – Wilderness caves", "—", "150–250k", "Cheaper (red chins), but PKer risk."),
-            ("Blowpipe on crabs / Nagua", "—", "60–100k", "Low effort, scales dart tier."),
+            ("Blowpipe on crabs / Nagua", "—", "60–100k", "Low effort; scales with dart tier."),
             ("Gemstone Crab", "1", "30–60k",
              "Shared-health crab in Varlamore. Nearly zero attention, scales with your gear, and works for any combat style."),
             ("Pest Control", "70 combat", "30–50k",
@@ -178,7 +178,7 @@ SKILLS = [
             ("Nightmare Zone", "Quest reqs", "40–60k", "AFK fallback."),
         ],
         notes=[
-            "The cannon is the right early call: it doubles as Slayer-task speed while your Ranged is too low for chinning to be efficient.",
+            "The cannon is the right early call: it also speeds up Slayer tasks while your Ranged is too low for chinning to be efficient.",
             "Bank chins as you get them from Hunter. They feed straight into the 99 Ranged grind.",
         ],
     ),
@@ -187,11 +187,11 @@ SKILLS = [
         phase="75 for the quest cape block; 99 in the combat block after the Diary Cape.",
         summary="Burst/barrage Slayer tasks.",
         methods=[
-            ("Bursting/barraging Slayer tasks", "Desert Treasure I", "100–250k", "Your Pick. Nechryael and dust devils in the Catacombs, smoke devils, jellies. Best XP-plus-Slayer combination in the game, but rune-hungry."),
+            ("Bursting/barraging Slayer tasks", "Desert Treasure I", "100–250k", "Your pick. Nechryael and dust devils in the Catacombs, smoke devils, jellies. Best XP-plus-Slayer combination in the game, but rune-hungry."),
             ("Bursting maniacal monkeys", "MM2, 70 Magic", "200–300k",
              "The fastest Magic XP in the game. Ice Burst on maniacal monkeys after Monkey Madness II, and it doubles as the Ranged chinning spot."),
             ("Splashing", "—", "10–30k", "Near-zero attention, near-zero rate. Only worth it if you genuinely cannot play actively."),
-            ("High Alchemy", "55", "65k", "78k GP-ish per hour spent; the classic buyable Magic. Combine with another activity."),
+            ("High Alchemy", "55", "65k", "Up to roughly 78k XP per hour; the classic buyable Magic method. Combine it with another activity."),
             ("Stun-alching", "—", "~150k", "Curse/Vulnerability + High Alch at NMZ. Fast but fully click-bound and expensive."),
             ("Powered staff on Slayer", "—", "40–80k", "Trident/Sang on tasks. No rune cost beyond charges."),
             ("Guardians of the Rift", "27 RC", "moderate", "Side Magic XP while training Runecraft."),
@@ -214,7 +214,7 @@ SKILLS = [
             ("Blessed bone shards", "Varlamore", "verify",
              "Libation bowl offerings at the Ancient Temple. Newer than the altar methods, so confirm the current rate and cost."),
             ("Wilderness Chaos altar", "—", "~300k", "Same 350% multiplier with no house needed and a 50% chance not to consume the bone. Effectively half price. PKer risk is real; bring nothing you mind losing."),
-            ("Ensouled heads", "Arceuus favour", "~300k", "Reanimate + Demonic Offering. Good when heads are cheap; needs Arceuus spellbook."),
+            ("Ensouled heads", "Arceuus spellbook", "~300k", "Reanimate + Demonic Offering. Good when heads are cheap; needs the Arceuus spellbook."),
             ("Cremating urium remains", "Shades of Mort'ton", "~250k",
              "Shade remains on a magic pyre. Slower to set up than an altar but cheap, and it drops keys for the reward chests."),
             ("Ectofuntus", "—", "~50k", "Cheapest XP per GP in the game, and painfully slow."),
@@ -239,8 +239,8 @@ SKILLS = [
         notes=[
             "Block list is the highest-leverage decision in this plan. Block the tasks that are slow and unprofitable for your gear (typically the low-XP-per-hour, high-count ones) rather than the merely boring ones.",
             "Extend the tasks you'll want to farm later (nechryael, abyssal demons, gargoyles) once points allow.",
-            "Superior slayer encounters (Bigger and Badder) are worth the point cost. They carry the imbue-tier drops.",
-            "Everything else in the plan is downstream of Slayer: it carries Attack, Strength, Defence, Hitpoints, and via cannon/barrage it carries Ranged and Magic too.",
+            "Superior Slayer monsters (unlocked by Bigger and Badder) are worth the point cost. They can drop the imbued heart and eternal gem.",
+            "Everything else in the plan is downstream of Slayer: it carries Attack, Strength, Defence and Hitpoints; via cannon and barrage, it also carries Ranged and Magic.",
             "The Along the Way table uses a neutral average split across melee styles. In play, prioritise Strength, then Attack, then Defence rather than expecting those three levels to land evenly.",
             "The task verdict table uses Duradel's weights. Nieve has different weights and extra assignments, and block lists do not carry between masters; revisit blocks when you switch.",
         ],
@@ -252,7 +252,7 @@ SKILLS = [
         summary="Quest requirement met; Tempoross, then Leechfin at 78.",
         methods=[
             ("Drift Net Fishing", "47 Fish / 44 Hunt", "53–88k Fishing", "Trains Fishing and Hunter at once on Fossil Island. It remains a useful maxing overlap, but Fishing 70 is not a quest-cape requirement and red chinchompas are faster if Hunter 70 is the only immediate goal."),
-            ("Barbarian Fishing", "48 (+ quest)", "23–57k, 55–144k 3-tick", "What the fastest route runs above 58. The 3-tick cut-eat is the highest rate in the skill; plain clicking is far slower. Drips Strength, Agility and Cooking either way."),
+            ("Barbarian Fishing", "48 (+ quest)", "23–57k (55–144k with 3-ticking)", "The fastest route uses this above level 58. The 3-tick cut-eat is the highest rate in the skill; plain clicking is far slower. Drips Strength, Agility and Cooking either way."),
             ("2-tick harpooning", "71", "78–133k",
              "Swordfish and tuna with tick manipulation. The genuine fastest Fishing, and the most demanding."),
             ("Minnows", "82", "40–56k", "Converts to sharks for Tempoross-adjacent profit. Fairly click-heavy."),
@@ -265,7 +265,7 @@ SKILLS = [
             ("Leechfin fishing", "78", "verify",
              "Newer method from the Varlamore content. Check the wiki for current rates before committing."),
             ("Dark crabs", "85 (+ Wilderness)", "~25k",
-             "The best fishing GP in the game, at the cost of being in the deep Wilderness with a lobster pot."),
+             "The most profitable Fishing method in the game, at the cost of being in the deep Wilderness with a lobster pot."),
             ("Anglerfish", "82", "15–39k", "Slow but good money and the best non-boss food."),
         ],
         notes=[
@@ -274,12 +274,12 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Hunter", group=GATHER, target="70 → 99", pick="Hunter Rumours (Hunters' Guild)",
+        name="Hunter", group=GATHER, target="70 → 99", pick="Hunter Rumours (Hunter Guild)",
         phase="70 for the quest cape. Red chinchompas are the shortest direct route from 65 and bank ammunition for Ranged; Drift Net is the optional Fishing overlap.",
-        summary="Red chinchompas, then Hunters' Rumours at 72.",
+        summary="Red chinchompas, then Hunter Rumours at 72.",
         methods=[
             ("Drift Net Fishing", "44 Hunt / 47 Fish", "50–113k Hunter", "Trains Hunter and Fishing together. It is efficient when both skills matter, but red chinchompas are the faster direct route to the Hunter 70 quest requirement from the current levels."),
-            ("Hunter Rumours (Hunters' Guild)", "72 / 91", "160–250k", "Varlamore contract system. Strong XP with useful rewards; the modern default for high Hunter."),
+            ("Hunter Rumours (Hunter Guild)", "72 / 91", "160–250k", "Varlamore contract system. Strong XP with useful rewards; the modern default for high Hunter."),
             ("Black chinchompas", "73", "up to 265k", "Best XP in the skill and excellent GP, but deep Wilderness. High risk, high reward."),
             ("Red chinchompas", "63", "100–150k", "Safer, still good, and it stockpiles the chins you'll want for 99 Ranged."),
             ("Letvek and stymphikes", "76 / 82 (+ Blood Moon Rises)", "~145k",
@@ -312,7 +312,7 @@ SKILLS = [
             ("Werewolf Skullball", "—", "low", "Only useful for very early levels."),
         ],
         notes=[
-            "Your plan doesn't name a method. Rooftops to 52, then Hallowed Sepulchre the rest of the way, is the standard and pays for itself.",
+            "Your plan doesn't name a method. Hallowed Sepulchre from level 52 onward is the standard and pays for itself.",
             "Agility is one of the true slow skills. The plan correctly puts 99 late. Do the 70 quest requirement, then leave it.",
             "Get full graceful early; the run-energy restore compounds across every other skill you train.",
         ],
@@ -364,7 +364,7 @@ SKILLS = [
         ],
         notes=[
             "Check whether Mining shows up in your remaining elite diary requirements before deciding how far to push it early.",
-            "Motherlode's nuggets buy the prospector kit and the sack upgrades. Do those first, they permanently improve the rate.",
+            "Golden nuggets buy the prospector kit and the sack upgrades. Buy those first; they permanently improve the rate.",
         ],
     ),
     dict(
@@ -372,14 +372,14 @@ SKILLS = [
         phase="74 for the quest cape, then 99 in the slow-skills block.",
         summary="Forestry teaks (2-tick).",
         methods=[
-            ("Forestry teaks", "35", "80–150k", "Your Pick. 2-tick teaks with Forestry events layered on top is the top sustained rate; the events also fund the Forestry shop."),
+            ("Forestry teaks", "35", "80–150k", "Your pick. 2-tick teak cutting with Forestry events layered on top is the top sustained method; the events also fund the Forestry shop."),
             ("Sulliuscep", "65 (+ Fossil Island)", "70–90k", "Fast, and drops fossils for the museum. A good change of pace."),
             ("Redwoods", "90", "~65k", "The AFK 99. Low rate, almost no attention."),
             ("Ironwood / rosewood trees", "80 / 92", "70–110k",
              "The high-level trees added alongside Sailing. Rosewood at 92 feeds the rosewood hull, which is a straight Sailing XP multiplier."),
             ("Bloodwood trees", "77 (+ Blood Moon Rises)", "~55k",
              "Vampyrium. Needs an empty bucket; the sap upgrades arrows into seeking arrows. Slower than teaks, worth it for the sap."),
-            ("Yews / Magics", "60 / 75", "30–50k", "Slow but profitable; mostly obsolete for XP."),
+            ("Yew / magic trees", "60 / 75", "30–50k", "Slow but profitable; mostly obsolete for XP."),
             ("Blisterwood tree", "62 (+ Sins of the Father)", "~60k",
              "No competition, banks itself through the Darkmeyer bank, and drops blisterwood logs for vampyre gear."),
             ("Woodcutting Guild", "60", "—", "Invisible +7 boost and a bank; use it wherever it applies."),
@@ -395,12 +395,12 @@ SKILLS = [
         phase="60 for the quest cape, ~77 relatively early for blood runes, then 99 first in the slow-skills block.",
         summary="GOTR, then blood runes or ZMI.",
         methods=[
-            ("Guardians of the Rift", "27", "25–70k", "Your Pick. XP scales with level and the rewards include pouches, the Abyssal needle, Raiments of the Eye and eventually the pet. The robes give up to 60% more runes but no bonus XP."),
+            ("Guardians of the Rift", "27", "25–70k", "Your pick. XP scales with level and the rewards include pouches, the Abyssal needle, Raiments of the Eye and eventually the pet. The robes give up to 60% more runes but no bonus XP."),
             ("ZMI altar", "50 (+ Lunar Diplomacy)", "40–70k", "Consistent, solo, no minigame timer. Needs pouches and the Ourania teleport."),
             ("Blood runes (Arceuus)", "77", "~36k", "Low attention, strong profit. This is why the plan wants 77 early. It turns Runecraft into passive income."),
             ("Lava runes with runners", "23", "80–130k",
              "The classic runner method. Far faster than solo lavas, but you depend on other players showing up."),
-            ("Lava runes (binding necklace)", "23", "43–102k", "Cheap and fast; requires a lot of clicking through the abyss."),
+            ("Lava runes (binding necklace)", "23", "43–102k", "Cheap and fast; requires a lot of clicking through the Abyss."),
             ("Mud runes", "23 (+ Lunars)", "60–100k",
              "Binding necklace runs like lavas but with the Magic Imbue spell instead of an earth talisman staff. Similar rate; take whichever is cheaper."),
             ("Aether runes with runners", "90", "165–445k",
@@ -433,7 +433,7 @@ SKILLS = [
             ("Barracuda Trials", "30 / 55 / 72", "80–200k", "The fastest Sailing from 30 onwards. Tempor Tantrum at 30, Jubbly Jive at 55, Gwenith Glide at 72; each has Swordfish/Shark/Marlin ranks with tighter timers. Gwenith Glide at Marlin rank reaches 200k+ with a rosewood hull and a crystal extractor running."),
             ("Courier tasks", "1 (46+ useful)", "30–145k", "Cargo runs between ports. Summer Shore 46–55 gives ~30k, Rellekka 62–70 gives 55–90k, Prifddinas 70–72 gives 65–70k, and Lunar Isle round trips from 76 give 120–145k once you can hold five tasks at 84. Far less intense than trials."),
             ("Sea charting", "1", "~10k", "The starting method and the best XP before 30. One-off task rewards tracked in the captain's log, with bonuses for clearing a region. Charting everything needs 78 Sailing and unlocks horizon's lure, a permanent 2.5% Sailing XP boost."),
-            ("Bounty tasks", "30", "middle", "Kill an assigned sea monster for its bounty drop, structured like Hunter Rumours. Sits between salvaging and trials for rate, pays well, and at 80+ every task is available. Magic or Ranged with a cannon crew."),
+            ("Bounty tasks", "30", "middle", "Kill an assigned sea monster for its bounty drop, structured like Hunter Rumours. Sits between salvaging and trials for rate, pays well, and at 80+ every task is available. Use Magic or Ranged with a cannon crew."),
             ("Shipwreck salvaging", "15 (42 better)", "8–40k", "The AFK option. Two salvaging hooks, a salvaging station and crewmates on a sloop; a crewmate on your hook makes it nearly idle at roughly 8k/hr. Tick manipulation roughly doubles it if you want to work for it."),
             ("Deep sea trawling", "Fishing hybrid", "moderate", "Trawling nets over fish shoals. Trains Sailing while producing raw deep-sea fish, so it doubles up with your Fishing goal."),
             ("Crystal extractor", "73 (+ 67 Con)", "+10–15k", "Not a method, a passive top-up. 250 XP per harvest roughly every 63 seconds, stacking on top of whatever else you are doing. Build it as soon as you hit 73."),
@@ -446,7 +446,7 @@ SKILLS = [
             "The plan puts Sailing in the slow block, which fits: it is the newest skill and its rates are still being balanced. Re-check the wiki guide before the long grind.",
             "Two permanent multipliers are worth detouring for: horizon's lure from full charting (78 Sailing, 2.5% bonus to everything) and the crystal extractor at 73 Sailing plus 67 Construction.",
             "Boat speed is XP rate. A rosewood hull at 93 Sailing and 84 Construction is about 20% faster, which is roughly 15% more XP per hour on trials.",
-            "If you want the least attention-heavy route, salvaging with crewmates and courier runs get there without any tick manipulation, just slower.",
+            "If you want the least attention-heavy route, salvaging with crewmates and courier runs get there without any tick manipulation, but more slowly.",
             "Deep sea trawling overlaps with Fishing, so it is the natural pick on days you want both skills moving.",
         ],
     ),
@@ -484,7 +484,7 @@ SKILLS = [
         ],
         notes=[
             "Your plan sets 90 as an interim target. Check which elite diary or quest wants it and stop exactly there before moving on.",
-            "Battlestaves vs d'hide is a pure GP question; price-check both before committing, they swap places regularly.",
+            "Battlestaves vs d'hide is a pure GP question; price-check both before committing; they swap places regularly.",
         ],
     ),
     dict(
@@ -515,8 +515,8 @@ SKILLS = [
             ("Teak garden benches", "66", "~350k", "Similar rate to mahogany tables, usually cheaper per XP."),
         ],
         notes=[
-            "At the current 77 Construction, build a portal nexus and spirit tree now. Boost to 80 for a fairy ring, rejuvenation pool and achievement gallery/spellbook altars, or train to 80 to avoid repeated stew boosts.",
-            "Level 83 is the famous practical max-house target: crystal saw plus a +5 spicy-stew boost reaches the ornate pool, occult altar and ornate jewellery box requirements where the saw applies.",
+            "At 77 Construction, build a portal nexus and spirit tree. Boost to 80 for a fairy ring, rejuvenation pool and achievement gallery/spellbook altars, or train to 80 to avoid repeated stew boosts.",
+            "Level 83 is the famous practical max-house target: a crystal saw plus a +5 spicy-stew boost lets you reach the ornate pool, occult altar and ornate jewellery box requirements where the saw applies.",
             "Do Mahogany Homes for the outfit and plank sack before the long 99 grind, but do not delay questing solely to finish the set.",
             "Unlock the demon butler before any bulk-building session.",
         ],
@@ -528,7 +528,7 @@ SKILLS = [
         methods=[
             ("Mastering Mixology", "60 (81 better)", "60–90k",
              "The Aldarin minigame. Cheaper per XP than buying potions outright and it pays in mixology rewards, including the alchemist's amulet."),
-            ("Unfinished potions", "any", "up to ~300k", "Making unfinished potions is the fastest raw XP per hour, though XP per herb is lower."),
+            ("Cleaning herbs", "any", "up to ~300k", "Cleaning herbs can provide fast raw XP, though the XP per herb is low."),
             ("Prayer potions", "38", "~150k", "Reliable, usually near break-even."),
             ("Super restores", "63", "~180k", "The long mid-game staple."),
             ("Stamina potions", "77", "~200k", "Amylase from Marks of Grace makes these cheap if you've been doing rooftops."),
@@ -545,8 +545,8 @@ SKILLS = [
         phase="72 for the quest cape, then finish this fast buyable near the end.",
         summary="Wines or 1-tick karambwans.",
         methods=[
-            ("Jugs of wine", "35", "300–450k", "The fastest and cheapest 99 Cooking. Mind-numbing but short."),
-            ("1-tick karambwans", "30", "700k+", "The fastest cooking in the game by a wide margin, and it needs perfect tick timing."),
+            ("Jugs of wine", "35", "300–450k", "A fast and cheap route to 99 Cooking. Mind-numbing but short."),
+            ("1-tick karambwans", "30", "700k+", "The fastest Cooking method in the game by a wide margin, and it needs perfect tick timing."),
             ("Bake Pie", "10 (+ 65 Magic)", "~150k",
              "The Lunar spell. Trains Cooking and Magic at once, which is why it shows up in both guides."),
             ("Fish at Hosidius / Myths' Guild", "varies", "150–250k", "Range next to a bank; no burning at Hosidius."),
@@ -558,7 +558,7 @@ SKILLS = [
     ),
     dict(
         name="Firemaking", group=ARTISAN, target="75 → 99", pick="Wintertodt",
-        phase="75 for the quest cape block, last in the buyables block.",
+        phase="75 for the quest cape block, then last in the grinds block.",
         summary="Wintertodt.",
         methods=[
             ("Wintertodt", "50", "150–300k", "Your effective pick. Profitable, sociable, gives the pyromancer outfit, herbs, seeds and gems. Almost everyone does 50–99 here."),
@@ -582,7 +582,7 @@ DIARY = dict(
         ("Elite diaries", "—", "—", "The remaining walls are skill levels, not content. Clear them opportunistically while training Slayer to 95."),
     ],
     notes=[
-        "Diary rewards compound: Ardougne cloak teleports, Karamja gloves for Slayer, Morytania legs for barrows, Fremennik boots for run energy, Varrock armour for Mining.",
+        "Diary rewards compound: Ardougne cloak teleports, Karamja gloves for Slayer, Morytania legs for Barrows, Fremennik boots for run energy, Varrock armour for Mining.",
         "Track which elite diaries are blocked by a single skill. Those are the ones worth a short dedicated grind rather than waiting for them to arrive naturally.",
     ],
 )
@@ -936,7 +936,7 @@ def quest_panel():
         return ('<div class="panel"><div class="k">Quest Cape</div>'
                 '<h3>Not Linked Yet</h3><p>Run <code>fetch_quests.py</code> once the '
                 'WikiSync plugin has uploaded your account. It reads quest completion '
-                'from RuneLite, which the hiscores do not carry.</p>'
+                'from RuneLite, which the Hiscores do not carry.</p>'
                 f'<p class="gap"><a class="btn ghost sm" href="{OQG_URL}" '
                 'rel="noopener">Optimal quest guide</a></p></div>')
 
@@ -1287,7 +1287,7 @@ def focus_panel():
         '<div class="fbarrow">'
         f'<span class="prog wide"><span class="fill lit" id="fbar" '
         f'style="width:{f["pct"]}%;--lc:{f["colour"]}"></span></span>'
-        f'<span class="fxp" id="fxp">{xp} xp</span>'
+        f'<span class="fxp" id="fxp">{xp} XP</span>'
         "</div>"
         f'<div class="falso" id="falso"{"" if also else " hidden"}>'
         f'<i>Also Trains</i>{also}</div>'
@@ -1308,7 +1308,7 @@ MAX_COMBAT = 126
 def rail_meter():
     """Account line at the top of the index: total level and combat."""
     spin = ('<button class="refresh stats-refresh" type="button" hidden '
-            'title="Refresh from the hiscores" aria-label="Refresh from the hiscores">'
+            'title="Refresh from the Hiscores" aria-label="Refresh from the Hiscores">'
             '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">'
             '<path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" '
             'stroke-width="1.7" stroke-linecap="round"/>'
@@ -1649,8 +1649,8 @@ POTION_JS = """
       name.textContent = best.name;
       var detail = document.createElement('span');
       detail.className = 'pdet';
-      detail.textContent = gp(best.gpxp) + ' gp per xp \u00b7 ' + best.xp
-        + ' xp each \u00b7 ' + gp(best.profit) + ' gp profit each';
+      detail.textContent = gp(best.gpxp) + ' GP per XP \u00b7 ' + best.xp
+        + ' XP each \u00b7 ' + gp(best.profit) + ' GP profit each';
       var why = document.createElement('span');
       why.className = 'pwhy';
       why.textContent = verdict;
@@ -2151,7 +2151,7 @@ FOCUS_JS = """
     set('fname', f.name);
     set('flvl', f.level == null ? '--' : f.level);
     set('fgoal', f.goal);
-    set('fxp', fmt(f.xp) + ' xp');
+    set('fxp', fmt(f.xp) + ' XP');
     set('fmethod', f.method);
     var ml = document.getElementById('fmethodlink');
     if (ml) ml.href = f.methodHref;
@@ -2202,7 +2202,7 @@ FOCUS_JS = """
 
 LIVE_JS = """
 <script>
-/* Pulls the hiscores through serve.py's /api/stats proxy. The hiscores send no
+/* Pulls the Hiscores through serve.py's /api/stats proxy. The Hiscores send no
    CORS headers, so a static page cannot call them directly. */
 (function () {
   var btn = document.querySelector('.stats-refresh');
@@ -2325,7 +2325,7 @@ def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
 </head>
 <body>
 <header class="topbar">
-  <a class="mark" href="{root}index.html"><img class="capemark" src="{root}assets/media/max-cape.png" alt="">OSRS max time wasting plan</a>
+  <a class="mark" href="{root}index.html"><img class="capemark" src="{root}assets/media/max-cape.png" alt="">OSRS Max Time-Wasting Plan</a>
   <nav class="topnav">
     <a class="navlink" href="{root}stars.html">{COMET_SVG}Shooting Stars</a>
     <a class="navlink" href="{root}paths.html">Paths</a>
@@ -2509,7 +2509,7 @@ TIERS = {
 
 
 def tier_line(method, skill_name):
-    """"At 75 Crafting you can make blue. Red unlocks at 77." or None."""
+    """For example, "At 75 Crafting you can make blue. Red unlocks at 77.", or None."""
     steps = TIERS.get(method)
     st = stat_of(skill_name)
     if not steps or not st:
@@ -2522,7 +2522,7 @@ def tier_line(method, skill_name):
         return (f'Nothing unlocked yet: {first[1]} starts at {first[0]} '
                 f'{skill_name}.')
     best = have[-1]
-    line = f'At {cur} {skill_name} the best tier open to you is <b>{e(best[1])}</b>.'
+    line = f'At {cur} {skill_name}, the best tier open to you is <b>{e(best[1])}</b>.'
     if nxt:
         line += f' Next: {e(nxt[1])} at {nxt[0]}.'
     return line
@@ -2894,7 +2894,7 @@ def potion_ladder():
             f'<span class="rung{" now" if now else ""}">'
             f'<span class="rl">{r["level"]}</span>'
             f'<span class="rn">{e(r["name"])}</span>'
-            f'<span class="rx">{r["xp"]:g} xp</span></span>')
+            f'<span class="rx">{r["xp"]:g} XP</span></span>')
 
     return ('<div class="ladder"><span class="k">Fastest ladder to 99</span>'
             f'<div class="rungs">{"".join(cells)}</div>'
@@ -2946,7 +2946,7 @@ def potion_section():
         + potion_ladder()
         + '<div class="tablewrap"><div class="tablescroll">'
         f'<table class="pottable" id="pottable" data-level="{lvl}" data-skill="Herblore"><thead><tr><th>Lvl</th><th>Potion</th>'
-        '<th>Ingredients</th><th>XP</th><th>gp/xp</th><th>Profit each</th>'
+        '<th>Ingredients</th><th>XP</th><th>GP/XP</th><th>Profit each</th>'
         '</tr></thead>'
         f'<tbody>{"".join(rows)}</tbody></table></div></div>'
         '<p class="lede2">Prices come straight from the OSRS Wiki real-time price API when the '
@@ -3017,7 +3017,7 @@ def slayer_sections():
         '<span class="tsortlbl">sort</span>'
         '<button class="ts on" type="button" data-s="verdict" aria-pressed="true">verdict</button>'
         '<button class="ts" type="button" data-s="weight" aria-pressed="false">how often</button>'
-        '<button class="ts" type="button" data-s="xp" aria-pressed="false">xp/hr</button>'
+        '<button class="ts" type="button" data-s="xp" aria-pressed="false">XP/hr</button>'
         '<button class="ts" type="button" data-s="level" aria-pressed="false">level</button>'
         "</div>")
 
@@ -3072,8 +3072,8 @@ BIRDHOUSE_TIERS = [
 
 BIRDHOUSE_STOPS = [
     ("Verdant Valley", "Two spots south of the Museum Camp, next to each other."),
-    ("Mushroom Forest", "West of the ancient shroom, straight north of the magic mushtree."),
-    ("Tar Swamp", "By the swamp entrance, south from the mushtree."),
+    ("Mushroom Meadow", "West of the ancient shroom, straight north of the magic mushtree."),
+    ("Sticky Swamp", "By the Tar Swamp entrance, south from the mushtree."),
 ]
 
 
@@ -3122,16 +3122,16 @@ def birdhouse_box():
         'Full guide on the wiki &#8599;</a></p>'
         '<div class="subpanel"><div class="k">While drift netting</div>'
         '<p>Both happen on Fossil Island, so the run costs you about three minutes '
-        'of fishing. Set the houses before you dive, so the 50 minutes runs while '
+        'of fishing. Set the houses before you dive, so the 50-minute timer runs while '
         'you are underwater.</p>'
         '<ol class="bhstops">'
         '<li>Surface and climb out. You land on the small island, which has a '
         '<b>bank</b>: restock nets, seeds and logs here rather than teleporting.</li>'
         '<li>Row back to the Museum Camp, then run south to the '
         '<b>Verdant Valley</b> mushtree. Two houses sit right by it.</li>'
-        '<li>Mushtree to <b>Mushroom Meadow</b>, third house is north of it.</li>'
-        '<li>Mushtree to <b>Sticky Swamp</b>, fourth house is by the Tar Swamp '
-        'entrance. Bring an axe and rake the first time you go.</li>'
+        '<li>Take the mushtree to <b>Mushroom Meadow</b>; the third house is north of it.</li>'
+        '<li>Take the mushtree to <b>Sticky Swamp</b>; the fourth house is by the '
+        'Tar Swamp entrance. Bring an axe and rake the first time you go.</li>'
         '<li>Mushtree back to <b>Verdant Valley</b>, run north to the camp, row out '
         'and dive.</li>'
         "</ol>"
@@ -3217,7 +3217,7 @@ def carry_panel(skill_name, pick=None):
     heads = "".join(f"<th>{e(SHORT.get(n, n))}</th>" for n in others)
     return (
         '<h2 id="alongtheway">Along the Way</h2>'
-        f'<p class="savednote">{e(route_label(route))} trains '
+        f'<p class="savednote">Training with {e(route_label(route))} trains '
         + e(", ".join(others[:-1]) + (" and " if len(others) > 1 else "")
             + others[-1])
         + ' alongside it. Where those land as you go'
@@ -3427,10 +3427,11 @@ def build_stars_page():
         '<h2 id="how">How the Tiers Work</h2>',
         '<ul>'
         '<li>Tier 1 needs 10 Mining, then ten levels per tier to tier 9 at 90.</li>'
-        '<li>Seven minutes per layer. Tier 9 lasts longest, a dying star is not '
+        '<li>Seven minutes per layer. Tier 9 lasts longest; a dying star is not '
         'worth the hop.</li>'
-        '<li>Stardust buys the celestial ring, +4 Mining, at Dusuri\'s Star Shop.</li>'
-        '<li>A house telescope narrows the next landing to a 24, 9 or 2 minute '
+        '<li>Stardust buys the celestial ring, which gives an invisible +4 Mining '
+        'boost, at Dusuri\'s Star Shop.</li>'
+        '<li>A house telescope narrows the next landing to a 24-, 9-, or 2-minute '
         'window.</li>'
         '</ul>',
     ]
@@ -3448,7 +3449,7 @@ OUTFITS = [
          pieces=["Prospector helmet", "Prospector jacket", "Prospector legs",
                  "Prospector boots"]),
     dict(name="Angler's Outfit", skill="Fishing", wiki="Angler%27s_outfit", bonus=0,
-         icon="angler", effect="+2.5% Fishing XP, excluding Drift Net and deep-sea trawling",
+         icon="angler", effect="+2.5% Fishing XP, excluding drift net fishing and deep-sea trawling",
          source="Fishing Trawler",
          pieces=["Angler hat", "Angler top", "Angler waders", "Angler boots"]),
     dict(name="Lumberjack Outfit", skill="Woodcutting", wiki="Lumberjack_outfit", bonus=0,
@@ -3599,7 +3600,7 @@ MAX_ORDER = [
          skills=["Mining", "Fishing", "Woodcutting", "Sailing"]),
     dict(title="Buyables last",
          why="Fast, and paid for by the blocks above. Cheapest per hour first so "
-             "the bank drains slowest.",
+             "the bank drains most slowly.",
          skills=["Cooking", "Smithing", "Construction", "Crafting", "Herblore"]),
 ]
 
@@ -3687,7 +3688,7 @@ FEEDERS = [
          note="A third of your catch cooks itself for half the Cooking XP."),
     dict(name="Daeyalt essence", wiki="Daeyalt_essence", skill="Runecraft",
          gives="Runecraft", needs=[("Mining", 60)], quest="Sins of the Father",
-         note="Mine it yourself, it does not trade. Fifty per cent more "
+         note="Mine it yourself; it does not trade. Fifty per cent more "
               "Runecraft XP per essence, and it stacks with Ourania."),
     dict(name="Guardians of the Rift", wiki="Guardians_of_the_Rift",
          skill="Runecraft", gives="Mining and Crafting", needs=[("Runecraft", 27)],
@@ -3866,7 +3867,7 @@ def build_afk_page():
         + "</ul>",
         '<h2 id="stack">Stacking Them</h2>',
         '<ul>'
-        '<li>Birdhouses run on a 50 minute timer that ignores what else you are '
+        '<li>Birdhouses run on a 50-minute timer that ignores what else you are '
         'doing, so they stack with everything on this page.</li>'
         '<li>A bonecrusher and ash sanctifier turn any combat into passive Prayer, '
         'including the Nightmare Zone and crab hours.</li>'
@@ -3973,7 +3974,7 @@ PATHS = {
         hybrid=[(1, "Giants' Foundry", 250_000)],
         afk=[(1, "Cannonballs", 20_000)]),
     "Herblore": dict(
-        fast=[(1, "Unfinished potions", 300_000)],
+        fast=[(1, "Cleaning herbs", 300_000)],
         hybrid=[(1, "Super combats", 250_000)],
         afk=[(1, "Potions, nothing is idle here", 250_000)]),
     "Construction": dict(
@@ -3984,7 +3985,7 @@ PATHS = {
         fast=[(1, "Red chinchompas", 120_000),
               (73, "Black chinchompas", 220_000)],
         hybrid=[(1, "Red chinchompas", 120_000),
-                (72, "Hunters' Rumours", 190_000)],
+                (72, "Hunter Rumours", 190_000)],
         afk=[(1, "Birdhouse runs", 5_000), (80, "Herbiboar", 150_000)]),
     "Sailing": dict(
         fast=[(1, "Barracuda Trials", 200_000)],
@@ -3994,11 +3995,10 @@ PATHS = {
 
 
 PATH_META = [
-    ("fast", "Fastest", "Every hour is the best rate available, tick manipulation "
-                        "included. The shortest route to the cape and the one that "
-                        "asks the most of you."),
-    ("hybrid", "Hybrid", "The fast method where the gap is worth it, the calm one "
-                         "where it barely is. What most people actually do."),
+    ("fast", "Direct", "Every skill uses the highest direct XP rate available, tick "
+                       "manipulation included. This route asks the most of you."),
+    ("hybrid", "Hybrid", "Use the fast method where the gap matters and the calmer "
+                         "one where it barely does. This is how most people train."),
     ("afk", "AFK", "The lowest attention that still trains the skill. Five skills "
                    "have no idle option, so they hold the least demanding thing "
                    "available."),
@@ -4296,7 +4296,7 @@ def route_label(route):
 def optimal_card(choice, computed):
     """What the search actually found, and how close the runners-up came.
 
-    When the optimum is just one of the three routes wholesale, a fourth table
+    When the optimum is simply one of the three routes in full, a fourth table
     would be a copy of it. The useful thing is the margin: which swaps cost
     almost nothing, because those are the ones worth taking for a calmer
     method.
@@ -4338,16 +4338,17 @@ def optimal_card(choice, computed):
     if winner:
         verdict = (f'Every swap was tried against every other route, one skill '
                    f'at a time. Nothing beat <b>{e(winner)}</b> on any of them, '
-                   f'so the optimum is that route whole. Carrying a slower '
-                   f'method for the XP it hands another skill never quite pays '
+                   f'so the optimum is that entire route. Using a slower '
+                   f'method for the XP it gives another skill never quite pays '
                    f'here.')
     else:
-        diffs = ", ".join(f'{e(n)} takes the {e(label_of[k].lower())} method'
-                          for n, k in sorted(choice.items())
-                          if k != PATH_META[0][0])
+        diffs = ", ".join(
+            f'{e(n)} takes the {"AFK" if k == "afk" else e(label_of[k].lower())} method'
+            for n, k in sorted(choice.items()) if k != PATH_META[0][0]
+        )
         verdict = ('The best mix is not any one route: ' + diffs +
                    '. Those methods are slower for their own skill and still '
-                   'win, because of what they hand the others.')
+                   'win because of the XP they give the other skills.')
 
     return (
         '<section class="pathcard" id="path-opt" data-path="opt" hidden>'
@@ -4381,13 +4382,19 @@ def order_note(key, rows, total):
     best_hours = {r["skill"]: r["hours"] for r in rows}
     moves = sorted(((r["hours"] - best_hours.get(r["skill"], 0), r["skill"])
                     for r in plan_rows), reverse=True)
-    named = ", ".join(f"{e(name)} pays {cost:.0f}h" for cost, name in moves[:3]
-                      if cost >= 1)
+    differences = [(cost, name) for cost, name in moves if cost >= 1]
+    named = ", ".join(f"{cost:.0f}h for {e(name)}"
+                      for cost, name in differences[:3])
+    if len(differences) == 1:
+        details = f' The biggest difference is {named}.'
+    elif named:
+        details = f' The biggest differences are {named}.'
+    else:
+        details = ' Small losses across several skills account for the difference.'
     return (f'<p class="note nt">The Max Order on the front page costs '
-            f'<b>{plan_total:,.0f}h</b> on this route, {gap:,.0f} more. It '
-            f'trains skills before the ones that would have carried them, so '
-            f'{named} more than here. The order below fixes that by crossing '
-            f'the blocks; the '
+            f'<b>{plan_total:,.0f}h</b> on this route, {gap:,.0f} hours more. It '
+            f'trains skills before the ones that would have carried them.'
+            f'{details} The order below fixes that by crossing the blocks; the '
             f'blocks themselves are still worth keeping, because they are '
             f'about money and this is only about hours.</p>')
 
@@ -4490,13 +4497,15 @@ def paths_page():
         f'<p class="lede">{left:,.0f} XP left. What that costs in hours is '
         'entirely a question of how much attention you are willing to pay.</p>',
         f'<div class="stats switcher">{buttons}</div>',
-        '<p class="note">Numbered in the order worth doing them: skills that '
-        'hand XP to other skills come first, so the gift lands before you pay '
-        'for those levels. The hours are then walked down that order, so a '
-        'skill shows the level you will actually arrive at rather than the one '
+        '<p class="note">Numbered in the order in which they are worth doing: skills '
+        'that hand XP to other skills come first, so the gift lands before you pay '
+        'for those levels. The calculation then follows that order, so each '
+        'skill shows the level you will actually reach rather than the one '
         f'you are on today. {have_now} of {DIARY_TIERS} diary tiers are '
-        'already inside your levels; the rest are marked on the step that '
-        'brings them in range. Diary tiers also want quest points and items, which none of this knows about, and the XP lamps they pay out are not counted.</p>',
+        'already covered by your current levels; the rest are marked on the step '
+        'that brings them in range. Diary tiers also require quest points and items, '
+        'which this calculation does not account for, and the XP lamps they award '
+        'are not counted.</p>',
     ] + cards
     return page("Which Path", "\n".join(body), depth=0)
 
@@ -4505,7 +4514,7 @@ def paths_page():
 CALC_JS = """
 <script>
 /* Skill calculators. Action tables are the wiki's, prices are the live GE
-   feed, the starting level is whatever the hiscores last said. */
+   feed, the starting level is whatever the Hiscores last said. */
 (function () {
   var DATA = null, PRICES = null, VOLUMES = null, STATS = null, skill = null;
   var MAX_LEVEL = 126;
@@ -4630,7 +4639,7 @@ CALC_JS = """
       var need = Math.max(0, target - start);
       var here = level(from, 1);
 
-      gap.textContent = need ? num(need) + ' xp to go' : 'already there';
+      gap.textContent = need ? num(need) + ' XP to go' : 'already there';
 
       var only = group.value;
       var best = null;
@@ -4682,7 +4691,7 @@ CALC_JS = """
         var d = document.createElement('span');
         d.className = 'pdet';
         d.textContent = num(best.count) + ' \\u00d7 at ' + num(best.gpxp)
-          + ' gp per xp \\u00b7 ' + num(best.total) + ' gp all in';
+          + ' GP per XP \\u00b7 ' + num(best.total) + ' GP all in';
         var w = document.createElement('span');
         w.className = 'pwhy';
         w.textContent = best.gpxp <= 0
@@ -4836,9 +4845,9 @@ def calculator_skills():
 def calculators_page():
     """One calculator per skill: how many of a thing to reach a level.
 
-    The action tables are the wiki's own (Module:Skill calc), so this agrees
-    with the wiki's calculators rather than being a second opinion. Prices are
-    live, the current level comes from the hiscores, and both can be typed over.
+    The action tables are the Wiki's own (Module:Skill calc), so this agrees
+    with the Wiki's calculators rather than being a second opinion. Prices are
+    live; the current level comes from the Hiscores, and both can be typed over.
     """
     skills = calculator_skills()
     if not skills:
@@ -4856,8 +4865,8 @@ def calculators_page():
         '<div class="page-head">'
         '<img class="icon lg" src="assets/media/site/combat-achievements.png" alt="">'
         '<h1 class="page">Calculators</h1></div>',
-        '<p class="lede">How many of a thing stands between you and a level, '
-        'what it costs at today\'s prices, and which option is cheapest per '
+        '<p class="lede">How many actions stand between you and a level, '
+        'what they cost at today\'s prices, and which option is cheapest per '
         'point of XP.</p>',
         f'<div class="ctabs">{tabs}</div>',
         '<div class="calcbar">'
@@ -4888,7 +4897,7 @@ def calculators_page():
         '<div class="tablewrap"><div class="tablescroll">'
         '<table class="pathtable calctable" id="calctable"><thead><tr>'
         '<th>Lvl</th><th>Action</th><th>XP each</th><th>Needed</th>'
-        '<th>Each</th><th>Total</th><th>gp/xp</th></tr></thead>'
+        '<th>Each</th><th>Total</th><th>GP/XP</th></tr></thead>'
         '<tbody id="calcbody"></tbody></table></div></div>',
         '<p class="lede2">Action tables come from the wiki\'s own skill '
         'calculator modules, so the XP figures match the wiki. Prices are the '
@@ -4975,7 +4984,7 @@ def build_index():
                     "assets/media/site/skills-icon.png"))
     parts.append(feeders_section())
 
-    return page("OSRS max time wasting plan", "\n".join(parts))
+    return page("OSRS Max Time-Wasting Plan", "\n".join(parts))
 
 
 def main():

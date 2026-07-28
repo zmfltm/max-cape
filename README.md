@@ -1,8 +1,8 @@
-# OSRS max time wasting plan
+# OSRS Max Time-Wasting Plan
 
 Static site for a Slayer-first route to the Max Cape. It includes an overview,
-a page per skill, route comparisons, an AFK reference, and a shooting-star
-tracker.
+a page for each skill, route comparisons, gear and AFK references, calculators,
+and a shooting-star tracker.
 
 ## Viewing it
 
@@ -11,8 +11,8 @@ python3 serve.py
 ```
 
 Then open <http://localhost:8412>. `serve.py` also exposes `/api/stats`, which
-proxies the OSRS hiscores so the refresh button in the sidebar works (the
-hiscores send no CORS headers, so the page cannot call them directly).
+proxies the OSRS Hiscores so the refresh button in the sidebar works (the
+Hiscores send no CORS headers, so the page cannot call them directly).
 
 `python3 -m http.server 8412` works too; you just lose the live API features.
 The generated site itself has no Python dependencies. To regenerate shooting-star
@@ -21,13 +21,13 @@ map images, install Pillow with `python3 -m pip install -r requirements.txt`.
 ## Live stats
 
 ```bash
-python3 fetch_stats.py "gxexe"   # snapshot the hiscores into data/stats.json
+python3 fetch_stats.py "gxexe"   # snapshot the Hiscores into data/stats.json
 python3 build.py                 # bake current levels into the pages
 ```
 
-After the first run the username is remembered, so `python3 fetch_stats.py`
+After the first run, the username is remembered, so `python3 fetch_stats.py`
 alone refreshes it. Every skill card and skill page then shows your current
-level, progress toward the next target in the plan, XP to go and rank, and the
+level, progress toward the next target in the plan, XP to go, and rank; the
 sidebar shows total level and combat. Without `data/stats.json` the site simply
 shows plan targets instead.
 
@@ -50,8 +50,8 @@ python3 fetch_quests.py          # uses the linked account
 python3 build.py
 ```
 
-Quest completion comes from WikiSync (`sync.runescape.wiki`), which the RuneLite
-WikiSync plugin uploads. The hiscores do not carry quest state, so the plugin
+Quest completion comes from WikiSync (`sync.runescape.wiki`), to which the
+RuneLite WikiSync plugin uploads data. The Hiscores do not carry quest state, so the plugin
 has to have run on the account at least once. Order comes from the wiki's
 optimal quest guide, parsed at fetch time. The refresh also snapshots the
 Quest point cape's current minimum skill and combat requirements, so newly
@@ -65,8 +65,8 @@ guide, and a scrollable list of everything still outstanding.
 
 Levels are coloured on a hue ramp: ember at low levels, amber through the
 middle, green at 99 (matching the "done" green exactly). The stops live in
-`_HUE_STOPS` in `build.py`. The same colour drives progress bars, so a skill
-reads at a glance.
+`_HUE_STOPS` in `build.py`. The same colour drives progress bars, so each skill's status is readable at a
+glance.
 
 ## Choosing a method
 
@@ -76,10 +76,10 @@ against your snapshots, and those rows are dimmed with a padlock. The highest-ra
 tagged "best at your level" and named in the line above the table.
 
 Every method table has a circle at the end of each row. Clicking it makes that
-method your pick: the panel at the top of the page updates, the choice is
-POSTed to `serve.py`, which writes `data/picks.json`, and the next
-`python3 build.py` bakes it into the generated pages. Without the server it
-still saves to localStorage for that browser.
+method your pick: the panel at the top of the page updates, the choice is sent
+via POST to `serve.py`, which writes `data/picks.json`, and the next
+`python3 build.py` bakes it into the generated pages. Without the server, it
+still saves to `localStorage` for that browser.
 
 `data/picks.json` overrides the defaults in `build.py`, so it survives rebuilds
 and you can edit it by hand.
@@ -97,12 +97,13 @@ After adding entries to `media.py`:
 python3 fetch_media.py && python3 build.py
 ```
 
-Titles the wiki has no image for are printed at the end of the fetch and simply
+Titles without Wiki images are printed at the end of the fetch and simply
 render without a picture.
 
 ## Other fetched data
 
 ```bash
+python3 fetch_calculators.py  # skill calculator actions
 python3 fetch_potions.py      # Herblore recipe/item IDs
 python3 fetch_diary_reqs.py   # diary skill requirements
 python3 fetch_star_maps.py    # local crash-site maps (needs Pillow)
@@ -110,11 +111,13 @@ python3 fetch_stars.py        # current 07.gg calls for static hosting
 python3 build.py
 ```
 
-`fetch_media.py` and the map fetcher make network requests and only need to run
-when their registries or upstream data change. The other snapshots can be
-refreshed regularly. `.github/workflows/refresh.yml` refreshes live snapshots,
-rebuilds, runs the checks, and commits changes every twenty minutes. Local
-shooting-star pages are fresher still because `serve.py` polls once a minute.
+`fetch_media.py` and `fetch_star_maps.py` make network requests and only need to
+run when their registries or upstream data change. The other snapshots can be
+refreshed regularly. `.github/workflows/refresh.yml` refreshes the Hiscores,
+quests, diaries, and stars, rebuilds, runs the checks, and commits once daily at
+06:07 UTC. `.github/workflows/stars.yml` refreshes only `data/stars.json` every
+twenty minutes. When served locally, the shooting-star page polls `serve.py`
+once a minute.
 
 ## Checks
 
@@ -131,7 +134,7 @@ generator drift, duplicate IDs, and local links/anchors.
 
 - `index.html` — plan overview, generated
 - `skills/*.html` — one page per skill, generated
-- `stars.html`, `afk.html`, `paths.html` — reference pages, generated
+- `stars.html`, `afk.html`, `paths.html`, `calculators.html`, `gear.html` — generated reference and tool pages
 - `build.py` — primary plan data and site generator
 - `media.py`, `slayer.py` — media registry and Slayer task data
 - `fetch_*.py` — snapshot/media refresh commands
@@ -139,9 +142,6 @@ generator drift, duplicate IDs, and local links/anchors.
 - `assets/style.css` — theme
 - `assets/fonts/` — Geist Sans and Geist Mono (OFL, licence included)
 - `assets/icons/` — skill icons from the OSRS Wiki
-
-Skill icons come from the OSRS Wiki. Old School RuneScape is a trademark of
-Jagex Ltd; this is a personal, non-commercial planning page.
 
 ## Credits
 

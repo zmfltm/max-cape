@@ -9,6 +9,7 @@ from pathlib import Path
 from unittest import mock
 
 import build
+import fetch_calculators
 import quests
 import serve
 from hiscores import XP_TABLE, combat_level, xp_for_level
@@ -20,6 +21,14 @@ class FormulaTests(unittest.TestCase):
         self.assertEqual(xp_for_level(2), 83)
         self.assertEqual(xp_for_level(50), 101_333)
         self.assertEqual(xp_for_level(99), 13_034_431)
+
+
+class FetcherTests(unittest.TestCase):
+    def test_calculator_labels_remove_wiki_line_break_markup(self):
+        self.assertEqual(fetch_calculators.clean_label("Mist rune<br>(Air altar)"),
+                         "Mist rune (Air altar)")
+        self.assertEqual(fetch_calculators.clean_label("Baby<br /> impling"),
+                         "Baby impling")
 
 
 class RequirementTests(unittest.TestCase):

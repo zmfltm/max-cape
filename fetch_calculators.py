@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Builds data/calculators.json: every trainable action, per skill.
+"""Builds data/calculators.json: every trainable action for each skill.
 
 The wiki drives its own skill calculators from Module:Skill calc/<Skill>, a Lua
 table of every action with its level, XP and materials. That is the same shape
 a calculator needs, so this reads those modules directly rather than scraping
 anyone's rendered output.
 
-Material names are matched to Grand Exchange ids where one exists, so the page
-can price a plan live. Anything untradeable simply has no id.
+Material names are matched to Grand Exchange IDs when available, so the page
+can price a plan using live data. Anything untradeable simply has no ID.
 
     python3 fetch_calculators.py
 """
@@ -183,9 +183,15 @@ def price_ids():
     return {item["name"]: item["id"] for item in json.loads(get(MAPPING))}
 
 
+def clean_label(value):
+    """Turn simple Wiki line-break markup into a plain-text label."""
+    return re.sub(r"\s*<br\s*/?>\s*", " ", str(value), flags=re.I).strip()
+
+
 def clean(entry, ids):
     """One action, with its materials priced where the GE knows them."""
-    name = entry.get("title") or entry.get("name")
+    raw_name = entry.get("title") or entry.get("name")
+    name = clean_label(raw_name) if raw_name else None
     if not name or not entry.get("level"):
         return None
 
@@ -193,9 +199,10 @@ def clean(entry, ids):
     for mat in entry.get("materials") or []:
         if not isinstance(mat, dict):
             continue
-        label = mat.get("title") or mat.get("name")
-        if not label:
+        raw_label = mat.get("title") or mat.get("name")
+        if not raw_label:
             continue
+        label = clean_label(raw_label)
         materials.append({
             "name": label,
             "qty": mat.get("quantity") or 1,

@@ -1,9 +1,9 @@
 """Quest progress: WikiSync for what is done, the optimal quest guide for order.
 
 WikiSync (sync.runescape.wiki) is the RuneLite plugin that uploads quest,
-diary and level state to the wiki. It is the only public source of OSRS quest
-completion; the hiscores do not expose it. The plugin has to have run at least
-once on the account.
+diary and level state to the Wiki. It provides the quest-completion data used
+here; the Hiscores do not expose quest state. The plugin must have run on the
+account at least once.
 """
 
 import html
@@ -39,7 +39,7 @@ def sync_state(player):
     return json.loads(_get(SYNC.format(urllib.parse.quote(player))))
 
 
-# the guide writes Recipe for Disaster subquests with a slash, WikiSync with a dash
+# The guide writes Recipe for Disaster subquests with a slash; WikiSync uses a dash.
 RFD_MAP = {
     "Another Cook's Quest": "Another Cook's Quest",
     "Freeing the Mountain Dwarf": "Mountain Dwarf",
@@ -75,7 +75,7 @@ def _parse_quest_cape_requirements(wikitext):
     combat = re.search(r"^\|Combat\s*=\s*(\d+)\s*$", body, re.MULTILINE)
     if values.keys() != SKILLS or not combat:
         missing = sorted(SKILLS - values.keys())
-        raise ValueError(f"incomplete Quest Cape requirements; missing {missing}")
+        raise ValueError(f"incomplete Quest point cape requirements; missing {missing}")
 
     boostable = {
         name: int(level)
@@ -102,8 +102,8 @@ def guide_route():
     """Every step of the optimal quest guide, in order.
 
     The guide tags each row with data-rowid, which is the cleanest handle on
-    the route: it covers quests, achievement diary tiers and the non-quest
-    steps, and it is ordered. Reading link order off the page instead picks up
+    the route: it covers quests, achievement diary tiers and non-quest steps
+    while preserving their order. Reading link order off the page instead picks up
     the 'Notable quest unlocks' list, which says outright that it is unordered.
     """
     q = urllib.parse.urlencode({
@@ -122,7 +122,7 @@ def guide_route():
 
 
 def normalise(rid):
-    """Guide row id -> (kind, name, extra)."""
+    """Guide row ID -> (kind, name, extra)."""
     if "Diary#" in rid:
         region, tier = rid.split(" Diary#")
         return "diary", region, tier

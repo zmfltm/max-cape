@@ -6,9 +6,9 @@ Writes data/quests.json and data/diaries.json.
     python3 fetch_quests.py            # uses the linked account
     python3 fetch_quests.py "Your RSN"
 
-Needs the WikiSync RuneLite plugin to have run on the account at least once;
-that is what publishes quest state to sync.runescape.wiki. The hiscores do not
-carry quest completion.
+The WikiSync RuneLite plugin must have run on the account at least once; that
+is what publishes quest state to sync.runescape.wiki. The Hiscores do not carry
+quest completion.
 """
 
 import datetime
@@ -57,7 +57,7 @@ def main():
             print(f"WikiSync error {exc.code}: {exc.reason}", file=sys.stderr)
         return 1
     except Exception as exc:                                      # noqa: BLE001
-        print(f"could not fetch quest data: {exc}", file=sys.stderr)
+        print(f"could not fetch quest and diary data: {exc}", file=sys.stderr)
         return 1
 
     stamp = datetime.datetime.now().astimezone().isoformat(timespec="minutes")
@@ -72,8 +72,8 @@ def main():
         print(f"next up: {data['next']}")
     bt = diaries["by_tier"]
     print(f"diaries: {diaries['done']}/{diaries['total']} tiers "
-          f"(hard {bt['Hard']}/{diaries['region_count']}, "
-          f"elite {bt['Elite']}/{diaries['region_count']})")
+          f"(Hard {bt['Hard']}/{diaries['region_count']}, "
+          f"Elite {bt['Elite']}/{diaries['region_count']})")
     print("wrote data/quests.json and data/diaries.json — now run python3 build.py")
     return 0
 

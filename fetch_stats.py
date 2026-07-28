@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Snapshots a player's OSRS hiscores into data/stats.json.
+"""Snapshots a player's OSRS Hiscores into data/stats.json.
 
     python3 fetch_stats.py "Your RSN"
     python3 build.py
@@ -43,13 +43,13 @@ def main():
         data = fetch(player)
     except urllib.error.HTTPError as exc:
         if exc.code == 404:
-            print(f"'{player}' is not on the hiscores. Check the spelling, and "
+            print(f"'{player}' is not on the Hiscores. Check the spelling, and "
                   "note that unranked accounts do not appear.", file=sys.stderr)
         else:
-            print(f"hiscores error {exc.code}: {exc.reason}", file=sys.stderr)
+            print(f"Hiscores error {exc.code}: {exc.reason}", file=sys.stderr)
         return 1
     except Exception as exc:                                      # noqa: BLE001
-        print(f"could not reach the hiscores: {exc}", file=sys.stderr)
+        print(f"could not reach the Hiscores: {exc}", file=sys.stderr)
         return 1
 
     data["fetched"] = datetime.datetime.now().astimezone().isoformat(timespec="minutes")

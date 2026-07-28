@@ -1,11 +1,12 @@
 name: Refresh stats and rebuild
 
 # GitHub Pages serves static files, so the live endpoints in serve.py do not
-# exist there. This re-pulls the hiscores and WikiSync, rebuilds the pages and
-# commits, which keeps the published site current without a backend.
+# exist there. This refreshes the Hiscores and WikiSync snapshots, rebuilds the
+# pages, and commits any changes, keeping the published site current without a
+# backend.
 #
-# Stars move far faster than anything here and are split into stars.yml, which
-# shares this concurrency group so the two never push over each other.
+# Shooting-star data changes much faster and is handled by stars.yml, which
+# shares this concurrency group so the workflows never push concurrently.
 on:
   schedule:
     # Refresh the linked character once a day at 06:07 UTC. Hiscores only move
@@ -37,8 +38,8 @@ jobs:
       - name: Install checks
         run: python3 -m pip install -r requirements-dev.txt
 
-      - name: Pull hiscores
-        run: python3 fetch_stats.py || echo "hiscores unavailable, keeping last snapshot"
+      - name: Pull Hiscores
+        run: python3 fetch_stats.py || echo "Hiscores unavailable, keeping last snapshot"
 
       - name: Pull quests and diaries
         run: python3 fetch_quests.py || echo "WikiSync unavailable, keeping last snapshot"
