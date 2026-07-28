@@ -8,10 +8,11 @@ name: Refresh stats and rebuild
 # shares this concurrency group so the two never push over each other.
 on:
   schedule:
-    # Hiscores only move while the account is being played and quest state
-    # barely moves at all, so an hourly pull is well ahead of the data. Offset
-    # off the hour to stay clear of the every-twenty-minutes star run.
-    - cron: "7 * * * *"
+    # Refresh the linked character once a day at 06:07 UTC. Hiscores only move
+    # while the account is being played, and WikiSync changes only after the
+    # RuneLite plugin uploads, so a daily rebuild keeps the site current without
+    # filling the commit history with hourly snapshots.
+    - cron: "7 6 * * *"
   workflow_dispatch:
 
 permissions:
