@@ -3,12 +3,15 @@ name: Refresh stats and rebuild
 # GitHub Pages serves static files, so the live endpoints in serve.py do not
 # exist there. This re-pulls the hiscores and WikiSync, rebuilds the pages and
 # commits, which keeps the published site current without a backend.
+#
+# Stars move far faster than anything here and are split into stars.yml, which
+# shares this concurrency group so the two never push over each other.
 on:
   schedule:
-    # Stars crash and burn out inside a couple of hours, so a six-hourly run
-    # would publish a list that is already dead. Everything else here is cheap
-    # enough to ride along, and the commit step is a no-op when nothing moved.
-    - cron: "*/20 * * * *"   # every twenty minutes
+    # Hiscores only move while the account is being played and quest state
+    # barely moves at all, so an hourly pull is well ahead of the data. Offset
+    # off the hour to stay clear of the every-twenty-minutes star run.
+    - cron: "7 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -55,5 +58,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git diff --staged --quiet || git commit -m "chore: refresh stats and rebuild"
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: refresh stats and rebuild"
+          git pull --rebase --autostash
           git push

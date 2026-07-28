@@ -1,0 +1,46 @@
+name: Refresh shooting stars
+
+# Stars crash and burn out inside a couple of hours, so the published list has
+# to be re-pulled on a much shorter cycle than the rest of the plan data.
+#
+# stars.html fetches data/stars.json in the browser rather than baking the list
+# in at build time, so this only has to move that one file: no rebuild, no
+# dependencies, and a diff that touches nothing else on the site.
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Shared with refresh.yml so the two jobs never race each other to push.
+concurrency:
+  group: refresh-static-data
+  cancel-in-progress: false
+
+jobs:
+  stars:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Leaves the previous snapshot in place if the tracker is down or parses
+      # to nothing, so a bad feed publishes stale stars rather than none.
+      - name: Pull shooting stars
+        run: python3 fetch_stars.py || echo "star tracker unavailable, keeping last snapshot"
+
+      - name: Commit if the stars moved
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/stars.json
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: refresh shooting stars"
+          git pull --rebase --autostash
+          git push
