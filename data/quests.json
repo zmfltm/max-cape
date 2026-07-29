@@ -1,6 +1,6 @@
 {
  "name": "gxexe",
- "synced": "2026-07-28T21:22:14.096Z",
+ "synced": "2026-07-29T08:50:59.071Z",
  "route": [
   {
    "kind": "task",
@@ -398,7 +398,7 @@
   {
    "kind": "quest",
    "name": "Death on the Isle",
-   "state": 0,
+   "state": 2,
    "wiki": "Death_on_the_Isle"
   },
   {
@@ -1487,11 +1487,11 @@
  ],
  "route_next": {
   "kind": "quest",
-  "name": "Death on the Isle",
+  "name": "Scorpion Catcher",
   "state": 0,
-  "wiki": "Death_on_the_Isle"
+  "wiki": "Scorpion_Catcher"
  },
- "route_left": 106,
+ "route_left": 105,
  "order": [
   "Cook's Assistant",
   "Sheep Shearer",
@@ -1730,7 +1730,7 @@
   "Curse of the Empty Lord": 0,
   "Daddy's Home": 2,
   "Darkness of Hallowvale": 0,
-  "Death on the Isle": 0,
+  "Death on the Isle": 2,
   "Death to the Dorgeshuun": 2,
   "Defender of Varrock": 0,
   "Demon Slayer": 2,
@@ -1916,7 +1916,7 @@
   "Witch's House": 2,
   "Witch's Potion": 2
  },
- "done": 120,
+ "done": 121,
  "total": 210,
  "in_progress": [
   "The Giant Dwarf",
@@ -1928,9 +1928,8 @@
   "The Enchanted Key",
   "The Frozen Door"
  ],
- "next": "Death on the Isle",
+ "next": "Scorpion Catcher",
  "remaining": [
-  "Death on the Isle",
   "Scorpion Catcher",
   "A Soul's Bane",
   "The Queen of Thieves",
@@ -2054,5 +2053,5 @@
    "Fishing": 62
   }
  },
- "fetched": "2026-07-28T21:22+00:00"
+ "fetched": "2026-07-29T08:50+00:00"
 }
