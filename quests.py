@@ -20,6 +20,22 @@ UA = "mudkip-osrs-plan/1.0 (personal planning page)"
 
 NOT_STARTED, IN_PROGRESS, DONE = 0, 1, 2
 
+# WikiSync's quest-key list can lag a same-day game release. Keep released
+# quests and their official start requirements available until the plugin and
+# optimal guide catch up.
+RELEASED_QUESTS = {
+    "Fallen From Grace": {
+        "skills": {
+            "Sailing": 62,
+            "Crafting": 60,
+            "Runecraft": 47,
+            "Mining": 53,
+        },
+        "quests": ["Pandemonium"],
+        "start": "Speak to Cormac in the middle of Auchrie village.",
+    },
+}
+
 SKILLS = {
     "Attack", "Hitpoints", "Mining", "Strength", "Agility", "Smithing",
     "Defence", "Herblore", "Fishing", "Ranged", "Thieving", "Cooking",
@@ -98,13 +114,19 @@ def quest_cape_requirements():
     return _parse_quest_cape_requirements(body)
 
 
+def _plain_text(fragment):
+    """Small HTML-to-text helper for the guide's server-rendered table rows."""
+    text = re.sub(r"<[^>]+>", " ", fragment)
+    return re.sub(r"\s+", " ", html.unescape(text)).strip()
+
+
 def guide_route():
     """Every step of the optimal quest guide, in order.
 
-    The guide tags each row with data-rowid, which is the cleanest handle on
-    the route: it covers quests, achievement diary tiers and non-quest steps
-    while preserving their order. Reading link order off the page instead picks up
-    the 'Notable quest unlocks' list, which says outright that it is unordered.
+    Quest, diary and unlock rows have ``data-rowid``. Training rows do not, so
+    retain their visible labels as synthetic task names. This gives guidance
+    enough information to interleave quests and level gates without changing
+    quest completion counts.
     """
     q = urllib.parse.urlencode({
         "action": "parse", "page": GUIDE, "prop": "text",
@@ -113,8 +135,17 @@ def guide_route():
     body = json.loads(_get(f"{WIKI_API}?{q}"))["parse"]["text"]
 
     seen, order = set(), []
-    for m in re.finditer(r'data-rowid="([^"]+)"', body):
-        rid = html.unescape(m.group(1))
+    for row in re.finditer(r"<tr\b([^>]*)>(.*?)</tr>", body,
+                           re.IGNORECASE | re.DOTALL):
+        attrs, contents = row.groups()
+        match = re.search(r'data-rowid="([^"]+)"', attrs)
+        if match:
+            rid = html.unescape(match.group(1))
+        else:
+            label = _plain_text(contents)
+            if not (label.startswith("Train ") or label.startswith("Start miniquest:")):
+                continue
+            rid = label
         if rid not in seen:
             seen.add(rid)
             order.append(rid)
@@ -218,6 +249,8 @@ def collect(player, raw=None):
         "username": raw.get("username") or player,
     }
     quests = state["quests"]
+    unreported = sorted(RELEASED_QUESTS.keys() - quests.keys())
+    quests.update({name: None for name in unreported})
     route = guide_route()
     order = guide_order(set(quests), route)
     done = [n for n in order if quests.get(n) == DONE]
@@ -237,6 +270,8 @@ def collect(player, raw=None):
         "route_left": len(outstanding),
         "order": order,
         "states": quests,
+        "unreported": unreported,
+        "quest_requirements": RELEASED_QUESTS,
         "done": len(done),
         "total": len(order),
         "in_progress": started,

@@ -10,11 +10,12 @@ and a shooting-star tracker.
 python3 serve.py
 ```
 
-Then open <http://localhost:8412>. `serve.py` also exposes `/api/stats`, which
-proxies the OSRS Hiscores so the refresh button in the sidebar works (the
-Hiscores send no CORS headers, so the page cannot call them directly).
+Then open <http://localhost:8412>. The overview has **Sync character** and
+**What should I do now?** controls. The first refreshes Hiscores, WikiSync
+quests and diaries and rebuilds the pages. The second performs the same sync,
+then recommends a manageable quest batch or the next real training gate.
 
-`python3 -m http.server 8412` works too; you just lose the live API features.
+`python3 -m http.server 8412` works too; you just lose those local API features.
 The generated site itself has no Python dependencies. To regenerate shooting-star
 map images, install Pillow with `python3 -m pip install -r requirements.txt`.
 

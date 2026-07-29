@@ -10,6 +10,7 @@ from unittest import mock
 
 import build
 import fetch_calculators
+import guidance
 import quests
 import serve
 from hiscores import XP_TABLE, combat_level, xp_for_level
@@ -85,7 +86,7 @@ class QuestCapeRequirementTests(unittest.TestCase):
 |Farming = 70
 |Construction = 70
 |Hunter = 70
-|Sailing = 52
+|Sailing = 62
 |Combat = 85
 |MiningNotes=(72)|FishingNotes=(62)}}}
 
@@ -128,6 +129,7 @@ Two skills can be boosted.
         self.assertEqual(build.QUEST_CAPE_REQUIREMENTS["Slayer"], 74)
         self.assertEqual(build.QUEST_CAPE_REQUIREMENTS["Ranged"], 62)
         self.assertEqual(build.QUEST_CAPE_REQUIREMENTS["Runecraft"], 60)
+        self.assertEqual(build.QUEST_CAPE_REQUIREMENTS["Sailing"], 62)
         self.assertEqual(build.QUEST_CAPE_REQUIREMENTS,
                          build.QUESTS["requirements"]["skills"])
 
@@ -183,6 +185,19 @@ class RouteTests(unittest.TestCase):
 
 
 class QuestTests(unittest.TestCase):
+    def test_guide_route_keeps_training_rows_in_order(self):
+        parsed = {
+            "parse": {"text": (
+                '<table><tr data-rowid="First Quest"><td>First Quest</td></tr>'
+                '<tr><th>Train Ranged from level 43 to level 60</th></tr>'
+                '<tr data-rowid="Second Quest"><td>Second Quest</td></tr></table>'
+            )}
+        }
+        with mock.patch.object(quests, "_get", return_value=json.dumps(parsed).encode()):
+            route = quests.guide_route()
+        self.assertEqual(route, ["First Quest", "Train Ranged from level 43 to level 60",
+                                 "Second Quest"])
+
     def test_collect_fetches_the_guide_once(self):
         raw = {
             "username": "test",
@@ -193,6 +208,24 @@ class QuestTests(unittest.TestCase):
             result = quests.collect("test", raw)
         self.assertEqual(route.call_count, 1)
         self.assertEqual(result["next"], "Cook's Assistant")
+
+    def test_new_quest_is_counted_while_wikisync_lags(self):
+        raw = {
+            "username": "test",
+            "quests": {"Cook's Assistant": 2},
+            "achievement_diaries": {},
+        }
+        with mock.patch.object(quests, "guide_route", return_value=["Cook's Assistant"]):
+            result = quests.collect("test", raw)
+        self.assertEqual(result["done"], 1)
+        self.assertEqual(result["total"], 2)
+        self.assertEqual(result["unreported"], ["Fallen From Grace"])
+        self.assertIsNone(result["states"]["Fallen From Grace"])
+        self.assertEqual(result["quest_requirements"]["Fallen From Grace"]["skills"], {
+            "Sailing": 62, "Crafting": 60, "Runecraft": 47, "Mining": 53,
+        })
+        self.assertEqual(result["quest_requirements"]["Fallen From Grace"]["quests"],
+                         ["Pandemonium"])
 
     def test_quest_panel_escapes_upstream_names_and_urls(self):
         old = build.QUESTS
@@ -220,6 +253,42 @@ class QuestTests(unittest.TestCase):
         self.assertIn("1</b><span>quests to go", panel)
 
 
+class GuidanceTests(unittest.TestCase):
+    def test_quest_batch_points_to_the_next_training_overlap(self):
+        stats = {
+            "combat": 89,
+            "skills": {"Ranged": {"level": 56}, "Slayer": {"level": 50}},
+        }
+        route = [
+            {"kind": "quest", "name": f"Quest {n}", "state": 0}
+            for n in range(1, 7)
+        ] + [
+            {"kind": "task", "name": "Varrock Museum", "state": None},
+            {"kind": "task", "name": "Train Ranged from level 43 to level 60",
+             "state": None},
+            {"kind": "quest", "name": "Later Quest", "state": 0},
+        ]
+        advice = guidance.recommend(stats, {"route": route})
+        self.assertEqual(advice["headline"], "Quest now: Quest 1")
+        self.assertIn("Then do the guide action: Varrock Museum.", advice["actions"])
+        self.assertEqual(advice["checkpoint"], "Train Ranged to 60 through Slayer")
+
+    def test_immediate_training_gate_wins_over_the_next_quest(self):
+        stats = {
+            "combat": 89,
+            "skills": {"Ranged": {"level": 56}, "Slayer": {"level": 50}},
+        }
+        route = [
+            {"kind": "quest", "name": "Done", "state": 2},
+            {"kind": "task", "name": "Train Ranged from level 43 to level 60",
+             "state": None},
+            {"kind": "quest", "name": "Blocked", "state": 0},
+        ]
+        advice = guidance.recommend(stats, {"route": route})
+        self.assertEqual(advice["headline"], "Train Ranged to 60 through Slayer")
+        self.assertEqual(advice["next_quest"], "Blocked")
+
+
 class ServerTests(unittest.TestCase):
     def test_crowd_sourced_star_text_is_sanitized(self):
         self.assertEqual(serve.clean_star_text("  two\n words  "), "two words")
@@ -229,6 +298,53 @@ class ServerTests(unittest.TestCase):
         self.assertTrue(serve.valid_method("Fishing", "Drift Net Fishing"))
         self.assertFalse(serve.valid_method("Fishing", "not a real method"))
         self.assertFalse(serve.valid_method("not a skill", "Drift Net Fishing"))
+
+    def test_sync_failure_preserves_previous_snapshots(self):
+        with tempfile.TemporaryDirectory() as directory:
+            stats_path = Path(directory) / "stats.json"
+            quests_path = Path(directory) / "quests.json"
+            diaries_path = Path(directory) / "diaries.json"
+            stats_path.write_text('{"name":"test","old":true}', encoding="utf-8")
+            quests_path.write_text('{"old":true}', encoding="utf-8")
+            diaries_path.write_text('{"old":true}', encoding="utf-8")
+            with mock.patch.object(serve, "STATS", str(stats_path)), \
+                    mock.patch.object(serve, "QUESTS", str(quests_path)), \
+                    mock.patch.object(serve, "DIARIES", str(diaries_path)), \
+                    mock.patch.object(serve, "fetch", return_value={"name": "test"}), \
+                    mock.patch.object(serve, "sync_state", side_effect=RuntimeError("offline")):
+                with self.assertRaisesRegex(RuntimeError, "offline"):
+                    serve.sync_character()
+            self.assertEqual(json.loads(stats_path.read_text()), {"name": "test", "old": True})
+            self.assertEqual(json.loads(quests_path.read_text()), {"old": True})
+            self.assertEqual(json.loads(diaries_path.read_text()), {"old": True})
+
+    def test_advice_endpoint_syncs_before_recommending(self):
+        stats = {"name": "test", "combat": 89, "overall": {"level": 1600}}
+        quest_data = {"done": 10, "total": 20, "route": []}
+        diaries = {"done": 0}
+        advice = {"headline": "Quest now"}
+        with mock.patch.object(serve, "sync_character",
+                               return_value=(stats, quest_data, diaries)) as sync, \
+                mock.patch.object(serve, "recommend", return_value=advice) as choose, \
+                mock.patch.object(serve.Handler, "log_message", lambda *args: None):
+            server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), serve.Handler)
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            try:
+                conn = http.client.HTTPConnection("127.0.0.1", server.server_port)
+                conn.request("POST", "/api/advice", body=b"{}",
+                             headers={"Content-Type": "application/json"})
+                response = conn.getresponse()
+                payload = json.loads(response.read())
+                conn.close()
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join()
+        self.assertEqual(response.status, 200)
+        self.assertEqual(payload["advice"], advice)
+        sync.assert_called_once_with()
+        choose.assert_called_once_with(stats, quest_data, diaries)
 
     def test_post_validation_and_atomic_focus_write(self):
         with tempfile.TemporaryDirectory() as directory:

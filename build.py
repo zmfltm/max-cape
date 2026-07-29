@@ -33,7 +33,7 @@ QUEST_CAPE_REQUIREMENTS = {
     "Fishing": 60, "Ranged": 62, "Thieving": 72, "Cooking": 72,
     "Prayer": 50, "Crafting": 70, "Firemaking": 75, "Magic": 75,
     "Fletching": 70, "Woodcutting": 74, "Runecraft": 60, "Slayer": 74,
-    "Farming": 70, "Construction": 70, "Hunter": 70, "Sailing": 52,
+    "Farming": 70, "Construction": 70, "Hunter": 70, "Sailing": 62,
 }
 QUEST_CAPE_COMBAT = 85
 QUEST_CAPE_BOOSTABLE = {"Mining": 72, "Fishing": 62}
@@ -233,6 +233,7 @@ SKILLS = [
             ("Nieve / Steve", "85 combat", "—", "Your starting master. Good task variety, reachable now. Level 99 Slayer bypasses the combat requirement."),
             ("Konar quo Maten", "75 combat", "—", "Location-locked tasks. Worth using for milestone points and for Hydra access later."),
             ("Duradel", "100 combat, 50 Slayer", "—", "Your main master after Shilo Village once you have 100 combat and 50 Slayer; 99 Slayer bypasses those two levels. Generally best for fast Slayer XP, though task weighting still matters."),
+            ("Mortimer", "70 Slayer, 100 combat", "—", "Unlocked partway through Fallen From Grace; 99 Slayer bypasses the combat requirement. Choose from two superior-capable tasks, or three after 50 Mortimer tasks. He is built for superior drops and choice, not cheap skipping."),
             ("Krystilia (Wilderness)", "—", "—", "Wilderness-only tasks. Fast points and good drops, but risky. Optional."),
             ("Turael/Spria skipping", "—", "—", "Turael-skip trick to reroll bad tasks without spending points. Useful when point-starved."),
         ],
@@ -240,6 +241,7 @@ SKILLS = [
             "Block list is the highest-leverage decision in this plan. Block the tasks that are slow and unprofitable for your gear (typically the low-XP-per-hour, high-count ones) rather than the merely boring ones.",
             "Extend the tasks you'll want to farm later (nechryael, abyssal demons, gargoyles) once points allow.",
             "Superior Slayer monsters (unlocked by Bigger and Badder) are worth the point cost. They can drop the imbued heart and eternal gem.",
+            "Fallen From Grace also unlocks the repeatable Mad Angel. Its Hallowfell drop needs 75 Attack and cleaves up to two nearby targets, so it is a specialised multi-target weapon rather than a universal single-target upgrade.",
             "Everything else in the plan is downstream of Slayer: it carries Attack, Strength, Defence and Hitpoints; via cannon and barrage, it also carries Ranged and Magic.",
             "The Along the Way table uses a neutral average split across melee styles. In play, prioritise Strength, then Attack, then Defence rather than expecting those three levels to land evenly.",
             "The task verdict table uses Duradel's weights. Nieve has different weights and extra assignments, and block lists do not carry between masters; revisit blocks when you switch.",
@@ -282,6 +284,8 @@ SKILLS = [
             ("Hunter Rumours (Hunter Guild)", "72 / 91", "160–250k", "Varlamore contract system. Strong XP with useful rewards; the modern default for high Hunter."),
             ("Black chinchompas", "73", "up to 265k", "Best XP in the skill and excellent GP, but deep Wilderness. High risk, high reward."),
             ("Red chinchompas", "63", "100–150k", "Safer, still good, and it stockpiles the chins you'll want for 99 Ranged."),
+            ("Goat hunting", "60 + Sheep Herder", "~192k with Tele Grab",
+             "Herd Wyrmscraig goats into a spike pit with a cattle prod, Telekinetic Grab or Dark Lure. The day-one Tele Grab estimate is fast but active; goat horns feed combat potions and the furs feed Golem Crafting."),
             ("Letvek and stymphikes", "76 / 82 (+ Blood Moon Rises)", "~145k",
              "Vampyrium. Box-trap letvek at 76 as bait, then hunt stymphikes at 82. With 3-tick manipulation this is the fastest Hunter in the game."),
             ("Razor-backed kebbits", "49", "~130k",
@@ -351,6 +355,8 @@ SKILLS = [
              "Crashed stars, a Distraction and Diversion. One click every 7 minutes, so it is the most AFK Mining there is, and stardust buys the celestial ring (+4 invisible Mining boost). Star tier scales with your level."),
             ("Volcanic Mine", "70 (+ quests)", "70–100k", "Fastest non-tick-manipulated Mining. Group activity, needs attention."),
             ("3-tick iron / granite", "15 / 45", "60–100k", "Top rates if you're willing to tick-manipulate. Granite at the Quarry, iron at the Mining Guild."),
+            ("Sunstone mining", "53 + Fallen From Grace", "day-one; verify",
+             "Mine active rocks on Wyrmscraig to build momentum for extra ore and XP; level 80 guarantees the momentum successes. The monolith is the slower, lower-attention alternative, and the sunstone feeds Golem Crafting."),
             ("Rubium rocks", "48 Mining, 60 Sailing", "50-80k",
              "Charred Dungeon, reached by docking at Charred Island. Higher XP than the nearby deposits but much more attention; the deposits at 68 are the AFK version."),
             ("Amethyst", "92", "~20k", "Very AFK and profitable; used mainly for the last stretch or while doing something else."),
@@ -426,9 +432,9 @@ SKILLS = [
         ],
     ),
     dict(
-        name="Sailing", group=GATHER, target="52 → 99", pick=None,
-        phase="52 for the quest cape, then last in the slow-skills block. Pandemonium must be completed before any Sailing XP is possible.",
-        summary="Barracuda Trials, or courier runs.",
+        name="Sailing", group=GATHER, target="62 → 99", pick=None,
+        phase="62 for Fallen From Grace and the quest cape, then last in the slow-skills block. Pandemonium must be completed before any Sailing XP is possible.",
+        summary="62 for Wyrmscraig; Trials or courier runs.",
         methods=[
             ("Barracuda Trials", "30 / 55 / 72", "80–200k", "The fastest Sailing from 30 onwards. Tempor Tantrum at 30, Jubbly Jive at 55, Gwenith Glide at 72; each has Swordfish/Shark/Marlin ranks with tighter timers. Gwenith Glide at Marlin rank reaches 200k+ with a rosewood hull and a crystal extractor running."),
             ("Courier tasks", "1 (46+ useful)", "30–145k", "Cargo runs between ports. Summer Shore 46–55 gives ~30k, Rellekka 62–70 gives 55–90k, Prifddinas 70–72 gives 65–70k, and Lunar Isle round trips from 76 give 120–145k once you can hold five tasks at 84. Far less intense than trials."),
@@ -437,8 +443,8 @@ SKILLS = [
             ("Shipwreck salvaging", "15 (42 better)", "8–40k", "The AFK option. Two salvaging hooks, a salvaging station and crewmates on a sloop; a crewmate on your hook makes it nearly idle at roughly 8k/hr. Tick manipulation roughly doubles it if you want to work for it."),
             ("Deep sea trawling", "Fishing hybrid", "moderate", "Trawling nets over fish shoals. Trains Sailing while producing raw deep-sea fish, so it doubles up with your Fishing goal."),
             ("Crystal extractor", "73 (+ 67 Con)", "+10–15k", "Not a method, a passive top-up. 250 XP per harvest roughly every 63 seconds, stacking on top of whatever else you are doing. Build it as soon as you hit 73."),
-            ("Wyrmscraig", "62", "not live yet",
-             "The player-designed island lands 29 July 2026 in the Unquiet Ocean. It gates Mortimer, the new Slayer master, behind The Fallen From Grace. Expect the rate picture here to move once it is out."),
+            ("Wyrmscraig", "62", "12.5k quest XP",
+             "Sail to the island after Pandemonium with 60 Crafting, 47 Runecraft and 53 Mining, then speak to Cormac in the middle of Auchrie village to start Fallen From Grace. It unlocks Mortimer during the quest, then the repeatable Mad Angel and Golem Crafting on completion."),
             ("Ocean encounters", "1", "passive", "Glows, strong winds and castaways while sailing. No requirement; trim your sails every time for the free XP."),
         ],
         notes=[
@@ -448,6 +454,7 @@ SKILLS = [
             "Boat speed is XP rate. A rosewood hull at 93 Sailing and 84 Construction is about 20% faster, which is roughly 15% more XP per hour on trials.",
             "If you want the least attention-heavy route, salvaging with crewmates and courier runs get there without any tick manipulation, but more slowly.",
             "Deep sea trawling overlaps with Fishing, so it is the natural pick on days you want both skills moving.",
+            "The Sailing Skillcape now includes Teleport to Boat, provided the boat has a Greater Teleport Focus.",
         ],
     ),
     # ---------------- artisan ----------------
@@ -477,6 +484,8 @@ SKILLS = [
             ("Dragonhide bodies", "63/71/77/84", "150–300k", "Green 63, blue 71, red 77, black 84. Simple, scalable, moderately expensive."),
             ("Battlestaves", "54–66", "150–250k", "Water 54, earth 58, fire 62, air 66. Buy orbs, attach to staves. Often the cheapest GP per XP."),
             ("Glassblowing / Superglass Make", "77 Magic", "150–250k", "Lunar spell + molten glass. Good rate; light hourly cost."),
+            ("Golem Crafting", "60 + Fallen From Grace", "100–165k+ day one",
+             "Mine sunstone, shape each side of a golem, then add a sunstone core and one Hunter fur. Lower intensity is about 100k Crafting XP/hr; better furs and active shaping push past 165k. The Jeweller's chisel reward improves semiprecious gem cutting and has a 10% chance to cut any gem twice."),
             ("Crafting drift nets", "26", "low",
              "Worth knowing because you will be running Drift Net Fishing anyway; make your own nets instead of buying them."),
             ("Gem cutting", "varies", "100–200k", "Dragonstones and up are fast; usually a loss."),
@@ -973,6 +982,44 @@ def quest_panel():
     nxt = (nxt_step.get("name", "") +
            (f' ({nxt_step["tier"]})' if nxt_step.get("tier") else ""))
     started = [s for s in route if s["state"] == 1]
+    unreported = [str(name) for name in (QUESTS.get("unreported") or [])]
+    source_note = (
+        '<p class="qnow">WikiSync has not reported the newly released '
+        + ", ".join(f"<b>{e(name)}</b>" for name in unreported)
+        + ' yet; it is counted as outstanding with unknown completion state.</p>'
+        if unreported else ""
+    )
+
+    release_panels = []
+    released = QUESTS.get("quest_requirements") or {}
+    states = QUESTS.get("states") or {}
+    if isinstance(released, dict) and isinstance(states, dict):
+        for name, details in released.items():
+            if states.get(name) == 2 or not isinstance(details, dict):
+                continue
+            skills = details.get("skills") or {}
+            chips = "".join(
+                req_chip(skill, target)
+                for skill, target in skills.items()
+                if skill in SKILL_NAMES and isinstance(target, int)
+            ) if isinstance(skills, dict) else ""
+            prerequisites = details.get("quests") or []
+            prerequisite_note = (
+                "Requires " + ", ".join(
+                    f"<b>{e(str(quest))}</b>" for quest in prerequisites
+                    if isinstance(quest, str)
+                ) + ". "
+            ) if isinstance(prerequisites, list) and prerequisites else ""
+            start = details.get("start")
+            wiki = urllib.parse.quote(str(name).replace(" ", "_"), safe="/#")
+            release_panels.append(
+                '<div class="subpanel"><div class="k">New quest requirements</div>'
+                f'<h3><a href="{WIKI}{wiki}" rel="noopener" target="_blank">'
+                f'{e(str(name))}</a></h3><div class="reqgrid">{chips}</div>'
+                f'<p class="qnow">{prerequisite_note}'
+                f'{e(start) if isinstance(start, str) else ""}</p></div>'
+            )
+    release_note = "".join(release_panels)
 
     synced = str(QUESTS.get("synced") or "")[:10]
     next_wiki = urllib.parse.quote(str(nxt_step.get("wiki", "")), safe="/#")
@@ -992,6 +1039,8 @@ def quest_panel():
            + (f' &middot; {len(started)} part-finished' if started else "")
            + "</p>" if nxt else
            '<p class="qnow">Every step in the guide is done.</p>')
+        + source_note
+        + release_note
         + f'<ol class="qlist">{"".join(rows)}</ol>'
         f'<div class="qfoot"><a href="{OQG_URL}" rel="noopener">Optimal quest guide</a>'
         f'<span>WikiSync: {e(QUESTS.get("name", ""))}'
@@ -1306,26 +1355,16 @@ MAX_COMBAT = 126
 
 
 def rail_meter():
-    """Account line at the top of the index: total level and combat."""
-    spin = ('<button class="refresh stats-refresh" type="button" hidden '
-            'title="Refresh from the Hiscores" aria-label="Refresh from the Hiscores">'
-            '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">'
-            '<path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" '
-            'stroke-width="1.7" stroke-linecap="round"/>'
-            '<path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" '
-            'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>'
-            '</svg></button>')
-
+    """Account line at the top of the site index."""
     if STATS:
         rows = (f'<span class="mrow"><span>Total Level</span>'
                 f'<b class="num" data-stat="total">{STATS.get("overall", {}).get("level")}</b>'
-                f'<span class="mmax">/{MAX_TOTAL}</span>{spin}</span>'
+                f'<span class="mmax">/{MAX_TOTAL}</span></span>'
                 f'<span class="mrow"><span>Combat</span>'
                 f'<b class="num" data-stat="combat">{STATS.get("combat")}</b>'
-                f'<span class="mmax">/{MAX_COMBAT}</span>'
-                f'<span class="spacer"></span></span>')
+                f'<span class="mmax">/{MAX_COMBAT}</span></span>')
     else:
-        rows = (f'<span class="mrow"><span>Not linked</span>{spin}</span>'
+        rows = ('<span class="mrow"><span>Not linked</span></span>'
                 '<span class="mrow hint"><code>fetch_stats.py "RSN"</code></span>')
 
     return f'  <div class="meter">{rows}</div>'
@@ -2200,91 +2239,102 @@ FOCUS_JS = """
 </script>
 """
 
-LIVE_JS = """
+COACH_JS = """
 <script>
-/* Pulls the Hiscores through serve.py's /api/stats proxy. The Hiscores send no
-   CORS headers, so a static page cannot call them directly. */
+/* Character refresh and deterministic next-step guidance. Both actions need
+   serve.py because they refresh Hiscores and WikiSync snapshots on disk. */
 (function () {
-  var btn = document.querySelector('.stats-refresh');
-  if (!btn || !/^https?:$/.test(location.protocol)) return;
-  btn.hidden = false;
+  var sync = document.getElementById('sync-character');
+  var ask = document.getElementById('ask-character');
+  var status = document.getElementById('coach-status');
+  var output = document.getElementById('coach-output');
+  if (!sync || !ask || !status || !output) return;
 
-  function xpFor(l) {
-    var t = 0;
-    for (var i = 1; i < l; i++) t += Math.floor(i + 300 * Math.pow(2, i / 7));
-    return Math.floor(t / 4);
+  function busy(on) {
+    sync.disabled = on;
+    ask.disabled = on;
+    sync.classList.toggle('busy', on);
+    ask.classList.toggle('busy', on);
   }
 
-  function apply(d) {
-    var skills = d.skills || {};
-    document.querySelectorAll('[data-skill-level]').forEach(function (el) {
-      var s = skills[el.getAttribute('data-skill-level')];
-      if (s) el.textContent = s.level;
-    });
-    function band(el, level) {
-      var goals = (el.getAttribute('data-goals') || '').split(',')
-        .map(function (x) { return parseInt(x, 10); })
-        .filter(function (x) { return x > 1 && x <= 99; });
-      var from = 1, goal = 99;
-      goals.forEach(function (x) { if (x <= level) from = x; });
-      var next = goals.filter(function (x) { return x > level; })[0];
-      if (next) goal = next;
-      return { from: from, goal: goal, next: next };
-    }
-    document.querySelectorAll('[data-skill-bar]').forEach(function (el) {
-      var s = skills[el.getAttribute('data-skill-bar')];
-      if (!s) return;
-      var b = band(el, s.level);
-      var lo = xpFor(b.from), hi = xpFor(b.goal);
-      var pct = hi <= lo ? 100 : Math.round(100 * (s.xp - lo) / (hi - lo));
-      el.style.width = Math.max(0, Math.min(100, pct)) + '%';
-    });
-    document.querySelectorAll('[data-skill-goal]').forEach(function (el) {
-      var s = skills[el.getAttribute('data-skill-goal')];
-      if (!s) return;
-      var b = band(el, s.level);
-      el.textContent = b.next ? (el.getAttribute('data-prefix') || '') + b.next
-        : (el.getAttribute('data-done') || '99');
-      el.classList.toggle('done', !b.next);
-    });
-    var set = function (key, val) {
-      var el = document.querySelector('[data-stat="' + key + '"]');
-      if (el && val != null) el.textContent = val;
-    };
-    set('total', d.overall && d.overall.level);
-    set('combat', d.combat);
-    document.dispatchEvent(new CustomEvent('osrsplan:stats', { detail: d }));
-  }
-
-  btn.addEventListener('click', function (ev) {
-    ev.preventDefault();
-    if (btn.classList.contains('busy')) return;
-    btn.classList.add('busy');
-    btn.classList.remove('ok', 'bad');
-    var started = Date.now();
-    var settle = function (fn) {
-      setTimeout(fn, Math.max(0, 1400 - (Date.now() - started)));
-    };
-    fetch('/api/stats', { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        if (!d || d.error) throw new Error(d && d.error || 'failed');
-        settle(function () {
-          apply(d);
-          btn.classList.remove('busy');
-          btn.classList.add('ok');
-          btn.title = 'Updated just now';
-          setTimeout(function () { btn.classList.remove('ok'); }, 2500);
-        });
-      })
-      .catch(function (err) {
-        settle(function () {
-          btn.classList.remove('busy');
-          btn.classList.add('bad');
-          btn.title = String(err.message || err).slice(0, 60);
-          setTimeout(function () { btn.classList.remove('bad'); }, 3000);
-        });
+  function request(path) {
+    return fetch(path, {
+      method: 'POST',
+      cache: 'no-store',
+      headers: { 'Content-Type': 'application/json' },
+      body: '{}'
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok || !data || data.error) {
+          throw new Error(data.error || 'This action needs python3 serve.py.');
+        }
+        return data;
       });
+    });
+  }
+
+  function add(tag, className, text) {
+    var element = document.createElement(tag);
+    element.className = className;
+    element.textContent = text;
+    output.appendChild(element);
+    return element;
+  }
+
+  function render(data) {
+    var advice = data.advice || {};
+    output.textContent = '';
+    add('span', 'k', 'Synced recommendation');
+    add('h3', 'coach-title', advice.headline || 'No recommendation available');
+    if (advice.summary) add('p', 'coach-summary', advice.summary);
+    if (Array.isArray(advice.actions) && advice.actions.length) {
+      var list = document.createElement('ol');
+      list.className = 'coach-steps';
+      advice.actions.forEach(function (text) {
+        var item = document.createElement('li');
+        item.textContent = text;
+        list.appendChild(item);
+      });
+      output.appendChild(list);
+    }
+    if (advice.checkpoint) add('p', 'coach-note', 'Next checkpoint: ' + advice.checkpoint + '.');
+    if (advice.next_quest) add('p', 'coach-note', 'Then resume with ' + advice.next_quest + '.');
+    if (advice.reward_note) add('p', 'coach-reward', advice.reward_note);
+    output.hidden = false;
+    var motion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? 'auto' : 'smooth';
+    output.scrollIntoView({ behavior: motion, block: 'nearest' });
+  }
+
+  sync.addEventListener('click', function () {
+    busy(true);
+    output.hidden = true;
+    status.classList.remove('bad');
+    status.textContent = 'Syncing Hiscores, quests and diaries…';
+    request('/api/sync').then(function () {
+      status.textContent = 'Synced. Reloading the updated site…';
+      location.reload();
+    }).catch(function (error) {
+      status.textContent = String(error.message || error);
+      status.classList.add('bad');
+      busy(false);
+    });
+  });
+
+  ask.addEventListener('click', function () {
+    busy(true);
+    output.hidden = true;
+    status.classList.remove('bad');
+    status.textContent = 'Syncing before choosing your next action…';
+    request('/api/advice').then(function (data) {
+      render(data);
+      status.textContent = 'Character synced just now.';
+      busy(false);
+    }).catch(function (error) {
+      status.textContent = String(error.message || error);
+      status.classList.add('bad');
+      busy(false);
+    });
   });
 })();
 </script>
@@ -2305,7 +2355,7 @@ RAIL_JS = """
 
 
 def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
-         wide=False):
+         wide=False, coach=False):
     root = "../" if depth else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -2339,7 +2389,7 @@ def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
 </main>
 {rail(active=active, depth=depth)}
 </div>
-{RAIL_JS}{LIVE_JS}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}{POTION_JS}{PATH_JS}
+{RAIL_JS}{COACH_JS if coach else ""}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}{POTION_JS}{PATH_JS}
 </body>
 </html>
 """
@@ -2675,7 +2725,7 @@ MASTERS = [
     ("Nieve / Steve", "Tree Gnome Stronghold", "85 combat or 99 Slayer", "12", "90"),
     ("Duradel / Kuradal", "Shilo Village", "Shilo Village; 100 combat + 50 Slayer, or 99 Slayer", "15", "100"),
     ("Krystilia", "Edgeville", "Any level, Wilderness tasks", "25", "100"),
-    ("Mortimer", "Wyrmscraig caverns", "The Fallen From Grace, 100 combat + 70 Slayer", "varies", "120"),
+    ("Mortimer", "Wyrmscraig Cavern", "Partly complete Fallen From Grace; 100 combat + 70 Slayer, or 99 Slayer", "modifier only", "120"),
 ]
 
 POINT_ORDER = [
@@ -2687,18 +2737,18 @@ POINT_ORDER = [
 ]
 
 MORTIMER = dict(
-    live="Launches 29 July 2026 with Wyrmscraig, so this is what Jagex have published rather than settled community practice.",
-    unlock="Reach the Wyrmscraig caverns during The Fallen From Grace, then 100 combat and 70 Slayer, or 99 Slayer at any combat level.",
+    live="Live since 29 July 2026. The modifiers and thresholds below are the launch values; settled community strategy is still developing.",
+    unlock="Reach Wyrmscraig Cavern partway through Fallen From Grace, then have 100 combat and 70 Slayer, or 99 Slayer at any combat level.",
     points=[
-        "He offers two tasks to choose from, and a third once you have done 100 tasks for him.",
-        "Every task comes with a modifier: bonus points, changed quantity, better clue rate, bonus Slayer XP, or a better superior unique roll.",
-        "Modifiers unlock as you go: points and quantity from the start, clues at 25 tasks, XP at 50, superior drop rate at 75, the third choice at 100.",
+        "He offers two tasks to choose from, and a third once you have completed 50 tasks for him.",
+        "Every offer can carry a Mortifier: Slayer points, changed quantity, better clue rates, bonus Slayer XP, or a better superior unique roll. Mortimer gives no baseline points without the points Mortifier.",
+        "Points and quantity are available immediately; clues unlock at 15 tasks, superior unique rolls at 25, Slayer XP at 40, and the third choice at 50.",
         "Skipping costs 100 points, Turael cannot reset a Mortimer task, and you only get two block slots at 120 points each.",
-        "He only assigns creatures that have superior variants, which is the point: it is the intended route to an imbued heart.",
+        "His streak is separate from normal Slayer, and he only assigns creatures with superior variants. The design is aimed at imbued-heart and eternal-gem hunters.",
         "Venators are exclusive to him and need no unlock, only The Blood Moon Rises.",
         "Task extensions carry over, but master-specific task unlocks do not. Gryphons, aquanites and basilisks are available without paying to unlock them.",
     ],
-    verdict="Jagex put Duradel and Mortimer extremely close on XP per hour, with Duradel pulling ahead as you unlock more block slots and keeping the boss tasks Mortimer cannot assign. Use Mortimer when you want superior drops or the choice between two known tasks; stay on Duradel for raw XP and bossing.",
+    verdict="Use Mortimer when superior drops or choosing between known tasks matter more than flexible blocks and cheap skips. Stay on Duradel for established raw-XP routing and boss tasks while Mortimer's launch strategy settles.",
 )
 
 
@@ -4929,13 +4979,31 @@ def gear_page():
     return page("Gear", "\n".join(body), depth=0)
 
 
+def character_coach():
+    """Local-server controls for a full sync and a next-action recommendation."""
+    return (
+        '<section class="coach" aria-labelledby="coach-heading">'
+        '<div class="coach-head"><div>'
+        '<span class="k">Character coach</span>'
+        '<h2 id="coach-heading">What should I do?</h2>'
+        '<p>Refresh Hiscores, quests and diaries, then turn the optimal route into one next action.</p>'
+        '</div><div class="coach-actions">'
+        '<button class="btn ghost" id="sync-character" type="button">Sync character</button>'
+        '<button class="btn" id="ask-character" type="button">What should I do now?</button>'
+        '</div></div>'
+        '<p class="coach-status" id="coach-status" role="status" aria-live="polite"></p>'
+        '<div class="coach-output" id="coach-output" hidden></div>'
+        '</section>'
+    )
+
+
 def build_index():
     parts = ['<h1 class="sr">OSRS Max Cape Plan</h1>']
     art = focus_panel()
     parts.append('<section class="hero">')
     parts.append(art)
     parts.append("</section>")
-
+    parts.append(character_coach())
 
     parts.append(h2("progression", "Main Progression", "assets/media/site/combat-achievements.png"))
     parts.append('<ol class="phases">')
@@ -4984,7 +5052,7 @@ def build_index():
                     "assets/media/site/skills-icon.png"))
     parts.append(feeders_section())
 
-    return page("OSRS Max Time-Wasting Plan", "\n".join(parts))
+    return page("OSRS Max Time-Wasting Plan", "\n".join(parts), coach=True)
 
 
 def main():

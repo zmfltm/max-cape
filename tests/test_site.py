@@ -65,11 +65,12 @@ class GeneratedSiteTests(unittest.TestCase):
             for value in attr.findall(page.read_text(encoding="utf-8")):
                 self.assertIsNone(raw_amp.search(value), f"{page}: unescaped &: {value}")
 
-    def test_live_stats_uses_its_own_refresh_button(self):
-        for page in self.pages:
-            source = page.read_text(encoding="utf-8")
-            self.assertIn("querySelector('.stats-refresh')", source, page)
-            self.assertEqual(source.count('class="refresh stats-refresh"'), 1, page)
+    def test_character_coach_has_exactly_two_actions(self):
+        source = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertEqual(source.count('id="sync-character"'), 1)
+        self.assertEqual(source.count('id="ask-character"'), 1)
+        self.assertIn("request('/api/sync')", source)
+        self.assertIn("request('/api/advice')", source)
 
     def test_generator_matches_tracked_html(self):
         ordered = [s for group in build.GROUP_ORDER
@@ -86,6 +87,8 @@ class GeneratedSiteTests(unittest.TestCase):
             ROOT / "stars.html": build.build_stars_page(),
             ROOT / "afk.html": build.build_afk_page(),
             ROOT / "paths.html": build.paths_page(),
+            ROOT / "calculators.html": build.calculators_page(),
+            ROOT / "gear.html": build.gear_page(),
         })
         for path, content in expected.items():
             self.assertEqual(path.read_text(encoding="utf-8"), content,

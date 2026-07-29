@@ -788,6 +788,56 @@ td.dt.none { color: var(--dim); }
 .btn.ghost { border-color: var(--line); color: var(--fg-2); background: var(--surface); }
 .btn.ghost:hover { border-color: rgba(255, 255, 255, 0.2); color: var(--fg); background: var(--surface-hi); }
 
+/* ------------------------------------------------------------ character coach */
+
+.coach {
+  margin-top: 14px;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 157, 46, 0.24);
+  border-radius: var(--r);
+  background: linear-gradient(135deg, rgba(255, 157, 46, 0.08), var(--surface) 58%);
+}
+.coach-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.coach-head h2 { display: block; margin: 3px 0 5px; font-size: 18px; }
+.coach-head p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.coach-actions { display: flex; flex: 0 0 auto; gap: 8px; }
+.coach-actions .btn {
+  appearance: none;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+.coach-actions .btn:hover { background: #ffad50; }
+.coach-actions .btn:disabled { cursor: wait; opacity: 0.58; }
+.coach-actions .btn.busy::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+.coach-status { min-height: 18px; margin: 8px 0 0; color: var(--dim); font-size: 12px; }
+.coach-status.bad { color: #e5847d; }
+.coach-output {
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+}
+.coach-title { margin: 4px 0 7px; font-size: 17px; }
+.coach-summary { color: var(--muted); font-size: 14px; line-height: 1.55; }
+.coach-steps { margin: 12px 0; padding-left: 22px; }
+.coach-steps li { margin-bottom: 6px; font-size: 13.5px; }
+.coach-note, .coach-reward {
+  margin: 8px 0 0;
+  color: var(--fg-2);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.coach-reward { color: var(--warn); }
+
 /* -------------------------------------------------------------------- stats */
 
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
@@ -1770,6 +1820,10 @@ p.lede2 { color: var(--muted); font-size: 14.5px; max-width: 68ch; }
 @media (max-width: 620px) {
   .shell { padding: 36px 18px 80px; }
   .btn { padding: 9px 17px; font-size: 14px; }
+  .coach { padding: 16px; }
+  .coach-head { align-items: stretch; flex-direction: column; gap: 14px; }
+  .coach-actions { flex-direction: column; }
+  .coach-actions .btn { justify-content: center; }
   h1.page { font-size: 26px; }
   .lede { font-size: 15.5px; }
   .rail .rail-body { columns: 1; }
@@ -1779,8 +1833,10 @@ p.lede2 { color: var(--muted); font-size: 14.5px; max-width: 68ch; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
   html { scroll-behavior: auto; }
-  /* the spinner is feedback, not decoration, so it keeps turning */
-  .refresh.busy svg { animation: spin 700ms linear infinite !important; }
+  /* spinners are feedback, not decoration, so they keep turning */
+  .refresh.busy svg, .coach-actions .btn.busy::after {
+    animation: spin 700ms linear infinite !important;
+  }
 }
 
 /* -------------------------------------------------------------- calculators */

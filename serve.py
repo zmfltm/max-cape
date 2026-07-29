@@ -1,36 +1,41 @@
 #!/usr/bin/env python3
-"""Serves the site and proxies the OSRS Hiscores so the page can refresh live.
+"""Serves the site with local character sync and recommendation APIs.
 
     python3 serve.py            # http://localhost:8412
     python3 serve.py 9000       # different port
 
-Plain `python3 -m http.server` also works; you just lose the live refresh
-button and see the levels as of the last `fetch_stats.py` run. The proxy exists
-because the Hiscores send no CORS headers, so a browser cannot call them
-directly from a `file://` URL or a static page.
+Plain `python3 -m http.server` also works, but it cannot refresh Hiscores and
+WikiSync snapshots or write regenerated pages.
 """
 
+import datetime
 import http.server
 import json
 import os
 import re
-import time
-import urllib.parse
-import urllib.request
+import subprocess
 import sys
 import threading
+import time
 import urllib.error
+import urllib.parse
+import urllib.request
 
+from guidance import recommend
 from hiscores import SKILL_ORDER, fetch
+from quests import collect, collect_diaries, quest_cape_requirements, sync_state
 from storage import atomic_json_dump
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STATS = os.path.join(HERE, "data", "stats.json")
+QUESTS = os.path.join(HERE, "data", "quests.json")
+DIARIES = os.path.join(HERE, "data", "diaries.json")
 PICKS = os.path.join(HERE, "data", "picks.json")
 FOCUS = os.path.join(HERE, "data", "focus.json")
 MAX_BODY = 8 * 1024
 VALID_SKILLS = set(SKILL_ORDER) | {"Diaries"}
 _write_lock = threading.Lock()
+_sync_lock = threading.Lock()
 
 
 def remembered_name():
@@ -40,6 +45,45 @@ def remembered_name():
         return data.get("name") if isinstance(data, dict) else None
     except (OSError, ValueError):
         return None
+
+
+def sync_character():
+    """Refresh all character snapshots, then regenerate the static pages.
+
+    Fetch everything before writing anything so a failed upstream leaves the
+    previous valid snapshot intact.
+    """
+    player = (remembered_name() or "").strip()
+    if not player:
+        raise ValueError("no player linked yet")
+    if not re.fullmatch(r"[A-Za-z0-9 _-]{1,12}", player):
+        raise ValueError("invalid player name")
+
+    with _sync_lock:
+        stats = fetch(player)
+        raw = sync_state(player)
+        quests = collect(player, raw)
+        quests["requirements"] = quest_cape_requirements()
+        diaries = collect_diaries(raw, player)
+        stamp = datetime.datetime.now().astimezone().isoformat(timespec="minutes")
+        stats["fetched"] = stamp
+        quests["fetched"] = stamp
+        diaries["fetched"] = stamp
+
+        with _write_lock:
+            atomic_json_dump(STATS, stats, sort_keys=True)
+            atomic_json_dump(QUESTS, quests)
+            atomic_json_dump(DIARIES, diaries)
+
+        build = subprocess.run(
+            [sys.executable, os.path.join(HERE, "build.py")],
+            cwd=HERE, capture_output=True, text=True, timeout=120, check=False,
+        )
+        if build.returncode:
+            detail = (build.stderr or build.stdout or "unknown build error").strip()
+            raise RuntimeError(f"character synced, but site rebuild failed: {detail[:200]}")
+
+    return stats, quests, diaries
 
 
 STAR_URL = "https://07.gg/trackers/shooting-star"
@@ -140,7 +184,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def do_POST(self):                                            # noqa: N802
         route = self.path.split("?")[0]
-        if route not in ("/api/pick", "/api/focus"):
+        if route not in ("/api/pick", "/api/focus", "/api/sync", "/api/advice"):
             return self.json({"error": "unknown endpoint"}, 404)
         content_type = self.headers.get_content_type()
         if content_type != "application/json":
@@ -157,7 +201,35 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.json({"error": "request body must be between 1 and 8,192 bytes"}, 413)
         try:
             body = json.loads(self.rfile.read(length))
-            if not isinstance(body, dict) or not isinstance(body.get("skill"), str):
+            if not isinstance(body, dict):
+                raise ValueError
+        except (ValueError, json.JSONDecodeError):
+            return self.json({"error": "bad request"}, 400)
+
+        if route in ("/api/sync", "/api/advice"):
+            try:
+                stats, quests, diaries = sync_character()
+            except ValueError as exc:
+                return self.json({"error": str(exc)}, 400)
+            except urllib.error.HTTPError as exc:
+                return self.json({"error": f"upstream refresh failed ({exc.code})"}, 502)
+            except Exception as exc:                              # noqa: BLE001
+                return self.json({"error": str(exc)}, 502)
+
+            synced = {
+                "name": stats.get("name"),
+                "total": (stats.get("overall") or {}).get("level"),
+                "combat": stats.get("combat"),
+                "quests_done": quests.get("done"),
+                "quests_total": quests.get("total"),
+            }
+            if route == "/api/advice":
+                return self.json({"ok": True, "synced": synced,
+                                  "advice": recommend(stats, quests, diaries)})
+            return self.json({"ok": True, "synced": synced})
+
+        try:
+            if not isinstance(body.get("skill"), str):
                 raise ValueError
             skill = body["skill"].strip()
             if skill not in VALID_SKILLS:
@@ -169,7 +241,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 method = body["method"].strip()
                 if not valid_method(skill, method):
                     raise ValueError
-        except (ValueError, json.JSONDecodeError):
+        except ValueError:
             return self.json({"error": "bad request"}, 400)
 
         if route == "/api/focus":
@@ -215,7 +287,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
         # keep the snapshot fresh so a later rebuild uses these numbers
         try:
-            import datetime
             data["fetched"] = datetime.datetime.now().astimezone().isoformat(timespec="minutes")
             with _write_lock:
                 atomic_json_dump(STATS, data, sort_keys=True)

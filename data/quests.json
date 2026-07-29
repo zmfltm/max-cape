@@ -1,6 +1,6 @@
 {
  "name": "gxexe",
- "synced": "2026-07-29T08:50:59.071Z",
+ "synced": "2026-07-29T14:46:55.594Z",
  "route": [
   {
    "kind": "task",
@@ -123,6 +123,12 @@
    "wiki": "The_Knight's_Sword"
   },
   {
+   "kind": "task",
+   "name": "Train Fletching from level 1 to level 10",
+   "state": null,
+   "wiki": "Train_Fletching_from_level_1_to_level_10"
+  },
+  {
    "kind": "quest",
    "name": "The Tourist Trap",
    "state": 2,
@@ -195,6 +201,12 @@
    "wiki": "Biohazard"
   },
   {
+   "kind": "task",
+   "name": "Train Construction from level 8 to level 10",
+   "state": null,
+   "wiki": "Train_Construction_from_level_8_to_level_10"
+  },
+  {
    "kind": "quest",
    "name": "Tower of Life",
    "state": 2,
@@ -264,6 +276,12 @@
    "wiki": "Nature_Spirit"
   },
   {
+   "kind": "task",
+   "name": "Train Cooking from level 14 to level 20",
+   "state": null,
+   "wiki": "Train_Cooking_from_level_14_to_level_20"
+  },
+  {
    "kind": "quest",
    "name": "Ghosts Ahoy",
    "state": 2,
@@ -300,6 +318,18 @@
    "wiki": "Elemental_Workshop_I"
   },
   {
+   "kind": "task",
+   "name": "Train Agility from level 34 to level 35",
+   "state": null,
+   "wiki": "Train_Agility_from_level_34_to_level_35"
+  },
+  {
+   "kind": "task",
+   "name": "Train Prayer from level 33 to level 37 for Protect from Magic",
+   "state": null,
+   "wiki": "Train_Prayer_from_level_33_to_level_37_for_Protect_from_Magic"
+  },
+  {
    "kind": "quest",
    "name": "Icthlarin's Little Helper",
    "state": 2,
@@ -316,6 +346,18 @@
    "name": "The Ribbiting Tale of a Lily Pad Labour Dispute",
    "state": 2,
    "wiki": "The_Ribbiting_Tale_of_a_Lily_Pad_Labour_Dispute"
+  },
+  {
+   "kind": "task",
+   "name": "Train Woodcutting from level 25 to level 36",
+   "state": null,
+   "wiki": "Train_Woodcutting_from_level_25_to_level_36"
+  },
+  {
+   "kind": "task",
+   "name": "Train Crafting from level 30 to level 31",
+   "state": null,
+   "wiki": "Train_Crafting_from_level_30_to_level_31"
   },
   {
    "kind": "quest",
@@ -342,6 +384,12 @@
    "wiki": "Recipe_for_Disaster_-_Wartface_&_Bentnoze"
   },
   {
+   "kind": "task",
+   "name": "Train Firemaking from level 1 to level 30",
+   "state": null,
+   "wiki": "Train_Firemaking_from_level_1_to_level_30"
+  },
+  {
    "kind": "quest",
    "name": "Sea Slug",
    "state": 2,
@@ -354,10 +402,22 @@
    "wiki": "Pandemonium"
   },
   {
+   "kind": "task",
+   "name": "Train Sailing from level 5 to level 12",
+   "state": null,
+   "wiki": "Train_Sailing_from_level_5_to_level_12"
+  },
+  {
    "kind": "quest",
    "name": "Prying Times",
    "state": 2,
    "wiki": "Prying_Times"
+  },
+  {
+   "kind": "task",
+   "name": "Train Sailing from level 14 to level 22",
+   "state": null,
+   "wiki": "Train_Sailing_from_level_14_to_level_22"
   },
   {
    "kind": "quest",
@@ -498,6 +558,12 @@
    "wiki": "Bone_Voyage"
   },
   {
+   "kind": "task",
+   "name": "Train Mining from level 36 to level 39",
+   "state": null,
+   "wiki": "Train_Mining_from_level_36_to_level_39"
+  },
+  {
    "kind": "quest",
    "name": "Watchtower",
    "state": 2,
@@ -544,6 +610,12 @@
    "name": "Shadow of the Storm",
    "state": 2,
    "wiki": "Shadow_of_the_Storm"
+  },
+  {
+   "kind": "task",
+   "name": "Train Prayer from level 38 to level 40 for Protect from Missiles",
+   "state": null,
+   "wiki": "Train_Prayer_from_level_38_to_level_40_for_Protect_from_Missiles"
   },
   {
    "kind": "quest",
@@ -603,6 +675,12 @@
    "wiki": "Observatory_Quest"
   },
   {
+   "kind": "task",
+   "name": "Train Ranged from level 33 to level 37",
+   "state": null,
+   "wiki": "Train_Ranged_from_level_33_to_level_37"
+  },
+  {
    "kind": "quest",
    "name": "Spirits of the Elid",
    "state": 2,
@@ -628,9 +706,21 @@
   },
   {
    "kind": "task",
+   "name": "Train Firemaking from level 34 to level 40",
+   "state": null,
+   "wiki": "Train_Firemaking_from_level_34_to_level_40"
+  },
+  {
+   "kind": "task",
    "name": "Varrock Balloon",
    "state": null,
    "wiki": "Varrock_Balloon"
+  },
+  {
+   "kind": "task",
+   "name": "Train Firemaking from level 40 to level 49",
+   "state": null,
+   "wiki": "Train_Firemaking_from_level_40_to_level_49"
   },
   {
    "kind": "quest",
@@ -643,6 +733,12 @@
    "name": "Tears of Guthix",
    "state": 2,
    "wiki": "Tears_of_Guthix"
+  },
+  {
+   "kind": "task",
+   "name": "Train Prayer from level 41 to level 43 for Protect from Melee",
+   "state": null,
+   "wiki": "Train_Prayer_from_level_41_to_level_43_for_Protect_from_Melee"
   },
   {
    "kind": "quest",
@@ -681,10 +777,22 @@
    "wiki": "Troll_Romance"
   },
   {
+   "kind": "task",
+   "name": "Train Strength from level 38 to level 40",
+   "state": null,
+   "wiki": "Train_Strength_from_level_38_to_level_40"
+  },
+  {
    "kind": "quest",
    "name": "Darkness of Hallowvale",
    "state": 0,
    "wiki": "Darkness_of_Hallowvale"
+  },
+  {
+   "kind": "task",
+   "name": "Train Agility from level 43 to level 56 highly recommended: Obtain full Graceful on the Canifis Rooftop Course (maximising marks of grace there with lower Agility levels. One is expected to reach ~58 Agility when doing so).",
+   "state": null,
+   "wiki": "Train_Agility_from_level_43_to_level_56_highly_recommended:_Obtain_full_Graceful_on_the_Canifis_Rooftop_Course_(maximising_marks_of_grace_there_with_lower_Agility_levels._One_is_expected_to_reach_~58_Agility_when_doing_so)."
   },
   {
    "kind": "quest",
@@ -709,6 +817,12 @@
    "name": "The Fremennik Trials",
    "state": 2,
    "wiki": "The_Fremennik_Trials"
+  },
+  {
+   "kind": "task",
+   "name": "Train Construction from level 19 to level 20",
+   "state": null,
+   "wiki": "Train_Construction_from_level_19_to_level_20"
   },
   {
    "kind": "quest",
@@ -750,10 +864,22 @@
    "wiki": "Contact!"
   },
   {
+   "kind": "task",
+   "name": "Train Ranged from level 37 to level 40",
+   "state": null,
+   "wiki": "Train_Ranged_from_level_37_to_level_40"
+  },
+  {
    "kind": "quest",
    "name": "Temple of Ikov",
    "state": 2,
    "wiki": "Temple_of_Ikov"
+  },
+  {
+   "kind": "task",
+   "name": "Train Magic from level 40 to level 46",
+   "state": null,
+   "wiki": "Train_Magic_from_level_40_to_level_46"
   },
   {
    "kind": "quest",
@@ -772,6 +898,12 @@
    "name": "One Small Favour",
    "state": 0,
    "wiki": "One_Small_Favour"
+  },
+  {
+   "kind": "task",
+   "name": "Train Hunter from level 9 to level 12",
+   "state": null,
+   "wiki": "Train_Hunter_from_level_9_to_level_12"
   },
   {
    "kind": "quest",
@@ -873,6 +1005,12 @@
    "wiki": "Wilderness_Diary#Easy"
   },
   {
+   "kind": "task",
+   "name": "Train Smithing from level 44 to level 50",
+   "state": null,
+   "wiki": "Train_Smithing_from_level_44_to_level_50"
+  },
+  {
    "kind": "quest",
    "name": "Between a Rock...",
    "state": 0,
@@ -897,16 +1035,34 @@
    "wiki": "Museum_Camp"
   },
   {
+   "kind": "task",
+   "name": "Train Construction from level 32 to level 37",
+   "state": null,
+   "wiki": "Train_Construction_from_level_32_to_level_37"
+  },
+  {
    "kind": "quest",
    "name": "Cold War",
    "state": 0,
    "wiki": "Cold_War"
   },
   {
+   "kind": "task",
+   "name": "Train Crafting from level 45 to level 49",
+   "state": null,
+   "wiki": "Train_Crafting_from_level_45_to_level_49"
+  },
+  {
    "kind": "quest",
    "name": "The Hand in the Sand",
    "state": 0,
    "wiki": "The_Hand_in_the_Sand"
+  },
+  {
+   "kind": "task",
+   "name": "Train Crafting from level 49 to level 50",
+   "state": null,
+   "wiki": "Train_Crafting_from_level_49_to_level_50"
   },
   {
    "kind": "quest",
@@ -939,6 +1095,30 @@
    "wiki": "Rag_and_Bone_Man_II"
   },
   {
+   "kind": "task",
+   "name": "Train Prayer from level 43 to level 45",
+   "state": null,
+   "wiki": "Train_Prayer_from_level_43_to_level_45"
+  },
+  {
+   "kind": "task",
+   "name": "Train Fishing from level 33 to level 50",
+   "state": null,
+   "wiki": "Train_Fishing_from_level_33_to_level_50"
+  },
+  {
+   "kind": "task",
+   "name": "Train Farming from level 38 to level 40",
+   "state": null,
+   "wiki": "Train_Farming_from_level_38_to_level_40"
+  },
+  {
+   "kind": "task",
+   "name": "Train Slayer from level 40 to level 42",
+   "state": null,
+   "wiki": "Train_Slayer_from_level_40_to_level_42"
+  },
+  {
    "kind": "quest",
    "name": "Rum Deal",
    "state": 0,
@@ -957,16 +1137,40 @@
    "wiki": "Meat_and_Greet"
   },
   {
+   "kind": "task",
+   "name": "Train Cooking from level 39 to level 40",
+   "state": null,
+   "wiki": "Train_Cooking_from_level_39_to_level_40"
+  },
+  {
    "kind": "quest",
    "name": "Recipe for Disaster - Lumbridge Guide",
    "state": 2,
    "wiki": "Recipe_for_Disaster_-_Lumbridge_Guide"
   },
   {
+   "kind": "task",
+   "name": "Train Cooking from level 40 to level 42",
+   "state": null,
+   "wiki": "Train_Cooking_from_level_40_to_level_42"
+  },
+  {
    "kind": "quest",
    "name": "Recipe for Disaster - Skrach Uglogwee",
    "state": 2,
    "wiki": "Recipe_for_Disaster_-_Skrach_Uglogwee"
+  },
+  {
+   "kind": "task",
+   "name": "Train Cooking from level 42 to level 50",
+   "state": null,
+   "wiki": "Train_Cooking_from_level_42_to_level_50"
+  },
+  {
+   "kind": "task",
+   "name": "Train Mining from level 43 to level 50",
+   "state": null,
+   "wiki": "Train_Mining_from_level_43_to_level_50"
   },
   {
    "kind": "quest",
@@ -1017,6 +1221,18 @@
    "wiki": "Twilight's_Promise"
   },
   {
+   "kind": "task",
+   "name": "Train Ranged from level 43 to level 60",
+   "state": null,
+   "wiki": "Train_Ranged_from_level_43_to_level_60"
+  },
+  {
+   "kind": "task",
+   "name": "Train Thieving from level 47 to level 50",
+   "state": null,
+   "wiki": "Train_Thieving_from_level_47_to_level_50"
+  },
+  {
    "kind": "quest",
    "name": "Roving Elves",
    "state": 0,
@@ -1035,10 +1251,28 @@
    "wiki": "Mourning's_End_Part_II"
   },
   {
+   "kind": "task",
+   "name": "Train Magic from level 48 to level 50",
+   "state": null,
+   "wiki": "Train_Magic_from_level_48_to_level_50"
+  },
+  {
+   "kind": "task",
+   "name": "Train Firemaking from level 49 to level 50",
+   "state": null,
+   "wiki": "Train_Firemaking_from_level_49_to_level_50"
+  },
+  {
    "kind": "quest",
    "name": "Desert Treasure I",
    "state": 2,
    "wiki": "Desert_Treasure_I"
+  },
+  {
+   "kind": "task",
+   "name": "Train Magic from level 51 to level 55",
+   "state": null,
+   "wiki": "Train_Magic_from_level_51_to_level_55"
   },
   {
    "kind": "quest",
@@ -1047,10 +1281,22 @@
    "wiki": "Family_Crest"
   },
   {
+   "kind": "task",
+   "name": "Train Runecraft from level 33 to level 35",
+   "state": null,
+   "wiki": "Train_Runecraft_from_level_33_to_level_35"
+  },
+  {
    "kind": "quest",
    "name": "What Lies Below",
    "state": 0,
    "wiki": "What_Lies_Below"
+  },
+  {
+   "kind": "task",
+   "name": "Train Hunter from level 16 to level 27",
+   "state": null,
+   "wiki": "Train_Hunter_from_level_16_to_level_27"
   },
   {
    "kind": "quest",
@@ -1063,6 +1309,24 @@
    "name": "A Tail of Two Cats",
    "state": 2,
    "wiki": "A_Tail_of_Two_Cats"
+  },
+  {
+   "kind": "task",
+   "name": "Train Mining from level 50 to level 52",
+   "state": null,
+   "wiki": "Train_Mining_from_level_50_to_level_52"
+  },
+  {
+   "kind": "task",
+   "name": "Train Woodcutting from level 42 to level 50",
+   "state": null,
+   "wiki": "Train_Woodcutting_from_level_42_to_level_50"
+  },
+  {
+   "kind": "task",
+   "name": "Train Herblore from level 40 to level 41",
+   "state": null,
+   "wiki": "Train_Herblore_from_level_40_to_level_41"
   },
   {
    "kind": "quest",
@@ -1089,6 +1353,12 @@
    "wiki": "Olaf's_Quest"
   },
   {
+   "kind": "task",
+   "name": "Train Woodcutting from level 50 to level 52",
+   "state": null,
+   "wiki": "Train_Woodcutting_from_level_50_to_level_52"
+  },
+  {
    "kind": "quest",
    "name": "A Kingdom Divided",
    "state": 0,
@@ -1101,10 +1371,34 @@
    "wiki": "A_Taste_of_Hope"
   },
   {
+   "kind": "task",
+   "name": "Train Hunter from level 29 to level 46",
+   "state": null,
+   "wiki": "Train_Hunter_from_level_29_to_level_46"
+  },
+  {
    "kind": "quest",
    "name": "At First Light",
    "state": 0,
    "wiki": "At_First_Light"
+  },
+  {
+   "kind": "task",
+   "name": "Train Farming from level 41 to level 46 - You can work on the 2 other skills while letting crops grow.",
+   "state": null,
+   "wiki": "Train_Farming_from_level_41_to_level_46_-_You_can_work_on_the_2_other_skills_while_letting_crops_grow."
+  },
+  {
+   "kind": "task",
+   "name": "Train Hunter from level 46 to level 50",
+   "state": null,
+   "wiki": "Train_Hunter_from_level_46_to_level_50"
+  },
+  {
+   "kind": "task",
+   "name": "Train Fletching from level 31 to level 50",
+   "state": null,
+   "wiki": "Train_Fletching_from_level_31_to_level_50"
   },
   {
    "kind": "task",
@@ -1227,6 +1521,12 @@
    "wiki": "His_Faithful_Servants"
   },
   {
+   "kind": "task",
+   "name": "Train Prayer from level 49 to level 50",
+   "state": null,
+   "wiki": "Train_Prayer_from_level_49_to_level_50"
+  },
+  {
    "kind": "quest",
    "name": "The Great Brain Robbery",
    "state": 0,
@@ -1245,6 +1545,12 @@
    "wiki": "Fairytale_II_-_Cure_a_Queen"
   },
   {
+   "kind": "task",
+   "name": "Train Cooking from level 51 to level 66",
+   "state": null,
+   "wiki": "Train_Cooking_from_level_51_to_level_66"
+  },
+  {
    "kind": "quest",
    "name": "Recipe for Disaster - King Awowogei",
    "state": 2,
@@ -1257,10 +1563,34 @@
    "wiki": "Recipe_for_Disaster_-_Culinaromancer"
   },
   {
+   "kind": "task",
+   "name": "Train Defence from level 51 to level 60",
+   "state": null,
+   "wiki": "Train_Defence_from_level_51_to_level_60"
+  },
+  {
+   "kind": "task",
+   "name": "Train Strength from level 51 to level 60",
+   "state": null,
+   "wiki": "Train_Strength_from_level_51_to_level_60"
+  },
+  {
    "kind": "quest",
    "name": "Perilous Moons",
    "state": 0,
    "wiki": "Perilous_Moons"
+  },
+  {
+   "kind": "task",
+   "name": "Start miniquest: In Search of Knowledge .",
+   "state": null,
+   "wiki": "Start_miniquest:_In_Search_of_Knowledge_."
+  },
+  {
+   "kind": "task",
+   "name": "Train Thieving from level 54 to level 56",
+   "state": null,
+   "wiki": "Train_Thieving_from_level_54_to_level_56"
   },
   {
    "kind": "quest",
@@ -1269,16 +1599,52 @@
    "wiki": "The_Path_of_Glouphrie"
   },
   {
+   "kind": "task",
+   "name": "Train Mining from level 52 to level 55",
+   "state": null,
+   "wiki": "Train_Mining_from_level_52_to_level_55"
+  },
+  {
    "kind": "quest",
    "name": "The Heart of Darkness",
    "state": 0,
    "wiki": "The_Heart_of_Darkness"
   },
   {
+   "kind": "task",
+   "name": "Train Magic from level 55 to level 65",
+   "state": null,
+   "wiki": "Train_Magic_from_level_55_to_level_65"
+  },
+  {
+   "kind": "task",
+   "name": "Train Crafting from level 52 to level 61",
+   "state": null,
+   "wiki": "Train_Crafting_from_level_52_to_level_61"
+  },
+  {
+   "kind": "task",
+   "name": "Train Mining from level 55 to level 60",
+   "state": null,
+   "wiki": "Train_Mining_from_level_55_to_level_60"
+  },
+  {
+   "kind": "task",
+   "name": "Train Woodcutting from level 52 to level 55",
+   "state": null,
+   "wiki": "Train_Woodcutting_from_level_52_to_level_55"
+  },
+  {
    "kind": "quest",
    "name": "Lunar Diplomacy",
    "state": 0,
    "wiki": "Lunar_Diplomacy"
+  },
+  {
+   "kind": "task",
+   "name": "Train Defence from level 60 to level 65",
+   "state": null,
+   "wiki": "Train_Defence_from_level_60_to_level_65"
   },
   {
    "kind": "quest",
@@ -1293,10 +1659,34 @@
    "wiki": "Knight_Waves_Training_Grounds"
   },
   {
+   "kind": "task",
+   "name": "Train Magic from level 65 to level 66",
+   "state": null,
+   "wiki": "Train_Magic_from_level_65_to_level_66"
+  },
+  {
+   "kind": "task",
+   "name": "Train Fishing from level 52 to level 57",
+   "state": null,
+   "wiki": "Train_Fishing_from_level_52_to_level_57"
+  },
+  {
    "kind": "quest",
    "name": "Swan Song",
    "state": 0,
    "wiki": "Swan_Song"
+  },
+  {
+   "kind": "task",
+   "name": "Train Smithing from level 52 to level 55",
+   "state": null,
+   "wiki": "Train_Smithing_from_level_52_to_level_55"
+  },
+  {
+   "kind": "task",
+   "name": "Train Hunter from level 50 to level 52",
+   "state": null,
+   "wiki": "Train_Hunter_from_level_50_to_level_52"
   },
   {
    "kind": "quest",
@@ -1311,10 +1701,34 @@
    "wiki": "Defender_of_Varrock"
   },
   {
+   "kind": "task",
+   "name": "Train Smithing from level 55 to level 65",
+   "state": null,
+   "wiki": "Train_Smithing_from_level_55_to_level_65"
+  },
+  {
+   "kind": "task",
+   "name": "Train Runecraft from level 40 to level 50",
+   "state": null,
+   "wiki": "Train_Runecraft_from_level_40_to_level_50"
+  },
+  {
    "kind": "quest",
    "name": "Devious Minds",
    "state": 0,
    "wiki": "Devious_Minds"
+  },
+  {
+   "kind": "task",
+   "name": "Train Woodcutting from level 55 to level 68",
+   "state": null,
+   "wiki": "Train_Woodcutting_from_level_55_to_level_68"
+  },
+  {
+   "kind": "task",
+   "name": "Train Thieving from level 56 to level 58",
+   "state": null,
+   "wiki": "Train_Thieving_from_level_56_to_level_58"
   },
   {
    "kind": "quest",
@@ -1323,10 +1737,22 @@
    "wiki": "Grim_Tales"
   },
   {
+   "kind": "task",
+   "name": "Train Combat level to 85 (Recommended: also train Slayer )",
+   "state": null,
+   "wiki": "Train_Combat_level_to_85_(Recommended:_also_train_Slayer_)"
+  },
+  {
    "kind": "quest",
    "name": "Dream Mentor",
    "state": 0,
    "wiki": "Dream_Mentor"
+  },
+  {
+   "kind": "task",
+   "name": "Train Fishing from level 59 to level 60",
+   "state": null,
+   "wiki": "Train_Fishing_from_level_59_to_level_60"
   },
   {
    "kind": "diary",
@@ -1347,16 +1773,40 @@
    "wiki": "Wilderness_Diary#Medium"
   },
   {
+   "kind": "task",
+   "name": "Train Crafting from level 61 to level 65",
+   "state": null,
+   "wiki": "Train_Crafting_from_level_61_to_level_65"
+  },
+  {
+   "kind": "task",
+   "name": "Train Runecraft from level 50 to level 55",
+   "state": null,
+   "wiki": "Train_Runecraft_from_level_50_to_level_55"
+  },
+  {
    "kind": "quest",
    "name": "The Fremennik Exiles",
    "state": 0,
    "wiki": "The_Fremennik_Exiles"
   },
   {
+   "kind": "task",
+   "name": "Train Fletching from level 50 to level 60",
+   "state": null,
+   "wiki": "Train_Fletching_from_level_50_to_level_60"
+  },
+  {
    "kind": "quest",
    "name": "Sins of the Father",
    "state": 0,
    "wiki": "Sins_of_the_Father"
+  },
+  {
+   "kind": "task",
+   "name": "Train Firemaking from level 50 to level 60",
+   "state": null,
+   "wiki": "Train_Firemaking_from_level_50_to_level_60"
   },
   {
    "kind": "task",
@@ -1377,10 +1827,22 @@
    "wiki": "Hopespear's_Will"
   },
   {
+   "kind": "task",
+   "name": "Train Agility from level 61 to level 62",
+   "state": null,
+   "wiki": "Train_Agility_from_level_61_to_level_62"
+  },
+  {
    "kind": "quest",
    "name": "Beneath Cursed Sands",
    "state": 0,
    "wiki": "Beneath_Cursed_Sands"
+  },
+  {
+   "kind": "task",
+   "name": "Train Construction from level 39 to level 41",
+   "state": null,
+   "wiki": "Train_Construction_from_level_39_to_level_41"
   },
   {
    "kind": "quest",
@@ -1389,16 +1851,58 @@
    "wiki": "Shadows_of_Custodia"
   },
   {
+   "kind": "task",
+   "name": "Train Sailing from level 23 to level 45",
+   "state": null,
+   "wiki": "Train_Sailing_from_level_23_to_level_45"
+  },
+  {
+   "kind": "task",
+   "name": "Train Construction from level 41 to level 50",
+   "state": null,
+   "wiki": "Train_Construction_from_level_41_to_level_50"
+  },
+  {
    "kind": "quest",
    "name": "Troubled Tortugans",
    "state": 0,
    "wiki": "Troubled_Tortugans"
   },
   {
+   "kind": "task",
+   "name": "Train Sailing from level 46 to level 52",
+   "state": null,
+   "wiki": "Train_Sailing_from_level_46_to_level_52"
+  },
+  {
    "kind": "quest",
    "name": "The Red Reef",
    "state": 0,
    "wiki": "The_Red_Reef"
+  },
+  {
+   "kind": "task",
+   "name": "Train Hunter from level 53 to level 60",
+   "state": null,
+   "wiki": "Train_Hunter_from_level_53_to_level_60"
+  },
+  {
+   "kind": "task",
+   "name": "Train Agility from level 63 to level 68",
+   "state": null,
+   "wiki": "Train_Agility_from_level_63_to_level_68"
+  },
+  {
+   "kind": "task",
+   "name": "Train Slayer from level 65 to level 69",
+   "state": null,
+   "wiki": "Train_Slayer_from_level_65_to_level_69"
+  },
+  {
+   "kind": "task",
+   "name": "Train Crafting from level 66 to level 70",
+   "state": null,
+   "wiki": "Train_Crafting_from_level_66_to_level_70"
   },
   {
    "kind": "quest",
@@ -1419,6 +1923,24 @@
    "wiki": "A_Night_at_the_Theatre"
   },
   {
+   "kind": "task",
+   "name": "Train Magic from level 70 to level 75",
+   "state": null,
+   "wiki": "Train_Magic_from_level_70_to_level_75"
+  },
+  {
+   "kind": "task",
+   "name": "Train Mining from level 60 to level 68",
+   "state": null,
+   "wiki": "Train_Mining_from_level_60_to_level_68"
+  },
+  {
+   "kind": "task",
+   "name": "Train Smithing from level 65 to level 70",
+   "state": null,
+   "wiki": "Train_Smithing_from_level_65_to_level_70"
+  },
+  {
    "kind": "quest",
    "name": "Dragon Slayer II",
    "state": 0,
@@ -1431,10 +1953,22 @@
    "wiki": "The_Curse_of_Arrav"
   },
   {
+   "kind": "task",
+   "name": "Train Firemaking from level 60 to level 66",
+   "state": null,
+   "wiki": "Train_Firemaking_from_level_60_to_level_66"
+  },
+  {
    "kind": "quest",
    "name": "Making Friends with My Arm",
    "state": 0,
    "wiki": "Making_Friends_with_My_Arm"
+  },
+  {
+   "kind": "task",
+   "name": "Train Thieving from level 63 to level 64",
+   "state": null,
+   "wiki": "Train_Thieving_from_level_63_to_level_64"
   },
   {
    "kind": "quest",
@@ -1443,10 +1977,46 @@
    "wiki": "Secrets_of_the_North"
   },
   {
+   "kind": "task",
+   "name": "Train Thieving from level 65 to level 66",
+   "state": null,
+   "wiki": "Train_Thieving_from_level_65_to_level_66"
+  },
+  {
    "kind": "quest",
    "name": "The Final Dawn",
    "state": 0,
    "wiki": "The_Final_Dawn"
+  },
+  {
+   "kind": "task",
+   "name": "Train Thieving from level 67 to level 72",
+   "state": null,
+   "wiki": "Train_Thieving_from_level_67_to_level_72"
+  },
+  {
+   "kind": "task",
+   "name": "Train Farming from level 47 to level 65",
+   "state": null,
+   "wiki": "Train_Farming_from_level_47_to_level_65"
+  },
+  {
+   "kind": "task",
+   "name": "Train Herblore from level 56 to level 65",
+   "state": null,
+   "wiki": "Train_Herblore_from_level_56_to_level_65"
+  },
+  {
+   "kind": "task",
+   "name": "Train Attack from level 58 to level 65",
+   "state": null,
+   "wiki": "Train_Attack_from_level_58_to_level_65"
+  },
+  {
+   "kind": "task",
+   "name": "Train Strength from level 61 to level 65",
+   "state": null,
+   "wiki": "Train_Strength_from_level_61_to_level_65"
   },
   {
    "kind": "quest",
@@ -1455,16 +2025,94 @@
    "wiki": "While_Guthix_Sleeps"
   },
   {
+   "kind": "task",
+   "name": "Train Firemaking from level 66 to level 75",
+   "state": null,
+   "wiki": "Train_Firemaking_from_level_66_to_level_75"
+  },
+  {
+   "kind": "task",
+   "name": "Train Runecraft from level 57 to level 60",
+   "state": null,
+   "wiki": "Train_Runecraft_from_level_57_to_level_60"
+  },
+  {
+   "kind": "task",
+   "name": "Train Construction from level 50 to level 60",
+   "state": null,
+   "wiki": "Train_Construction_from_level_50_to_level_60"
+  },
+  {
    "kind": "quest",
    "name": "Desert Treasure II - The Fallen Empire",
    "state": 0,
    "wiki": "Desert_Treasure_II_-_The_Fallen_Empire"
   },
   {
+   "kind": "task",
+   "name": "Train Construction from level 60 to level 70",
+   "state": null,
+   "wiki": "Train_Construction_from_level_60_to_level_70"
+  },
+  {
+   "kind": "task",
+   "name": "Train Farming from level 66 to level 70",
+   "state": null,
+   "wiki": "Train_Farming_from_level_66_to_level_70"
+  },
+  {
+   "kind": "task",
+   "name": "Train Herblore from level 66 to level 70",
+   "state": null,
+   "wiki": "Train_Herblore_from_level_66_to_level_70"
+  },
+  {
+   "kind": "task",
+   "name": "Train Hunter from level 64 to level 70",
+   "state": null,
+   "wiki": "Train_Hunter_from_level_64_to_level_70"
+  },
+  {
+   "kind": "task",
+   "name": "Train Woodcutting from level 68 to level 70",
+   "state": null,
+   "wiki": "Train_Woodcutting_from_level_68_to_level_70"
+  },
+  {
    "kind": "quest",
    "name": "Song of the Elves",
    "state": 0,
    "wiki": "Song_of_the_Elves"
+  },
+  {
+   "kind": "task",
+   "name": "Train Slayer from level 70 to level 74",
+   "state": null,
+   "wiki": "Train_Slayer_from_level_70_to_level_74"
+  },
+  {
+   "kind": "task",
+   "name": "Train Woodcutting from level 70 to level 74",
+   "state": null,
+   "wiki": "Train_Woodcutting_from_level_70_to_level_74"
+  },
+  {
+   "kind": "task",
+   "name": "Train Smithing from level 71 to level 72",
+   "state": null,
+   "wiki": "Train_Smithing_from_level_71_to_level_72"
+  },
+  {
+   "kind": "task",
+   "name": "Train Cooking from level 66 to level 72",
+   "state": null,
+   "wiki": "Train_Cooking_from_level_66_to_level_72"
+  },
+  {
+   "kind": "task",
+   "name": "Train Fletching from level 60 to level 70",
+   "state": null,
+   "wiki": "Train_Fletching_from_level_60_to_level_70"
   },
   {
    "kind": "quest",
@@ -1695,6 +2343,7 @@
   "The Corsair Curse",
   "Barbarian Training",
   "Bear Your Soul",
+  "Fallen From Grace",
   "Family Pest",
   "Learning the Ropes",
   "Mage Arena I",
@@ -1914,10 +2563,28 @@
   "Watchtower": 2,
   "Waterfall Quest": 2,
   "Witch's House": 2,
-  "Witch's Potion": 2
+  "Witch's Potion": 2,
+  "Fallen From Grace": null
+ },
+ "unreported": [
+  "Fallen From Grace"
+ ],
+ "quest_requirements": {
+  "Fallen From Grace": {
+   "skills": {
+    "Sailing": 62,
+    "Crafting": 60,
+    "Runecraft": 47,
+    "Mining": 53
+   },
+   "quests": [
+    "Pandemonium"
+   ],
+   "start": "Speak to Cormac in the middle of Auchrie village."
+  }
  },
  "done": 121,
- "total": 210,
+ "total": 211,
  "in_progress": [
   "The Giant Dwarf",
   "Regicide",
@@ -2014,6 +2681,7 @@
   "Clock Tower",
   "Barbarian Training",
   "Bear Your Soul",
+  "Fallen From Grace",
   "Mage Arena I",
   "Mage Arena II",
   "The Enchanted Key",
@@ -2045,7 +2713,7 @@
    "Farming": 70,
    "Construction": 70,
    "Hunter": 70,
-   "Sailing": 52
+   "Sailing": 62
   },
   "combat": 85,
   "boostable": {
@@ -2053,5 +2721,5 @@
    "Fishing": 62
   }
  },
- "fetched": "2026-07-29T08:50+00:00"
+ "fetched": "2026-07-29T23:46+09:00"
 }
