@@ -1,244 +1,202 @@
 {
  "stars": [
   {
-   "world": 523,
-   "tier": 9,
-   "location": "Rellekka mine",
-   "calledAt": 1785395408110,
-   "endsAt": 1785399188110
-  },
-  {
-   "world": 474,
+   "world": 521,
    "tier": 8,
-   "location": "Rellekka mine",
-   "calledAt": 1785395018082,
-   "endsAt": 1785398378082
-  },
-  {
-   "world": 607,
-   "tier": 8,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1785395138113,
-   "endsAt": 1785398498113
-  },
-  {
-   "world": 606,
-   "tier": 8,
-   "location": "Ardougne Monastery",
-   "calledAt": 1785395498145,
-   "endsAt": 1785398858145
-  },
-  {
-   "world": 624,
-   "tier": 8,
-   "location": "Miscellania mine (cip fairy ring)",
-   "calledAt": 1785395738093,
-   "endsAt": 1785399098093
-  },
-  {
-   "world": 507,
-   "tier": 8,
-   "location": "Crafting guild",
-   "calledAt": 1785395768090,
-   "endsAt": 1785399128090
-  },
-  {
-   "world": 422,
-   "tier": 7,
-   "location": "Mount Karuulm mine",
-   "calledAt": 1785394838076,
-   "endsAt": 1785397778076
-  },
-  {
-   "world": 352,
-   "tier": 7,
-   "location": "Myths Guild",
-   "calledAt": 1785395018082,
-   "endsAt": 1785397958082
-  },
-  {
-   "world": 525,
-   "tier": 7,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1785395108130,
-   "endsAt": 1785398048130
-  },
-  {
-   "world": 376,
-   "tier": 7,
-   "location": "Soul Wars south mine",
-   "calledAt": 1785395588235,
-   "endsAt": 1785398528235
-  },
-  {
-   "world": 529,
-   "tier": 7,
-   "location": "Ardougne Monastery",
-   "calledAt": 1785395768090,
-   "endsAt": 1785398708090
-  },
-  {
-   "world": 365,
-   "tier": 7,
-   "location": "Yanille bank",
-   "calledAt": 1785395768090,
-   "endsAt": 1785398708090
-  },
-  {
-   "world": 325,
-   "tier": 7,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1785395768090,
-   "endsAt": 1785398708090
-  },
-  {
-   "world": 323,
-   "tier": 7,
-   "location": "Ardougne Monastery",
-   "calledAt": 1785395768090,
-   "endsAt": 1785398708090
-  },
-  {
-   "world": 621,
-   "tier": 6,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1785392138128,
-   "endsAt": 1785394658128
-  },
-  {
-   "world": 612,
-   "tier": 6,
-   "location": "Jatizso mine entrance",
-   "calledAt": 1785392678078,
-   "endsAt": 1785395198078
-  },
-  {
-   "world": 448,
-   "tier": 6,
-   "location": "Lunar Isle mine entrance",
-   "calledAt": 1785394238080,
-   "endsAt": 1785396758080
+   "location": "Lava maze runite mine (lvl 46 Wildy)",
+   "calledAt": 1785399188151,
+   "endsAt": 1785402548151
   },
   {
    "world": 351,
-   "tier": 6,
-   "location": "Mage Arena bank (lvl 56 Wildy)",
-   "calledAt": 1785394298085,
-   "endsAt": 1785396818085
+   "tier": 8,
+   "location": "Skeleton mine (lvl 10 Wildy)",
+   "calledAt": 1785400238095,
+   "endsAt": 1785403598095
   },
   {
-   "world": 486,
-   "tier": 6,
+   "world": 341,
+   "tier": 8,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1785400418090,
+   "endsAt": 1785403778090
+  },
+  {
+   "world": 515,
+   "tier": 8,
    "location": "Mount Karuulm mine",
-   "calledAt": 1785394388066,
-   "endsAt": 1785396908066
+   "calledAt": 1785400508112,
+   "endsAt": 1785403868112
+  },
+  {
+   "world": 325,
+   "tier": 8,
+   "location": "Mage of Zamorak mine (lvl 7 Wildy)",
+   "calledAt": 1785400778131,
+   "endsAt": 1785404138131
+  },
+  {
+   "world": 612,
+   "tier": 7,
+   "location": "Southwest of Brimhaven Poh",
+   "calledAt": 1785396188438,
+   "endsAt": 1785399128438
+  },
+  {
+   "world": 358,
+   "tier": 7,
+   "location": "Port Piscarilius mine in Kourend",
+   "calledAt": 1785399608152,
+   "endsAt": 1785402548152
+  },
+  {
+   "world": 625,
+   "tier": 7,
+   "location": "Lovakite mine",
+   "calledAt": 1785399818100,
+   "endsAt": 1785402758100
+  },
+  {
+   "world": 364,
+   "tier": 7,
+   "location": "Mage Arena bank (lvl 56 Wildy)",
+   "calledAt": 1785400598160,
+   "endsAt": 1785403538160
   },
   {
    "world": 531,
-   "tier": 6,
-   "location": "Yanille bank",
-   "calledAt": 1785395558121,
-   "endsAt": 1785398078121
+   "tier": 7,
+   "location": "Varrock east bank",
+   "calledAt": 1785400778131,
+   "endsAt": 1785403718131
   },
   {
-   "world": 444,
-   "tier": 6,
-   "location": "South Lovakengj bank",
-   "calledAt": 1785395588235,
-   "endsAt": 1785398108235
+   "world": 447,
+   "tier": 7,
+   "location": "Crafting guild",
+   "calledAt": 1785400808087,
+   "endsAt": 1785403748087
   },
   {
-   "world": 477,
+   "world": 546,
+   "tier": 6,
+   "location": "Abandoned Mine west of Burgh",
+   "calledAt": 1785400508112,
+   "endsAt": 1785403028112
+  },
+  {
+   "world": 541,
+   "tier": 6,
+   "location": "Lava maze runite mine (lvl 46 Wildy)",
+   "calledAt": 1785400538083,
+   "endsAt": 1785403058083
+  },
+  {
+   "world": 340,
    "tier": 6,
    "location": "Ardougne Monastery",
-   "calledAt": 1785395738093,
-   "endsAt": 1785398258093
+   "calledAt": 1785400538083,
+   "endsAt": 1785403058083
   },
   {
-   "world": 471,
+   "world": 504,
    "tier": 6,
-   "location": "Al Kharid bank",
-   "calledAt": 1785395768090,
-   "endsAt": 1785398288090
+   "location": "cox bank",
+   "calledAt": 1785400808087,
+   "endsAt": 1785403328087
   },
   {
-   "world": 512,
-   "tier": 6,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1785395858091,
-   "endsAt": 1785398378091
-  },
-  {
-   "world": 613,
+   "world": 303,
    "tier": 5,
-   "location": "Corsair Cove bank (innit)",
-   "calledAt": 1785395468084,
-   "endsAt": 1785397568084
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1785400238095,
+   "endsAt": 1785402338095
   },
   {
-   "world": 428,
+   "world": 508,
    "tier": 5,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1785395828071,
-   "endsAt": 1785397928071
+   "location": "Varrock east bank",
+   "calledAt": 1785400448120,
+   "endsAt": 1785402548120
   },
   {
-   "world": 346,
+   "world": 332,
    "tier": 5,
-   "location": "Shilo Village gem mine",
-   "calledAt": 1785395858091,
-   "endsAt": 1785397958091
+   "location": "Piscatoris (akq fairy ring)",
+   "calledAt": 1785400508112,
+   "endsAt": 1785402608112
   },
   {
-   "world": 520,
+   "world": 516,
+   "tier": 5,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1785400598160,
+   "endsAt": 1785402698160
+  },
+  {
+   "world": 604,
+   "tier": 5,
+   "location": "Crafting guild",
+   "calledAt": 1785400718136,
+   "endsAt": 1785402818136
+  },
+  {
+   "world": 454,
+   "tier": 5,
+   "location": "Southeast Varrock mine",
+   "calledAt": 1785400808087,
+   "endsAt": 1785402908087
+  },
+  {
+   "world": 490,
    "tier": 4,
-   "location": "Myths Guild",
-   "calledAt": 1785395678073,
-   "endsAt": 1785397358073
+   "location": "West of Grand Tree",
+   "calledAt": 1785400628095,
+   "endsAt": 1785402308095
   },
   {
-   "world": 482,
+   "world": 467,
    "tier": 3,
-   "location": "Shayzien mine south of Kourend Ca...",
-   "calledAt": 1785394418085,
-   "endsAt": 1785395678085
+   "location": "North Dwarven Mine entrance",
+   "calledAt": 1785400628095,
+   "endsAt": 1785401888095
   },
   {
-   "world": 694,
+   "world": 518,
    "tier": 3,
-   "location": "Rantz cave",
-   "calledAt": 1785395648178,
-   "endsAt": 1785396908178
+   "location": "Fossil Island Volcanic Mine entrance",
+   "calledAt": 1785400778131,
+   "endsAt": 1785402038131
   },
   {
-   "world": 522,
-   "tier": 3,
-   "location": "Catherby bank",
-   "calledAt": 1785395828071,
-   "endsAt": 1785397088071
-  },
-  {
-   "world": 699,
-   "tier": 3,
-   "location": "East Lumbridge Swamp mine",
-   "calledAt": 1785395858091,
-   "endsAt": 1785397118091
-  },
-  {
-   "world": 599,
+   "world": 614,
    "tier": 2,
-   "location": "Mage of Zamorak mine (lvl 7 Wildy)",
-   "calledAt": 1785394298085,
-   "endsAt": 1785395138085
+   "location": "Nardah bank",
+   "calledAt": 1785400598160,
+   "endsAt": 1785401438160
   },
   {
-   "world": 348,
+   "world": 387,
+   "tier": 2,
+   "location": "Rellekka mine",
+   "calledAt": 1785400778131,
+   "endsAt": 1785401618131
+  },
+  {
+   "world": 621,
    "tier": 1,
-   "location": "Champions Guild mine",
-   "calledAt": 1785395018081,
-   "endsAt": 1785395438081
+   "location": "Crafting guild",
+   "calledAt": 1785400598160,
+   "endsAt": 1785401018160
+  },
+  {
+   "world": 405,
+   "tier": 1,
+   "location": "Miscellania mine (cip fairy ring)",
+   "calledAt": 1785400778131,
+   "endsAt": 1785401198131
   }
  ],
- "at": 1785395906343,
+ "at": 1785400832813,
  "source": "https://07.gg/trackers/shooting-star"
 }

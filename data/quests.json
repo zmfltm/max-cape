@@ -1,6 +1,6 @@
 {
  "name": "gxexe",
- "synced": "2026-07-29T14:46:55.594Z",
+ "synced": "2026-07-30T08:40:31.679Z",
  "route": [
   {
    "kind": "task",
@@ -470,7 +470,7 @@
   {
    "kind": "quest",
    "name": "Scorpion Catcher",
-   "state": 0,
+   "state": 2,
    "wiki": "Scorpion_Catcher"
   },
   {
@@ -1882,6 +1882,18 @@
   },
   {
    "kind": "task",
+   "name": "Train Sailing from level 53 to level 62",
+   "state": null,
+   "wiki": "Train_Sailing_from_level_53_to_level_62"
+  },
+  {
+   "kind": "quest",
+   "name": "Fallen From Grace",
+   "state": null,
+   "wiki": "Fallen_From_Grace"
+  },
+  {
+   "kind": "task",
    "name": "Train Hunter from level 53 to level 60",
    "state": null,
    "wiki": "Train_Hunter_from_level_53_to_level_60"
@@ -2032,9 +2044,9 @@
   },
   {
    "kind": "task",
-   "name": "Train Runecraft from level 57 to level 60",
+   "name": "Train Runecraft from level 58 to level 60",
    "state": null,
-   "wiki": "Train_Runecraft_from_level_57_to_level_60"
+   "wiki": "Train_Runecraft_from_level_58_to_level_60"
   },
   {
    "kind": "task",
@@ -2135,11 +2147,11 @@
  ],
  "route_next": {
   "kind": "quest",
-  "name": "Scorpion Catcher",
+  "name": "A Soul's Bane",
   "state": 0,
-  "wiki": "Scorpion_Catcher"
+  "wiki": "A_Soul's_Bane"
  },
- "route_left": 105,
+ "route_left": 104,
  "order": [
   "Cook's Assistant",
   "Sheep Shearer",
@@ -2327,6 +2339,7 @@
   "Shadows of Custodia",
   "Troubled Tortugans",
   "The Red Reef",
+  "Fallen From Grace",
   "Monkey Madness II",
   "Into the Tombs",
   "A Night at the Theatre",
@@ -2343,7 +2356,6 @@
   "The Corsair Curse",
   "Barbarian Training",
   "Bear Your Soul",
-  "Fallen From Grace",
   "Family Pest",
   "Learning the Ropes",
   "Mage Arena I",
@@ -2538,7 +2550,7 @@
   "Roving Elves": 0,
   "Rum Deal": 0,
   "Rune Mysteries": 2,
-  "Scorpion Catcher": 0,
+  "Scorpion Catcher": 2,
   "Sea Slug": 2,
   "Shades of Mort'ton": 2,
   "Sheep Herder": 2,
@@ -2583,7 +2595,7 @@
    "start": "Speak to Cormac in the middle of Auchrie village."
   }
  },
- "done": 121,
+ "done": 122,
  "total": 211,
  "in_progress": [
   "The Giant Dwarf",
@@ -2595,9 +2607,8 @@
   "The Enchanted Key",
   "The Frozen Door"
  ],
- "next": "Scorpion Catcher",
+ "next": "A Soul's Bane",
  "remaining": [
-  "Scorpion Catcher",
   "A Soul's Bane",
   "The Queen of Thieves",
   "The Depths of Despair",
@@ -2666,6 +2677,7 @@
   "Shadows of Custodia",
   "Troubled Tortugans",
   "The Red Reef",
+  "Fallen From Grace",
   "Monkey Madness II",
   "Into the Tombs",
   "A Night at the Theatre",
@@ -2681,7 +2693,6 @@
   "Clock Tower",
   "Barbarian Training",
   "Bear Your Soul",
-  "Fallen From Grace",
   "Mage Arena I",
   "Mage Arena II",
   "The Enchanted Key",
@@ -2721,5 +2732,5 @@
    "Fishing": 62
   }
  },
- "fetched": "2026-07-29T23:46+09:00"
+ "fetched": "2026-07-30T08:40+00:00"
 }
