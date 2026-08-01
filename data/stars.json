@@ -1,195 +1,384 @@
 {
  "stars": [
   {
-   "world": 447,
+   "world": 518,
    "tier": 9,
-   "location": "Burgh de Rott bank",
-   "calledAt": 1785585278879,
-   "endsAt": 1785589058879
+   "location": "Mage of Zamorak mine (lvl 7 Wildy)",
+   "calledAt": 1785591819004,
+   "endsAt": 1785595599004
   },
   {
-   "world": 307,
+   "world": 317,
    "tier": 9,
-   "location": "Burgh de Rott bank",
-   "calledAt": 1785585338992,
-   "endsAt": 1785589118992
+   "location": "Darkmeyer ess. mine entrance",
+   "calledAt": 1785591908908,
+   "endsAt": 1785595688908
+  },
+  {
+   "world": 562,
+   "tier": 9,
+   "location": "Al Kharid bank",
+   "calledAt": 1785592808913,
+   "endsAt": 1785596588913
+  },
+  {
+   "world": 473,
+   "tier": 8,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1785592538955,
+   "endsAt": 1785595898955
   },
   {
    "world": 507,
    "tier": 8,
-   "location": "East Falador bank",
-   "calledAt": 1785585548958,
-   "endsAt": 1785588908958
+   "location": "Champions Guild mine",
+   "calledAt": 1785592568902,
+   "endsAt": 1785595928902
   },
   {
-   "world": 519,
+   "world": 621,
    "tier": 8,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1785585638881,
-   "endsAt": 1785588998881
+   "location": "Champions Guild mine",
+   "calledAt": 1785592568902,
+   "endsAt": 1785595928902
   },
   {
-   "world": 574,
+   "world": 334,
    "tier": 8,
-   "location": "Miscellania mine (cip fairy ring)",
-   "calledAt": 1785585638881,
-   "endsAt": 1785588998881
+   "location": "Champions Guild mine",
+   "calledAt": 1785592628985,
+   "endsAt": 1785595988985
   },
   {
-   "world": 661,
-   "tier": 7,
-   "location": "Soul Wars south mine",
-   "calledAt": 1785581648925,
-   "endsAt": 1785584588925
+   "world": 373,
+   "tier": 8,
+   "location": "Champions Guild mine",
+   "calledAt": 1785592658905,
+   "endsAt": 1785596018905
   },
   {
-   "world": 336,
-   "tier": 7,
-   "location": "Gnome Stronghold spirit tree",
-   "calledAt": 1785585368944,
-   "endsAt": 1785588308944
-  },
-  {
-   "world": 332,
-   "tier": 6,
-   "location": "Canifis bank",
-   "calledAt": 1785580958898,
-   "endsAt": 1785583478898
-  },
-  {
-   "world": 492,
-   "tier": 6,
-   "location": "West Falador mine",
-   "calledAt": 1785585368944,
-   "endsAt": 1785587888944
+   "world": 328,
+   "tier": 8,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1785592658905,
+   "endsAt": 1785596018905
   },
   {
    "world": 482,
-   "tier": 6,
-   "location": "Shayzien mine south of Kourend Ca...",
-   "calledAt": 1785584828980,
-   "endsAt": 1785587978906
+   "tier": 7,
+   "location": "Brimhaven northwest gold mine",
+   "calledAt": 1785591488991,
+   "endsAt": 1785594428991
   },
   {
-   "world": 485,
-   "tier": 6,
-   "location": "Catherby bank",
-   "calledAt": 1785585458906,
-   "endsAt": 1785587978906
+   "world": 371,
+   "tier": 7,
+   "location": "Mount Karuulm mine",
+   "calledAt": 1785591668987,
+   "endsAt": 1785594608987
   },
   {
-   "world": 471,
-   "tier": 6,
-   "location": "Rellekka mine",
-   "calledAt": 1785585518912,
-   "endsAt": 1785588038912
+   "world": 489,
+   "tier": 7,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1785591758900,
+   "endsAt": 1785594698900
   },
   {
-   "world": 420,
+   "world": 463,
+   "tier": 7,
+   "location": "Mynydd nw of Prifddinas",
+   "calledAt": 1785592088909,
+   "endsAt": 1785595028909
+  },
+  {
+   "world": 528,
+   "tier": 7,
+   "location": "Lletya",
+   "calledAt": 1785592298975,
+   "endsAt": 1785595238975
+  },
+  {
+   "world": 525,
+   "tier": 7,
+   "location": "West of Grand Tree",
+   "calledAt": 1785592478990,
+   "endsAt": 1785595418990
+  },
+  {
+   "world": 662,
+   "tier": 7,
+   "location": "East Lumbridge Swamp mine",
+   "calledAt": 1785592538955,
+   "endsAt": 1785595478955
+  },
+  {
+   "world": 358,
+   "tier": 7,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1785592718941,
+   "endsAt": 1785595658941
+  },
+  {
+   "world": 490,
+   "tier": 7,
+   "location": "Southwest of Brimhaven Poh",
+   "calledAt": 1785592718941,
+   "endsAt": 1785595658941
+  },
+  {
+   "world": 622,
+   "tier": 7,
+   "location": "Taverley house portal",
+   "calledAt": 1785592808913,
+   "endsAt": 1785595748913
+  },
+  {
+   "world": 306,
    "tier": 6,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1785585518912,
-   "endsAt": 1785588038912
+   "location": "Mine northwest of hunter guild",
+   "calledAt": 1785591129040,
+   "endsAt": 1785593649040
+  },
+  {
+   "world": 480,
+   "tier": 6,
+   "location": "Mos LeHarmless west bank",
+   "calledAt": 1785591129040,
+   "endsAt": 1785593649040
+  },
+  {
+   "world": 302,
+   "tier": 6,
+   "location": "Brimhaven northwest gold mine",
+   "calledAt": 1785591998979,
+   "endsAt": 1785594518979
   },
   {
    "world": 486,
    "tier": 6,
-   "location": "Aldarin mine in Varlamore",
-   "calledAt": 1785585548958,
-   "endsAt": 1785588068958
+   "location": "Southeast Varrock mine",
+   "calledAt": 1785592388915,
+   "endsAt": 1785594908915
   },
   {
-   "world": 404,
-   "tier": 6,
-   "location": "Shayzien mine south of Kourend Ca...",
-   "calledAt": 1785585548958,
-   "endsAt": 1785588068958
-  },
-  {
-   "world": 348,
-   "tier": 6,
-   "location": "Yanille bank",
-   "calledAt": 1785585698902,
-   "endsAt": 1785588218902
-  },
-  {
-   "world": 626,
-   "tier": 6,
-   "location": "Pirates Hideout (lvl 53 Wildy)",
-   "calledAt": 1785585728896,
-   "endsAt": 1785588248896
-  },
-  {
-   "world": 309,
+   "world": 614,
    "tier": 6,
    "location": "Draynor Village",
-   "calledAt": 1785585728896,
-   "endsAt": 1785588248896
+   "calledAt": 1785592449041,
+   "endsAt": 1785594969041
   },
   {
-   "world": 365,
+   "world": 432,
+   "tier": 6,
+   "location": "Champions Guild mine",
+   "calledAt": 1785592449041,
+   "endsAt": 1785594969041
+  },
+  {
+   "world": 349,
+   "tier": 6,
+   "location": "Taverley house portal",
+   "calledAt": 1785592478990,
+   "endsAt": 1785594998990
+  },
+  {
+   "world": 387,
+   "tier": 6,
+   "location": "East Lumbridge Swamp mine",
+   "calledAt": 1785592538955,
+   "endsAt": 1785595058955
+  },
+  {
+   "world": 326,
+   "tier": 6,
+   "location": "Corsair Resource Area",
+   "calledAt": 1785592568902,
+   "endsAt": 1785595088902
+  },
+  {
+   "world": 500,
+   "tier": 6,
+   "location": "West of Grand Tree",
+   "calledAt": 1785592658905,
+   "endsAt": 1785595178905
+  },
+  {
+   "world": 607,
+   "tier": 6,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1785592658905,
+   "endsAt": 1785595178905
+  },
+  {
+   "world": 377,
    "tier": 5,
-   "location": "Gnome Stronghold spirit tree",
-   "calledAt": 1785585368944,
-   "endsAt": 1785587468944
+   "location": "Burgh de Rott bank",
+   "calledAt": 1785592568902,
+   "endsAt": 1785594668902
   },
   {
-   "world": 331,
+   "world": 481,
    "tier": 5,
-   "location": "Varrock east bank",
-   "calledAt": 1785585518912,
-   "endsAt": 1785587618912
+   "location": "East Falador bank",
+   "calledAt": 1785592568902,
+   "endsAt": 1785594668902
   },
   {
-   "world": 408,
+   "world": 511,
    "tier": 5,
-   "location": "Gnome Stronghold spirit tree",
-   "calledAt": 1785585638881,
-   "endsAt": 1785587738881
-  },
-  {
-   "world": 621,
-   "tier": 4,
-   "location": "Coal Trucks west of Seers",
-   "calledAt": 1785585368944,
-   "endsAt": 1785587048944
-  },
-  {
-   "world": 364,
-   "tier": 4,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1785585518912,
-   "endsAt": 1785587198912
-  },
-  {
-   "world": 444,
-   "tier": 4,
-   "location": "Rellekka mine",
-   "calledAt": 1785585728896,
-   "endsAt": 1785587408896
-  },
-  {
-   "world": 566,
-   "tier": 3,
    "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1785584648915,
-   "endsAt": 1785585908915
+   "calledAt": 1785592628985,
+   "endsAt": 1785594728985
   },
   {
-   "world": 318,
+   "world": 495,
+   "tier": 5,
+   "location": "Burgh de Rott bank",
+   "calledAt": 1785592658905,
+   "endsAt": 1785594758905
+  },
+  {
+   "world": 398,
+   "tier": 4,
+   "location": "North Dwarven Mine entrance",
+   "calledAt": 1785592449041,
+   "endsAt": 1785594129041
+  },
+  {
+   "world": 521,
+   "tier": 4,
+   "location": "relleka mine",
+   "calledAt": 1785592538955,
+   "endsAt": 1785594218955
+  },
+  {
+   "world": 351,
+   "tier": 4,
+   "location": "Varrock east bank",
+   "calledAt": 1785592718941,
+   "endsAt": 1785594398941
+  },
+  {
+   "world": 374,
+   "tier": 4,
+   "location": "Catherby bank",
+   "calledAt": 1785592808913,
+   "endsAt": 1785594488913
+  },
+  {
+   "world": 388,
    "tier": 3,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1785585368944,
-   "endsAt": 1785586628944
+   "location": "Taverley house portal",
+   "calledAt": 1785591758900,
+   "endsAt": 1785593018900
   },
   {
-   "world": 431,
+   "world": 470,
+   "tier": 3,
+   "location": "Aldarin mine in Varlamore",
+   "calledAt": 1785592568902,
+   "endsAt": 1785593828902
+  },
+  {
+   "world": 496,
+   "tier": 3,
+   "location": "West of Grand Tree",
+   "calledAt": 1785592628985,
+   "endsAt": 1785593888985
+  },
+  {
+   "world": 336,
+   "tier": 3,
+   "location": "South of Legends Guild",
+   "calledAt": 1785592628985,
+   "endsAt": 1785593888985
+  },
+  {
+   "world": 479,
+   "tier": 3,
+   "location": "Lletya",
+   "calledAt": 1785592808913,
+   "endsAt": 1785594068913
+  },
+  {
+   "world": 487,
    "tier": 2,
-   "location": "West Lumbridge Swamp mine",
-   "calledAt": 1785585638881,
-   "endsAt": 1785586478881
+   "location": "Ardougne Monastery",
+   "calledAt": 1785592478990,
+   "endsAt": 1785593318990
+  },
+  {
+   "world": 314,
+   "tier": 2,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1785592538955,
+   "endsAt": 1785593378955
+  },
+  {
+   "world": 567,
+   "tier": 2,
+   "location": "Theatre of Blood bank",
+   "calledAt": 1785592628985,
+   "endsAt": 1785593468985
+  },
+  {
+   "world": 520,
+   "tier": 2,
+   "location": "Varrock east bank",
+   "calledAt": 1785592658905,
+   "endsAt": 1785593498905
+  },
+  {
+   "world": 322,
+   "tier": 2,
+   "location": "Rimmington mine",
+   "calledAt": 1785592718941,
+   "endsAt": 1785593558941
+  },
+  {
+   "world": 313,
+   "tier": 2,
+   "location": "Crafting guild",
+   "calledAt": 1785592749041,
+   "endsAt": 1785593589041
+  },
+  {
+   "world": 509,
+   "tier": 1,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1785592478990,
+   "endsAt": 1785592898990
+  },
+  {
+   "world": 472,
+   "tier": 1,
+   "location": "Catherby bank",
+   "calledAt": 1785592478990,
+   "endsAt": 1785592898990
+  },
+  {
+   "world": 352,
+   "tier": 1,
+   "location": "Crafting guild",
+   "calledAt": 1785592658905,
+   "endsAt": 1785593078905
+  },
+  {
+   "world": 531,
+   "tier": 1,
+   "location": "Al Kharid bank",
+   "calledAt": 1785592718941,
+   "endsAt": 1785593138941
+  },
+  {
+   "world": 368,
+   "tier": 1,
+   "location": "East Falador bank",
+   "calledAt": 1785592718941,
+   "endsAt": 1785593138941
   }
  ],
- "at": 1785585784412,
+ "at": 1785592836470,
  "source": "https://07.gg/trackers/shooting-star"
 }
