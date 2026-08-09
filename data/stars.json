@@ -1,53 +1,32 @@
 {
  "stars": [
   {
-   "world": 370,
+   "world": 496,
    "tier": 9,
-   "location": "Rimmington mine",
-   "calledAt": 1786259117437,
-   "endsAt": 1786262897437
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1786259840578,
+   "endsAt": 1786263620578
   },
   {
-   "world": 601,
+   "world": 368,
+   "tier": 9,
+   "location": "Yanille bank",
+   "calledAt": 1786260265197,
+   "endsAt": 1786264045197
+  },
+  {
+   "world": 342,
    "tier": 8,
-   "location": "Varrock east bank",
-   "calledAt": 1786258730686,
-   "endsAt": 1786262090686
+   "location": "Rellekka mine",
+   "calledAt": 1786259938253,
+   "endsAt": 1786263298253
   },
   {
-   "world": 534,
-   "tier": 8,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1786258909419,
-   "endsAt": 1786262269419
-  },
-  {
-   "world": 493,
+   "world": 569,
    "tier": 8,
    "location": "Al Kharid bank",
-   "calledAt": 1786258949139,
-   "endsAt": 1786262309139
-  },
-  {
-   "world": 516,
-   "tier": 8,
-   "location": "North of Al Kharid PvP Arena",
-   "calledAt": 1786258992960,
-   "endsAt": 1786262352960
-  },
-  {
-   "world": 406,
-   "tier": 8,
-   "location": "Crafting guild",
-   "calledAt": 1786259115896,
-   "endsAt": 1786262475896
-  },
-  {
-   "world": 532,
-   "tier": 7,
-   "location": "Mage of Zamorak mine (lvl 7 Wildy)",
-   "calledAt": 1786258143032,
-   "endsAt": 1786261083032
+   "calledAt": 1786260051386,
+   "endsAt": 1786263411386
   },
   {
    "world": 444,
@@ -57,27 +36,6 @@
    "endsAt": 1786261686231
   },
   {
-   "world": 424,
-   "tier": 7,
-   "location": "Draynor Village",
-   "calledAt": 1786258829130,
-   "endsAt": 1786261769130
-  },
-  {
-   "world": 415,
-   "tier": 7,
-   "location": "Crafting guild",
-   "calledAt": 1786258979631,
-   "endsAt": 1786261919631
-  },
-  {
-   "world": 614,
-   "tier": 7,
-   "location": "East Falador bank",
-   "calledAt": 1786259008955,
-   "endsAt": 1786261948955
-  },
-  {
    "world": 662,
    "tier": 7,
    "location": "Mage Arena bank (lvl 56 Wildy)",
@@ -85,88 +43,193 @@
    "endsAt": 1786261969997
   },
   {
-   "world": 325,
+   "world": 606,
    "tier": 7,
-   "location": "Feldip Hills (aks fairy ring)",
-   "calledAt": 1786259033423,
-   "endsAt": 1786261973423
+   "location": "Mage Arena bank (lvl 56 Wildy)",
+   "calledAt": 1786259321891,
+   "endsAt": 1786262261891
+  },
+  {
+   "world": 332,
+   "tier": 7,
+   "location": "Mage Arena bank (lvl 56 Wildy)",
+   "calledAt": 1786259455890,
+   "endsAt": 1786262395890
+  },
+  {
+   "world": 525,
+   "tier": 7,
+   "location": "South Crandor",
+   "calledAt": 1786259490913,
+   "endsAt": 1786262430913
+  },
+  {
+   "world": 370,
+   "tier": 7,
+   "location": "Rimmington mine",
+   "calledAt": 1786260033543,
+   "endsAt": 1786262973543
+  },
+  {
+   "world": 371,
+   "tier": 7,
+   "location": "Canifis bank",
+   "calledAt": 1786260319262,
+   "endsAt": 1786263259262
+  },
+  {
+   "world": 611,
+   "tier": 6,
+   "location": "Lletya",
+   "calledAt": 1786259413081,
+   "endsAt": 1786261933081
+  },
+  {
+   "world": 470,
+   "tier": 6,
+   "location": "South Lovakengj bank",
+   "calledAt": 1786259597070,
+   "endsAt": 1786262117070
+  },
+  {
+   "world": 406,
+   "tier": 6,
+   "location": "Crafting guild",
+   "calledAt": 1786259987315,
+   "endsAt": 1786262507315
+  },
+  {
+   "world": 660,
+   "tier": 6,
+   "location": "North of Al Kharid PvP Arena",
+   "calledAt": 1786260012987,
+   "endsAt": 1786262532987
+  },
+  {
+   "world": 516,
+   "tier": 6,
+   "location": "North of Al Kharid PvP Arena",
+   "calledAt": 1786260045435,
+   "endsAt": 1786262565435
+  },
+  {
+   "world": 302,
+   "tier": 6,
+   "location": "Hosidius mine",
+   "calledAt": 1786260220222,
+   "endsAt": 1786262740222
+  },
+  {
+   "world": 489,
+   "tier": 6,
+   "location": "Theatre of Blood bank",
+   "calledAt": 1786260247551,
+   "endsAt": 1786262767551
+  },
+  {
+   "world": 490,
+   "tier": 6,
+   "location": "Theatre of Blood bank",
+   "calledAt": 1786260261376,
+   "endsAt": 1786262781376
+  },
+  {
+   "world": 614,
+   "tier": 5,
+   "location": "East Falador bank",
+   "calledAt": 1786259953319,
+   "endsAt": 1786262053319
   },
   {
    "world": 385,
-   "tier": 7,
+   "tier": 5,
    "location": "Rimmington mine",
-   "calledAt": 1786259139227,
-   "endsAt": 1786262079227
+   "calledAt": 1786259980613,
+   "endsAt": 1786262080613
+  },
+  {
+   "world": 510,
+   "tier": 5,
+   "location": "Varlamore colosseum entrance bank",
+   "calledAt": 1786259992466,
+   "endsAt": 1786262092466
   },
   {
    "world": 599,
-   "tier": 7,
+   "tier": 5,
    "location": "Yanille bank",
-   "calledAt": 1786259145711,
-   "endsAt": 1786262085711
+   "calledAt": 1786260050257,
+   "endsAt": 1786262150257
   },
   {
-   "world": 387,
-   "tier": 6,
-   "location": "Mos LeHarmless west bank",
-   "calledAt": 1786257835974,
-   "endsAt": 1786260355974
+   "world": 601,
+   "tier": 5,
+   "location": "Varrock east bank",
+   "calledAt": 1786260060275,
+   "endsAt": 1786262160275
   },
   {
-   "world": 543,
-   "tier": 6,
-   "location": "Rimmington mine",
-   "calledAt": 1786258888272,
-   "endsAt": 1786261408272
+   "world": 507,
+   "tier": 5,
+   "location": "West Falador mine",
+   "calledAt": 1786260155246,
+   "endsAt": 1786262255246
   },
   {
-   "world": 550,
-   "tier": 6,
-   "location": "Canifis bank",
-   "calledAt": 1786258890023,
-   "endsAt": 1786261410023
+   "world": 337,
+   "tier": 5,
+   "location": "Catherby bank",
+   "calledAt": 1786260206505,
+   "endsAt": 1786262306505
+  },
+  {
+   "world": 493,
+   "tier": 5,
+   "location": "Al Kharid bank",
+   "calledAt": 1786260259401,
+   "endsAt": 1786262359401
+  },
+  {
+   "world": 534,
+   "tier": 5,
+   "location": "Mount Karuulm bank",
+   "calledAt": 1786260266135,
+   "endsAt": 1786262366135
   },
   {
    "world": 544,
-   "tier": 6,
+   "tier": 4,
    "location": "Crafting guild",
-   "calledAt": 1786259129033,
-   "endsAt": 1786261649033
+   "calledAt": 1786259970408,
+   "endsAt": 1786261650408
   },
   {
    "world": 421,
-   "tier": 6,
-   "location": "Feldip Hills (aks fairy ring)",
-   "calledAt": 1786259129618,
-   "endsAt": 1786261649618
-  },
-  {
-   "world": 491,
-   "tier": 5,
-   "location": "Shilo Village gem mine",
-   "calledAt": 1786259055360,
-   "endsAt": 1786261155360
-  },
-  {
-   "world": 440,
    "tier": 4,
    "location": "Feldip Hills (aks fairy ring)",
-   "calledAt": 1786257868311,
-   "endsAt": 1786259548311
+   "calledAt": 1786259971093,
+   "endsAt": 1786261651093
   },
   {
-   "world": 573,
+   "world": 424,
    "tier": 4,
-   "location": "rimmington mine",
-   "calledAt": 1786258762627,
-   "endsAt": 1786260699200
+   "location": "Draynor Village",
+   "calledAt": 1786260091491,
+   "endsAt": 1786261771491
   },
   {
-   "world": 343,
-   "tier": 3,
-   "location": "Varrock east bank",
-   "calledAt": 1786258756406,
-   "endsAt": 1786260016406
+   "world": 415,
+   "tier": 4,
+   "location": "Crafting guild",
+   "calledAt": 1786260243414,
+   "endsAt": 1786261923414
+  },
+  {
+   "world": 325,
+   "tier": 4,
+   "location": "Feldip Hills (aks fairy ring)",
+   "calledAt": 1786260298033,
+   "endsAt": 1786261978033
   },
   {
    "world": 663,
@@ -176,27 +239,34 @@
    "endsAt": 1786260305190
   },
   {
-   "world": 322,
-   "tier": 2,
-   "location": "Brimhaven northwest gold mine",
-   "calledAt": 1786258914699,
-   "endsAt": 1786259754699
+   "world": 550,
+   "tier": 3,
+   "location": "Canifis bank",
+   "calledAt": 1786260152980,
+   "endsAt": 1786261412980
   },
   {
-   "world": 452,
-   "tier": 2,
-   "location": "Al Kharid mine",
-   "calledAt": 1786259080882,
-   "endsAt": 1786259920882
+   "world": 543,
+   "tier": 3,
+   "location": "Rimmington mine",
+   "calledAt": 1786260184431,
+   "endsAt": 1786261444431
   },
   {
-   "world": 606,
+   "world": 491,
+   "tier": 2,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1786260318459,
+   "endsAt": 1786261158459
+  },
+  {
+   "world": 573,
    "tier": 1,
-   "location": "Piscatoris (akq fairy ring)",
-   "calledAt": 1786258376466,
-   "endsAt": 1786258796466
+   "location": "Rimmington mine",
+   "calledAt": 1786260256249,
+   "endsAt": 1786260676249
   }
  ],
- "at": 1786259177924,
+ "at": 1786260399725,
  "source": "https://07.gg/trackers/shooting-star"
 }
