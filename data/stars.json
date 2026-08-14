@@ -8,39 +8,46 @@
    "endsAt": 1786709149681
   },
   {
-   "world": 604,
-   "tier": 8,
-   "location": "Mage Arena bank (lvl 56 Wildy)",
-   "calledAt": 1786704050025,
-   "endsAt": 1786707410025
+   "world": 330,
+   "tier": 9,
+   "location": "south of piscatoris",
+   "calledAt": 1786708017714,
+   "endsAt": 1786711797714
   },
   {
-   "world": 493,
-   "tier": 8,
-   "location": "Arceuus dense essence mine",
-   "calledAt": 1786705460961,
-   "endsAt": 1786708820961
+   "world": 458,
+   "tier": 9,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1786708573708,
+   "endsAt": 1786712353708
   },
   {
-   "world": 469,
-   "tier": 8,
-   "location": "Varrock east bank",
-   "calledAt": 1786705535292,
-   "endsAt": 1786708895292
+   "world": 612,
+   "tier": 9,
+   "location": "Aldarin mine in Varlamore",
+   "calledAt": 1786708613864,
+   "endsAt": 1786712393864
   },
   {
-   "world": 342,
+   "world": 357,
    "tier": 8,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1786705715431,
-   "endsAt": 1786709075431
+   "location": "North of Al Kharid PvP Arena",
+   "calledAt": 1786707020402,
+   "endsAt": 1786710380402
   },
   {
-   "world": 303,
-   "tier": 7,
-   "location": "Brimhaven northwest gold mine",
-   "calledAt": 1786705219962,
-   "endsAt": 1786708159962
+   "world": 478,
+   "tier": 8,
+   "location": "Southwest of Brimhaven Poh",
+   "calledAt": 1786708384235,
+   "endsAt": 1786711744235
+  },
+  {
+   "world": 661,
+   "tier": 8,
+   "location": "West of Grand Tree",
+   "calledAt": 1786708770699,
+   "endsAt": 1786712130699
   },
   {
    "world": 412,
@@ -50,13 +57,6 @@
    "endsAt": 1786708336414
   },
   {
-   "world": 622,
-   "tier": 7,
-   "location": "Myths Guild",
-   "calledAt": 1786705494462,
-   "endsAt": 1786708434462
-  },
-  {
    "world": 462,
    "tier": 7,
    "location": "Neitiznot south of rune rock",
@@ -64,46 +64,46 @@
    "endsAt": 1786708463033
   },
   {
-   "world": 511,
+   "world": 402,
    "tier": 7,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1786705537791,
-   "endsAt": 1786708477791
+   "location": "Southeast Varrock mine",
+   "calledAt": 1786706765394,
+   "endsAt": 1786709705394
   },
   {
-   "world": 509,
+   "world": 443,
    "tier": 7,
-   "location": "Draynor Village",
-   "calledAt": 1786705649296,
-   "endsAt": 1786708589296
+   "location": "Theatre of Blood bank",
+   "calledAt": 1786708427565,
+   "endsAt": 1786711367565
   },
   {
-   "world": 349,
+   "world": 426,
    "tier": 7,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1786705671781,
-   "endsAt": 1786708611781
-  },
-  {
-   "world": 500,
-   "tier": 7,
-   "location": "Catherby bank",
-   "calledAt": 1786705712807,
-   "endsAt": 1786708652807
-  },
-  {
-   "world": 346,
-   "tier": 6,
-   "location": "East Lumbridge Swamp mine",
-   "calledAt": 1786700500756,
-   "endsAt": 1786703020756
+   "location": "Shayzien mine south of Kourend Castle",
+   "calledAt": 1786708449090,
+   "endsAt": 1786711389090
   },
   {
    "world": 611,
-   "tier": 6,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1786705234740,
-   "endsAt": 1786707754740
+   "tier": 7,
+   "location": "Varrock east bank",
+   "calledAt": 1786708594888,
+   "endsAt": 1786711534888
+  },
+  {
+   "world": 621,
+   "tier": 7,
+   "location": "Aldarin mine in Varlamore",
+   "calledAt": 1786708634515,
+   "endsAt": 1786711574515
+  },
+  {
+   "world": 395,
+   "tier": 7,
+   "location": "Hosidius mine",
+   "calledAt": 1786708679743,
+   "endsAt": 1786711619743
   },
   {
    "world": 404,
@@ -113,27 +113,6 @@
    "endsAt": 1786707847364
   },
   {
-   "world": 618,
-   "tier": 6,
-   "location": "Canifis bank",
-   "calledAt": 1786705475939,
-   "endsAt": 1786707995939
-  },
-  {
-   "world": 459,
-   "tier": 6,
-   "location": "Nardah bank",
-   "calledAt": 1786705517532,
-   "endsAt": 1786708037532
-  },
-  {
-   "world": 521,
-   "tier": 6,
-   "location": "Draynor Village",
-   "calledAt": 1786705534624,
-   "endsAt": 1786708054624
-  },
-  {
    "world": 360,
    "tier": 6,
    "location": "Fossil Island Volcanic Mine entrance",
@@ -141,111 +120,202 @@
    "endsAt": 1786708097369
   },
   {
-   "world": 365,
+   "world": 344,
    "tier": 6,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1786705592025,
-   "endsAt": 1786708112025
+   "location": "Aldarin mine in Varlamore",
+   "calledAt": 1786706028347,
+   "endsAt": 1786708548347
   },
   {
-   "world": 562,
+   "world": 599,
    "tier": 6,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1786705618640,
-   "endsAt": 1786708138640
+   "location": "Canifis bank",
+   "calledAt": 1786708308932,
+   "endsAt": 1786710828932
   },
   {
-   "world": 516,
+   "world": 422,
    "tier": 6,
-   "location": "West Falador mine",
-   "calledAt": 1786705703294,
-   "endsAt": 1786708223294
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1786708510354,
+   "endsAt": 1786711030354
   },
   {
-   "world": 391,
-   "tier": 6,
-   "location": "Taverley house portal",
-   "calledAt": 1786705780714,
-   "endsAt": 1786708300714
-  },
-  {
-   "world": 627,
+   "world": 569,
    "tier": 5,
    "location": "South of Legends Guild",
-   "calledAt": 1786704612592,
-   "endsAt": 1786706712592
+   "calledAt": 1786707400590,
+   "endsAt": 1786709500590
   },
   {
-   "world": 620,
+   "world": 597,
    "tier": 5,
-   "location": "Aldarin mine in Varlamore",
-   "calledAt": 1786705674652,
-   "endsAt": 1786707774652
+   "location": "South of Legends Guild",
+   "calledAt": 1786708548844,
+   "endsAt": 1786710648844
   },
   {
-   "world": 387,
+   "world": 325,
    "tier": 5,
-   "location": "Burgh de Rott bank",
-   "calledAt": 1786705747035,
-   "endsAt": 1786707847035
+   "location": "East Falador bank",
+   "calledAt": 1786708599109,
+   "endsAt": 1786710699109
   },
   {
-   "world": 394,
+   "world": 532,
    "tier": 5,
-   "location": "Rimmington mine",
-   "calledAt": 1786705772278,
-   "endsAt": 1786707872278
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1786708701202,
+   "endsAt": 1786710801202
   },
   {
-   "world": 471,
+   "world": 303,
    "tier": 4,
-   "location": "Varlamore colosseum entrance bank",
-   "calledAt": 1786704940567,
-   "endsAt": 1786706620567
+   "location": "Brimhaven northwest gold mine",
+   "calledAt": 1786706582475,
+   "endsAt": 1786708262475
   },
   {
-   "world": 389,
+   "world": 366,
    "tier": 4,
+   "location": "East Falador bank",
+   "calledAt": 1786708435676,
+   "endsAt": 1786710115676
+  },
+  {
+   "world": 519,
+   "tier": 4,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1786708598493,
+   "endsAt": 1786710278493
+  },
+  {
+   "world": 624,
+   "tier": 4,
+   "location": "South of Legends Guild",
+   "calledAt": 1786708618415,
+   "endsAt": 1786710298415
+  },
+  {
+   "world": 484,
+   "tier": 3,
    "location": "Catherby bank",
-   "calledAt": 1786705599069,
-   "endsAt": 1786707279069
+   "calledAt": 1786707756609,
+   "endsAt": 1786709016609
   },
   {
-   "world": 380,
+   "world": 510,
    "tier": 3,
-   "location": "Corsair Resource Area",
-   "calledAt": 1786704263063,
-   "endsAt": 1786705523063
+   "location": "Catherby bank",
+   "calledAt": 1786708419593,
+   "endsAt": 1786709679593
   },
   {
-   "world": 542,
+   "world": 528,
    "tier": 3,
-   "location": "Abandoned Mine west of Burgh",
-   "calledAt": 1786704359235,
-   "endsAt": 1786705619235
+   "location": "Mount Karuulm bank",
+   "calledAt": 1786708475426,
+   "endsAt": 1786709735426
   },
   {
-   "world": 352,
+   "world": 513,
+   "tier": 3,
+   "location": "Varrock east bank",
+   "calledAt": 1786708520795,
+   "endsAt": 1786709780795
+  },
+  {
+   "world": 525,
    "tier": 3,
    "location": "Keldagrim entrance mine",
-   "calledAt": 1786705295882,
-   "endsAt": 1786706555882
+   "calledAt": 1786708668743,
+   "endsAt": 1786709928743
   },
   {
-   "world": 609,
-   "tier": 2,
-   "location": "Southwest of Brimhaven Poh",
-   "calledAt": 1786705450167,
-   "endsAt": 1786706290167
+   "world": 495,
+   "tier": 3,
+   "location": "East Falador bank",
+   "calledAt": 1786708763039,
+   "endsAt": 1786710023039
   },
   {
-   "world": 699,
+   "world": 337,
    "tier": 2,
-   "location": "Piscatoris (akq fairy ring)",
-   "calledAt": 1786705794666,
-   "endsAt": 1786706634666
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1786708618413,
+   "endsAt": 1786709458413
+  },
+  {
+   "world": 494,
+   "tier": 2,
+   "location": "Al Kharid bank",
+   "calledAt": 1786708626989,
+   "endsAt": 1786709466989
+  },
+  {
+   "world": 314,
+   "tier": 2,
+   "location": "Draynor Village",
+   "calledAt": 1786708686188,
+   "endsAt": 1786709526188
+  },
+  {
+   "world": 480,
+   "tier": 2,
+   "location": "Champions Guild mine",
+   "calledAt": 1786708780652,
+   "endsAt": 1786709620652
+  },
+  {
+   "world": 349,
+   "tier": 1,
+   "location": "Mount Karuulm bank",
+   "calledAt": 1786708243538,
+   "endsAt": 1786708663538
+  },
+  {
+   "world": 693,
+   "tier": 1,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1786708351694,
+   "endsAt": 1786708771694
+  },
+  {
+   "world": 342,
+   "tier": 1,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1786708747159,
+   "endsAt": 1786708851992
+  },
+  {
+   "world": 493,
+   "tier": 1,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1786708467665,
+   "endsAt": 1786708887665
+  },
+  {
+   "world": 469,
+   "tier": 1,
+   "location": "Varrock east bank",
+   "calledAt": 1786708517835,
+   "endsAt": 1786708937835
+  },
+  {
+   "world": 302,
+   "tier": 1,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1786708560857,
+   "endsAt": 1786708980857
+  },
+  {
+   "world": 348,
+   "tier": 1,
+   "location": "Varlamore colosseum entrance bank",
+   "calledAt": 1786708775686,
+   "endsAt": 1786709195686
   }
  ],
- "at": 1786705879389,
+ "at": 1786708839421,
  "source": "https://07.gg/trackers/shooting-star"
 }
