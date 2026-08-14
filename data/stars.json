@@ -1,342 +1,307 @@
 {
  "stars": [
   {
-   "world": 403,
-   "tier": 9,
-   "location": "Skeleton mine (lvl 10 Wildy)",
-   "calledAt": 1786671258954,
-   "endsAt": 1786675038954
-  },
-  {
-   "world": 346,
-   "tier": 9,
-   "location": "Jatizso mine entrance",
-   "calledAt": 1786672043391,
-   "endsAt": 1786675823391
-  },
-  {
-   "world": 662,
-   "tier": 9,
-   "location": "Theatre of Blood bank",
-   "calledAt": 1786672420818,
-   "endsAt": 1786676200818
-  },
-  {
-   "world": 348,
-   "tier": 9,
-   "location": "Taverley house portal",
-   "calledAt": 1786672546690,
-   "endsAt": 1786676326690
-  },
-  {
-   "world": 491,
-   "tier": 9,
-   "location": "Lletya",
-   "calledAt": 1786672769649,
-   "endsAt": 1786676549649
-  },
-  {
-   "world": 509,
-   "tier": 8,
-   "location": "Ardougne Monastery",
-   "calledAt": 1786672589061,
-   "endsAt": 1786675949061
-  },
-  {
-   "world": 321,
-   "tier": 8,
-   "location": "Soul Wars south mine",
-   "calledAt": 1786672637114,
-   "endsAt": 1786675997114
-  },
-  {
-   "world": 332,
-   "tier": 8,
-   "location": "Port Khazard mine",
-   "calledAt": 1786672676423,
-   "endsAt": 1786676036423
-  },
-  {
-   "world": 365,
+   "world": 386,
    "tier": 8,
    "location": "Burgh de Rott bank",
-   "calledAt": 1786672823269,
-   "endsAt": 1786676183269
+   "calledAt": 1786680689307,
+   "endsAt": 1786684049307
   },
   {
-   "world": 340,
+   "world": 440,
+   "tier": 8,
+   "location": "South Lovakengj bank",
+   "calledAt": 1786680885778,
+   "endsAt": 1786684245778
+  },
+  {
+   "world": 404,
    "tier": 7,
-   "location": "Lovakite mine",
-   "calledAt": 1786670627569,
-   "endsAt": 1786673567569
-  },
-  {
-   "world": 350,
-   "tier": 7,
-   "location": "Mage Arena bank (lvl 56 Wildy)",
-   "calledAt": 1786671379097,
-   "endsAt": 1786674319097
-  },
-  {
-   "world": 527,
-   "tier": 7,
-   "location": "Port Khazard mine",
-   "calledAt": 1786671822452,
-   "endsAt": 1786674762452
-  },
-  {
-   "world": 415,
-   "tier": 7,
-   "location": "Fossil Island Volcanic Mine entrance",
-   "calledAt": 1786671975513,
-   "endsAt": 1786674915513
-  },
-  {
-   "world": 318,
-   "tier": 7,
-   "location": "Desert Quarry mine",
-   "calledAt": 1786672345029,
-   "endsAt": 1786675285029
-  },
-  {
-   "world": 477,
-   "tier": 7,
-   "location": "Ardougne Monastery",
-   "calledAt": 1786672488500,
-   "endsAt": 1786675428500
-  },
-  {
-   "world": 695,
-   "tier": 7,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1786672758724,
-   "endsAt": 1786675698724
-  },
-  {
-   "world": 428,
-   "tier": 7,
-   "location": "Shilo Village gem mine",
-   "calledAt": 1786672856132,
-   "endsAt": 1786675796132
-  },
-  {
-   "world": 495,
-   "tier": 7,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1786672868357,
-   "endsAt": 1786675808357
-  },
-  {
-   "world": 309,
-   "tier": 6,
    "location": "North Crandor",
-   "calledAt": 1786671412531,
-   "endsAt": 1786673932531
+   "calledAt": 1786679141609,
+   "endsAt": 1786682081609
   },
   {
-   "world": 626,
-   "tier": 6,
-   "location": "Isafdar runite rocks",
-   "calledAt": 1786671605956,
-   "endsAt": 1786674125956
+   "world": 339,
+   "tier": 7,
+   "location": "Mount Karuulm bank",
+   "calledAt": 1786679458225,
+   "endsAt": 1786682398225
   },
   {
-   "world": 344,
+   "world": 367,
+   "tier": 7,
+   "location": "Agility Pyramid mine",
+   "calledAt": 1786679633598,
+   "endsAt": 1786682573598
+  },
+  {
+   "world": 361,
+   "tier": 7,
+   "location": "Shayzien mine south of Kourend Castle",
+   "calledAt": 1786680812674,
+   "endsAt": 1786683752674
+  },
+  {
+   "world": 439,
+   "tier": 7,
+   "location": "Mine north-west of hunter guild",
+   "calledAt": 1786681113873,
+   "endsAt": 1786683896428
+  },
+  {
+   "world": 562,
+   "tier": 7,
+   "location": "Varlamore South East mine",
+   "calledAt": 1786681030337,
+   "endsAt": 1786683970337
+  },
+  {
+   "world": 538,
+   "tier": 7,
+   "location": "Agility Pyramid mine",
+   "calledAt": 1786681069193,
+   "endsAt": 1786684009193
+  },
+  {
+   "world": 438,
    "tier": 6,
-   "location": "Canifis bank",
-   "calledAt": 1786672234803,
-   "endsAt": 1786674754803
+   "location": "Lunar Isle mine entrance",
+   "calledAt": 1786677951500,
+   "endsAt": 1786680471500
+  },
+  {
+   "world": 406,
+   "tier": 6,
+   "location": "Desert Quarry mine",
+   "calledAt": 1786679246806,
+   "endsAt": 1786681766806
   },
   {
    "world": 370,
    "tier": 6,
-   "location": "Nardah bank",
-   "calledAt": 1786672262667,
-   "endsAt": 1786674782667
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1786679749482,
+   "endsAt": 1786682269482
   },
   {
-   "world": 569,
+   "world": 534,
    "tier": 6,
-   "location": "South Crandor",
-   "calledAt": 1786672327206,
-   "endsAt": 1786674847206
+   "location": "East Lumbridge Swamp mine",
+   "calledAt": 1786680990917,
+   "endsAt": 1786683510917
   },
   {
-   "world": 313,
+   "world": 458,
    "tier": 6,
-   "location": "Lletya",
-   "calledAt": 1786672405013,
-   "endsAt": 1786674925013
+   "location": "Varlamore South East mine",
+   "calledAt": 1786681015546,
+   "endsAt": 1786683535546
+  },
+  {
+   "world": 422,
+   "tier": 5,
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1786679798358,
+   "endsAt": 1786681898358
+  },
+  {
+   "world": 609,
+   "tier": 5,
+   "location": "Southeast Varrock mine",
+   "calledAt": 1786680740651,
+   "endsAt": 1786682840651
+  },
+  {
+   "world": 336,
+   "tier": 5,
+   "location": "Champions Guild mine",
+   "calledAt": 1786680748534,
+   "endsAt": 1786682848534
+  },
+  {
+   "world": 331,
+   "tier": 5,
+   "location": "Draynor Village",
+   "calledAt": 1786680753915,
+   "endsAt": 1786682853915
+  },
+  {
+   "world": 509,
+   "tier": 5,
+   "location": "Theatre of Blood bank",
+   "calledAt": 1786680786464,
+   "endsAt": 1786682886464
+  },
+  {
+   "world": 346,
+   "tier": 5,
+   "location": "Champions Guild mine",
+   "calledAt": 1786680828067,
+   "endsAt": 1786682928067
+  },
+  {
+   "world": 528,
+   "tier": 5,
+   "location": "West of Grand Tree",
+   "calledAt": 1786680845521,
+   "endsAt": 1786682945521
+  },
+  {
+   "world": 599,
+   "tier": 5,
+   "location": "Draynor Village",
+   "calledAt": 1786680876420,
+   "endsAt": 1786682976420
+  },
+  {
+   "world": 353,
+   "tier": 5,
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1786680918131,
+   "endsAt": 1786683018131
   },
   {
    "world": 320,
-   "tier": 6,
-   "location": "Draynor Village",
-   "calledAt": 1786672610417,
-   "endsAt": 1786675130417
-  },
-  {
-   "world": 334,
-   "tier": 6,
-   "location": "Fossil Island rune rocks",
-   "calledAt": 1786672613726,
-   "endsAt": 1786675133726
-  },
-  {
-   "world": 440,
-   "tier": 6,
-   "location": "Ardougne Monastery",
-   "calledAt": 1786672710410,
-   "endsAt": 1786675230410
-  },
-  {
-   "world": 550,
-   "tier": 6,
-   "location": "Ardougne Monastery",
-   "calledAt": 1786672734599,
-   "endsAt": 1786675254599
-  },
-  {
-   "world": 411,
-   "tier": 6,
-   "location": "East Falador bank",
-   "calledAt": 1786672760875,
-   "endsAt": 1786675280875
-  },
-  {
-   "world": 479,
-   "tier": 6,
-   "location": "Southwest of Brimhaven Poh",
-   "calledAt": 1786672782304,
-   "endsAt": 1786675302304
-  },
-  {
-   "world": 429,
-   "tier": 6,
-   "location": "Theatre of Blood bank",
-   "calledAt": 1786672841826,
-   "endsAt": 1786675361826
-  },
-  {
-   "world": 493,
    "tier": 5,
-   "location": "Canifis bank",
-   "calledAt": 1786672292977,
-   "endsAt": 1786674392977
+   "location": "Mount Karuulm bank",
+   "calledAt": 1786680964472,
+   "endsAt": 1786683064472
   },
   {
-   "world": 391,
+   "world": 473,
    "tier": 5,
-   "location": "Miscellania mine (cip fairy ring)",
-   "calledAt": 1786672554090,
-   "endsAt": 1786674654090
+   "location": "Mount Karuulm bank",
+   "calledAt": 1786680978955,
+   "endsAt": 1786683078955
   },
   {
-   "world": 386,
-   "tier": 5,
+   "world": 378,
+   "tier": 4,
+   "location": "Lletya",
+   "calledAt": 1786678507432,
+   "endsAt": 1786680187432
+  },
+  {
+   "world": 313,
+   "tier": 4,
+   "location": "Champions Guild mine",
+   "calledAt": 1786680816834,
+   "endsAt": 1786682496834
+  },
+  {
+   "world": 357,
+   "tier": 4,
    "location": "Rimmington mine",
-   "calledAt": 1786672773236,
-   "endsAt": 1786674873236
+   "calledAt": 1786680969311,
+   "endsAt": 1786682649311
+  },
+  {
+   "world": 557,
+   "tier": 4,
+   "location": "Mine north-west of hunter guild",
+   "calledAt": 1786680983938,
+   "endsAt": 1786682663938
+  },
+  {
+   "world": 437,
+   "tier": 3,
+   "location": "Corsair Resource Area",
+   "calledAt": 1786680502825,
+   "endsAt": 1786681762825
+  },
+  {
+   "world": 606,
+   "tier": 3,
+   "location": "Theatre of Blood bank",
+   "calledAt": 1786680977521,
+   "endsAt": 1786682237521
+  },
+  {
+   "world": 355,
+   "tier": 3,
+   "location": "Fossil Island rune rocks",
+   "calledAt": 1786681026957,
+   "endsAt": 1786682286957
+  },
+  {
+   "world": 610,
+   "tier": 2,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1786679294766,
+   "endsAt": 1786680134766
+  },
+  {
+   "world": 332,
+   "tier": 2,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1786680101310,
+   "endsAt": 1786680941310
+  },
+  {
+   "world": 424,
+   "tier": 2,
+   "location": "Lletya",
+   "calledAt": 1786680876420,
+   "endsAt": 1786681716420
+  },
+  {
+   "world": 470,
+   "tier": 2,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1786680961595,
+   "endsAt": 1786681801595
+  },
+  {
+   "world": 318,
+   "tier": 2,
+   "location": "Rimmington mine",
+   "calledAt": 1786681136227,
+   "endsAt": 1786681976227
   },
   {
    "world": 329,
-   "tier": 5,
-   "location": "Arceuus dense essence mine",
-   "calledAt": 1786672862085,
-   "endsAt": 1786674962085
-  },
-  {
-   "world": 322,
-   "tier": 4,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1786672271205,
-   "endsAt": 1786673951205
-  },
-  {
-   "world": 603,
-   "tier": 4,
-   "location": "West Lumbridge Swamp mine",
-   "calledAt": 1786672550927,
-   "endsAt": 1786674230927
-  },
-  {
-   "world": 516,
-   "tier": 4,
-   "location": "Varrock east bank",
-   "calledAt": 1786672633187,
-   "endsAt": 1786674313187
-  },
-  {
-   "world": 627,
-   "tier": 4,
-   "location": "Crafting guild",
-   "calledAt": 1786672648803,
-   "endsAt": 1786674328803
-  },
-  {
-   "world": 536,
-   "tier": 4,
-   "location": "Ardougne Monastery",
-   "calledAt": 1786672716693,
-   "endsAt": 1786674396693
-  },
-  {
-   "world": 480,
-   "tier": 4,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1786672743329,
-   "endsAt": 1786674423329
-  },
-  {
-   "world": 393,
-   "tier": 4,
-   "location": "Champions Guild mine",
-   "calledAt": 1786672797203,
-   "endsAt": 1786674477203
-  },
-  {
-   "world": 354,
-   "tier": 4,
-   "location": "East Falador bank",
-   "calledAt": 1786672809615,
-   "endsAt": 1786674489615
-  },
-  {
-   "world": 510,
-   "tier": 4,
-   "location": "Hosidius mine",
-   "calledAt": 1786672822514,
-   "endsAt": 1786674502514
-  },
-  {
-   "world": 574,
-   "tier": 3,
-   "location": "Draynor Village",
-   "calledAt": 1786672516940,
-   "endsAt": 1786673776940
-  },
-  {
-   "world": 533,
-   "tier": 3,
-   "location": "Lletya",
-   "calledAt": 1786672567049,
-   "endsAt": 1786673827049
-  },
-  {
-   "world": 410,
-   "tier": 3,
-   "location": "Rantz cave",
-   "calledAt": 1786672824504,
-   "endsAt": 1786674084504
-  },
-  {
-   "world": 693,
    "tier": 1,
-   "location": "West of Grand Tree",
-   "calledAt": 1786671263274,
-   "endsAt": 1786671683274
+   "location": "Port Khazard mine",
+   "calledAt": 1786680779984,
+   "endsAt": 1786681199984
+  },
+  {
+   "world": 498,
+   "tier": 1,
+   "location": "Champions Guild mine",
+   "calledAt": 1786680863325,
+   "endsAt": 1786681283325
+  },
+  {
+   "world": 340,
+   "tier": 1,
+   "location": "Canifis bank",
+   "calledAt": 1786680955421,
+   "endsAt": 1786681375421
+  },
+  {
+   "world": 419,
+   "tier": 1,
+   "location": "West Lumbridge Swamp mine",
+   "calledAt": 1786680968611,
+   "endsAt": 1786681388611
+  },
+  {
+   "world": 482,
+   "tier": 1,
+   "location": "Canifis bank",
+   "calledAt": 1786680999632,
+   "endsAt": 1786681419632
+  },
+  {
+   "world": 305,
+   "tier": 1,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1786681120218,
+   "endsAt": 1786681540218
   }
  ],
- "at": 1786672917125,
+ "at": 1786681192812,
  "source": "https://07.gg/trackers/shooting-star"
 }
