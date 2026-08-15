@@ -1,11 +1,46 @@
 {
  "stars": [
   {
-   "world": 305,
+   "world": 618,
+   "tier": 9,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1786788475591,
+   "endsAt": 1786792255591
+  },
+  {
+   "world": 342,
    "tier": 8,
-   "location": "Canifis bank",
-   "calledAt": 1786786631808,
-   "endsAt": 1786789991808
+   "location": "Desert Quarry mine",
+   "calledAt": 1786788391881,
+   "endsAt": 1786791751881
+  },
+  {
+   "world": 515,
+   "tier": 8,
+   "location": "Hobgoblin mine (lvl 30 Wildy)",
+   "calledAt": 1786788900771,
+   "endsAt": 1786792260771
+  },
+  {
+   "world": 306,
+   "tier": 8,
+   "location": "Miscellania mine (cip fairy ring)",
+   "calledAt": 1786789049537,
+   "endsAt": 1786792409537
+  },
+  {
+   "world": 309,
+   "tier": 8,
+   "location": "Al Kharid mine",
+   "calledAt": 1786789250401,
+   "endsAt": 1786792610401
+  },
+  {
+   "world": 700,
+   "tier": 8,
+   "location": "North Dwarven Mine entrance",
+   "calledAt": 1786789303360,
+   "endsAt": 1786792663360
   },
   {
    "world": 302,
@@ -15,244 +50,125 @@
    "endsAt": 1786787428093
   },
   {
-   "world": 421,
+   "world": 416,
    "tier": 7,
-   "location": "Rellekka mine",
-   "calledAt": 1786786113897,
-   "endsAt": 1786789053897
+   "location": "Corsair Resource Area",
+   "calledAt": 1786788057975,
+   "endsAt": 1786790997975
   },
   {
-   "world": 309,
+   "world": 518,
    "tier": 7,
-   "location": "Desert Quarry mine",
-   "calledAt": 1786786187943,
-   "endsAt": 1786789127943
-  },
-  {
-   "world": 510,
-   "tier": 7,
-   "location": "Myths Guild",
-   "calledAt": 1786786474469,
-   "endsAt": 1786789414469
-  },
-  {
-   "world": 511,
-   "tier": 7,
-   "location": "Burgh de Rott bank",
-   "calledAt": 1786786651159,
-   "endsAt": 1786789591159
-  },
-  {
-   "world": 439,
-   "tier": 7,
-   "location": "Taverley house portal",
-   "calledAt": 1786786736484,
-   "endsAt": 1786789676484
-  },
-  {
-   "world": 693,
-   "tier": 7,
-   "location": "Taverley house portal",
-   "calledAt": 1786786860980,
-   "endsAt": 1786789800980
-  },
-  {
-   "world": 615,
-   "tier": 6,
-   "location": "Burgh de Rott bank",
-   "calledAt": 1786785528687,
-   "endsAt": 1786788048687
-  },
-  {
-   "world": 374,
-   "tier": 6,
-   "location": "Lava maze runite mine (lvl 46 Wildy)",
-   "calledAt": 1786786417222,
-   "endsAt": 1786788937222
-  },
-  {
-   "world": 499,
-   "tier": 6,
-   "location": "North Dwarven Mine entrance",
-   "calledAt": 1786786583547,
-   "endsAt": 1786789103547
-  },
-  {
-   "world": 425,
-   "tier": 6,
-   "location": "Southeast Varrock mine",
-   "calledAt": 1786786761384,
-   "endsAt": 1786789281384
-  },
-  {
-   "world": 477,
-   "tier": 6,
-   "location": "Gnome Stronghold spirit tree",
-   "calledAt": 1786786818982,
-   "endsAt": 1786789338982
-  },
-  {
-   "world": 622,
-   "tier": 6,
-   "location": "Miscellania mine (cip fairy ring)",
-   "calledAt": 1786786857767,
-   "endsAt": 1786789377767
-  },
-  {
-   "world": 512,
-   "tier": 6,
-   "location": "Varlamore colosseum entrance bank",
-   "calledAt": 1786786858057,
-   "endsAt": 1786789378057
-  },
-  {
-   "world": 420,
-   "tier": 5,
-   "location": "Piscatoris (akq fairy ring)",
-   "calledAt": 1786786646764,
-   "endsAt": 1786788746764
-  },
-  {
-   "world": 323,
-   "tier": 5,
-   "location": "Rantz cave",
-   "calledAt": 1786786927874,
-   "endsAt": 1786789027874
-  },
-  {
-   "world": 562,
-   "tier": 4,
-   "location": "Myths Guild",
-   "calledAt": 1786785510069,
-   "endsAt": 1786787190069
-  },
-  {
-   "world": 330,
-   "tier": 4,
-   "location": "South of Legends Guild",
-   "calledAt": 1786785925041,
-   "endsAt": 1786787605041
-  },
-  {
-   "world": 391,
-   "tier": 4,
-   "location": "Mage Arena bank (lvl 56 Wildy)",
-   "calledAt": 1786786132281,
-   "endsAt": 1786787812281
-  },
-  {
-   "world": 521,
-   "tier": 4,
-   "location": "Southeast Varrock mine",
-   "calledAt": 1786786603172,
-   "endsAt": 1786788283172
-  },
-  {
-   "world": 390,
-   "tier": 4,
-   "location": "Catherby bank",
-   "calledAt": 1786786706856,
-   "endsAt": 1786788386856
-  },
-  {
-   "world": 364,
-   "tier": 4,
-   "location": "Taverley house portal",
-   "calledAt": 1786786771815,
-   "endsAt": 1786788451815
-  },
-  {
-   "world": 331,
-   "tier": 4,
-   "location": "South of Legends Guild",
-   "calledAt": 1786786776641,
-   "endsAt": 1786788456641
-  },
-  {
-   "world": 517,
-   "tier": 3,
-   "location": "Theatre of Blood bank",
-   "calledAt": 1786786686075,
-   "endsAt": 1786787946075
-  },
-  {
-   "world": 601,
-   "tier": 3,
-   "location": "Port Piscarilius mine in Kourend",
-   "calledAt": 1786786704009,
-   "endsAt": 1786787964009
-  },
-  {
-   "world": 321,
-   "tier": 3,
-   "location": "Canifis bank",
-   "calledAt": 1786786744044,
-   "endsAt": 1786788004044
-  },
-  {
-   "world": 377,
-   "tier": 3,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1786786825221,
-   "endsAt": 1786788085221
+   "location": "Mine north-west of hunter guild",
+   "calledAt": 1786788909851,
+   "endsAt": 1786791849851
   },
   {
    "world": 619,
-   "tier": 3,
-   "location": "Burgh de Rott bank",
-   "calledAt": 1786786851721,
-   "endsAt": 1786788111721
+   "tier": 7,
+   "location": "Ardougne Monastery",
+   "calledAt": 1786789045045,
+   "endsAt": 1786791985045
   },
   {
-   "world": 620,
-   "tier": 2,
+   "world": 470,
+   "tier": 7,
+   "location": "Varrock east bank",
+   "calledAt": 1786789281725,
+   "endsAt": 1786792221725
+  },
+  {
+   "world": 479,
+   "tier": 6,
+   "location": "Mage Arena bank (lvl 56 Wildy)",
+   "calledAt": 1786787797415,
+   "endsAt": 1786790317415
+  },
+  {
+   "world": 514,
+   "tier": 6,
    "location": "Southwest of Brimhaven Poh",
-   "calledAt": 1786786711538,
-   "endsAt": 1786787551538
+   "calledAt": 1786788649598,
+   "endsAt": 1786791169598
   },
   {
-   "world": 424,
+   "world": 509,
+   "tier": 6,
+   "location": "Mount Karuulm bank",
+   "calledAt": 1786789086584,
+   "endsAt": 1786791606584
+  },
+  {
+   "world": 510,
+   "tier": 5,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1786789001035,
+   "endsAt": 1786791101035
+  },
+  {
+   "world": 506,
+   "tier": 5,
+   "location": "Miscellania mine (cip fairy ring)",
+   "calledAt": 1786789185050,
+   "endsAt": 1786791285050
+  },
+  {
+   "world": 511,
+   "tier": 4,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1786789125630,
+   "endsAt": 1786790805630
+  },
+  {
+   "world": 693,
    "tier": 2,
-   "location": "Crafting guild",
-   "calledAt": 1786786930054,
-   "endsAt": 1786787770054
+   "location": "Taverley house portal",
+   "calledAt": 1786788967128,
+   "endsAt": 1786789807128
   },
   {
-   "world": 313,
-   "tier": 1,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1786786625362,
-   "endsAt": 1786787045362
+   "world": 305,
+   "tier": 2,
+   "location": "Canifis bank",
+   "calledAt": 1786789155044,
+   "endsAt": 1786789995044
   },
   {
-   "world": 504,
-   "tier": 1,
-   "location": "East Falador bank",
-   "calledAt": 1786786696808,
-   "endsAt": 1786787116808
+   "world": 340,
+   "tier": 2,
+   "location": "Port Khazard mine",
+   "calledAt": 1786789257199,
+   "endsAt": 1786790097199
   },
   {
-   "world": 515,
+   "world": 517,
    "tier": 1,
-   "location": "Crafting guild",
-   "calledAt": 1786786701677,
-   "endsAt": 1786787121677
+   "location": "Theatre of Blood bank",
+   "calledAt": 1786787660836,
+   "endsAt": 1786788080836
   },
   {
-   "world": 380,
+   "world": 477,
    "tier": 1,
-   "location": "Al Kharid bank",
-   "calledAt": 1786786779834,
-   "endsAt": 1786787199834
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1786788926068,
+   "endsAt": 1786789346068
   },
   {
-   "world": 443,
+   "world": 622,
    "tier": 1,
-   "location": "West of Grand Tree",
-   "calledAt": 1786786925263,
-   "endsAt": 1786787345263
+   "location": "Miscellania mine (cip fairy ring)",
+   "calledAt": 1786788963139,
+   "endsAt": 1786789383139
+  },
+  {
+   "world": 512,
+   "tier": 1,
+   "location": "Varlamore colosseum entrance bank",
+   "calledAt": 1786788963523,
+   "endsAt": 1786789383523
   }
  ],
- "at": 1786787054062,
+ "at": 1786789415606,
  "source": "https://07.gg/trackers/shooting-star"
 }
