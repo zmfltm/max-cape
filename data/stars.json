@@ -1,95 +1,53 @@
 {
  "stars": [
   {
-   "world": 421,
+   "world": 505,
    "tier": 9,
-   "location": "Draynor Village",
-   "calledAt": 1786778658601,
-   "endsAt": 1786782438601
+   "location": "Mos LeHarmless west bank",
+   "calledAt": 1786779250699,
+   "endsAt": 1786783030699
   },
   {
-   "world": 494,
+   "world": 412,
+   "tier": 9,
+   "location": "South of Legends Guild",
+   "calledAt": 1786780540367,
+   "endsAt": 1786784320367
+  },
+  {
+   "world": 425,
+   "tier": 9,
+   "location": "Hobgoblin mine (lvl 30 Wildy)",
+   "calledAt": 1786780603435,
+   "endsAt": 1786784383435
+  },
+  {
+   "world": 575,
    "tier": 8,
-   "location": "Aldarin mine in Varlamore",
-   "calledAt": 1786778884581,
-   "endsAt": 1786782244581
+   "location": "Catherby bank",
+   "calledAt": 1786780545504,
+   "endsAt": 1786783905504
   },
   {
-   "world": 532,
+   "world": 621,
    "tier": 7,
-   "location": "Mage Arena bank (lvl 56 Wildy)",
-   "calledAt": 1786777509230,
-   "endsAt": 1786780449230
+   "location": "Crafting guild",
+   "calledAt": 1786780219885,
+   "endsAt": 1786783159885
   },
   {
-   "world": 491,
+   "world": 619,
    "tier": 7,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1786778759115,
-   "endsAt": 1786781699115
+   "location": "Catherby bank",
+   "calledAt": 1786780238286,
+   "endsAt": 1786783178286
   },
   {
-   "world": 500,
+   "world": 700,
    "tier": 7,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1786778764964,
-   "endsAt": 1786781704964
-  },
-  {
-   "world": 388,
-   "tier": 7,
-   "location": "Canifis bank",
-   "calledAt": 1786778837390,
-   "endsAt": 1786781777390
-  },
-  {
-   "world": 534,
-   "tier": 7,
-   "location": "North of Al Kharid PvP Arena",
-   "calledAt": 1786778878347,
-   "endsAt": 1786781818347
-  },
-  {
-   "world": 487,
-   "tier": 7,
-   "location": "Gnome Stronghold spirit tree",
-   "calledAt": 1786778889459,
-   "endsAt": 1786781829459
-  },
-  {
-   "world": 608,
-   "tier": 6,
-   "location": "Brimhaven northwest gold mine",
-   "calledAt": 1786777408136,
-   "endsAt": 1786779928136
-  },
-  {
-   "world": 662,
-   "tier": 6,
-   "location": "North Dwarven Mine entrance",
-   "calledAt": 1786778376081,
-   "endsAt": 1786780896081
-  },
-  {
-   "world": 695,
-   "tier": 6,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1786778676428,
-   "endsAt": 1786781196428
-  },
-  {
-   "world": 590,
-   "tier": 6,
-   "location": "Port Khazard mine",
-   "calledAt": 1786778742130,
-   "endsAt": 1786781262130
-  },
-  {
-   "world": 480,
-   "tier": 6,
-   "location": "Myths Guild",
-   "calledAt": 1786778807346,
-   "endsAt": 1786781327346
+   "location": "Burgh de Rott bank",
+   "calledAt": 1786780436066,
+   "endsAt": 1786783376066
   },
   {
    "world": 302,
@@ -106,118 +64,202 @@
    "endsAt": 1786781432865
   },
   {
-   "world": 530,
+   "world": 507,
    "tier": 6,
-   "location": "North of Al Kharid PvP Arena",
-   "calledAt": 1786778963369,
-   "endsAt": 1786781483369
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1786779681891,
+   "endsAt": 1786782201891
   },
   {
-   "world": 516,
+   "world": 668,
    "tier": 6,
    "location": "Draynor Village",
-   "calledAt": 1786778964367,
-   "endsAt": 1786781484367
+   "calledAt": 1786780290361,
+   "endsAt": 1786782810361
   },
   {
-   "world": 322,
+   "world": 416,
    "tier": 6,
-   "location": "Varlamore colosseum entrance bank",
-   "calledAt": 1786778972490,
-   "endsAt": 1786781492490
+   "location": "Shilo Village gem mine",
+   "calledAt": 1786780331333,
+   "endsAt": 1786782851333
+  },
+  {
+   "world": 338,
+   "tier": 5,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1786780040673,
+   "endsAt": 1786782140673
+  },
+  {
+   "world": 534,
+   "tier": 5,
+   "location": "North of Al Kharid PvP Arena",
+   "calledAt": 1786780343834,
+   "endsAt": 1786782443834
+  },
+  {
+   "world": 494,
+   "tier": 5,
+   "location": "Aldarin mine in Varlamore",
+   "calledAt": 1786780359964,
+   "endsAt": 1786782459964
+  },
+  {
+   "world": 421,
+   "tier": 5,
+   "location": "Draynor Village",
+   "calledAt": 1786780416176,
+   "endsAt": 1786782516176
+  },
+  {
+   "world": 567,
+   "tier": 5,
+   "location": "Canifis bank",
+   "calledAt": 1786780420024,
+   "endsAt": 1786782520024
+  },
+  {
+   "world": 444,
+   "tier": 5,
+   "location": "Ardougne Monastery",
+   "calledAt": 1786780548507,
+   "endsAt": 1786782648507
+  },
+  {
+   "world": 535,
+   "tier": 4,
+   "location": "Myths Guild",
+   "calledAt": 1786780118651,
+   "endsAt": 1786781798651
+  },
+  {
+   "world": 530,
+   "tier": 3,
+   "location": "North of Al Kharid PvP Arena",
+   "calledAt": 1786780224816,
+   "endsAt": 1786781484816
   },
   {
    "world": 595,
-   "tier": 6,
+   "tier": 3,
    "location": "Mount Karuulm bank",
-   "calledAt": 1786778996069,
-   "endsAt": 1786781516069
+   "calledAt": 1786780259771,
+   "endsAt": 1786781519771
   },
   {
-   "world": 525,
-   "tier": 5,
+   "world": 516,
+   "tier": 3,
+   "location": "Draynor Village",
+   "calledAt": 1786780288868,
+   "endsAt": 1786781548868
+  },
+  {
+   "world": 500,
+   "tier": 3,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1786780448914,
+   "endsAt": 1786781708914
+  },
+  {
+   "world": 322,
+   "tier": 3,
+   "location": "Varlamore colosseum entrance bank",
+   "calledAt": 1786780456017,
+   "endsAt": 1786781716017
+  },
+  {
+   "world": 491,
+   "tier": 3,
    "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1786778689570,
-   "endsAt": 1786780728436
+   "calledAt": 1786780482217,
+   "endsAt": 1786781742217
   },
   {
-   "world": 329,
-   "tier": 5,
-   "location": "Crafting guild",
-   "calledAt": 1786778775925,
-   "endsAt": 1786780875925
+   "world": 388,
+   "tier": 3,
+   "location": "Canifis bank",
+   "calledAt": 1786780521043,
+   "endsAt": 1786781781043
   },
   {
-   "world": 389,
-   "tier": 5,
-   "location": "East Falador bank",
-   "calledAt": 1786778868009,
-   "endsAt": 1786780968009
-  },
-  {
-   "world": 445,
-   "tier": 5,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1786778875688,
-   "endsAt": 1786780975688
-  },
-  {
-   "world": 574,
-   "tier": 5,
-   "location": "Crafting guild",
-   "calledAt": 1786778967381,
-   "endsAt": 1786781067381
-  },
-  {
-   "world": 403,
-   "tier": 4,
-   "location": "Varrock east bank",
-   "calledAt": 1786778640338,
-   "endsAt": 1786780320338
-  },
-  {
-   "world": 475,
-   "tier": 4,
-   "location": "Al Kharid bank",
-   "calledAt": 1786778654453,
-   "endsAt": 1786780334453
+   "world": 487,
+   "tier": 3,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1786780574413,
+   "endsAt": 1786781834413
   },
   {
    "world": 514,
-   "tier": 3,
-   "location": "Desert Quarry mine",
-   "calledAt": 1786778796804,
-   "endsAt": 1786780056804
-  },
-  {
-   "world": 614,
-   "tier": 3,
-   "location": "Crafting guild",
-   "calledAt": 1786778946647,
-   "endsAt": 1786780206647
-  },
-  {
-   "world": 492,
-   "tier": 3,
-   "location": "Ardougne Monastery",
-   "calledAt": 1786779015892,
-   "endsAt": 1786780275892
-  },
-  {
-   "world": 569,
    "tier": 2,
-   "location": "Draynor Village",
-   "calledAt": 1786778879977,
-   "endsAt": 1786779719977
+   "location": "Desert Quarry mine",
+   "calledAt": 1786779227129,
+   "endsAt": 1786780067129
   },
   {
-   "world": 490,
+   "world": 574,
+   "tier": 2,
+   "location": "Crafting guild",
+   "calledAt": 1786780230757,
+   "endsAt": 1786781070757
+  },
+  {
+   "world": 695,
+   "tier": 2,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1786780318208,
+   "endsAt": 1786781158208
+  },
+  {
+   "world": 590,
+   "tier": 2,
+   "location": "Port Khazard mine",
+   "calledAt": 1786780442569,
+   "endsAt": 1786781282569
+  },
+  {
+   "world": 480,
+   "tier": 2,
+   "location": "Myths Guild",
+   "calledAt": 1786780491669,
+   "endsAt": 1786781331669
+  },
+  {
+   "world": 366,
    "tier": 1,
-   "location": "Theatre of Blood bank",
-   "calledAt": 1786778953018,
-   "endsAt": 1786779373018
+   "location": "Crafting guild",
+   "calledAt": 1786779861669,
+   "endsAt": 1786780281669
+  },
+  {
+   "world": 525,
+   "tier": 1,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1786780312807,
+   "endsAt": 1786780732807
+  },
+  {
+   "world": 329,
+   "tier": 1,
+   "location": "Crafting guild",
+   "calledAt": 1786780460378,
+   "endsAt": 1786780880378
+  },
+  {
+   "world": 389,
+   "tier": 1,
+   "location": "East Falador bank",
+   "calledAt": 1786780552193,
+   "endsAt": 1786780972193
+  },
+  {
+   "world": 445,
+   "tier": 1,
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1786780561472,
+   "endsAt": 1786780981472
   }
  ],
- "at": 1786779104727,
+ "at": 1786780643274,
  "source": "https://07.gg/trackers/shooting-star"
 }
