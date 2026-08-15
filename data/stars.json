@@ -22,20 +22,6 @@
    "endsAt": 1786779753152
   },
   {
-   "world": 356,
-   "tier": 7,
-   "location": "Burgh de Rott bank",
-   "calledAt": 1786776119236,
-   "endsAt": 1786779059236
-  },
-  {
-   "world": 332,
-   "tier": 7,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1786776143228,
-   "endsAt": 1786779083228
-  },
-  {
    "world": 305,
    "tier": 7,
    "location": "West Lumbridge Swamp mine",
@@ -43,18 +29,18 @@
    "endsAt": 1786779232526
   },
   {
+   "world": 514,
+   "tier": 7,
+   "location": "Desert Quarry mine",
+   "calledAt": 1786776578446,
+   "endsAt": 1786779518446
+  },
+  {
    "world": 429,
    "tier": 6,
    "location": "Hosidius mine",
    "calledAt": 1786775068714,
    "endsAt": 1786777588714
-  },
-  {
-   "world": 387,
-   "tier": 6,
-   "location": "Feldip Hills (aks fairy ring)",
-   "calledAt": 1786776119628,
-   "endsAt": 1786778639628
   },
   {
    "world": 444,
@@ -92,18 +78,25 @@
    "endsAt": 1786779004063
   },
   {
-   "world": 325,
-   "tier": 4,
-   "location": "East Falador bank",
-   "calledAt": 1786776170248,
-   "endsAt": 1786777850248
+   "world": 356,
+   "tier": 6,
+   "location": "Burgh de Rott bank",
+   "calledAt": 1786776538628,
+   "endsAt": 1786779058628
   },
   {
-   "world": 517,
-   "tier": 4,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1786776176670,
-   "endsAt": 1786777856670
+   "world": 332,
+   "tier": 6,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1786776564100,
+   "endsAt": 1786779084100
+  },
+  {
+   "world": 387,
+   "tier": 5,
+   "location": "Feldip Hills (aks fairy ring)",
+   "calledAt": 1786776539693,
+   "endsAt": 1786778639693
   },
   {
    "world": 371,
@@ -134,32 +127,18 @@
    "endsAt": 1786777212602
   },
   {
-   "world": 602,
+   "world": 325,
    "tier": 3,
-   "location": "Crafting guild",
-   "calledAt": 1786776118515,
-   "endsAt": 1786777378515
+   "location": "East Falador bank",
+   "calledAt": 1786776590754,
+   "endsAt": 1786777850754
   },
   {
-   "world": 486,
+   "world": 517,
    "tier": 3,
-   "location": "Rimmington mine",
-   "calledAt": 1786776160353,
-   "endsAt": 1786777420353
-  },
-  {
-   "world": 695,
-   "tier": 2,
-   "location": "North Dwarven Mine entrance",
-   "calledAt": 1786776117752,
-   "endsAt": 1786776957752
-  },
-  {
-   "world": 613,
-   "tier": 2,
-   "location": "West of Grand Tree",
-   "calledAt": 1786776166372,
-   "endsAt": 1786777006372
+   "location": "Mount Karuulm bank",
+   "calledAt": 1786776597351,
+   "endsAt": 1786777857351
   },
   {
    "world": 436,
@@ -176,11 +155,18 @@
    "endsAt": 1786777076896
   },
   {
-   "world": 410,
-   "tier": 1,
-   "location": "Taverley house portal",
-   "calledAt": 1786774764112,
-   "endsAt": 1786775184112
+   "world": 602,
+   "tier": 2,
+   "location": "Crafting guild",
+   "calledAt": 1786776535735,
+   "endsAt": 1786777375735
+  },
+  {
+   "world": 486,
+   "tier": 2,
+   "location": "Rimmington mine",
+   "calledAt": 1786776581942,
+   "endsAt": 1786777421942
   },
   {
    "world": 575,
@@ -202,8 +188,22 @@
    "location": "Corsair Resource Area",
    "calledAt": 1786776477155,
    "endsAt": 1786776897155
+  },
+  {
+   "world": 695,
+   "tier": 1,
+   "location": "North Dwarven Mine entrance",
+   "calledAt": 1786776539338,
+   "endsAt": 1786776959338
+  },
+  {
+   "world": 613,
+   "tier": 1,
+   "location": "West of Grand Tree",
+   "calledAt": 1786776588841,
+   "endsAt": 1786777008841
   }
  ],
- "at": 1786776564223,
+ "at": 1786776665672,
  "source": "https://07.gg/trackers/shooting-star"
 }
