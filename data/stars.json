@@ -1,11 +1,32 @@
 {
  "stars": [
   {
-   "world": 442,
+   "world": 360,
+   "tier": 9,
+   "location": "Mos LeHarmless west bank",
+   "calledAt": 1786950197327,
+   "endsAt": 1786953977327
+  },
+  {
+   "world": 504,
+   "tier": 9,
+   "location": "Al Kharid bank",
+   "calledAt": 1786950298306,
+   "endsAt": 1786954078306
+  },
+  {
+   "world": 403,
+   "tier": 9,
+   "location": "Piscatoris (akq fairy ring)",
+   "calledAt": 1786950427529,
+   "endsAt": 1786954207529
+  },
+  {
+   "world": 620,
    "tier": 8,
-   "location": "Soul Wars south mine",
-   "calledAt": 1786949706876,
-   "endsAt": 1786953066876
+   "location": "Theatre of Blood bank",
+   "calledAt": 1786950387551,
+   "endsAt": 1786953747551
   },
   {
    "world": 612,
@@ -13,13 +34,6 @@
    "location": "Corsair Resource Area",
    "calledAt": 1786945533666,
    "endsAt": 1786948473666
-  },
-  {
-   "world": 563,
-   "tier": 7,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1786946893757,
-   "endsAt": 1786949833757
   },
   {
    "world": 344,
@@ -43,32 +57,32 @@
    "endsAt": 1786952582039
   },
   {
-   "world": 389,
+   "world": 442,
    "tier": 7,
-   "location": "Arceuus dense essence mine",
-   "calledAt": 1786949721287,
-   "endsAt": 1786952661287
+   "location": "Soul Wars south mine",
+   "calledAt": 1786950251528,
+   "endsAt": 1786953191528
   },
   {
-   "world": 562,
+   "world": 470,
    "tier": 7,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1786949798244,
-   "endsAt": 1786952738244
+   "location": "West of Grand Tree",
+   "calledAt": 1786950306059,
+   "endsAt": 1786953246059
   },
   {
-   "world": 519,
+   "world": 459,
    "tier": 7,
-   "location": "Aldarin mine in Varlamore",
-   "calledAt": 1786949847097,
-   "endsAt": 1786952787097
+   "location": "Rimmington mine",
+   "calledAt": 1786950383960,
+   "endsAt": 1786953323960
   },
   {
-   "world": 416,
+   "world": 376,
    "tier": 7,
-   "location": "East Lumbridge Swamp mine",
-   "calledAt": 1786949872948,
-   "endsAt": 1786952812948
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1786950418406,
+   "endsAt": 1786953358406
   },
   {
    "world": 438,
@@ -106,67 +120,88 @@
    "endsAt": 1786951310179
   },
   {
-   "world": 528,
+   "world": 562,
    "tier": 6,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1786950220893,
+   "endsAt": 1786952740893
+  },
+  {
+   "world": 315,
+   "tier": 6,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1786950245008,
+   "endsAt": 1786952765008
+  },
+  {
+   "world": 519,
+   "tier": 6,
+   "location": "Aldarin mine in Varlamore",
+   "calledAt": 1786950267730,
+   "endsAt": 1786952787730
+  },
+  {
+   "world": 389,
+   "tier": 6,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1786950313896,
+   "endsAt": 1786952833896
+  },
+  {
+   "world": 416,
+   "tier": 6,
+   "location": "East Lumbridge Swamp mine",
+   "calledAt": 1786950363823,
+   "endsAt": 1786952883823
+  },
+  {
+   "world": 528,
+   "tier": 5,
    "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1786949912717,
-   "endsAt": 1786952432717
-  },
-  {
-   "world": 358,
-   "tier": 5,
-   "location": "Varlamore South East mine",
-   "calledAt": 1786949726282,
-   "endsAt": 1786951826282
-  },
-  {
-   "world": 326,
-   "tier": 5,
-   "location": "East Falador bank",
-   "calledAt": 1786949785202,
-   "endsAt": 1786951885202
+   "calledAt": 1786950333909,
+   "endsAt": 1786952433909
   },
   {
    "world": 517,
-   "tier": 5,
+   "tier": 4,
    "location": "Mine north-west of hunter guild",
-   "calledAt": 1786949792623,
-   "endsAt": 1786951892623
+   "calledAt": 1786950383000,
+   "endsAt": 1786951760185
+  },
+  {
+   "world": 358,
+   "tier": 4,
+   "location": "Varlamore South East mine",
+   "calledAt": 1786950148275,
+   "endsAt": 1786951828275
+  },
+  {
+   "world": 326,
+   "tier": 4,
+   "location": "East Falador bank",
+   "calledAt": 1786950206271,
+   "endsAt": 1786951886271
   },
   {
    "world": 550,
-   "tier": 5,
+   "tier": 4,
    "location": "Mount Karuulm bank",
-   "calledAt": 1786949835113,
-   "endsAt": 1786951935113
+   "calledAt": 1786950255124,
+   "endsAt": 1786951935124
   },
   {
    "world": 340,
-   "tier": 5,
+   "tier": 4,
    "location": "Yanille bank",
-   "calledAt": 1786949868644,
-   "endsAt": 1786951968644
+   "calledAt": 1786950291363,
+   "endsAt": 1786951971363
   },
   {
    "world": 534,
-   "tier": 5,
+   "tier": 4,
    "location": "Port Khazard mine",
-   "calledAt": 1786949904498,
-   "endsAt": 1786952004498
-  },
-  {
-   "world": 367,
-   "tier": 4,
-   "location": "South of Legends Guild",
-   "calledAt": 1786949655544,
-   "endsAt": 1786951335544
-  },
-  {
-   "world": 515,
-   "tier": 4,
-   "location": "Crafting guild",
-   "calledAt": 1786949893511,
-   "endsAt": 1786951573511
+   "calledAt": 1786950325624,
+   "endsAt": 1786952005624
   },
   {
    "world": 351,
@@ -176,67 +211,18 @@
    "endsAt": 1786948852201
   },
   {
-   "world": 573,
+   "world": 515,
    "tier": 3,
-   "location": "Brimhaven northwest gold mine",
-   "calledAt": 1786949476441,
-   "endsAt": 1786950736441
+   "location": "Crafting guild",
+   "calledAt": 1786950341279,
+   "endsAt": 1786951601279
   },
   {
    "world": 318,
-   "tier": 3,
+   "tier": 2,
    "location": "Pirates Hideout (lvl 53 Wildy)",
-   "calledAt": 1786949489453,
-   "endsAt": 1786950749453
-  },
-  {
-   "world": 437,
-   "tier": 3,
-   "location": "Southeast Varrock mine",
-   "calledAt": 1786949551395,
-   "endsAt": 1786950811395
-  },
-  {
-   "world": 514,
-   "tier": 2,
-   "location": "Ardougne Monastery",
-   "calledAt": 1786948238083,
-   "endsAt": 1786949078083
-  },
-  {
-   "world": 409,
-   "tier": 2,
-   "location": "Miscellania mine (cip fairy ring)",
-   "calledAt": 1786949514000,
-   "endsAt": 1786950354000
-  },
-  {
-   "world": 346,
-   "tier": 2,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1786949586692,
-   "endsAt": 1786950426692
-  },
-  {
-   "world": 449,
-   "tier": 2,
-   "location": "West Falador mine",
-   "calledAt": 1786949610111,
-   "endsAt": 1786950450111
-  },
-  {
-   "world": 306,
-   "tier": 2,
-   "location": "Theatre of Blood bank",
-   "calledAt": 1786949745986,
-   "endsAt": 1786950585986
-  },
-  {
-   "world": 417,
-   "tier": 2,
-   "location": "Southeast Varrock mine",
-   "calledAt": 1786949891442,
-   "endsAt": 1786950731442
+   "calledAt": 1786950009261,
+   "endsAt": 1786950849261
   },
   {
    "world": 485,
@@ -246,34 +232,55 @@
    "endsAt": 1786949774841
   },
   {
-   "world": 426,
+   "world": 447,
    "tier": 1,
-   "location": "Canifis bank",
-   "calledAt": 1786949548928,
-   "endsAt": 1786949968928
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1786949986921,
+   "endsAt": 1786950406921
   },
   {
-   "world": 309,
+   "world": 449,
    "tier": 1,
-   "location": "Champions Guild mine",
-   "calledAt": 1786949734757,
-   "endsAt": 1786950154757
+   "location": "West Falador mine",
+   "calledAt": 1786950030373,
+   "endsAt": 1786950450373
   },
   {
-   "world": 700,
+   "world": 306,
    "tier": 1,
-   "location": "Rimmington mine",
-   "calledAt": 1786949859594,
-   "endsAt": 1786950279594
+   "location": "Theatre of Blood bank",
+   "calledAt": 1786950166739,
+   "endsAt": 1786950586739
   },
   {
-   "world": 444,
+   "world": 417,
    "tier": 1,
-   "location": "West of Grand Tree",
-   "calledAt": 1786949893207,
-   "endsAt": 1786950313207
+   "location": "Southeast Varrock mine",
+   "calledAt": 1786950313243,
+   "endsAt": 1786950733243
+  },
+  {
+   "world": 573,
+   "tier": 1,
+   "location": "Brimhaven northwest gold mine",
+   "calledAt": 1786950318314,
+   "endsAt": 1786950738314
+  },
+  {
+   "world": 437,
+   "tier": 1,
+   "location": "Southeast Varrock mine",
+   "calledAt": 1786950393807,
+   "endsAt": 1786950813807
+  },
+  {
+   "world": 524,
+   "tier": 1,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1786950420088,
+   "endsAt": 1786950840088
   }
  ],
- "at": 1786949980111,
+ "at": 1786950480661,
  "source": "https://07.gg/trackers/shooting-star"
 }
