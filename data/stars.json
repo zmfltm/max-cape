@@ -1,111 +1,223 @@
 {
  "stars": [
   {
-   "world": 388,
-   "tier": 9,
-   "location": "Theatre of Blood bank",
-   "calledAt": 1787135349545,
-   "endsAt": 1787139129545
-  },
-  {
-   "world": 452,
-   "tier": 9,
-   "location": "East Lumbridge Swamp mine",
-   "calledAt": 1787136441771,
-   "endsAt": 1787140221771
-  },
-  {
-   "world": 531,
+   "world": 377,
    "tier": 8,
-   "location": "Nature Altar mine north of Shilo",
-   "calledAt": 1787135029283,
-   "endsAt": 1787138389283
+   "location": "Taverley house portal",
+   "calledAt": 1787138411840,
+   "endsAt": 1787141771840
   },
   {
-   "world": 536,
-   "tier": 7,
-   "location": "North of Al Kharid PvP Arena",
-   "calledAt": 1787134924987,
-   "endsAt": 1787137864987
+   "world": 321,
+   "tier": 8,
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1787138447416,
+   "endsAt": 1787141807416
   },
   {
-   "world": 425,
-   "tier": 7,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1787136260929,
-   "endsAt": 1787139200929
+   "world": 493,
+   "tier": 8,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1787138562012,
+   "endsAt": 1787141922012
   },
   {
-   "world": 327,
-   "tier": 6,
-   "location": "Lunar Isle mine entrance",
-   "calledAt": 1787134921013,
-   "endsAt": 1787137441013
-  },
-  {
-   "world": 495,
-   "tier": 6,
-   "location": "Champions Guild mine",
-   "calledAt": 1787135112402,
-   "endsAt": 1787137632402
-  },
-  {
-   "world": 370,
-   "tier": 6,
-   "location": "Draynor Village",
-   "calledAt": 1787136339922,
-   "endsAt": 1787138859922
-  },
-  {
-   "world": 420,
-   "tier": 5,
-   "location": "Coal Trucks west of Seers",
-   "calledAt": 1787134756139,
-   "endsAt": 1787136856139
-  },
-  {
-   "world": 402,
-   "tier": 5,
-   "location": "West of Grand Tree",
-   "calledAt": 1787135028450,
-   "endsAt": 1787137128450
-  },
-  {
-   "world": 479,
-   "tier": 5,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1787135034838,
-   "endsAt": 1787137134838
-  },
-  {
-   "world": 555,
-   "tier": 4,
-   "location": "Draynor Village",
-   "calledAt": 1787134794341,
-   "endsAt": 1787136474341
-  },
-  {
-   "world": 399,
-   "tier": 2,
-   "location": "Champions Guild mine",
-   "calledAt": 1787135244852,
-   "endsAt": 1787136084852
-  },
-  {
-   "world": 590,
-   "tier": 2,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1787135329432,
-   "endsAt": 1787136169432
+   "world": 361,
+   "tier": 8,
+   "location": "Darkmeyer ess. mine entrance",
+   "calledAt": 1787138648386,
+   "endsAt": 1787142008386
   },
   {
    "world": 563,
+   "tier": 7,
+   "location": "Rantz cave",
+   "calledAt": 1787136968050,
+   "endsAt": 1787139908050
+  },
+  {
+   "world": 389,
+   "tier": 7,
+   "location": "East Lumbridge Swamp mine",
+   "calledAt": 1787137091880,
+   "endsAt": 1787140031880
+  },
+  {
+   "world": 328,
+   "tier": 7,
+   "location": "Nature Altar mine north of Shilo",
+   "calledAt": 1787137816935,
+   "endsAt": 1787140756935
+  },
+  {
+   "world": 569,
+   "tier": 7,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1787138150968,
+   "endsAt": 1787141090968
+  },
+  {
+   "world": 500,
+   "tier": 7,
+   "location": "Jatizso mine entrance",
+   "calledAt": 1787138537711,
+   "endsAt": 1787141477711
+  },
+  {
+   "world": 486,
+   "tier": 7,
+   "location": "Southwest of Brimhaven Poh",
+   "calledAt": 1787138697094,
+   "endsAt": 1787141637094
+  },
+  {
+   "world": 330,
+   "tier": 6,
+   "location": "Piscatoris (akq fairy ring)",
+   "calledAt": 1787137756528,
+   "endsAt": 1787140276528
+  },
+  {
+   "world": 306,
+   "tier": 6,
+   "location": "North Crandor",
+   "calledAt": 1787137840143,
+   "endsAt": 1787140360143
+  },
+  {
+   "world": 359,
+   "tier": 6,
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1787138122318,
+   "endsAt": 1787140642318
+  },
+  {
+   "world": 521,
+   "tier": 6,
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1787138205870,
+   "endsAt": 1787140725870
+  },
+  {
+   "world": 590,
+   "tier": 6,
+   "location": "Varrock east bank",
+   "calledAt": 1787138417375,
+   "endsAt": 1787140937375
+  },
+  {
+   "world": 546,
+   "tier": 5,
+   "location": "East Falador bank",
+   "calledAt": 1787138396628,
+   "endsAt": 1787140496628
+  },
+  {
+   "world": 516,
+   "tier": 5,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787138408303,
+   "endsAt": 1787140508303
+  },
+  {
+   "world": 600,
+   "tier": 5,
+   "location": "Rimmington mine",
+   "calledAt": 1787138476009,
+   "endsAt": 1787140576009
+  },
+  {
+   "world": 305,
+   "tier": 5,
+   "location": "Catherby bank",
+   "calledAt": 1787138747112,
+   "endsAt": 1787140847112
+  },
+  {
+   "world": 622,
+   "tier": 5,
+   "location": "Champions Guild mine",
+   "calledAt": 1787138754305,
+   "endsAt": 1787140854305
+  },
+  {
+   "world": 550,
+   "tier": 4,
+   "location": "Burgh de Rott bank",
+   "calledAt": 1787138480516,
+   "endsAt": 1787140160516
+  },
+  {
+   "world": 452,
+   "tier": 4,
+   "location": "East Lumbridge Swamp mine",
+   "calledAt": 1787138537293,
+   "endsAt": 1787140217293
+  },
+  {
+   "world": 365,
+   "tier": 4,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787138585738,
+   "endsAt": 1787140265738
+  },
+  {
+   "world": 394,
+   "tier": 4,
+   "location": "Draynor Village",
+   "calledAt": 1787138671547,
+   "endsAt": 1787140351547
+  },
+  {
+   "world": 376,
+   "tier": 4,
+   "location": "West Falador mine",
+   "calledAt": 1787138716070,
+   "endsAt": 1787140396070
+  },
+  {
+   "world": 480,
+   "tier": 4,
+   "location": "Theatre of Blood bank",
+   "calledAt": 1787138753111,
+   "endsAt": 1787140433111
+  },
+  {
+   "world": 472,
+   "tier": 3,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787138642211,
+   "endsAt": 1787139902211
+  },
+  {
+   "world": 421,
+   "tier": 3,
+   "location": "Taverley house portal",
+   "calledAt": 1787138672836,
+   "endsAt": 1787139932836
+  },
+  {
+   "world": 425,
+   "tier": 2,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1787138421703,
+   "endsAt": 1787139261703
+  },
+  {
+   "world": 448,
+   "tier": 2,
+   "location": "Crafting guild",
+   "calledAt": 1787138535857,
+   "endsAt": 1787139375857
+  },
+  {
+   "world": 370,
    "tier": 1,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1787134936049,
-   "endsAt": 1787135356049
+   "location": "Draynor Village",
+   "calledAt": 1787138470239,
+   "endsAt": 1787138890239
   }
  ],
- "at": 1787136559975,
+ "at": 1787138776995,
  "source": "https://07.gg/trackers/shooting-star"
 }
