@@ -141,13 +141,6 @@
    "endsAt": 1787382647426
   },
   {
-   "world": 349,
-   "tier": 6,
-   "location": "East Falador bank",
-   "calledAt": 1787380953715,
-   "endsAt": 1787383473715
-  },
-  {
    "world": 536,
    "tier": 5,
    "location": "Burgh de Rott bank",
@@ -183,18 +176,18 @@
    "endsAt": 1787383499856
   },
   {
+   "world": 349,
+   "tier": 5,
+   "location": "East Falador bank",
+   "calledAt": 1787381465011,
+   "endsAt": 1787383565011
+  },
+  {
    "world": 534,
    "tier": 4,
    "location": "Southwest of Brimhaven Poh",
    "calledAt": 1787379818668,
    "endsAt": 1787381498668
-  },
-  {
-   "world": 367,
-   "tier": 4,
-   "location": "Draynor Village",
-   "calledAt": 1787381052873,
-   "endsAt": 1787382732873
   },
   {
    "world": 323,
@@ -267,6 +260,13 @@
    "endsAt": 1787382614191
   },
   {
+   "world": 367,
+   "tier": 3,
+   "location": "Draynor Village",
+   "calledAt": 1787381473327,
+   "endsAt": 1787382733327
+  },
+  {
    "world": 538,
    "tier": 2,
    "location": "Ardougne Monastery",
@@ -281,13 +281,6 @@
    "endsAt": 1787381202152
   },
   {
-   "world": 406,
-   "tier": 2,
-   "location": "Canifis bank",
-   "calledAt": 1787381069056,
-   "endsAt": 1787381909056
-  },
-  {
    "world": 338,
    "tier": 2,
    "location": "Piscatoris (akq fairy ring)",
@@ -300,13 +293,6 @@
    "location": "Port Khazard mine",
    "calledAt": 1787381183782,
    "endsAt": 1787382023782
-  },
-  {
-   "world": 373,
-   "tier": 2,
-   "location": "Aldarin mine in Varlamore",
-   "calledAt": 1787381222010,
-   "endsAt": 1787382062010
   },
   {
    "world": 490,
@@ -351,20 +337,20 @@
    "endsAt": 1787380807922
   },
   {
-   "world": 347,
-   "tier": 1,
-   "location": "Mine north-west of hunter guild",
-   "calledAt": 1787381093279,
-   "endsAt": 1787381513279
-  },
-  {
    "world": 331,
    "tier": 1,
    "location": "West of Grand Tree",
    "calledAt": 1787381270679,
    "endsAt": 1787381690679
+  },
+  {
+   "world": 406,
+   "tier": 1,
+   "location": "Canifis bank",
+   "calledAt": 1787381490216,
+   "endsAt": 1787381910216
   }
  ],
- "at": 1787381483337,
+ "at": 1787381600278,
  "source": "https://07.gg/trackers/shooting-star"
 }
