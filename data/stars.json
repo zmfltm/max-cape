@@ -1,265 +1,412 @@
 {
  "stars": [
   {
-   "world": 402,
+   "world": 513,
    "tier": 9,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1787410045696,
-   "endsAt": 1787413825696
+   "location": "Piscatoris (akq fairy ring)",
+   "calledAt": 1787411268671,
+   "endsAt": 1787415048671
   },
   {
-   "world": 337,
+   "world": 614,
    "tier": 9,
-   "location": "Ardougne Monastery",
-   "calledAt": 1787410350226,
-   "endsAt": 1787414130226
+   "location": "Port Khazard mine",
+   "calledAt": 1787411886435,
+   "endsAt": 1787415666435
   },
   {
-   "world": 310,
+   "world": 349,
    "tier": 9,
-   "location": "East Falador bank",
-   "calledAt": 1787410433770,
-   "endsAt": 1787414213770
+   "location": "Yanille bank",
+   "calledAt": 1787411997648,
+   "endsAt": 1787415777648
+  },
+  {
+   "world": 492,
+   "tier": 9,
+   "location": "North Crandor",
+   "calledAt": 1787412049157,
+   "endsAt": 1787415829157
+  },
+  {
+   "world": 443,
+   "tier": 8,
+   "location": "South Crandor",
+   "calledAt": 1787410643537,
+   "endsAt": 1787414003537
+  },
+  {
+   "world": 524,
+   "tier": 8,
+   "location": "Piscatoris (akq fairy ring)",
+   "calledAt": 1787411511833,
+   "endsAt": 1787414871833
+  },
+  {
+   "world": 485,
+   "tier": 8,
+   "location": "Varrock east bank",
+   "calledAt": 1787411876626,
+   "endsAt": 1787415236626
+  },
+  {
+   "world": 487,
+   "tier": 8,
+   "location": "Yanille bank",
+   "calledAt": 1787411880952,
+   "endsAt": 1787415240952
+  },
+  {
+   "world": 395,
+   "tier": 8,
+   "location": "Burgh de Rott bank",
+   "calledAt": 1787411935553,
+   "endsAt": 1787415295553
+  },
+  {
+   "world": 343,
+   "tier": 8,
+   "location": "West Falador mine",
+   "calledAt": 1787412068254,
+   "endsAt": 1787415428254
+  },
+  {
+   "world": 334,
+   "tier": 7,
+   "location": "Abandoned Mine west of Burgh",
+   "calledAt": 1787411488262,
+   "endsAt": 1787414428262
+  },
+  {
+   "world": 374,
+   "tier": 7,
+   "location": "Desert Quarry mine",
+   "calledAt": 1787411675077,
+   "endsAt": 1787414615077
   },
   {
    "world": 668,
-   "tier": 8,
-   "location": "Draynor Village",
-   "calledAt": 1787410117751,
-   "endsAt": 1787413477751
-  },
-  {
-   "world": 698,
-   "tier": 8,
-   "location": "Varrock east bank",
-   "calledAt": 1787410170312,
-   "endsAt": 1787413530312
-  },
-  {
-   "world": 511,
-   "tier": 8,
-   "location": "Yanille bank",
-   "calledAt": 1787410289102,
-   "endsAt": 1787413649102
-  },
-  {
-   "world": 564,
-   "tier": 8,
-   "location": "Rimmington mine",
-   "calledAt": 1787410314804,
-   "endsAt": 1787413674804
-  },
-  {
-   "world": 421,
-   "tier": 8,
-   "location": "Miscellania mine (cip fairy ring)",
-   "calledAt": 1787410372946,
-   "endsAt": 1787413732946
-  },
-  {
-   "world": 504,
    "tier": 7,
-   "location": "Kebos Swamp mine",
-   "calledAt": 1787409778462,
-   "endsAt": 1787412718462
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1787411760137,
+   "endsAt": 1787414700137
   },
   {
-   "world": 412,
+   "world": 320,
    "tier": 7,
-   "location": "Corsair Cove bank (innit)",
-   "calledAt": 1787409920276,
-   "endsAt": 1787412860276
+   "location": "Mine north-west of hunter guild",
+   "calledAt": 1787411853046,
+   "endsAt": 1787414793046
   },
   {
-   "world": 627,
-   "tier": 7,
-   "location": "Pirates Hideout (lvl 53 Wildy)",
-   "calledAt": 1787410019340,
-   "endsAt": 1787412959340
-  },
-  {
-   "world": 501,
-   "tier": 7,
-   "location": "Al Kharid mine",
-   "calledAt": 1787410148569,
-   "endsAt": 1787413088569
-  },
-  {
-   "world": 340,
+   "world": 439,
    "tier": 7,
    "location": "Ardougne Monastery",
-   "calledAt": 1787410249534,
-   "endsAt": 1787413189534
+   "calledAt": 1787411855887,
+   "endsAt": 1787414795887
   },
   {
-   "world": 664,
+   "world": 441,
    "tier": 7,
-   "location": "Rimmington mine",
-   "calledAt": 1787410379778,
-   "endsAt": 1787413319778
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1787411948721,
+   "endsAt": 1787414888721
   },
   {
-   "world": 360,
-   "tier": 6,
-   "location": "North Crandor",
-   "calledAt": 1787405166959,
-   "endsAt": 1787407686959
+   "world": 461,
+   "tier": 7,
+   "location": "Catherby bank",
+   "calledAt": 1787411988685,
+   "endsAt": 1787414928685
   },
   {
-   "world": 410,
-   "tier": 6,
-   "location": "Coal Trucks west of Seers",
-   "calledAt": 1787405548744,
-   "endsAt": 1787408068744
-  },
-  {
-   "world": 512,
-   "tier": 6,
-   "location": "Lunar Isle mine entrance",
-   "calledAt": 1787407029174,
-   "endsAt": 1787409549174
-  },
-  {
-   "world": 516,
-   "tier": 6,
+   "world": 317,
+   "tier": 7,
    "location": "Hobgoblin mine (lvl 30 Wildy)",
-   "calledAt": 1787408576900,
-   "endsAt": 1787411096900
+   "calledAt": 1787412052085,
+   "endsAt": 1787414992085
+  },
+  {
+   "world": 609,
+   "tier": 7,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1787412118377,
+   "endsAt": 1787415058377
+  },
+  {
+   "world": 556,
+   "tier": 7,
+   "location": "Catherby bank",
+   "calledAt": 1787412148538,
+   "endsAt": 1787415088538
+  },
+  {
+   "world": 367,
+   "tier": 6,
+   "location": "Abandoned Mine west of Burgh",
+   "calledAt": 1787411016461,
+   "endsAt": 1787413536461
+  },
+  {
+   "world": 566,
+   "tier": 6,
+   "location": "Darkmeyer ess. mine entrance",
+   "calledAt": 1787411451653,
+   "endsAt": 1787413971653
   },
   {
    "world": 480,
    "tier": 6,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1787408801713,
-   "endsAt": 1787411321713
+   "location": "Brimhaven northwest gold mine",
+   "calledAt": 1787411860977,
+   "endsAt": 1787414380977
   },
   {
-   "world": 625,
+   "world": 469,
    "tier": 6,
-   "location": "Arceuus dense essence mine",
-   "calledAt": 1787409808293,
-   "endsAt": 1787412328293
+   "location": "Crafting guild",
+   "calledAt": 1787411914885,
+   "endsAt": 1787414434885
   },
   {
-   "world": 358,
+   "world": 332,
    "tier": 6,
-   "location": "Varlamore colosseum entrance bank",
-   "calledAt": 1787410108856,
-   "endsAt": 1787412628856
+   "location": "Theatre of Blood bank",
+   "calledAt": 1787412037540,
+   "endsAt": 1787414557540
   },
   {
-   "world": 465,
+   "world": 346,
    "tier": 6,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1787410482588,
-   "endsAt": 1787413002588
+   "location": "Coal Trucks west of Seers",
+   "calledAt": 1787412063468,
+   "endsAt": 1787414583468
   },
   {
-   "world": 610,
-   "tier": 5,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1787407031451,
-   "endsAt": 1787409131451
+   "world": 533,
+   "tier": 6,
+   "location": "Varrock east bank",
+   "calledAt": 1787412140369,
+   "endsAt": 1787414660369
   },
   {
-   "world": 514,
+   "world": 621,
+   "tier": 6,
+   "location": "East Falador bank",
+   "calledAt": 1787412150291,
+   "endsAt": 1787414670291
+  },
+  {
+   "world": 359,
+   "tier": 6,
+   "location": "Piscatoris (akq fairy ring)",
+   "calledAt": 1787412160399,
+   "endsAt": 1787414680399
+  },
+  {
+   "world": 412,
    "tier": 5,
    "location": "Corsair Cove bank (innit)",
-   "calledAt": 1787408376893,
-   "endsAt": 1787410476893
+   "calledAt": 1787410901419,
+   "endsAt": 1787413001419
   },
   {
-   "world": 482,
+   "world": 619,
    "tier": 5,
-   "location": "Darkmeyer ess. mine entrance",
-   "calledAt": 1787409131895,
-   "endsAt": 1787411231895
+   "location": "Lletya",
+   "calledAt": 1787411674329,
+   "endsAt": 1787413774329
   },
   {
-   "world": 661,
+   "world": 573,
    "tier": 5,
-   "location": "Al Kharid bank",
-   "calledAt": 1787410138473,
-   "endsAt": 1787412238473
+   "location": "Miscellania mine (cip fairy ring)",
+   "calledAt": 1787411769380,
+   "endsAt": 1787413869380
   },
   {
-   "world": 546,
+   "world": 402,
    "tier": 5,
-   "location": "Varrock east bank",
-   "calledAt": 1787410253596,
-   "endsAt": 1787412353596
-  },
-  {
-   "world": 387,
-   "tier": 5,
-   "location": "Myths Guild",
-   "calledAt": 1787410363429,
-   "endsAt": 1787412463429
-  },
-  {
-   "world": 567,
-   "tier": 4,
-   "location": "Brimhaven northwest gold mine",
-   "calledAt": 1787407406998,
-   "endsAt": 1787409086998
-  },
-  {
-   "world": 526,
-   "tier": 4,
-   "location": "Ardougne Monastery",
-   "calledAt": 1787410399341,
-   "endsAt": 1787412079341
-  },
-  {
-   "world": 580,
-   "tier": 4,
-   "location": "Burgh de Rott bank",
-   "calledAt": 1787410453610,
-   "endsAt": 1787412133610
-  },
-  {
-   "world": 384,
-   "tier": 3,
-   "location": "East Falador bank",
-   "calledAt": 1787410367300,
-   "endsAt": 1787411627300
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1787411795455,
+   "endsAt": 1787413895455
   },
   {
    "world": 463,
-   "tier": 2,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1787409144076,
-   "endsAt": 1787409984076
+   "tier": 5,
+   "location": "Al Kharid bank",
+   "calledAt": 1787411902909,
+   "endsAt": 1787414002909
   },
   {
-   "world": 525,
-   "tier": 2,
-   "location": "East Lumbridge Swamp mine",
-   "calledAt": 1787410151104,
-   "endsAt": 1787410991104
-  },
-  {
-   "world": 505,
-   "tier": 2,
-   "location": "Nature Altar mine north of Shilo",
-   "calledAt": 1787410340151,
-   "endsAt": 1787411180151
-  },
-  {
-   "world": 343,
-   "tier": 1,
-   "location": "Mount Karuulm bank",
-   "calledAt": 1787407906843,
-   "endsAt": 1787408326843
+   "world": 307,
+   "tier": 5,
+   "location": "Rimmington mine",
+   "calledAt": 1787412049157,
+   "endsAt": 1787414149157
   },
   {
    "world": 342,
+   "tier": 5,
+   "location": "Nardah bank",
+   "calledAt": 1787412052084,
+   "endsAt": 1787414152084
+  },
+  {
+   "world": 337,
+   "tier": 5,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787412058480,
+   "endsAt": 1787414158480
+  },
+  {
+   "world": 310,
+   "tier": 5,
+   "location": "East Falador bank",
+   "calledAt": 1787412153475,
+   "endsAt": 1787414253475
+  },
+  {
+   "world": 368,
+   "tier": 4,
+   "location": "Nardah bank",
+   "calledAt": 1787410551468,
+   "endsAt": 1787412231468
+  },
+  {
+   "world": 532,
+   "tier": 4,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1787411689331,
+   "endsAt": 1787413369331
+  },
+  {
+   "world": 500,
+   "tier": 4,
+   "location": "North of Al Kharid PvP Arena",
+   "calledAt": 1787411844371,
+   "endsAt": 1787413524371
+  },
+  {
+   "world": 698,
+   "tier": 4,
+   "location": "Varrock east bank",
+   "calledAt": 1787411886439,
+   "endsAt": 1787413566439
+  },
+  {
+   "world": 510,
+   "tier": 4,
+   "location": "Draynor Village",
+   "calledAt": 1787411933984,
+   "endsAt": 1787413613984
+  },
+  {
+   "world": 511,
+   "tier": 4,
+   "location": "Yanille bank",
+   "calledAt": 1787412028612,
+   "endsAt": 1787413708612
+  },
+  {
+   "world": 303,
+   "tier": 4,
+   "location": "Gnome Stronghold spirit tree",
+   "calledAt": 1787412061660,
+   "endsAt": 1787413741660
+  },
+  {
+   "world": 421,
+   "tier": 4,
+   "location": "Miscellania mine (cip fairy ring)",
+   "calledAt": 1787412094289,
+   "endsAt": 1787413774289
+  },
+  {
+   "world": 375,
+   "tier": 4,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787412125390,
+   "endsAt": 1787413805390
+  },
+  {
+   "world": 514,
+   "tier": 4,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787412133349,
+   "endsAt": 1787413813349
+  },
+  {
+   "world": 620,
+   "tier": 4,
+   "location": "Catherby bank",
+   "calledAt": 1787412143787,
+   "endsAt": 1787413823787
+  },
+  {
+   "world": 442,
+   "tier": 3,
+   "location": "Al Kharid mine",
+   "calledAt": 1787411892671,
+   "endsAt": 1787413152671
+  },
+  {
+   "world": 340,
+   "tier": 3,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787411978944,
+   "endsAt": 1787413238944
+  },
+  {
+   "world": 664,
+   "tier": 3,
+   "location": "Rimmington mine",
+   "calledAt": 1787412064753,
+   "endsAt": 1787413324753
+  },
+  {
+   "world": 479,
+   "tier": 3,
+   "location": "West Falador mine",
+   "calledAt": 1787412162034,
+   "endsAt": 1787413422034
+  },
+  {
+   "world": 661,
+   "tier": 3,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787412166769,
+   "endsAt": 1787413426769
+  },
+  {
+   "world": 625,
+   "tier": 2,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1787411699650,
+   "endsAt": 1787412539650
+  },
+  {
+   "world": 351,
+   "tier": 2,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1787412059866,
+   "endsAt": 1787412899866
+  },
+  {
+   "world": 465,
+   "tier": 2,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1787412166355,
+   "endsAt": 1787413006355
+  },
+  {
+   "world": 546,
    "tier": 1,
-   "location": "Lunar Isle mine entrance",
-   "calledAt": 1787409688796,
-   "endsAt": 1787410108796
+   "location": "Varrock east bank",
+   "calledAt": 1787411932952,
+   "endsAt": 1787412352952
   }
  ],
- "at": 1787410550596,
+ "at": 1787412241408,
  "source": "https://07.gg/trackers/shooting-star"
 }
