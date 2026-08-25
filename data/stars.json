@@ -1,25 +1,60 @@
 {
  "stars": [
   {
-   "world": 424,
-   "tier": 9,
-   "location": "South Crandor",
-   "calledAt": 1787646873200,
-   "endsAt": 1787650653200
+   "world": 562,
+   "tier": 8,
+   "location": "Lletya",
+   "calledAt": 1787650941294,
+   "endsAt": 1787654301294
   },
   {
-   "world": 358,
+   "world": 343,
+   "tier": 8,
+   "location": "Rellekka mine",
+   "calledAt": 1787651701502,
+   "endsAt": 1787655061502
+  },
+  {
+   "world": 591,
+   "tier": 8,
+   "location": "Lletya",
+   "calledAt": 1787651823097,
+   "endsAt": 1787655183097
+  },
+  {
+   "world": 462,
    "tier": 7,
-   "location": "Al Kharid bank",
-   "calledAt": 1787648016165,
-   "endsAt": 1787650956165
+   "location": "Abandoned Mine west of Burgh",
+   "calledAt": 1787651425033,
+   "endsAt": 1787654365033
   },
   {
-   "world": 612,
-   "tier": 6,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1787645822029,
-   "endsAt": 1787648342029
+   "world": 337,
+   "tier": 7,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1787651470367,
+   "endsAt": 1787654410367
+  },
+  {
+   "world": 507,
+   "tier": 7,
+   "location": "Burgh de Rott bank",
+   "calledAt": 1787651833333,
+   "endsAt": 1787654773333
+  },
+  {
+   "world": 508,
+   "tier": 7,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1787651937607,
+   "endsAt": 1787654877607
+  },
+  {
+   "world": 525,
+   "tier": 7,
+   "location": "Crafting guild",
+   "calledAt": 1787652153448,
+   "endsAt": 1787655093448
   },
   {
    "world": 352,
@@ -29,20 +64,125 @@
    "endsAt": 1787652783418
   },
   {
-   "world": 439,
+   "world": 341,
    "tier": 6,
-   "location": "Ardougne Monastery",
-   "calledAt": 1787650304203,
-   "endsAt": 1787652824203
+   "location": "Brimhaven northwest gold mine",
+   "calledAt": 1787651429843,
+   "endsAt": 1787653949843
   },
   {
-   "world": 463,
-   "tier": 2,
+   "world": 389,
+   "tier": 6,
+   "location": "Champions Guild mine",
+   "calledAt": 1787651717813,
+   "endsAt": 1787654237813
+  },
+  {
+   "world": 556,
+   "tier": 6,
+   "location": "Arceuus dense essence mine",
+   "calledAt": 1787651875432,
+   "endsAt": 1787654395432
+  },
+  {
+   "world": 424,
+   "tier": 6,
    "location": "Varrock east bank",
-   "calledAt": 1787648208498,
-   "endsAt": 1787649048498
+   "calledAt": 1787651995151,
+   "endsAt": 1787654515151
+  },
+  {
+   "world": 301,
+   "tier": 6,
+   "location": "Draynor Village",
+   "calledAt": 1787652017532,
+   "endsAt": 1787654537532
+  },
+  {
+   "world": 573,
+   "tier": 6,
+   "location": "East Falador bank",
+   "calledAt": 1787652093417,
+   "endsAt": 1787654613417
+  },
+  {
+   "world": 350,
+   "tier": 6,
+   "location": "Mount Karuulm mine",
+   "calledAt": 1787652106646,
+   "endsAt": 1787654626646
+  },
+  {
+   "world": 511,
+   "tier": 5,
+   "location": "West Falador mine",
+   "calledAt": 1787652020569,
+   "endsAt": 1787654120569
+  },
+  {
+   "world": 535,
+   "tier": 5,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1787652140865,
+   "endsAt": 1787654240865
+  },
+  {
+   "world": 328,
+   "tier": 4,
+   "location": "Rellekka mine",
+   "calledAt": 1787651869875,
+   "endsAt": 1787653549875
+  },
+  {
+   "world": 324,
+   "tier": 4,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1787651983062,
+   "endsAt": 1787653663062
+  },
+  {
+   "world": 660,
+   "tier": 4,
+   "location": "North Dwarven Mine entrance",
+   "calledAt": 1787652011728,
+   "endsAt": 1787653691728
+  },
+  {
+   "world": 302,
+   "tier": 4,
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1787652013404,
+   "endsAt": 1787653693404
+  },
+  {
+   "world": 416,
+   "tier": 4,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787652095901,
+   "endsAt": 1787653775901
+  },
+  {
+   "world": 529,
+   "tier": 4,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1787652151690,
+   "endsAt": 1787653831690
+  },
+  {
+   "world": 465,
+   "tier": 3,
+   "location": "East Lumbridge Swamp mine",
+   "calledAt": 1787652091574,
+   "endsAt": 1787653351574
+  },
+  {
+   "world": 439,
+   "tier": 2,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787652019575,
+   "endsAt": 1787652859575
   }
  ],
- "at": 1787650572758,
+ "at": 1787652280292,
  "source": "https://07.gg/trackers/shooting-star"
 }
