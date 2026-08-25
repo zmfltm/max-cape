@@ -1,39 +1,18 @@
 {
  "stars": [
   {
-   "world": 486,
+   "world": 327,
    "tier": 9,
-   "location": "Rimmington mine",
-   "calledAt": 1787640169583,
-   "endsAt": 1787643949583
+   "location": "Varlamore South East mine",
+   "calledAt": 1787640785606,
+   "endsAt": 1787644565606
   },
   {
-   "world": 347,
+   "world": 362,
    "tier": 9,
-   "location": "Prifddinas Zalcano entrance",
-   "calledAt": 1787640173680,
-   "endsAt": 1787643953680
-  },
-  {
-   "world": 471,
-   "tier": 9,
-   "location": "Varlamore colosseum entrance bank",
-   "calledAt": 1787640484009,
-   "endsAt": 1787644264009
-  },
-  {
-   "world": 420,
-   "tier": 9,
-   "location": "Taverley house portal",
-   "calledAt": 1787640546186,
-   "endsAt": 1787644326186
-  },
-  {
-   "world": 518,
-   "tier": 9,
-   "location": "Mos LeHarmless west bank",
-   "calledAt": 1787640577525,
-   "endsAt": 1787644357525
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1787640938967,
+   "endsAt": 1787644718967
   },
   {
    "world": 406,
@@ -50,25 +29,39 @@
    "endsAt": 1787643052327
   },
   {
-   "world": 477,
+   "world": 347,
    "tier": 8,
-   "location": "Chambers of Xeric bank",
-   "calledAt": 1787640217797,
-   "endsAt": 1787643577797
+   "location": "Prifddinas Zalcano entrance",
+   "calledAt": 1787640714717,
+   "endsAt": 1787644074717
   },
   {
-   "world": 312,
+   "world": 471,
    "tier": 8,
-   "location": "Feldip Hills (aks fairy ring)",
-   "calledAt": 1787640470650,
-   "endsAt": 1787643830650
+   "location": "Varlamore colosseum entrance bank",
+   "calledAt": 1787640940305,
+   "endsAt": 1787644300305
   },
   {
-   "world": 322,
-   "tier": 7,
-   "location": "Gnome Stronghold spirit tree",
-   "calledAt": 1787638828512,
-   "endsAt": 1787641768512
+   "world": 518,
+   "tier": 8,
+   "location": "Mos LeHarmless west bank",
+   "calledAt": 1787640999997,
+   "endsAt": 1787644359997
+  },
+  {
+   "world": 307,
+   "tier": 8,
+   "location": "Mount Karuulm bank",
+   "calledAt": 1787641001061,
+   "endsAt": 1787644361061
+  },
+  {
+   "world": 420,
+   "tier": 8,
+   "location": "Taverley house portal",
+   "calledAt": 1787641095330,
+   "endsAt": 1787644455330
   },
   {
    "world": 416,
@@ -78,39 +71,11 @@
    "endsAt": 1787642600454
   },
   {
-   "world": 380,
-   "tier": 7,
-   "location": "North of Al Kharid PvP Arena",
-   "calledAt": 1787640237546,
-   "endsAt": 1787643177546
-  },
-  {
    "world": 415,
    "tier": 7,
    "location": "Miscellania mine (cip fairy ring)",
    "calledAt": 1787640289631,
    "endsAt": 1787643229631
-  },
-  {
-   "world": 311,
-   "tier": 7,
-   "location": "Myths Guild",
-   "calledAt": 1787640300391,
-   "endsAt": 1787643240391
-  },
-  {
-   "world": 459,
-   "tier": 7,
-   "location": "Al Kharid bank",
-   "calledAt": 1787640310857,
-   "endsAt": 1787643250857
-  },
-  {
-   "world": 564,
-   "tier": 7,
-   "location": "Yanille bank",
-   "calledAt": 1787640335454,
-   "endsAt": 1787643275454
   },
   {
    "world": 357,
@@ -120,18 +85,25 @@
    "endsAt": 1787643443823
   },
   {
+   "world": 312,
+   "tier": 7,
+   "location": "Feldip Hills (aks fairy ring)",
+   "calledAt": 1787640993006,
+   "endsAt": 1787643933006
+  },
+  {
+   "world": 486,
+   "tier": 7,
+   "location": "Rimmington mine",
+   "calledAt": 1787641080808,
+   "endsAt": 1787644020808
+  },
+  {
    "world": 394,
    "tier": 6,
    "location": "Draynor Village",
    "calledAt": 1787639838942,
    "endsAt": 1787642358942
-  },
-  {
-   "world": 511,
-   "tier": 6,
-   "location": "Theatre of Blood bank",
-   "calledAt": 1787640186158,
-   "endsAt": 1787642706158
   },
   {
    "world": 532,
@@ -141,32 +113,11 @@
    "endsAt": 1787642771622
   },
   {
-   "world": 346,
-   "tier": 6,
-   "location": "Ardougne Monastery",
-   "calledAt": 1787640262184,
-   "endsAt": 1787642782184
-  },
-  {
    "world": 348,
    "tier": 6,
    "location": "Taverley house portal",
    "calledAt": 1787640332082,
    "endsAt": 1787642852082
-  },
-  {
-   "world": 541,
-   "tier": 6,
-   "location": "East Falador bank",
-   "calledAt": 1787640341251,
-   "endsAt": 1787642861251
-  },
-  {
-   "world": 557,
-   "tier": 6,
-   "location": "Catherby bank",
-   "calledAt": 1787640394319,
-   "endsAt": 1787642914319
   },
   {
    "world": 567,
@@ -176,39 +127,74 @@
    "endsAt": 1787642925179
   },
   {
-   "world": 340,
+   "world": 459,
    "tier": 6,
-   "location": "Southwest of Brimhaven Poh",
-   "calledAt": 1787640542904,
-   "endsAt": 1787643062904
+   "location": "Al Kharid bank",
+   "calledAt": 1787640730631,
+   "endsAt": 1787643250631
   },
   {
-   "world": 625,
-   "tier": 5,
-   "location": "Shilo Village gem mine",
-   "calledAt": 1787640201952,
-   "endsAt": 1787642301952
+   "world": 311,
+   "tier": 6,
+   "location": "Myths Guild",
+   "calledAt": 1787640804854,
+   "endsAt": 1787643324854
   },
   {
-   "world": 456,
-   "tier": 5,
-   "location": "Southeast Varrock mine",
-   "calledAt": 1787640214901,
-   "endsAt": 1787642314901
+   "world": 545,
+   "tier": 6,
+   "location": "Taverley house portal",
+   "calledAt": 1787640821421,
+   "endsAt": 1787643341421
   },
   {
-   "world": 368,
-   "tier": 5,
-   "location": "Shilo Village gem mine",
-   "calledAt": 1787640377235,
-   "endsAt": 1787642477235
+   "world": 564,
+   "tier": 6,
+   "location": "Yanille bank",
+   "calledAt": 1787640945289,
+   "endsAt": 1787643465289
   },
   {
-   "world": 342,
+   "world": 477,
+   "tier": 6,
+   "location": "Chambers of Xeric bank",
+   "calledAt": 1787641059467,
+   "endsAt": 1787643579467
+  },
+  {
+   "world": 520,
+   "tier": 6,
+   "location": "East Falador bank",
+   "calledAt": 1787641089710,
+   "endsAt": 1787643609710
+  },
+  {
+   "world": 541,
    "tier": 5,
    "location": "East Falador bank",
-   "calledAt": 1787640420460,
-   "endsAt": 1787642520460
+   "calledAt": 1787640762849,
+   "endsAt": 1787642862849
+  },
+  {
+   "world": 557,
+   "tier": 5,
+   "location": "Catherby bank",
+   "calledAt": 1787640811232,
+   "endsAt": 1787642911232
+  },
+  {
+   "world": 340,
+   "tier": 5,
+   "location": "Southwest of Brimhaven Poh",
+   "calledAt": 1787640970107,
+   "endsAt": 1787643070107
+  },
+  {
+   "world": 380,
+   "tier": 5,
+   "location": "North of Al Kharid PvP Arena",
+   "calledAt": 1787641077614,
+   "endsAt": 1787643177614
   },
   {
    "world": 609,
@@ -225,34 +211,76 @@
    "endsAt": 1787640655745
   },
   {
-   "world": 534,
+   "world": 368,
    "tier": 4,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1787640820133,
+   "endsAt": 1787642500133
+  },
+  {
+   "world": 342,
+   "tier": 4,
+   "location": "East Falador bank",
+   "calledAt": 1787640841140,
+   "endsAt": 1787642521140
+  },
+  {
+   "world": 511,
+   "tier": 4,
+   "location": "Theatre of Blood bank",
+   "calledAt": 1787641027810,
+   "endsAt": 1787642707810
+  },
+  {
+   "world": 346,
+   "tier": 4,
+   "location": "Ardougne Monastery",
+   "calledAt": 1787641103409,
+   "endsAt": 1787642783409
+  },
+  {
+   "world": 534,
+   "tier": 3,
    "location": "West of Grand Tree",
-   "calledAt": 1787640391557,
-   "endsAt": 1787642071557
+   "calledAt": 1787640808454,
+   "endsAt": 1787642068454
   },
   {
    "world": 620,
-   "tier": 4,
+   "tier": 3,
    "location": "Mine north-west of hunter guild",
-   "calledAt": 1787640459757,
-   "endsAt": 1787642139757
+   "calledAt": 1787640879826,
+   "endsAt": 1787642139826
   },
   {
    "world": 446,
-   "tier": 4,
+   "tier": 3,
    "location": "South of Legends Guild",
-   "calledAt": 1787640501021,
-   "endsAt": 1787642181021
+   "calledAt": 1787640922315,
+   "endsAt": 1787642182315
+  },
+  {
+   "world": 625,
+   "tier": 3,
+   "location": "Shilo Village gem mine",
+   "calledAt": 1787641043060,
+   "endsAt": 1787642303060
+  },
+  {
+   "world": 456,
+   "tier": 3,
+   "location": "Southeast Varrock mine",
+   "calledAt": 1787641054385,
+   "endsAt": 1787642314385
   },
   {
    "world": 439,
-   "tier": 2,
+   "tier": 1,
    "location": "Piscatoris (akq fairy ring)",
-   "calledAt": 1787640396391,
-   "endsAt": 1787641236391
+   "calledAt": 1787640815994,
+   "endsAt": 1787641235994
   }
  ],
- "at": 1787640649053,
+ "at": 1787641131186,
  "source": "https://07.gg/trackers/shooting-star"
 }
