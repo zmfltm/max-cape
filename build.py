@@ -70,7 +70,8 @@ COMBAT_APPROACH = [
     "Duradel after 100 combat, 50 Slayer and Shilo Village access.",
     "Cannon tasks to train Ranged.",
     "Burst appropriate tasks to train Magic.",
-    "Melee priority: Strength to ~85 first, then Attack 80, then Defence 75–80.",
+    "Melee priority: Strength 80, then Attack 80, then Defence 80; do not dilute the early levels with Controlled.",
+    "That balanced pass reaches 100 combat on this account. Switch to Duradel as soon as it unlocks, then resume Strength toward ~85.",
     "Let Slayer and later bossing carry most combat XP rather than separately grinding combat skills early.",
 ]
 
@@ -98,8 +99,8 @@ SKILLS = [
     # ---------------- combat ----------------
     dict(
         name="Attack", group=COMBAT, target="80 → 99", pick="Slayer tasks",
-        phase="80 during the Slayer grind (after Strength ~85), 99 in the combat block after the Diary Cape.",
-        summary="Slayer tasks; Strength first, then Attack.",
+        phase="80 during the Slayer grind after Strength 80, then 99 in the combat block after the Diary Cape.",
+        summary="Strength 80 first, then train Attack to 80.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Your default. XP depends entirely on the task and gear; Duradel tasks with a good weapon are the top end."),
             ("Nightmare Zone", "Quest reqs", "40–80k", "Absorptions + rock cake, very AFK. Dream selection matters; also prints points for imbues."),
@@ -110,14 +111,14 @@ SKILLS = [
             ("Bossing", "Varies", "40–80k", "Vorkath, Muspah, ToA. Slower than pure XP methods but pays for the rest of the account."),
         ],
         notes=[
-            "Attack is the least valuable of the three melee stats for XP-per-hour purposes. Strength raises max hit, so the plan front-loads it to ~85.",
-            "Watch for quest and diary requirements before pushing past your plan target (e.g. Attack requirements for weapon tiers you actually want to use).",
+            "Strength raises max hit, so it still goes first, but only to 80 before Attack catches up. This keeps the damage advantage without postponing the level-80 weapon tier.",
+            "Attack 80 is the second leg of the balanced melee pass. Train it on Slayer rather than stopping the route for a separate combat grind.",
         ],
     ),
     dict(
-        name="Strength", group=COMBAT, target="85 → 99", pick="Slayer tasks",
-        phase="~85 first among the melee stats, 99 in the combat block after the Diary Cape.",
-        summary="Slayer tasks, Strength style first to ~85.",
+        name="Strength", group=COMBAT, target="80 → 85 → 99", pick="Slayer tasks",
+        phase="80 first, then Attack and Defence to 80; resume toward ~85 after the balanced pass.",
+        summary="Train Strength to 80 first; return for 85 after balanced 80s.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Your default. Aggressive/Controlled styles on tasks where the melee kill is fastest."),
             ("Nightmare Zone", "Quest reqs", "40–80k", "The classic AFK 99 Strength. Slower per hour than active methods but nearly zero attention."),
@@ -128,13 +129,14 @@ SKILLS = [
             ("Ammonite / sand crabs", "—", "20–40k", "Free and AFK; overtaken by anything else once you have gear."),
         ],
         notes=[
-            "Strength first is right: max hit drives kill speed on every later Slayer task, which feeds back into Slayer XP rate.",
+            "Strength first is right because max hits improve every later Slayer task, but stopping at 80 avoids leaving Attack and Defence too far behind.",
+            "For general Strength training, use an abyssal bludgeon if you own one; otherwise use an abyssal dagger with a dragon defender. A Saradomin sword is the cheap option. Save the abyssal whip for Attack or Defence because it cannot train Strength directly.",
         ],
     ),
     dict(
-        name="Defence", group=COMBAT, target="70 → 75–80 → 99", pick="Slayer tasks",
-        phase="The quest-cape minimum is 65 and is already met. Reach 70 through Slayer for the useful armour breakpoint, then 75–80 after Strength and Attack.",
-        summary="Quest requirement met; 70 through Slayer for gear.",
+        name="Defence", group=COMBAT, target="80 → 99", pick="Slayer tasks",
+        phase="The quest-cape minimum and level-70 armour breakpoint are already met. Train to 80 after Strength and Attack.",
+        summary="Finish the balanced melee pass with Defence 80.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Defensive or Controlled style on tasks you would be doing anyway."),
             ("Nightmare Zone", "Quest reqs", "40–80k", "Defensive style; the standard AFK route."),
@@ -144,8 +146,8 @@ SKILLS = [
             ("Bossing", "Varies", "30–60k", "Defensive style on long boss trips."),
         ],
         notes=[
-            "Defence 70 unlocks most of the armour that matters (Bandos, Barrows, Karil's), so it is a useful optional breakpoint.",
-            "No current quest needs more than 65 Defence. Let Slayer carry 66→70 rather than delaying quests for it.",
+            "Defence 70 already unlocks most of the armour that matters (Bandos, Barrows, Karil's), so Defence stays last in the balanced 80 pass.",
+            "This account should reach combat 100 around Defence 76 after Strength and Attack 80. Switch from Nieve to Duradel then, and finish Defence 80 on the better task list.",
         ],
     ),
     dict(
@@ -243,7 +245,7 @@ SKILLS = [
             "Superior Slayer monsters (unlocked by Bigger and Badder) are worth the point cost. They can drop the imbued heart and eternal gem.",
             "Fallen From Grace also unlocks the repeatable Mad Angel. Its Hallowfell drop needs 75 Attack and cleaves up to two nearby targets, so it is a specialised multi-target weapon rather than a universal single-target upgrade.",
             "Everything else in the plan is downstream of Slayer: it carries Attack, Strength, Defence and Hitpoints; via cannon and barrage, it also carries Ranged and Magic.",
-            "The Along the Way table uses a neutral average split across melee styles. In play, prioritise Strength, then Attack, then Defence rather than expecting those three levels to land evenly.",
+            "The Along the Way table uses a neutral average split across melee styles. In play, train Strength to 80, Attack to 80, then Defence to 80; return to Strength 85 afterward.",
             "The task verdict table uses Duradel's weights. Nieve has different weights and extra assignments, and block lists do not carry between masters; revisit blocks when you switch.",
         ],
     ),
@@ -2244,11 +2246,16 @@ COACH_JS = """
 /* Character refresh and deterministic next-step guidance. Both actions need
    serve.py because they refresh Hiscores and WikiSync snapshots on disk. */
 (function () {
+  var coach = document.querySelector('.coach');
   var sync = document.getElementById('sync-character');
   var ask = document.getElementById('ask-character');
   var status = document.getElementById('coach-status');
   var output = document.getElementById('coach-output');
-  if (!sync || !ask || !status || !output) return;
+  if (!coach || !sync || !ask || !status || !output) return;
+  if (window.location.hostname.endsWith('.github.io')) {
+    coach.hidden = true;
+    return;
+  }
 
   function busy(on) {
     sync.disabled = on;

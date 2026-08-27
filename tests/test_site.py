@@ -71,6 +71,8 @@ class GeneratedSiteTests(unittest.TestCase):
         self.assertEqual(source.count('id="ask-character"'), 1)
         self.assertIn("request('/api/sync')", source)
         self.assertIn("request('/api/advice')", source)
+        self.assertIn("hostname.endsWith('.github.io')", source)
+        self.assertIn("coach.hidden = true", source)
 
     def test_generator_matches_tracked_html(self):
         ordered = [s for group in build.GROUP_ORDER
