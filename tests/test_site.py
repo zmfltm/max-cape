@@ -65,14 +65,21 @@ class GeneratedSiteTests(unittest.TestCase):
             for value in attr.findall(page.read_text(encoding="utf-8")):
                 self.assertIsNone(raw_amp.search(value), f"{page}: unescaped &: {value}")
 
-    def test_character_coach_has_exactly_two_actions(self):
+    def test_character_coach_has_local_and_pages_actions(self):
         source = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertEqual(source.count('id="refresh-character-pages"'), 1)
         self.assertEqual(source.count('id="sync-character"'), 1)
         self.assertEqual(source.count('id="ask-character"'), 1)
+        self.assertIn(
+            'href="https://github.com/zmfltm/max-cape/actions/workflows/refresh.yml"',
+            source,
+        )
         self.assertIn("request('/api/sync')", source)
         self.assertIn("request('/api/advice')", source)
         self.assertIn("hostname.endsWith('.github.io')", source)
-        self.assertIn("coach.hidden = true", source)
+        self.assertIn("pagesRefresh.hidden = false", source)
+        self.assertIn("sync.hidden = true", source)
+        self.assertIn("ask.hidden = true", source)
 
     def test_generator_matches_tracked_html(self):
         ordered = [s for group in build.GROUP_ORDER

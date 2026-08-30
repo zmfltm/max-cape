@@ -2243,19 +2243,27 @@ FOCUS_JS = """
 
 COACH_JS = """
 <script>
-/* Character refresh and deterministic next-step guidance. Both actions need
-   serve.py because they refresh Hiscores and WikiSync snapshots on disk. */
+/* Character refresh and deterministic next-step guidance. Local actions use
+   serve.py; the published site links to the equivalent GitHub workflow. */
 (function () {
   var coach = document.querySelector('.coach');
+  var heading = document.getElementById('coach-heading');
+  var description = document.getElementById('coach-description');
+  var pagesRefresh = document.getElementById('refresh-character-pages');
   var sync = document.getElementById('sync-character');
   var ask = document.getElementById('ask-character');
   var status = document.getElementById('coach-status');
   var output = document.getElementById('coach-output');
-  if (!coach || !sync || !ask || !status || !output) return;
+  if (!coach || !heading || !description || !pagesRefresh || !sync || !ask || !status || !output) return;
   if (window.location.hostname.endsWith('.github.io')) {
-    coach.hidden = true;
+    heading.textContent = 'Refresh character';
+    description.textContent = 'Open the GitHub Action, choose Run workflow, then return after the site rebuilds.';
+    pagesRefresh.hidden = false;
+    sync.hidden = true;
+    ask.hidden = true;
     return;
   }
+  pagesRefresh.hidden = true;
 
   function busy(on) {
     sync.disabled = on;
@@ -4987,14 +4995,17 @@ def gear_page():
 
 
 def character_coach():
-    """Local-server controls for a full sync and a next-action recommendation."""
+    """Character refresh controls for local serving and GitHub Pages."""
     return (
         '<section class="coach" aria-labelledby="coach-heading">'
         '<div class="coach-head"><div>'
         '<span class="k">Character coach</span>'
         '<h2 id="coach-heading">What should I do?</h2>'
-        '<p>Refresh Hiscores, quests and diaries, then turn the optimal route into one next action.</p>'
+        '<p id="coach-description">Refresh Hiscores, quests and diaries, then turn the optimal route into one next action.</p>'
         '</div><div class="coach-actions">'
+        '<a class="btn ghost" id="refresh-character-pages" '
+        'href="https://github.com/zmfltm/max-cape/actions/workflows/refresh.yml" '
+        'rel="noopener" target="_blank" hidden>Refresh via GitHub</a>'
         '<button class="btn ghost" id="sync-character" type="button">Sync character</button>'
         '<button class="btn" id="ask-character" type="button">What should I do now?</button>'
         '</div></div>'
