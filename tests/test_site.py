@@ -65,21 +65,22 @@ class GeneratedSiteTests(unittest.TestCase):
             for value in attr.findall(page.read_text(encoding="utf-8")):
                 self.assertIsNone(raw_amp.search(value), f"{page}: unescaped &: {value}")
 
-    def test_character_coach_has_local_and_pages_actions(self):
+    def test_character_refresh_is_compact_on_pages_and_full_locally(self):
         source = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertEqual(source.count('id="refresh-character-pages"'), 1)
+        self.assertNotIn('id="refresh-character-pages"', source)
         self.assertEqual(source.count('id="sync-character"'), 1)
         self.assertEqual(source.count('id="ask-character"'), 1)
-        self.assertIn(
-            'href="https://github.com/zmfltm/max-cape/actions/workflows/refresh.yml"',
-            source,
-        )
         self.assertIn("request('/api/sync')", source)
         self.assertIn("request('/api/advice')", source)
         self.assertIn("hostname.endsWith('.github.io')", source)
-        self.assertIn("pagesRefresh.hidden = false", source)
-        self.assertIn("sync.hidden = true", source)
-        self.assertIn("ask.hidden = true", source)
+        self.assertIn("coach.hidden = true", source)
+
+        endpoint = "https://mudkip-hiscores.mudkip-max-cape.workers.dev/"
+        for page in self.pages:
+            page_source = page.read_text(encoding="utf-8")
+            self.assertEqual(page_source.count('id="statrefresh"'), 1, page)
+            self.assertIn(endpoint, page_source, page)
+            self.assertIn('data-live-skill="Attack"', page_source, page)
 
     def test_generator_matches_tracked_html(self):
         ordered = [s for group in build.GROUP_ORDER

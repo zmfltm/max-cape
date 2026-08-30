@@ -484,6 +484,7 @@ li::marker { color: var(--dim); }
   transition: color var(--fast) var(--ease);
 }
 .meter .refresh:hover { color: var(--accent); }
+.meter .stat-refresh { align-self: center; }
 .refresh svg { display: block; transform-origin: 50% 50%; }
 .refresh.busy { color: var(--accent); }
 .refresh.busy svg { animation: spin 700ms linear infinite; }

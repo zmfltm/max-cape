@@ -1354,17 +1354,33 @@ def focus_data_script():
 
 MAX_TOTAL = sum(1 for x in SKILLS if x["group"] != SUPPORT) * 99
 MAX_COMBAT = 126
+HISCORES_WORKER = "https://mudkip-hiscores.mudkip-max-cape.workers.dev/"
+
+
+REFRESH_SVG = (
+    '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">'
+    '<path d="M13.6 8a5.6 5.6 0 1 1-1.7-4" fill="none" stroke="currentColor" '
+    'stroke-width="1.7" stroke-linecap="round"/>'
+    '<path d="M13.4 1.4v3h-3" fill="none" stroke="currentColor" '
+    'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+)
 
 
 def rail_meter():
     """Account line at the top of the site index."""
     if STATS:
         rows = (f'<span class="mrow"><span>Total Level</span>'
+                '<button class="refresh stat-refresh" id="statrefresh" type="button" '
+                'title="Refresh gxexe from OSRS Hiscores" '
+                'aria-label="Refresh gxexe from OSRS Hiscores">'
+                f'{REFRESH_SVG}</button>'
                 f'<b class="num" data-stat="total">{STATS.get("overall", {}).get("level")}</b>'
                 f'<span class="mmax">/{MAX_TOTAL}</span></span>'
                 f'<span class="mrow"><span>Combat</span>'
                 f'<b class="num" data-stat="combat">{STATS.get("combat")}</b>'
-                f'<span class="mmax">/{MAX_COMBAT}</span></span>')
+                f'<span class="mmax">/{MAX_COMBAT}</span></span>'
+                '<span class="sr" id="statrefresh-status" role="status" '
+                'aria-live="polite"></span>')
     else:
         rows = ('<span class="mrow"><span>Not linked</span></span>'
                 '<span class="mrow hint"><code>fetch_stats.py "RSN"</code></span>')
@@ -1417,7 +1433,8 @@ def rail(active=None, depth=0):
             f'<a class="r{here}" href="{root}skills/{sl}.html">'
             f'{icon(sk["name"], depth, "sm")}'
             f'<span class="t">{e(sk["name"])}</span>'
-            f'<span class="r-lvl{cls}"{style}>{e(tag)}</span></a>'
+            f'<span class="r-lvl{cls}" data-live-skill="{e(sk["name"])}"'
+            f'{style}>{e(tag)}</span></a>'
             f'<button class="focusbtn" type="button" data-skill="{e(sk["name"])}" '
             f'title="Set as the skill you are levelling" '
             f'aria-label="Focus {e(sk["name"])}">{DOT_SVG}</button></span>'
@@ -2243,27 +2260,20 @@ FOCUS_JS = """
 
 COACH_JS = """
 <script>
-/* Character refresh and deterministic next-step guidance. Local actions use
-   serve.py; the published site links to the equivalent GitHub workflow. */
+/* Character refresh and deterministic next-step guidance for serve.py. */
 (function () {
   var coach = document.querySelector('.coach');
   var heading = document.getElementById('coach-heading');
   var description = document.getElementById('coach-description');
-  var pagesRefresh = document.getElementById('refresh-character-pages');
   var sync = document.getElementById('sync-character');
   var ask = document.getElementById('ask-character');
   var status = document.getElementById('coach-status');
   var output = document.getElementById('coach-output');
-  if (!coach || !heading || !description || !pagesRefresh || !sync || !ask || !status || !output) return;
+  if (!coach || !heading || !description || !sync || !ask || !status || !output) return;
   if (window.location.hostname.endsWith('.github.io')) {
-    heading.textContent = 'Refresh character';
-    description.textContent = 'Open the GitHub Action, choose Run workflow, then return after the site rebuilds.';
-    pagesRefresh.hidden = false;
-    sync.hidden = true;
-    ask.hidden = true;
+    coach.hidden = true;
     return;
   }
-  pagesRefresh.hidden = true;
 
   function busy(on) {
     sync.disabled = on;
@@ -2368,6 +2378,89 @@ RAIL_JS = """
 </script>
 """
 
+LIVE_STATS_JS = """
+<script>
+(function () {
+  var button = document.getElementById('statrefresh');
+  var status = document.getElementById('statrefresh-status');
+  if (!button || !status) return;
+
+  var endpoint = __HISCORES_WORKER__;
+  var defaultLabel = 'Refresh gxexe from OSRS Hiscores';
+  var timer = 0;
+
+  function levelColour(value) {
+    var level = Math.max(1, Math.min(99, Number(value) || 1));
+    var stops = [[1, 12], [40, 28], [60, 44], [75, 62], [88, 96], [95, 120], [99, 142]];
+    var hue = 142;
+    for (var i = 0; i < stops.length - 1; i += 1) {
+      var left = stops[i];
+      var right = stops[i + 1];
+      if (level <= right[0]) {
+        hue = left[1] + (right[1] - left[1]) * ((level - left[0]) / (right[0] - left[0]));
+        break;
+      }
+    }
+    return 'hsl(' + Math.round(hue) + ' ' + Math.round(70 + 8 * level / 99) + '% ' +
+      Math.round(58 + 7 * level / 99) + '%)';
+  }
+
+  function setState(kind, message) {
+    window.clearTimeout(timer);
+    button.disabled = false;
+    button.classList.remove('busy', 'ok', 'bad');
+    if (kind) button.classList.add(kind);
+    button.title = message;
+    button.setAttribute('aria-label', message);
+    status.textContent = message;
+    timer = window.setTimeout(function () {
+      button.classList.remove('ok', 'bad');
+      button.title = defaultLabel;
+      button.setAttribute('aria-label', defaultLabel);
+    }, 3500);
+  }
+
+  function paint(data) {
+    var total = document.querySelector('[data-stat="total"]');
+    var combat = document.querySelector('[data-stat="combat"]');
+    if (total) total.textContent = data.overall.level;
+    if (combat) combat.textContent = data.combat;
+    document.querySelectorAll('[data-live-skill]').forEach(function (node) {
+      var record = data.skills[node.getAttribute('data-live-skill')];
+      if (!record || !Number.isInteger(record.level)) return;
+      node.textContent = record.level;
+      node.classList.add('lit');
+      node.classList.remove('done');
+      node.style.setProperty('--lc', levelColour(record.level));
+    });
+  }
+
+  button.addEventListener('click', function () {
+    window.clearTimeout(timer);
+    button.disabled = true;
+    button.classList.remove('ok', 'bad');
+    button.classList.add('busy');
+    button.title = 'Refreshing gxexe…';
+    button.setAttribute('aria-label', 'Refreshing gxexe from OSRS Hiscores');
+    status.textContent = 'Refreshing gxexe from OSRS Hiscores.';
+    fetch(endpoint, { cache: 'no-store' }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok || !data.overall || !data.skills) {
+          throw new Error(data.error || 'Hiscores refresh failed');
+        }
+        return data;
+      });
+    }).then(function (data) {
+      paint(data);
+      setState('ok', 'gxexe refreshed from OSRS Hiscores');
+    }).catch(function (error) {
+      setState('bad', error.message || 'Hiscores refresh failed');
+    });
+  });
+})();
+</script>
+""".replace("__HISCORES_WORKER__", json.dumps(HISCORES_WORKER))
+
 
 def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
          wide=False, coach=False):
@@ -2404,7 +2497,7 @@ def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
 </main>
 {rail(active=active, depth=depth)}
 </div>
-{RAIL_JS}{COACH_JS if coach else ""}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}{POTION_JS}{PATH_JS}
+{RAIL_JS}{LIVE_STATS_JS}{COACH_JS if coach else ""}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}{POTION_JS}{PATH_JS}
 </body>
 </html>
 """
@@ -4995,7 +5088,7 @@ def gear_page():
 
 
 def character_coach():
-    """Character refresh controls for local serving and GitHub Pages."""
+    """Character refresh controls shown when the site runs through serve.py."""
     return (
         '<section class="coach" aria-labelledby="coach-heading">'
         '<div class="coach-head"><div>'
@@ -5003,9 +5096,6 @@ def character_coach():
         '<h2 id="coach-heading">What should I do?</h2>'
         '<p id="coach-description">Refresh Hiscores, quests and diaries, then turn the optimal route into one next action.</p>'
         '</div><div class="coach-actions">'
-        '<a class="btn ghost" id="refresh-character-pages" '
-        'href="https://github.com/zmfltm/max-cape/actions/workflows/refresh.yml" '
-        'rel="noopener" target="_blank" hidden>Refresh via GitHub</a>'
         '<button class="btn ghost" id="sync-character" type="button">Sync character</button>'
         '<button class="btn" id="ask-character" type="button">What should I do now?</button>'
         '</div></div>'
