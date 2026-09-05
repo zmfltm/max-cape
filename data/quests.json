@@ -1,6 +1,6 @@
 {
  "name": "gxexe",
- "synced": "2026-09-04T11:02:29.629Z",
+ "synced": "2026-09-05T10:24:37.085Z",
  "route": [
   {
    "kind": "task",
@@ -1889,7 +1889,7 @@
   {
    "kind": "quest",
    "name": "Fallen From Grace",
-   "state": null,
+   "state": 0,
    "wiki": "Fallen_From_Grace"
   },
   {
@@ -2151,7 +2151,7 @@
   "state": 0,
   "wiki": "The_Depths_of_Despair"
  },
- "route_left": 102,
+ "route_left": 103,
  "order": [
   "Cook's Assistant",
   "Sheep Shearer",
@@ -2408,6 +2408,7 @@
   "Ethically Acquired Antiquities": 0,
   "Fairytale I - Growing Pains": 2,
   "Fairytale II - Cure a Queen": 1,
+  "Fallen From Grace": 0,
   "Family Pest": 2,
   "Forgettable Tale...": 0,
   "Garden of Tranquillity": 0,
@@ -2575,12 +2576,9 @@
   "Watchtower": 2,
   "Waterfall Quest": 2,
   "Witch's House": 2,
-  "Witch's Potion": 2,
-  "Fallen From Grace": null
+  "Witch's Potion": 2
  },
- "unreported": [
-  "Fallen From Grace"
- ],
+ "unreported": [],
  "quest_requirements": {
   "Fallen From Grace": {
    "skills": {
@@ -2730,5 +2728,5 @@
    "Fishing": 62
   }
  },
- "fetched": "2026-09-04T11:02+00:00"
+ "fetched": "2026-09-05T10:24+00:00"
 }
