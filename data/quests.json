@@ -1,6 +1,6 @@
 {
  "name": "gxexe",
- "synced": "2026-09-08T11:02:31.219Z",
+ "synced": "2026-09-09T11:07:24.498Z",
  "route": [
   {
    "kind": "task",
@@ -256,6 +256,12 @@
    "done": 10,
    "total": 10,
    "wiki": "Ardougne_Diary#Easy"
+  },
+  {
+   "kind": "task",
+   "name": "A Ruff Situation",
+   "state": null,
+   "wiki": "A_Ruff_Situation"
   },
   {
    "kind": "quest",
@@ -1096,15 +1102,27 @@
   },
   {
    "kind": "task",
+   "name": "Train Sailing from level 23 to level 40",
+   "state": null,
+   "wiki": "Train_Sailing_from_level_23_to_level_40"
+  },
+  {
+   "kind": "task",
+   "name": "Crab Quest",
+   "state": null,
+   "wiki": "Crab_Quest"
+  },
+  {
+   "kind": "task",
    "name": "Train Prayer from level 43 to level 45",
    "state": null,
    "wiki": "Train_Prayer_from_level_43_to_level_45"
   },
   {
    "kind": "task",
-   "name": "Train Fishing from level 33 to level 50",
+   "name": "Train Fishing from level 35 to level 50",
    "state": null,
-   "wiki": "Train_Fishing_from_level_33_to_level_50"
+   "wiki": "Train_Fishing_from_level_35_to_level_50"
   },
   {
    "kind": "task",
@@ -1852,9 +1870,9 @@
   },
   {
    "kind": "task",
-   "name": "Train Sailing from level 23 to level 45",
+   "name": "Train Sailing from level 42 to level 45",
    "state": null,
-   "wiki": "Train_Sailing_from_level_23_to_level_45"
+   "wiki": "Train_Sailing_from_level_42_to_level_45"
   },
   {
    "kind": "task",
@@ -2728,5 +2746,5 @@
    "Fishing": 62
   }
  },
- "fetched": "2026-09-08T11:02+00:00"
+ "fetched": "2026-09-09T11:07+00:00"
 }
