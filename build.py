@@ -37,7 +37,7 @@ QUEST_CAPE_REQUIREMENTS = {
 }
 QUEST_CAPE_COMBAT = 85
 QUEST_CAPE_BOOSTABLE = {"Mining": 72, "Fishing": 62}
-QUEST_CAPE_COMPOSITE = "While Guthix Sleeps also needs Attack + Strength 130 (already 140), or 99 in either skill."
+QUEST_CAPE_COMPOSITE = "While Guthix Sleeps wants Attack + Strength 130, or 99 in either."
 
 # The account already meets the omitted minimums. Keeping only live blockers
 # makes the overview useful without presenting the hard-diary targets as QPC
@@ -48,31 +48,32 @@ QUEST_CAPE_BLOCKERS = [
 ]
 
 PLAN_PHASES = [
-    dict(title="Quest-cape preparation",
+    dict(title="Clear the quest blockers",
          reqs=[(name, QUEST_CAPE_REQUIREMENTS[name])
                for name in QUEST_CAPE_BLOCKERS],
          combat=QUEST_CAPE_COMBAT,
-         subs=["Follow the optimal quest route until it reaches a real level gate; train only enough to clear the next group of blocked quests.",
-               "Do Slayer before separate combat training because cannon and burst tasks carry Ranged and Magic alongside it.",
+         subs=["Follow the quest route. Train only enough to unblock the next quests.",
+               "Train combat on Slayer. Cannon and burst tasks carry Ranged and Magic with it.",
                QUEST_CAPE_COMPOSITE]),
     dict(title="Quest Cape", track="quests", subs=[]),
     dict(title="All Hard Diaries", track="diary_hard", diary_tier="Hard",
          subs=[]),
     dict(title="Slayer to 95", track="slayer", subs=[]),
-    dict(title="Elite diary skill walls",
+    dict(title="Elite diary levels",
          track="diary_elite", diary_tier="Elite", subs=[]),
     dict(title="Max Cape", track="max", subs=[]),
 ]
 
 COMBAT_APPROACH = [
-    "Nieve/Steve initially.",
-    "Konar when useful for milestone points.",
-    "Duradel after 100 combat, 50 Slayer and Shilo Village access.",
-    "Cannon tasks to train Ranged.",
-    "Burst appropriate tasks to train Magic.",
-    "Melee priority: Strength 80, then Attack 80, then Defence 80; do not dilute the early levels with Controlled.",
-    "That balanced pass reaches 100 combat on this account. Switch to Duradel as soon as it unlocks, then resume Strength toward ~85.",
-    "Let Slayer and later bossing carry most combat XP rather than separately grinding combat skills early.",
+    "Nieve or Steve for now.",
+    "Konar for milestone points.",
+    "Duradel at 100 combat, 50 Slayer and Shilo Village.",
+    "Cannon multi tasks for Ranged.",
+    "Burst stacked tasks for Magic.",
+    "Melee order: Strength, Attack, Defence. 75 each, then 80 each, then Strength to 85.",
+    "Dedicated styles reach each milestone sooner. A hasta on Controlled is the low-maintenance option, best on stab-weak tasks.",
+    "The 80s pass puts you at 100 combat. Switch to Duradel there.",
+    "Let Slayer carry combat XP. Do not grind it on its own.",
 ]
 
 
@@ -99,8 +100,8 @@ SKILLS = [
     # ---------------- combat ----------------
     dict(
         name="Attack", group=COMBAT, target="80 → 99", pick="Slayer tasks",
-        phase="80 during the Slayer grind after Strength 80, then 99 in the combat block after the Diary Cape.",
-        summary="Strength 80 first, then train Attack to 80.",
+        phase="75 after Strength 75, then 80 after Strength 80; finish 99 in the combat block after the Diary Cape.",
+        summary="Follow Strength to 75, then repeat that order for level 80.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Your default. XP depends entirely on the task and gear; Duradel tasks with a good weapon are the top end."),
             ("Nightmare Zone", "Quest reqs", "40–80k", "Absorptions + rock cake, very AFK. Dream selection matters; also prints points for imbues."),
@@ -111,16 +112,16 @@ SKILLS = [
             ("Bossing", "Varies", "40–80k", "Vorkath, Muspah, ToA. Slower than pure XP methods but pays for the rest of the account."),
         ],
         notes=[
-            "Strength raises max hit, so it still goes first, but only to 80 before Attack catches up. This keeps the damage advantage without postponing the level-80 weapon tier.",
-            "Attack 80 is the second leg of the balanced melee pass. Train it on Slayer rather than stopping the route for a separate combat grind.",
+            "Strength leads each milestone because max hits improve later training. Bring Attack to 75 after Strength 75, then bring it to 80 after Strength 80 so accuracy and weapon unlocks do not fall far behind.",
+            "Train Attack on Slayer rather than stopping the quest route for a separate combat grind. Use an abyssal whip with a dragon defender for general Attack training.",
         ],
     ),
     dict(
         name="Strength", group=COMBAT, target="80 → 85 → 99", pick="Slayer tasks",
-        phase="80 first, then Attack and Defence to 80; resume toward ~85 after the balanced pass.",
-        summary="Train Strength to 80 first; return for 85 after balanced 80s.",
+        phase="75 first, then Attack and Defence to 75; lead the level-80 pass the same way, then resume toward ~85 after balanced 80s.",
+        summary="Lead each balanced pass with Strength; return for 85 after balanced 80s.",
         methods=[
-            ("Slayer tasks", "—", "30–60k", "Your default. Aggressive/Controlled styles on tasks where the melee kill is fastest."),
+            ("Slayer tasks", "—", "30–60k", "Your default. Use Aggressive for dedicated Strength XP on tasks where the melee kill is fastest."),
             ("Nightmare Zone", "Quest reqs", "40–80k", "The classic AFK 99 Strength. Slower per hour than active methods but nearly zero attention."),
             ("Sulphur Nagua", "Varlamore", "60–90k", "Strong low-effort rates; popular replacement for NMZ."),
             ("Scurrius", "Quest-free", "40–60k",
@@ -129,14 +130,15 @@ SKILLS = [
             ("Ammonite / sand crabs", "—", "20–40k", "Free and AFK; overtaken by anything else once you have gear."),
         ],
         notes=[
-            "Strength first is right because max hits improve every later Slayer task, but stopping at 80 avoids leaving Attack and Defence too far behind.",
-            "For general Strength training, use an abyssal bludgeon if you own one; otherwise use an abyssal dagger with a dragon defender. A Saradomin sword is the cheap option. Save the abyssal whip for Attack or Defence because it cannot train Strength directly.",
+            "Train Strength to 75 before bringing Attack and Defence to 75, then repeat the order to 80. Five-level milestones capture most of the Strength-first damage advantage without leaving the other stats behind.",
+            "For general Strength training, use an abyssal dagger with a dragon defender. A Saradomin sword is the cheap option; an abyssal bludgeon is only a small upgrade for its price. Save the abyssal whip for Attack or Defence because it cannot train Strength directly.",
+            "A Zamorakian hasta with a dragon defender on Controlled is fine when you want balanced, low-maintenance XP, especially against stab-weak targets. Dedicated styles remain faster for reaching each damage or equipment milestone.",
         ],
     ),
     dict(
         name="Defence", group=COMBAT, target="80 → 99", pick="Slayer tasks",
-        phase="The quest-cape minimum and level-70 armour breakpoint are already met. Train to 80 after Strength and Attack.",
-        summary="Finish the balanced melee pass with Defence 80.",
+        phase="The quest-cape minimum and level-70 armour breakpoint are already met. Train to 75 after Strength and Attack, then finish the balanced level-80 pass the same way.",
+        summary="Finish each balanced melee pass with Defence.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Defensive or Controlled style on tasks you would be doing anyway."),
             ("Nightmare Zone", "Quest reqs", "40–80k", "Defensive style; the standard AFK route."),
@@ -146,7 +148,7 @@ SKILLS = [
             ("Bossing", "Varies", "30–60k", "Defensive style on long boss trips."),
         ],
         notes=[
-            "Defence 70 already unlocks most of the armour that matters (Bandos, Barrows, Karil's), so Defence stays last in the balanced 80 pass.",
+            "Defence 70 already unlocks most of the armour that matters (Bandos, Barrows, Karil's), so Defence stays last at both the level-75 and level-80 milestones.",
             "This account should reach combat 100 around Defence 76 after Strength and Attack 80. Switch from Nieve to Duradel then, and finish Defence 80 on the better task list.",
         ],
     ),
@@ -245,7 +247,7 @@ SKILLS = [
             "Superior Slayer monsters (unlocked by Bigger and Badder) are worth the point cost. They can drop the imbued heart and eternal gem.",
             "Fallen From Grace also unlocks the repeatable Mad Angel. Its Hallowfell drop needs 75 Attack and cleaves up to two nearby targets, so it is a specialised multi-target weapon rather than a universal single-target upgrade.",
             "Everything else in the plan is downstream of Slayer: it carries Attack, Strength, Defence and Hitpoints; via cannon and barrage, it also carries Ranged and Magic.",
-            "The Along the Way table uses a neutral average split across melee styles. In play, train Strength to 80, Attack to 80, then Defence to 80; return to Strength 85 afterward.",
+            "The Along the Way table uses a neutral average split across melee styles. In play, train Strength to 75, Attack to 75 and Defence to 75; repeat that order to 80, then return to Strength 85. Controlled hasta training is the convenient alternative, especially on stab-weak tasks.",
             "The task verdict table uses Duradel's weights. Nieve has different weights and extra assignments, and block lists do not carry between masters; revisit blocks when you switch.",
         ],
     ),
@@ -628,6 +630,7 @@ PLAN_LINKS = [
     ("max-order", "Max Order", "assets/media/max-cape.png"),
     ("feeders", "Feeders", "assets/media/site/skills-icon.png"),
     ("gear.html", "Gear", "assets/media/site/gear-icon.png"),
+    ("maxguide.html", "Time to Max", "assets/media/max-cape.png"),
 ]
 
 
@@ -936,6 +939,19 @@ COMET_SVG = ('<svg class="comet" viewBox="0 0 16 16" width="14" height="14" '
              'stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
              "</svg>")
 
+# The sidebar sync control: a circular arrow that turns while the request is in
+# flight. The ticked badge is hidden until a sync has actually landed.
+SYNC_SVG = ('<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">'
+            '<path d="M12.3 4.2A5.2 5.2 0 1 0 13.2 7.3" fill="none" '
+            'stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'
+            '<path d="M9.5 4.3h3.3V1" fill="none" stroke="currentColor" '
+            'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
+            '<g class="ccdone">'
+            '<circle cx="11.5" cy="11.5" r="4.1" fill="currentColor"/>'
+            '<path d="M9.7 11.6 11 12.9l2.3-2.7" fill="none" stroke="var(--bg)" '
+            'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
+            "</g></svg>")
+
 
 WIKI = "https://oldschool.runescape.wiki/w/"
 OQG_URL = WIKI + "Optimal_quest_guide"
@@ -1133,6 +1149,39 @@ def mini_bar(pct, colour=None, from_level=1, level=None):
     return f'<span class="prog mini"><span class="fill lit" style="{style}"></span></span>'
 
 
+def short_xp(xp):
+    """1_240_000 -> 1.2M. Requirement rows have no room for full figures."""
+    if xp >= 1_000_000:
+        return f"{xp / 1_000_000:.1f}M".replace(".0M", "M")
+    if xp >= 1_000:
+        return f"{round(xp / 1_000)}k"
+    return str(int(xp))
+
+
+def final_goal(skill_name):
+    """The last level the plan wants from a skill, read off its target label."""
+    sk = next((x for x in SKILLS if x["name"] == skill_name), None)
+    nums = re.findall(r"\d+", sk.get("target", "")) if sk else []
+    return max(int(n) for n in nums) if nums else None
+
+
+def req_gap(skill_name, target, xp_now):
+    """XP left to this section's requirement, roughly how long that takes, and
+    the gap to the skill's end goal. Rates are planning estimates."""
+    left = max(0, xp_for_level(target) - (xp_now or 0))
+    if not left:
+        return ""
+    rate = SKILL_RATE.get(skill_name, (0, ""))[0]
+    parts = [f"{short_xp(left)} to {target}"]
+    if rate:
+        hours = left / rate
+        parts.append("under 1h" if hours < 1 else f"~{round(hours)}h")
+    end = final_goal(skill_name)
+    if end and end > target:
+        parts.append(f"{short_xp(max(0, xp_for_level(end) - (xp_now or 0)))} to {end}")
+    return '<span class="rgap">' + " &middot; ".join(parts) + "</span>"
+
+
 def req_chip(skill_name, target):
     """One skill requirement: links to the skill page, with a focus dot."""
     st = stat_of(skill_name)
@@ -1156,6 +1205,7 @@ def req_chip(skill_name, target):
             f'<span class="rq">{e(skill_name)}</span>'
             f'<b class="rl" style="--lc:{level_color(cur)}">{cur}</b>'
             f'<span class="rt">/{target}</span></a>{dot}'
+            f'{"" if met else req_gap(skill_name, target, st["xp"])}'
             f'{chip_bar(pct)}</span>')
 
 
@@ -1307,45 +1357,6 @@ def default_focus():
     return "Slayer"
 
 
-def focus_panel():
-    name = default_focus()
-    sk = next(x for x in SKILLS if x["name"] == name)
-    f = skill_facts(sk)
-    lvl = f["level"] if f["level"] is not None else "--"
-    xp = f"{f['xp']:,}" if f["xp"] is not None else "--"
-
-    also = "".join(
-        f'<a class="fa" href="{a["href"]}"><img class="icon sm" src="{a["icon"]}" alt="">'
-        f'<span class="fan">{e(a["name"])}</span>'
-        f'<b class="fal" style="--lc:{a["colour"]}">{a["level"] if a["level"] else "--"}</b>'
-        f'<span class="fag">/{a["goal"]}</span></a>'
-        for a in f["also"]
-    )
-
-    return (
-        '<aside class="focus" id="focus">'
-        '<div class="fhead"><span class="k">Currently Levelling</span>'
-        f'<a class="flink" id="flink" href="{f["href"]}">Open {e(f["name"])} &rsaquo;</a></div>'
-        '<div class="ftop">'
-        f'<img class="icon lg" id="fic" src="{f["icon"]}" alt="">'
-        f'<span class="fname" id="fname">{e(f["name"])}</span>'
-        f'<b class="fbig lit" id="flvl" style="--lc:{f["colour"]}">{lvl}</b>'
-        f'<span class="fsep">&rarr;</span><span class="fgoal" id="fgoal">{f["goal"]}</span>'
-        '<span class="fspace"></span>'
-        f'<a class="fmethod" id="fmethodlink" href="{f["methodHref"]}">'
-        f'<i>Method</i><b id="fmethod">{e(f["method"])}</b></a>'
-        "</div>"
-        '<div class="fbarrow">'
-        f'<span class="prog wide"><span class="fill lit" id="fbar" '
-        f'style="width:{f["pct"]}%;--lc:{f["colour"]}"></span></span>'
-        f'<span class="fxp" id="fxp">{xp} XP</span>'
-        "</div>"
-        f'<div class="falso" id="falso"{"" if also else " hidden"}>'
-        f'<i>Also Trains</i>{also}</div>'
-        "</aside>"
-    )
-
-
 def focus_data_script():
     data = {x["name"]: skill_facts(x) for x in SKILLS}
     return ("<script>window.FOCUSDATA=" + json.dumps(data, separators=(",", ":"))
@@ -1366,8 +1377,9 @@ REFRESH_SVG = (
 )
 
 
-def rail_meter():
-    """Account line at the top of the site index."""
+def rail_meter(coach=False):
+    """Account line at the top of the site index, with the local-server sync
+    and next-action controls when the page carries the coach script."""
     if STATS:
         rows = (f'<span class="mrow"><span>Total Level</span>'
                 '<button class="refresh stat-refresh" id="statrefresh" type="button" '
@@ -1385,14 +1397,24 @@ def rail_meter():
         rows = ('<span class="mrow"><span>Not linked</span></span>'
                 '<span class="mrow hint"><code>fetch_stats.py "RSN"</code></span>')
 
-    return f'  <div class="meter">{rows}</div>'
+    controls = (
+        '<div class="cctl">'
+        f'<button class="ccsync" id="sync-character" type="button" '
+        f'title="Sync Hiscores, quests and diaries" '
+        f'aria-label="Sync character">{SYNC_SVG}</button>'
+        '<button class="ccask" id="ask-character" type="button" '
+        'title="What should I do now?">WSID?</button>'
+        "</div>"
+    ) if coach else ""
+
+    return f'  <div class="meter">{rows}{controls}</div>'
 
 
-def rail(active=None, depth=0):
-    """Sticky right-hand index: the plan on top, then every skill by group."""
+def rail(active=None, depth=0, coach=False):
+    """Left-hand index: the account line on top, then every skill by group."""
     root = "../" if depth else ""
     p = ['<aside class="rail" aria-label="Site index">',
-         rail_meter(),
+         rail_meter(coach=coach),
          '  <nav class="rail-body">',
          '  <div class="rail-kick">Reference</div>']
     for anchor, label, ico in PLAN_LINKS:
@@ -2263,16 +2285,28 @@ COACH_JS = """
 /* Character refresh and deterministic next-step guidance for serve.py. */
 (function () {
   var coach = document.querySelector('.coach');
-  var heading = document.getElementById('coach-heading');
-  var description = document.getElementById('coach-description');
   var sync = document.getElementById('sync-character');
   var ask = document.getElementById('ask-character');
   var status = document.getElementById('coach-status');
   var output = document.getElementById('coach-output');
-  if (!coach || !heading || !description || !sync || !ask || !status || !output) return;
+  var controls = document.querySelector('.cctl');
+  if (!coach || !sync || !ask || !status || !output) return;
   if (window.location.hostname.endsWith('.github.io')) {
     coach.hidden = true;
+    if (controls) controls.hidden = true;
     return;
+  }
+
+  /* The tick on the sync icon means "this page is showing freshly synced
+     data", so it survives the reload a sync triggers but not a new tab. */
+  var SYNCED = 'osrsplan.synced';
+  try {
+    if (sessionStorage.getItem(SYNCED)) sync.classList.add('ok');
+  } catch (err) { /* private mode */ }
+
+  function marksynced() {
+    sync.classList.add('ok');
+    try { sessionStorage.setItem(SYNCED, '1'); } catch (err) { /* private mode */ }
   }
 
   function busy(on) {
@@ -2280,6 +2314,7 @@ COACH_JS = """
     ask.disabled = on;
     sync.classList.toggle('busy', on);
     ask.classList.toggle('busy', on);
+    if (on) sync.classList.remove('ok');
   }
 
   function request(path) {
@@ -2337,6 +2372,7 @@ COACH_JS = """
     status.classList.remove('bad');
     status.textContent = 'Syncing Hiscores, quests and diaries…';
     request('/api/sync').then(function () {
+      marksynced();
       status.textContent = 'Synced. Reloading the updated site…';
       location.reload();
     }).catch(function (error) {
@@ -2353,6 +2389,7 @@ COACH_JS = """
     status.textContent = 'Syncing before choosing your next action…';
     request('/api/advice').then(function (data) {
       render(data);
+      marksynced();
       status.textContent = 'Character synced just now.';
       busy(false);
     }).catch(function (error) {
@@ -2482,7 +2519,8 @@ def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
 {head_extra}
 </head>
 <body>
-<header class="topbar">
+<div class="frame">
+<header class="sidebar">
   <a class="mark" href="{root}index.html"><img class="capemark" src="{root}assets/media/max-cape.png" alt="">OSRS Max Time-Wasting Plan</a>
   <nav class="topnav">
     <a class="navlink" href="{root}stars.html">{COMET_SVG}Shooting Stars</a>
@@ -2490,12 +2528,13 @@ def page(title, body, active=None, depth=0, skill_name=None, head_extra="",
     <a class="navlink" href="{root}calculators.html">Calculators</a>
     <a class="navlink" href="{root}afk.html">AFK</a>
   </nav>
+{rail(active=active, depth=depth, coach=coach)}
 </header>
 <div class="shell{" wide" if wide else ""}">
 <main class="main">
 {body}
 </main>
-{rail(active=active, depth=depth)}
+</div>
 </div>
 {RAIL_JS}{LIVE_STATS_JS}{COACH_JS if coach else ""}{PICK_JS}{FOCUS_JS}{TASKS_JS}{STARS_JS}{BONUS_JS}{OWN_JS}{POTION_JS}{PATH_JS}
 </body>
@@ -2866,7 +2905,6 @@ OSRSGUIDE = "https://www.osrsguide.com/"
 SITE_LINKS = [
     ("OSRS Guide", OSRSGUIDE + "skilling-guides/"),
     ("Calculators", "https://07.gg/calculators"),
-    ("Time to Max", OSRSGUIDE + "time-to-max-osrs/"),
     ("OSRS Wiki", "https://oldschool.runescape.wiki/"),
 ]
 
@@ -3469,7 +3507,7 @@ def build_skill_page(skill, prev_skill, next_skill):
                      '<div class="k">Open Decision</div>'
                      '<h3>No Method Locked In</h3>'
                      "<p>The plan sets a target here but does not name a method. "
-                     "Pick one with the circle at the end of any row below.</p></div>")
+                     "Pick one with the box at the end of any row below.</p></div>")
 
     parts.append(carry_panel(name, pick))
 
@@ -3488,7 +3526,7 @@ def build_skill_page(skill, prev_skill, next_skill):
                      + (f' ({e(rrate)}/hr).' if rrate and rrate[0].isdigit() else '.')
                      + ' Locked rows need a higher level.</p>')
     else:
-        parts.append('<p class="savednote" id="savednote">Tap the circle on any row to '
+        parts.append('<p class="savednote" id="savednote">Tap the box on any row to '
                      'make it your method.</p>')
     parts.append(method_table(skill["methods"], pick, skill_name=name))
 
@@ -3581,7 +3619,14 @@ def build_stars_page():
         '<div class="page-head"><span class="comethead">' + COMET_SVG
         + '</span><h1 class="page">Shooting Stars</h1></div>',
         f'<p class="lede">{e(cfg["note"])}</p>',
-        embed_panel("Mining", full=True),
+        # The callers all post to 07.gg, so the tracker itself is the panel.
+        '<iframe class="siteframe" src="https://07.gg/trackers/shooting-star" '
+        'title="Shooting star tracker on 07.gg" loading="lazy" '
+        'referrerpolicy="no-referrer"></iframe>',
+        '<p class="note">Called worlds come from '
+        '<a class="wl" href="https://07.gg/trackers/shooting-star" '
+        'target="_blank" rel="noopener">07.gg</a>. If the frame stays blank the '
+        'tracker is refusing to be embedded; open it directly.</p>',
         '<h2 id="how">How the Tiers Work</h2>',
         '<ul>'
         '<li>Tier 1 needs 10 Mining, then ten levels per tier to tier 9 at 90.</li>'
@@ -3593,8 +3638,7 @@ def build_stars_page():
         'window.</li>'
         '</ul>',
     ]
-    return page("Shooting Stars", "\n".join(body), depth=0,
-                head_extra=starmap_script())
+    return page("Shooting Stars", "\n".join(body), depth=0)
 
 
 # Skilling outfits: what each piece is called, what the set does, and where it
@@ -3663,7 +3707,7 @@ OUTFITS = [
 
 
 def piece_label(setname, piece):
-    """Drop whatever the piece repeats from the set name, so the pill reads
+    """Drop whatever the piece repeats from the set name, so the label reads
     'hat' rather than "Angler's hat"."""
     stop = {"outfit", "kit", "uniform", "robes", "raiments", "of", "the", "eye",
             "guild", "s"}
@@ -4697,6 +4741,15 @@ CALC_JS = """
       return d.innerHTML;
     }
 
+    /* The wiki serves an item's icon straight off its file name. Anything that
+       does not resolve removes itself, so a miss costs an empty cell. */
+    function itemPic(name) {
+      var file = encodeURIComponent(String(name).replace(/ /g, '_')) + '.png';
+      return '<td class="pic"><img class="itempic" loading="lazy" alt="" '
+        + 'src="https://oldschool.runescape.wiki/w/Special:FilePath/' + file + '"'
+        + ' onerror="this.remove()"></td>';
+    }
+
     function xpFor(l) {
       if (l <= 1) return 0;
       var t = 0;
@@ -4828,6 +4881,7 @@ CALC_JS = """
         tr.setAttribute('data-name', r.a.name);
         tr.innerHTML =
           '<td class="req">' + r.a.level + '</td>' +
+          itemPic(r.a.name) +
           '<td class="tn">' + esc(r.a.name) +
             (r.thin ? '<span class="thin">' + num(r.daily)
               + ' traded a day</span>' : '') +
@@ -4844,7 +4898,14 @@ CALC_JS = """
       if (best) {
         pick.replaceChildren();
         var k = document.createElement('span');
-        k.className = 'k'; k.textContent = 'Cheapest open to you';
+        k.className = 'k'; k.textContent = 'Cheapest';
+        var pic = document.createElement('img');
+        pic.className = 'itempic';
+        pic.loading = 'lazy';
+        pic.alt = '';
+        pic.onerror = function () { pic.remove(); };
+        pic.src = 'https://oldschool.runescape.wiki/w/Special:FilePath/'
+          + encodeURIComponent(best.name.replace(/ /g, '_')) + '.png';
         var b = document.createElement('b'); b.textContent = best.name;
         var d = document.createElement('span');
         d.className = 'pdet';
@@ -4855,7 +4916,7 @@ CALC_JS = """
         w.textContent = best.gpxp <= 0
           ? 'It pays you to train, so the only cost is the time.'
           : 'Lowest cost per point of experience at your level.';
-        pick.append(k, b, d, w);
+        pick.append(k, pic, b, d, w);
         pick.hidden = false;
       } else {
         pick.hidden = true;
@@ -5054,7 +5115,7 @@ def calculators_page():
         '<div class="cpick" id="cpick" hidden></div>',
         '<div class="tablewrap"><div class="tablescroll">'
         '<table class="pathtable calctable" id="calctable"><thead><tr>'
-        '<th>Lvl</th><th>Action</th><th>XP each</th><th>Needed</th>'
+        '<th>Lvl</th><th class="pic"></th><th>Action</th><th>XP each</th><th>Needed</th>'
         '<th>Each</th><th>Total</th><th>GP/XP</th></tr></thead>'
         '<tbody id="calcbody"></tbody></table></div></div>',
         '<p class="lede2">Action tables come from the wiki\'s own skill '
@@ -5088,17 +5149,10 @@ def gear_page():
 
 
 def character_coach():
-    """Character refresh controls shown when the site runs through serve.py."""
+    """Where the sidebar's sync and next-action controls report back. Empty
+    until one of them runs, so it takes no space on a fresh page."""
     return (
-        '<section class="coach" aria-labelledby="coach-heading">'
-        '<div class="coach-head"><div>'
-        '<span class="k">Character coach</span>'
-        '<h2 id="coach-heading">What should I do?</h2>'
-        '<p id="coach-description">Refresh Hiscores, quests and diaries, then turn the optimal route into one next action.</p>'
-        '</div><div class="coach-actions">'
-        '<button class="btn ghost" id="sync-character" type="button">Sync character</button>'
-        '<button class="btn" id="ask-character" type="button">What should I do now?</button>'
-        '</div></div>'
+        '<section class="coach">'
         '<p class="coach-status" id="coach-status" role="status" aria-live="polite"></p>'
         '<div class="coach-output" id="coach-output" hidden></div>'
         '</section>'
@@ -5107,14 +5161,9 @@ def character_coach():
 
 def build_index():
     parts = ['<h1 class="sr">OSRS Max Cape Plan</h1>']
-    art = focus_panel()
-    parts.append('<section class="hero">')
-    parts.append(art)
-    parts.append("</section>")
     parts.append(character_coach())
 
-    parts.append(h2("progression", "Main Progression", "assets/media/site/combat-achievements.png"))
-    parts.append('<ol class="phases">')
+    parts.append('<ol class="phases" id="progression">')
     for i, ph in enumerate(PLAN_PHASES, 1):
         body = phase_meter(ph.get("track", ""))
         reqs = ph.get("reqs") or (diary_wall(ph["diary_tier"])
@@ -5130,37 +5179,168 @@ def build_index():
                      f'{phase_tag(ph.get("track", ""))}{body}</li>')
     parts.append("</ol>")
 
-    parts.append(h2("quests", "Quest Cape Progress", "assets/media/quest-point-cape.png"))
+    parts.append(h2("quests", "Quest Cape", "assets/media/quest-point-cape.png"))
     parts.append(quest_panel())
 
-    parts.append(h2("diaries", "Diary Progress", "assets/icons/Diaries.png"))
+    parts.append(h2("diaries", "Diaries", "assets/icons/Diaries.png"))
     parts.append(diary_panel())
 
     parts.append(h2("approach", "Slayer", "assets/icons/Slayer.png"))
-    parts.append('<div class="panel"><div class="k">Standing Rules</div><ul>' +
+    parts.append('<div class="panel"><div class="k">Rules</div><ul>' +
                  "".join(f"<li>{annotate(c)}</li>" for c in COMBAT_APPROACH) +
                  "</ul></div>")
 
-    parts.append(h2("max-order", "Post-Diary-Cape Maxing Order",
-                    "assets/media/max-cape.png"))
+    parts.append(h2("max-order", "Max Order", "assets/media/max-cape.png"))
     after, left = post_diary_rows()
-    parts.append(f'<p class="lede2">Levels start from where the Diary Cape '
-                 f'leaves them, not from today, so nothing here is counted '
-                 f'twice. <b>{left:,.0f} hours</b> on the hybrid route, at the '
-                 f'same rates and shared XP the '
-                 f'<a class="wl" href="paths.html">route tables</a> use. '
-                 f'Ordered so the hours that pay come before the hours that '
-                 f'cost; searching every reordering finds nothing cheaper.</p>')
+    parts.append(f'<p class="lede2">Starts from where the Diary Cape leaves '
+                 f'you, so nothing is counted twice. <b>{left:,.0f} hours</b> on '
+                 f'the hybrid route, at the rates the '
+                 f'<a class="wl" href="paths.html">route tables</a> use. Skills '
+                 f'that pay come before skills that cost; no other order is '
+                 f'cheaper.</p>')
     parts.append('<ol class="phases maxorder">')
     for phase in MAX_ORDER:
         parts.append(max_order_block(phase, after))
     parts.append("</ol>")
 
-    parts.append(h2("feeders", "Feeders and Unlocks",
-                    "assets/media/site/skills-icon.png"))
+    parts.append(h2("feeders", "Feeders", "assets/media/site/skills-icon.png"))
     parts.append(feeders_section())
 
     return page("OSRS Max Time-Wasting Plan", "\n".join(parts), coach=True)
+
+
+# --------------------------------------------------------------------------
+# Time to max. Hours, methods and order are osrsguide.com's; the wording here
+# is ours. Every figure is 1-99 from scratch at maximum efficiency, so it does
+# not subtract the levels this account already has.
+# --------------------------------------------------------------------------
+
+MAXGUIDE_URL = OSRSGUIDE + "time-to-max-osrs/"
+
+MAXGUIDE_COMBAT = [
+    "Strength and Attack to 80, then Defence to 80.",
+    "Everything after that comes off Slayer tasks, switching style in the same "
+    "order: Strength, then Attack, then Defence.",
+    "Cannon on task. It pays 0.75 Ranged XP for every point of Slayer XP, which "
+    "is most of the way to 90.",
+    "Hitpoints arrives on its own. Ranged finishes with ten hours of chinning.",
+]
+
+MAXGUIDE_COMBAT_ROWS = [
+    ("Strength", "Slayer tasks, aggressive", "150", ""),
+    ("Attack", "Slayer tasks, accurate", "150", ""),
+    ("Defence", "Slayer tasks, defensive", "150", ""),
+    ("Slayer", "Duradel, cannon on multi tasks", "200", "trained alongside the three above"),
+    ("Ranged", "Cannon to about 90, then chinning", "10", ""),
+    ("Hitpoints", "Passive", "0", "comes with the combat XP"),
+]
+
+MAXGUIDE_ROWS = [
+    ("Prayer", "Dagannoth bones, superior dragon bones from 70, gilded or chaos altar", "10", ""),
+    ("Fletching", "Dart tips", "12-18", "143M"),
+    ("Farming", "Tree runs", "15", "80M"),
+    ("Construction", "Chairs to 33, oak larders to 52, mahogany tables to 77, gnome benches to 99", "15", "300M"),
+    ("Cooking", "1-tick karambwans from 30", "16", "4M profit"),
+    ("Herblore", "Attack potions to 38, prayer potions to 63, super restores to 83, anti-venoms from 87", "24", "200M"),
+    ("Crafting", "Dragonhide bodies", "34", "120M"),
+    ("Firemaking", "Highest logs you can burn, Varrock teleport loop", "35", "11M"),
+    ("Smithing", "Blast Furnace gold bars from 40", "37", "43M"),
+    ("Magic", "Enchanting bolts, ice barrage in the MM2 caves", "38", ""),
+    ("Thieving", "Blackjacking from 45, or Ardougne knights", "57.5", ""),
+    ("Woodcutting", "2-tick teaks", "80", ""),
+    ("Hunter", "Salamanders to 80, then herbiboar", "110", ""),
+    ("Fishing", "Barbarian fishing", "150", "pays 1M Strength and 1M Agility"),
+    ("Mining", "3-tick granite at the quarry", "150", ""),
+    ("Runecraft", "Lava runes", "190", "ZMI instead costs 70 hours more"),
+    ("Agility", "Rooftops", "214", "already 16 hours lighter from barbarian fishing"),
+]
+
+MAXGUIDE_ALTS = [
+    ("Cooking", "Jugs of wine", "26 hours"),
+    ("Firemaking", "Wintertodt", "50 hours, about 3M profit"),
+    ("Woodcutting", "3-tick teaks", "120 hours"),
+    ("Woodcutting", "Redwoods", "140 hours"),
+    ("Runecraft", "ZMI altar", "260 hours"),
+]
+
+# Where the guide and the current wiki rates disagree. Both are on the page;
+# the reader gets to pick.
+MAXGUIDE_CHECKS = [
+    "Agility: the guide trains rooftops. The Hallowed Sepulchre now runs to "
+    "about 105k/hr and its floors dropped to 77 and 87 in August 2026, which "
+    "beats rooftops from 62 up.",
+    "Runecraft: lava runes cap near 102k/hr. Aether runes with runners reach "
+    "265-345k/hr at 90, at roughly 12-15M per runner hour.",
+    "Hunter: birdhouse XP was cut 40-60% in August 2026, so any plan leaning "
+    "on passive birdhouse XP is now slower than it looks.",
+]
+
+
+def maxguide_page():
+    """The osrsguide.com route, in our words, with its numbers."""
+    def rows(data):
+        return "".join(
+            f'<tr><td class="tn">{icon(name) if name in SKILL_NAMES else ""}'
+            f'{e(name)}</td><td class="notes">{e(method)}</td>'
+            f'<td class="rate">{e(hours)}</td><td class="req">{e(extra)}</td></tr>'
+            for name, method, hours, extra in data
+        )
+
+    skills_hours = 1178.5
+    body = [
+        '<div class="kick">Maxing route</div>',
+        '<div class="page-head"><img class="icon lg" src="assets/media/max-cape.png" '
+        'alt=""><h1 class="page">Time to Max</h1></div>',
+        '<p class="lede">Every skill at its fastest method, tick manipulation '
+        'included. This is the ceiling, not a forecast.</p>',
+        '<div class="pillrow">'
+        f'<span class="pill"><span class="pl">Perfect play</span>'
+        f'<span class="pv">{310 + skills_hours:,.1f}h</span></span>'
+        '<span class="pill"><span class="pl">Realistic</span>'
+        '<span class="pv">2,000-2,500h</span></span>'
+        '<span class="pill"><span class="pl">Record</span>'
+        '<span class="pv">32d 3h 3m</span></span>'
+        "</div>",
+        '<p class="note">Hours are 1-99 from nothing, so they do not subtract '
+        'the levels you already have. For that, use '
+        '<a class="wl" href="index.html#max-order">Max Order</a>, which starts '
+        'from your live stats. The record is He Box Jonge\'s. Numbers and route '
+        f'from <a class="wl" href="{MAXGUIDE_URL}" target="_blank" '
+        'rel="noopener">osrsguide.com</a>.</p>',
+
+        h2("combat", "Combat and Slayer", "assets/icons/Slayer.png"),
+        '<p class="lede2">310 hours for the whole block, because Slayer pays '
+        'the combat stats while you train it.</p>',
+        '<ul>' + "".join(f"<li>{annotate(x)}</li>" for x in MAXGUIDE_COMBAT) + "</ul>",
+        '<div class="tablewrap"><div class="tablescroll">'
+        '<table class="maxtable"><thead><tr><th>Skill</th><th>Method</th>'
+        '<th>Hours</th><th></th></tr></thead>'
+        f'<tbody>{rows(MAXGUIDE_COMBAT_ROWS)}</tbody></table></div></div>',
+
+        h2("skills", "The rest, fastest first", "assets/media/site/skills-icon.png"),
+        f'<p class="lede2">{skills_hours:,.1f} hours across the seventeen.</p>',
+        '<div class="tablewrap"><div class="tablescroll">'
+        '<table class="maxtable"><thead><tr><th>Skill</th><th>Method</th>'
+        '<th>Hours</th><th>Cost</th></tr></thead>'
+        f'<tbody>{rows(MAXGUIDE_ROWS)}</tbody></table></div></div>',
+
+        h2("alts", "Slower, easier", "assets/media/site/quests.png"),
+        '<p class="lede2">What each swap costs you.</p>',
+        '<div class="tablewrap"><div class="tablescroll">'
+        '<table class="maxtable"><thead><tr><th>Skill</th><th>Instead</th>'
+        '<th>Costs</th></tr></thead><tbody>'
+        + "".join(f'<tr><td class="tn">{icon(name)}{e(name)}</td>'
+                  f'<td class="notes">{e(alt)}</td>'
+                  f'<td class="rate">{e(cost)}</td></tr>'
+                  for name, alt, cost in MAXGUIDE_ALTS)
+        + "</tbody></table></div></div>",
+
+        h2("checks", "Worth checking", "assets/icons/Diaries.png"),
+        '<p class="lede2">Three places where the guide is behind the current '
+        'wiki rates.</p>',
+        '<ul>' + "".join(f"<li>{annotate(x)}</li>" for x in MAXGUIDE_CHECKS) + "</ul>",
+    ]
+    return page("Time to Max", "\n".join(body), depth=0)
 
 
 def main():
@@ -5180,12 +5360,13 @@ def main():
         os.path.join(OUT, "paths.html"): paths_page(),
         os.path.join(OUT, "calculators.html"): calculators_page(),
         os.path.join(OUT, "gear.html"): gear_page(),
+        os.path.join(OUT, "maxguide.html"): maxguide_page(),
         os.path.join(OUT, "index.html"): build_index(),
     })
     for path, content in outputs.items():
         atomic_text_dump(path, content)
 
-    print(f"wrote index.html + {len(ordered)} skill pages + 5 reference pages")
+    print(f"wrote index.html + {len(ordered)} skill pages + 6 reference pages")
 
 
 if __name__ == "__main__":
