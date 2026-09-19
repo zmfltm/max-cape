@@ -189,6 +189,28 @@ METHOD_MEDIA = {
     # diaries
     "Hard diaries": "Achievement Diary",
     "Elite diaries": "Achievement Diary",
+    # september 2026 training-guide refresh
+    "Hallowfell on maniacal monkeys": "Hallowfell",
+    "Red chinchompas on maniacal monkeys": "Red chinchompa",
+    "Black chinchompas on maniacal monkeys": "Black chinchompa",
+    "Venator bow on maniacal monkeys": "Venator bow",
+    "Nightmare Zone, absorptions and Venator bow": "Venator bow",
+    "Bandit Camp lodge, blood spells": "Blood Burst",
+    "Blood Burst at the Bandit Camp lodge": "Blood Burst",
+    "Cure Me at the Araxytes": "Cure Me",
+    "Plank Make": "Plank Make",
+    "Hunters' Rumours": "Hunter Guild",
+    "Maniacal monkey deadfalls": "Maniacal monkey (Hunter)",
+    "Rockslide shortcut": "Vampyrium",
+    "Stealing valuables": "Stealing valuables",
+    "Brews": "Saradomin brew",
+    "Potions, an inventory at a time": "Super restore",
+    "Soul runes (Arceuus)": "Soul rune",
+    "Aether runes": "Aether rune",
+    "Forestry events": "Forestry",
+    "Rosewood trees": "Rosewood tree",
+    "Colossal Wyrm advanced course": "Colossal Wyrm Agility Course",
+    "Karambwans, one click per inventory": "Cooked karambwan",
 }
 
 # Names that get an inline thumbnail on first mention in prose. Order matters
@@ -247,6 +269,10 @@ PROSE_ENTITIES = {
     "Wyrmscraig": "Wyrmscraig",
     "Jeweller's chisel": "Jeweller's chisel",
     "Hallowfell": "Hallowfell",
+    "Venator bow": "Venator bow",
+    "Colossal Wyrm": "Colossal Wyrm Agility Course",
+    "stealing artefacts": "Stealing artefacts",
+    "libation bowl": "Libation bowl",
     # skilling outfits
     "Angler's outfit": "Angler's outfit",
     "Lumberjack outfit": "Lumberjack outfit",

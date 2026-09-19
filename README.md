@@ -1,8 +1,9 @@
 # OSRS Max Time-Wasting Plan
 
 Static site for a Slayer-first route to the Max Cape. It includes an overview,
-a page for each skill, route comparisons, gear and AFK references, calculators,
-and a shooting-star tracker.
+a page for each skill, three costed routes to 99 in every skill (Speed,
+Realistic and AFK), gear and AFK references, calculators, and a shooting-star
+tracker.
 
 ## Viewing it
 
@@ -68,6 +69,18 @@ Levels are coloured on a hue ramp: ember at low levels, amber through the
 middle, green at 99 (matching the "done" green exactly). The stops live in
 `_HUE_STOPS` in `build.py`. The same colour drives progress bars, so each skill's status is readable at a
 glance.
+
+## The three paths
+
+`PATHS` in `build.py` holds three staged routes per skill: `fast` (Speed: the
+top rate the wiki quotes, tick manipulation included), `hybrid` (Realistic: no
+tick manipulation, no runners, methods that pay or nearly do) and `afk` (the
+least attention that still trains the skill). Each leg is `(level it opens,
+method, XP/hr)`, and `CARRIES` says what a method hands to other skills, so the
+paths page can order the skills and price the carries. Every skill page shows
+the same three routes costed from the current XP. Rates come from the OSRS Wiki
+training guides; the date they were last checked is in the comment above
+`PATHS`.
 
 ## Choosing a method
 

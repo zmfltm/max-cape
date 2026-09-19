@@ -5,6 +5,7 @@ Edit SKILLS / PLAN below and re-run:  python3 build.py
 """
 
 import base64
+import datetime
 import html
 import json
 import os
@@ -74,6 +75,7 @@ COMBAT_APPROACH = [
     "Dedicated styles reach each milestone sooner. A hasta on Controlled is the low-maintenance option, best on stab-weak tasks.",
     "The 80s pass puts you at 100 combat. Switch to Duradel there.",
     "Let Slayer carry combat XP. Do not grind it on its own.",
+    "Attack 75 wields Hallowfell. After Slayer 99, the melee 99s happen at the maniacal monkeys, not on tasks.",
 ]
 
 
@@ -104,16 +106,20 @@ SKILLS = [
         summary="Follow Strength to 75, then repeat that order for level 80.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Your default. XP depends entirely on the task and gear; Duradel tasks with a good weapon are the top end."),
-            ("Nightmare Zone", "Quest reqs", "40–80k", "Absorptions + rock cake, very AFK. Dream selection matters; also prints points for imbues."),
-            ("Sulphur Nagua", "Varlamore", "60–90k", "Low-attention melee XP with good rates once you have decent gear."),
+            ("Hallowfell on maniacal monkeys", "75 Attack, MM2", "200–300k",
+             "The fastest melee XP in the game since Wyrmscraig. Hallowfell hits two extra monkeys for half damage; 200k+ with stacking and halberd specs, still well over 150k on auto-retaliate with a bonecrusher necklace keeping Piety up."),
+            ("Sulphur Nagua", "55 Attack, Perilous Moons", "75–130k", "Negative armour plus double-hit weapons. About 75k with Strength in the low 60s, up to 130k at 75 with full blood moon and Piety. The bridge from here to Hallowfell."),
+            ("Nightmare Zone", "Quest reqs", "100k", "Absorptions and a rock cake in a normal rumble: 20 minutes between clicks, about 100k with decent gear. Also prints the points for imbues."),
             ("Gemstone Crab", "1", "30–60k",
-             "Shared-health crab in Varlamore. The modern replacement for sand crabs when you want to do nothing."),
+             "Shared-health crab in Varlamore. Ten minutes per burrow, two clicks to re-engage. The idle option when you cannot get to NMZ."),
+            ("Scurrius", "40 Prayer", "70–100k", "The rat boss under Varrock. Faster than the crab at 55–75 with a bone mace, but it takes actual attention."),
             ("Ammonite / sand crabs", "—", "20–40k", "Free, safe, extremely AFK. Fine for early levels, poor once you have Slayer flowing."),
             ("Bossing", "Varies", "40–80k", "Vorkath, Muspah, ToA. Slower than pure XP methods but pays for the rest of the account."),
         ],
         notes=[
             "Strength leads each milestone because max hits improve later training. Bring Attack to 75 after Strength 75, then bring it to 80 after Strength 80 so accuracy and weapon unlocks do not fall far behind.",
-            "Train Attack on Slayer rather than stopping the quest route for a separate combat grind. Use an abyssal whip with a dragon defender for general Attack training.",
+            "Attack 75 now matters for its own sake: it wields Hallowfell, the Mad Angel drop that turns maniacal monkeys into 200k+ melee XP an hour. Fallen From Grace unlocks the boss.",
+            "Train Attack on Slayer rather than stopping the quest route for a separate combat grind. Use an abyssal whip with a dragon defender for general Attack training until Hallowfell.",
         ],
     ),
     dict(
@@ -122,17 +128,20 @@ SKILLS = [
         summary="Lead each balanced pass with Strength; return for 85 after balanced 80s.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Your default. Use Aggressive for dedicated Strength XP on tasks where the melee kill is fastest."),
-            ("Nightmare Zone", "Quest reqs", "40–80k", "The classic AFK 99 Strength. Slower per hour than active methods but nearly zero attention."),
-            ("Sulphur Nagua", "Varlamore", "60–90k", "Strong low-effort rates; popular replacement for NMZ."),
-            ("Scurrius", "Quest-free", "40–60k",
+            ("Hallowfell on maniacal monkeys", "75 Attack, MM2", "200–300k",
+             "The fastest melee XP there is. Bring super strength rather than super combat; the monkeys have no defence to speak of. Low-intensity on auto-retaliate still beats everything below."),
+            ("Sulphur Nagua", "55 Attack, Perilous Moons", "75–130k", "Strong low-effort rates; moonlight potions made on site cover prayer and boosts."),
+            ("Nightmare Zone", "Quest reqs", "100k", "The AFK 99 Strength. Absorptions, rock cake, 20 minutes a click; about 100k with an obsidian set or better."),
+            ("Scurrius", "40 Prayer", "70–100k",
              "The rat boss under Varrock. Solid XP for the level band, and bones plus the spine for the Prayer stockpile."),
+            ("Gemstone Crab", "1", "30–60k", "Shared-health crab in Varlamore. The modern replacement for sand crabs when you want to do nothing."),
             ("Barbarian Fishing", "—", "passive", "Leaping fish give a trickle of Strength and Agility while you train Fishing."),
             ("Ammonite / sand crabs", "—", "20–40k", "Free and AFK; overtaken by anything else once you have gear."),
         ],
         notes=[
             "Train Strength to 75 before bringing Attack and Defence to 75, then repeat the order to 80. Five-level milestones capture most of the Strength-first damage advantage without leaving the other stats behind.",
             "For general Strength training, use an abyssal dagger with a dragon defender. A Saradomin sword is the cheap option; an abyssal bludgeon is only a small upgrade for its price. Save the abyssal whip for Attack or Defence because it cannot train Strength directly.",
-            "A Zamorakian hasta with a dragon defender on Controlled is fine when you want balanced, low-maintenance XP, especially against stab-weak targets. Dedicated styles remain faster for reaching each damage or equipment milestone.",
+            "Once Attack is 75, Hallowfell replaces all of that: one two-handed sword, one spot, and the best rate in the skill.",
         ],
     ),
     dict(
@@ -141,8 +150,9 @@ SKILLS = [
         summary="Finish each balanced melee pass with Defence.",
         methods=[
             ("Slayer tasks", "—", "30–60k", "Defensive or Controlled style on tasks you would be doing anyway."),
-            ("Nightmare Zone", "Quest reqs", "40–80k", "Defensive style; the standard AFK route."),
-            ("Sulphur Nagua", "Varlamore", "60–90k", "Same as melee. Just swap to Defensive."),
+            ("Hallowfell on maniacal monkeys", "75 Attack, MM2", "200–300k", "Defensive style at the monkeys. The wiki notes long-fuse chins and defensive Ancients edge it at the very top; for a single grind this is simpler."),
+            ("Sulphur Nagua", "55 Attack, Perilous Moons", "75–130k", "Same as melee. Just swap to Defensive."),
+            ("Nightmare Zone", "Quest reqs", "100k", "Defensive style; the standard AFK route."),
             ("Gemstone Crab", "1", "30–60k",
              "Shared-health crab in Varlamore. Defensive style, near-zero attention."),
             ("Bossing", "Varies", "30–60k", "Defensive style on long boss trips."),
@@ -168,22 +178,23 @@ SKILLS = [
     dict(
         name="Ranged", group=COMBAT, target="62 → 70 → 99", pick="Cannon on Slayer tasks",
         phase="62 is the quest-cape requirement. Let cannoned Slayer tasks carry it there, continue to 70 as an early combat breakpoint, then finish 99 after the Diary Cape.",
-        summary="Cannon on Slayer tasks; chinning later.",
+        summary="Cannon on Slayer tasks; chins or a Venator bow later.",
         methods=[
-            ("Cannon on Slayer tasks", "—", "40–80k", "Your pick. Cannon the multi-friendly tasks (dust devils, jellies, nechryael, greater demons) and it trains Ranged while the task still counts."),
-            ("Chinning – maniacal monkeys", "MM2", "250–400k+", "The fastest Ranged in the game. Expensive, click-intensive, needs Monkey Madness II. This is the usual 99 route once you can afford chins."),
-            ("Chinning – Wilderness caves", "—", "150–250k", "Cheaper (red chins), but PKer risk."),
-            ("Blowpipe on crabs / Nagua", "—", "60–100k", "Low effort; scales with dart tier."),
+            ("Cannon on Slayer tasks", "—", "passive", "Your pick. Cannon the multi-friendly tasks (dust devils, jellies, nechryael, greater demons) and it trains Ranged while the task still counts. The wiki puts 99 Slayer at 2–4M Ranged XP from the cannon alone."),
+            ("Red chinchompas on maniacal monkeys", "45 (MM2)", "400–600k", "The fastest Ranged in the game. Solo with active stacking is roughly 450k at 70 and 600k by 85; the wiki's 670–840k figures assume two dancing alts. Costs a few million an hour."),
+            ("Black chinchompas on maniacal monkeys", "65 (MM2)", "550–800k", "Same spot, bigger hits. Solo rates sit around 650k at 85. The chins are the expensive part."),
+            ("Venator bow on maniacal monkeys", "80", "140–230k", "The cheap camp. Amethyst arrows, prayer potion drops, endless monkeys; the wiki calls 240k a realistic ceiling near 99. Far less involved than chinning."),
+            ("Nightmare Zone", "Quest reqs", "70–150k", "Normal rumble with absorptions: 20 minutes AFK. Venator bow 145–150k, blowpipe 90–95k, magic shortbow (i) about 70k."),
+            ("Pest Control", "70 combat", "80–150k",
+             "Veteran boat plus combat-achievement point bonuses. The table runs 77k at 70 to 157k at 98 with hard CAs. Free, low intensity, team-dependent."),
             ("Gemstone Crab", "1", "30–60k",
-             "Shared-health crab in Varlamore. Nearly zero attention, scales with your gear, and works for any combat style."),
-            ("Pest Control", "70 combat", "30–50k",
-             "Points convert into XP in whichever combat stat you pick. Low intensity and free, but the rate depends on your team."),
+             "Shared-health crab in Varlamore. Nearly zero attention, scales with your gear, and ruby bolts (e) carry it at 46–65."),
             ("Vorkath / bossing", "Quest reqs", "60–100k", "Decent XP plus serious GP; a good way to fund chinning."),
-            ("Nightmare Zone", "Quest reqs", "40–60k", "AFK fallback."),
         ],
         notes=[
             "The cannon is the right early call: it also speeds up Slayer tasks while your Ranged is too low for chinning to be efficient.",
             "Bank chins as you get them from Hunter. They feed straight into the 99 Ranged grind.",
+            "Chinning at 300k+ costs real money; the Venator bow at 200k is what to fall back on once the wallet argues.",
         ],
     ),
     dict(
@@ -192,20 +203,23 @@ SKILLS = [
         summary="Burst/barrage Slayer tasks.",
         methods=[
             ("Bursting/barraging Slayer tasks", "Desert Treasure I", "100–250k", "Your pick. Nechryael and dust devils in the Catacombs, smoke devils, jellies. Best XP-plus-Slayer combination in the game, but rune-hungry."),
-            ("Bursting maniacal monkeys", "MM2, 70 Magic", "200–300k",
-             "The fastest Magic XP in the game. Ice Burst on maniacal monkeys after Monkey Madness II, and it doubles as the Ranged chinning spot."),
+            ("Bursting maniacal monkeys", "MM2, 70 Magic", "250–400k",
+             "The fastest viable Magic in real time. Ice Burst is about 310k active and 250k on auto-retaliate; Ice Barrage 400k and 320k. The same spot as chinning."),
+            ("Bandit Camp lodge, blood spells", "68 (Zamorak item)", "150–230k", "Stand two tiles inside the Big Heist Lodge door and every bandit comes to you. Blood Burst 150k, Blood Barrage 230k, life leech keeps you alive: the 20-minute AFK Magic method. Costs the runes with no drops back."),
+            ("Cure Me at the Araxytes", "71 (Lunars)", "~414k", "Click once a tick while venomed spiders keep you cursed. The fastest raw number in the skill and the most exhausting; roughly 29 hours to 99 if you can keep it up."),
+            ("High Alchemy", "55", "65k", "Up to roughly 78k XP per hour standing still; 20–50k while doing something else. The classic buyable Magic method."),
+            ("Stun-alching", "80", "184–256k", "Stun plus High Alch, optionally with an Ardougne teleport in the rotation. Fast, fully click-bound and expensive."),
+            ("Tele-alch", "55", "~145k",
+             "Alternate a teleport with High Alchemy for a faster loop than alching alone. Camelot is the cheap version."),
+            ("Plank Make", "86 (Dream Mentor)", "90–180k", "Auto-cast on mahogany logs for 90k and a quiet profit, or cast manually for 166k. About 90 seconds per inventory when idle."),
             ("Splashing", "—", "10–30k", "Near-zero attention, near-zero rate. Only worth it if you genuinely cannot play actively."),
-            ("High Alchemy", "55", "65k", "Up to roughly 78k XP per hour; the classic buyable Magic method. Combine it with another activity."),
-            ("Stun-alching", "—", "~150k", "Curse/Vulnerability + High Alch at NMZ. Fast but fully click-bound and expensive."),
-            ("Powered staff on Slayer", "—", "40–80k", "Trident/Sang on tasks. No rune cost beyond charges."),
             ("Guardians of the Rift", "27 RC", "moderate", "Side Magic XP while training Runecraft."),
-            ("Tele-alch", "55", "~100k",
-             "Alternate a teleport with High Alchemy for a faster loop than alching alone. Costs more per hour but no combat needed."),
             ("Superheat / Enchant bolts", "43+", "varies", "Doubles up with Smithing / Crafting when you're doing those anyway."),
         ],
         notes=[
             "Barrage tasks are the single best overlap in your plan. Magic XP, Slayer XP and Slayer points from the same hour.",
             "Budget for runes. If the cost gets uncomfortable, fall back to trident tasks and take Magic to 99 later in the combat block.",
+            "The wiki's advice for Slayer is to reach 82 passively (alchs, Bake Pie, Plank Make) and boost to 94 with a saturated heart so barrage tasks start earlier.",
         ],
     ),
     dict(
@@ -213,18 +227,19 @@ SKILLS = [
         phase="82–85 as an early quality-of-life target (Rigour/Augury tier prayers and Piety), 99 in the post-Diary combat block.",
         summary="Gilded altar bones; ensouled heads as an alternative.",
         methods=[
-            ("Gilded altar – dragon bones", "Construction 75", "~250k", "The standard. Two burners lit = 350% XP. Use a friend's house or the POH portal hubs."),
-            ("Gilded altar – superior dragon bones", "Construction 75", "~500k+", "Fastest sane method; roughly double the cost of dragon bones."),
-            ("Blessed bone shards", "Varlamore", "verify",
-             "Libation bowl offerings at the Ancient Temple. Newer than the altar methods, so confirm the current rate and cost."),
-            ("Wilderness Chaos altar", "—", "~300k", "Same 350% multiplier with no house needed and a 50% chance not to consume the bone. Effectively half price. PKer risk is real; bring nothing you mind losing."),
-            ("Ensouled heads", "Arceuus spellbook", "~300k", "Reanimate + Demonic Offering. Good when heads are cheap; needs the Arceuus spellbook."),
-            ("Cremating urium remains", "Shades of Mort'ton", "~250k",
-             "Shade remains on a magic pyre. Slower to set up than an altar but cheap, and it drops keys for the reward chests."),
+            ("Gilded altar – dragon bones", "Construction 75", "~640k", "The standard. Two burners lit = 350% XP; use each bone on the altar by hand for 2,550 bones an hour. Use a friend's house or the POH portal hubs."),
+            ("Gilded altar – superior dragon bones", "Construction 75", "~1.3M", "Fastest sane method; roughly double the cost of dragon bones."),
+            ("Blessed bone shards", "30", "0.9–1.4M",
+             "Libation bowl at the Teomat. About 1.05M between levels 62 and 86 with blessed wine, 1.3M+ with sunfire wine at 88+, and the shards give more XP per bone than any altar. Making your own shards roughly halves the rate."),
+            ("Wilderness Chaos altar", "—", "500k–1.8M", "Same 350% multiplier with no house needed and a 50% chance not to consume the bone. 500k with dragon bones if you suicide each inventory, 860k bringing noted bones. PKer risk is real; bring nothing you mind losing."),
+            ("Ensouled heads", "Arceuus spellbook", "~340k", "Reanimate and kill near the Dark Altar. 220 heads an hour with good stats; slower than the altars but cheap and no Wilderness."),
+            ("Cremating urium remains", "Shades of Mort'ton", "35–57k",
+             "Slow, but the fastest way to the zealot's robes, which save 5% of every bone you ever offer."),
+            ("Bonecrusher and ash sanctifier", "Passive", "passive", "Half the bone or ash XP (full with the elite diaries) from everything you kill, for no clicks. Around 40k an hour at the monkeys."),
             ("Ectofuntus", "—", "~50k", "Cheapest XP per GP in the game, and painfully slow."),
         ],
         notes=[
-            "Your plan didn't fix a method here. Chaos altar is the cost-efficient pick; gilded altar is the safe pick. Both are fine.",
+            "Your plan didn't fix a method here. Chaos altar is the cost-efficient pick; gilded altar is the safe pick. Both are fine, and the libation bowl now sits between them on cost with better XP per bone.",
             "Prayer is a pure buyable. Don't spend early hours on it. Bank bones from Slayer and burn them in one go.",
         ],
     ),
@@ -245,6 +260,8 @@ SKILLS = [
             "Block list is the highest-leverage decision in this plan. Block the tasks that are slow and unprofitable for your gear (typically the low-XP-per-hour, high-count ones) rather than the merely boring ones.",
             "Extend the tasks you'll want to farm later (nechryael, abyssal demons, gargoyles) once points allow.",
             "Superior Slayer monsters (unlocked by Bigger and Badder) are worth the point cost. They can drop the imbued heart and eternal gem.",
+            "The wiki's current top rates: smoke devils 150k barraged, nechryael and TzHaar 100k, araxytes 100k with a cannon and Venator bow, dagannoth 85k cannoned. Those are the tasks to extend.",
+            "A Venator bow is the low-effort Slayer weapon: its ricochet pulls in the same stacks you would barrage, for less XP an hour and far fewer clicks.",
             "Fallen From Grace also unlocks the repeatable Mad Angel. Its Hallowfell drop needs 75 Attack and cleaves up to two nearby targets, so it is a specialised multi-target weapon rather than a universal single-target upgrade.",
             "Everything else in the plan is downstream of Slayer: it carries Attack, Strength, Defence and Hitpoints; via cannon and barrage, it also carries Ranged and Magic.",
             "The Along the Way table uses a neutral average split across melee styles. In play, train Strength to 75, Attack to 75 and Defence to 75; repeat that order to 80, then return to Strength 85. Controlled hasta training is the convenient alternative, especially on stab-weak tasks.",
@@ -255,46 +272,48 @@ SKILLS = [
     dict(
         name="Fishing", group=GATHER, target="60 → 99 (62 quest step boostable)", goals=[60, 99], pick="Tempoross",
         phase="The quest-cape minimum is 60 unboosted, with 62 needed only for a boostable step; both are already in range. Train it later in the slow-skills block.",
-        summary="Quest requirement met; Tempoross, then Leechfin at 78.",
+        summary="Quest requirement met; drift nets or Tempoross, harpoons if you want speed.",
         methods=[
-            ("Drift Net Fishing", "47 Fish / 44 Hunt", "53–88k Fishing", "Trains Fishing and Hunter at once on Fossil Island. It remains a useful maxing overlap, but Fishing 70 is not a quest-cape requirement and red chinchompas are faster if Hunter 70 is the only immediate goal."),
-            ("Barbarian Fishing", "48 (+ quest)", "23–57k (55–144k with 3-ticking)", "The fastest route uses this above level 58. The 3-tick cut-eat is the highest rate in the skill; plain clicking is far slower. Drips Strength, Agility and Cooking either way."),
+            ("Drift Net Fishing", "47 Fish / 44 Hunt", "53–88k Fishing", "Trains Fishing and Hunter at once on Fossil Island: about 70k Fishing and 95k Hunter from your levels, 88k and 117k once both are 70. The best-value method in the skill when Hunter still needs training, which here it does."),
+            ("Barbarian Fishing", "48 (+ quest)", "23–57k (55–108k with 3-ticking)", "3-tick cut-eat is the fastest thing below 71: 90k Fishing at 70, 97k at 80, plus Strength and Agility. Plain clicking is far slower."),
             ("2-tick harpooning", "71", "78–133k",
-             "Swordfish and tuna with tick manipulation. The genuine fastest Fishing, and the most demanding."),
+             "Swordfish and tuna at Piscarilius with tick manipulation. 91k at 71 with a dragon harpoon, 117k at 85 with a crystal one, 133k at 99. The genuine fastest Fishing and the most demanding."),
+            ("Leechfin fishing", "78 (+ Blood Moon Rises)", "109–130k",
+             "Vampyrium. Click every tick to angle the net; sits between barbarian 3-tick and 2-tick harpooning, and needs nothing but a big net."),
+            ("Tempoross", "35", "62–102k", "62k at 70 on a mass world, 68k at 90; 77–95k with a crystal harpoon and 102k solo near 99. Free food and permits. Sociable, low risk."),
             ("Minnows", "82", "40–56k", "Converts to sharks for Tempoross-adjacent profit. Fairly click-heavy."),
-            ("Tempoross", "35", "30–95k", "Reward XP plus free food and permits. Sociable, low risk."),
-            ("Karambwans", "65", "27–40k", "3-tick; feeds 1-tick Cooking later."),
-            ("Monkfish", "62", "~30k",
-             "Piscatoris. Modest XP but steady, and the fish are worth banking for Slayer trips."),
+            ("Karambwans", "65", "29–42k", "One click a minute with the fish barrel; feeds 1-tick Cooking later."),
+            ("Monkfish", "62", "36–42k",
+             "Piscatoris, or from a raft just north of the beach where the spot never moves: three to four minutes per inventory. Steady, and the fish are worth banking for Slayer trips."),
             ("Aerial fishing", "43 (+ 35 Hunter)", "35–50k",
              "Trains Fishing and Hunter together at Lake Molch, and pays in molch pearls."),
-            ("Leechfin fishing", "78", "verify",
-             "Newer method from the Varlamore content. Check the wiki for current rates before committing."),
-            ("Dark crabs", "85 (+ Wilderness)", "~25k",
-             "The most profitable Fishing method in the game, at the cost of being in the deep Wilderness with a lobster pot."),
-            ("Anglerfish", "82", "15–39k", "Slow but good money and the best non-boss food."),
+            ("Dark crabs", "85 (+ Wilderness)", "~40k",
+             "The longest single stretch without clicking in the skill, at the cost of being in the deep Wilderness with a lobster pot."),
+            ("Anglerfish", "82", "15–39k", "Slow but good money and the best non-boss food. From a boat off Piscarilius it is six to seven minutes per inventory; diabolic worms double the rate."),
         ],
         notes=[
-            "Do not train Fishing to 70 just for the quest cape: 60 unboosted is enough and the level-62 step is boostable. Drift Net is an optional maxing overlap with Hunter, not a QPC gate.",
-            "If you'd rather not tick-manipulate for hours, Tempoross to 99 is slower but far more pleasant.",
+            "Do not train Fishing to 70 just for the quest cape: 60 unboosted is enough and the level-62 step is boostable. Drift Net is the maxing overlap with Hunter, not a QPC gate.",
+            "If you'd rather not tick-manipulate for hours, drift nets or Tempoross to 99 are slower but far more pleasant, and drift nets pay most of a Hunter 99 on the side.",
         ],
     ),
     dict(
-        name="Hunter", group=GATHER, target="70 → 99", pick="Hunter Rumours (Hunter Guild)",
-        phase="70 for the quest cape. Red chinchompas are the shortest direct route from 65 and bank ammunition for Ranged; Drift Net is the optional Fishing overlap.",
-        summary="Red chinchompas, then Hunter Rumours at 72.",
+        name="Hunter", group=GATHER, target="70 → 99", pick="Hunters' Rumours",
+        phase="70 for the quest cape. Razor-backed kebbits are the shortest direct route from 65; Drift Net is the optional Fishing overlap.",
+        summary="Kebbits to 72, then Hunters' Rumours.",
         methods=[
-            ("Drift Net Fishing", "44 Hunt / 47 Fish", "50–113k Hunter", "Trains Hunter and Fishing together. It is efficient when both skills matter, but red chinchompas are the faster direct route to the Hunter 70 quest requirement from the current levels."),
-            ("Hunter Rumours (Hunter Guild)", "72 / 91", "160–250k", "Varlamore contract system. Strong XP with useful rewards; the modern default for high Hunter."),
-            ("Black chinchompas", "73", "up to 265k", "Best XP in the skill and excellent GP, but deep Wilderness. High risk, high reward."),
-            ("Red chinchompas", "63", "100–150k", "Safer, still good, and it stockpiles the chins you'll want for 99 Ranged."),
-            ("Goat hunting", "60 + Sheep Herder", "~192k with Tele Grab",
-             "Herd Wyrmscraig goats into a spike pit with a cattle prod, Telekinetic Grab or Dark Lure. The day-one Tele Grab estimate is fast but active; goat horns feed combat potions and the furs feed Golem Crafting."),
-            ("Letvek and stymphikes", "76 / 82 (+ Blood Moon Rises)", "~145k",
-             "Vampyrium. Box-trap letvek at 76 as bait, then hunt stymphikes at 82. With 3-tick manipulation this is the fastest Hunter in the game."),
+            ("Drift Net Fishing", "44 Hunt / 47 Fish", "60–117k Hunter", "Trains Hunter and Fishing together. About 95k Hunter from your levels, 117k at 70/70. Efficient when both skills matter, which they do here."),
+            ("Hunters' Rumours", "72 / 91", "160–250k", "Varlamore contract system: 160k at 72, 195k at 91, 250k at 99 with a block list and back-to-back rumours. The modern default and the fastest safe Hunter there is."),
+            ("Black chinchompas", "73", "145–225k", "Solo with tick manipulation and the odd PKer. Matches rumours at 90+ and pays better, but it is deep Wilderness and the rumours are safer for the same XP."),
+            ("Red chinchompas", "63", "72–155k", "The Tlati Rainforest spot: 72k at 70 without tick manipulation, 115k at 80, 155k at 99, and it stockpiles the chins you'll want for 99 Ranged."),
             ("Razor-backed kebbits", "49", "~130k",
-             "Deadfall trapping in the Piscatoris hunter area. The standard bridge between falconry and chinning."),
-            ("Herbiboar", "80 (+ 31 Herb)", "137–171k", "Slower XP, but pays out herbs continuously. Requires Fossil Island access and Bone Voyage."),
+             "Deadfall trapping in the Piscatoris hunter area. The standard bridge from here to rumours at 72; no tick manipulation."),
+            ("Maniacal monkey deadfalls", "60 (+ MM2)", "51–110k",
+             "Ride a stunted gorilla and bait a boulder with bananas. One click every 25–30 seconds and a 50-minute trip on a basket of bananas: the AFK Hunter method. 59k at 65, 82k at 80, 110k at 99."),
+            ("Herbiboar", "80 (+ 31 Herb)", "137–171k", "Low-effort tracking on Fossil Island that pays out herbs continuously. Requires Bone Voyage."),
+            ("Goat hunting", "60 + Sheep Herder", "~192k with Tele Grab",
+             "Herd Wyrmscraig goats into a spike pit with a cattle prod, Telekinetic Grab or Dark Lure. Fast but active; goat horns feed combat potions and the furs feed Golem Crafting."),
+            ("Letvek and stymphikes", "76 / 82 (+ Blood Moon Rises)", "~145k",
+             "Vampyrium. Box-trap letvek at 76 as bait, then hunt stymphikes at 82. With 3-tick manipulation this is among the fastest Hunter in the game."),
             ("Falconry", "43", "60–70k",
              "Spotted and dark kebbits at Piscatoris. No traps, just clicking, and it is the fastest option in its band."),
             ("Birdhouse runs", "5+", "passive", "Two minutes every 50 minutes. Free XP forever. Start doing these now regardless of method."),
@@ -302,6 +321,7 @@ SKILLS = [
         notes=[
             "Set birdhouse runs as a habit from today; over a max grind they are worth several levels for almost no time.",
             "Chinchompa hunting doubles as Ranged ammunition. It's the natural bridge between your Hunter and Ranged goals.",
+            "Rumours beat every chinchompa method on XP at 91+, without the Wilderness. Hunt chins for the ammo, not the XP.",
         ],
     ),
     dict(
@@ -309,18 +329,18 @@ SKILLS = [
         phase="70 for the quest cape, then 99 in the slow-skills block.",
         summary="Rooftops, then Hallowed Sepulchre.",
         methods=[
-            ("Rooftop courses", "10–90", "20–60k", "Canifis 40, Seers' 60, Pollnivneach 70, Rellekka 80, Ardougne 90. Marks of grace fund graceful."),
-            ("Hallowed Sepulchre", "52", "50–90k", "The main 99 route. XP scales with floors unlocked (62/72/82/92) and it's genuinely profitable."),
-            ("Colossal Wyrm course", "50 (62 advanced)", "50–70k",
-             "The Varlamore course. Pays in wyrm agility tickets for the Colossal Wyrm rewards."),
-            ("Prifddinas rooftop", "75 (+ Song of the Elves)", "~60k", "Highest rooftop rate; also drops crystal shards."),
-            ("Wilderness Agility Course", "47", "45–60k",
-             "Faster than rooftops in its band and drops from the pile at the end, but you are in the Wilderness."),
-            ("Brimhaven Agility Arena", "1+", "15–40k", "Slow XP but tickets buy graceful/pet-adjacent rewards. Mostly skipped now."),
-            ("Werewolf Skullball", "—", "low", "Only useful for very early levels."),
+            ("Hallowed Sepulchre", "52 (62/72/77/87)", "45–98k", "The main 99 route. 56k with floors 1–2, 69k with three, 80k with four, 98k with all five looting the grand coffin. Profitable."),
+            ("Rooftop courses", "10–90", "20–70k", "Seers' 60 (50–56k), Pollnivneach 70 (53–58k), Rellekka 80 (59–63k), Ardougne 90 (66–70k). Marks of grace fund graceful."),
+            ("Prifddinas rooftop", "75 (+ Song of the Elves)", "60–65k", "Highest rooftop rate below 90; also drops crystal shards."),
+            ("Wilderness Agility Course", "47", "50–60k",
+             "Faster than rooftops in its band, with the pile at the end and medium clues, but you are in the Wilderness."),
+            ("Colossal Wyrm course", "50 (62 advanced)", "31–42k",
+             "Six clicks per 60-second lap on the advanced route, with two 20-second stretches where you do nothing. The least demanding Agility, and it pays amylase and blessed bone shards."),
+            ("Brimhaven Agility Arena", "20+", "36–50k", "Floor spikes on a single tile for 36k with almost no focus; 45–50k tagging pillars at 40+."),
+            ("Rockslide shortcut", "78 (+ Blood Moon Rises)", "+3.5–4k", "550 XP every seven and a half minutes through the Vampyrium rockslide. Not a method, a habit to layer on anything else."),
         ],
         notes=[
-            "Your plan doesn't name a method. Hallowed Sepulchre from level 52 onward is the standard and pays for itself.",
+            "Your plan doesn't name a method. Hallowed Sepulchre from level 62 onward is the standard and pays for itself.",
             "Agility is one of the true slow skills. The plan correctly puts 99 late. Do the 70 quest requirement, then leave it.",
             "Get full graceful early; the run-energy restore compounds across every other skill you train.",
         ],
@@ -328,49 +348,48 @@ SKILLS = [
     dict(
         name="Thieving", group=GATHER, target="72 → 99", pick=None,
         phase="72 for the quest cape. Slot the eventual 99 in with the faster skills.",
-        summary="Blackjacking or Pyramid Plunder.",
+        summary="Stealing artefacts, then blackjacking or Pyramid Plunder.",
         methods=[
-            ("Blackjacking", "The Feud, 45/65", "200–300k", "Bearded bandits at 45, Menaphite thugs at 65. The fastest Thieving in the game and the most tick-intensive."),
-            ("Pyramid Plunder", "21 (71 useful)", "100–260k", "Scales hard with level; the final room at 91 is where the top rates are. Good artefact money and no tick manipulation."),
-            ("Stealing artefacts", "49", "60–80k",
-             "Port Piscarilius artefact runs. Safe, steady, and it needs no tick manipulation."),
-            ("Ardougne knights", "55 + Ardy medium", "100–130k", "Bank-adjacent, decent GP, much easier on the hands than blackjacking."),
-            ("Varlamore valuables", "50", "60–90k",
-             "Stealing valuables around Civitas illa Fortis. Modern alternative to knights with better GP."),
-            ("Vyres", "Sins of the Father", "~200k", "High level only. Blood shards make it the best GP in the skill."),
-            ("Rogues' Castle chests", "84", "100–130k",
-             "Deep Wilderness chests. Among the best rates in the skill if you accept the PKer risk."),
+            ("Stealing artefacts", "49", "150–261k",
+             "Port Piscarilius artefact runs with staminas and guard lures. 163k at 55, 197k at 70, 230k at 85, 261k at 99. Safe, steady, no tick manipulation, and it now beats blackjacking below 65."),
+            ("Blackjacking", "The Feud, 45/65", "99–265k", "Menaphite thugs at 65: 230k at 65 rising to 265k at 99 with brews. The fastest Thieving until Rogues' Castle and the most tick-intensive."),
+            ("Rogues' Castle chests", "84", "260–300k",
+             "Deep Wilderness chests. The fastest Thieving from 84, and about 2.5M an hour in loot, if you accept the PKer risk."),
+            ("Pyramid Plunder", "21 (91 for the rate)", "125–270k", "125k at 71–80, 190k at 81–90, 270k in the final room at 91+. Good artefact money and no tick manipulation."),
+            ("Ardougne knights", "55 + Ardy medium", "86–240k", "Bank-adjacent, decent GP, and one trapped knight means zero mouse movement. 124k at 70, 182k at 85, 240k at 95."),
+            ("Stealing valuables", "50", "72–105k",
+             "Civitas illa Fortis house burglary: about one click a minute while the loot rolls in on its own. 80k at 60, 93k at 70, 100k at 90. The AFK Thieving method."),
+            ("Vyres", "82 (Sins of the Father)", "120–180k", "Blood shards make it the best GP in the skill."),
             ("Master farmers", "38", "low", "Seed money rather than XP."),
-            ("Sorceress's Garden", "1+", "low", "Early levels and free sq'irks; largely skipped now."),
         ],
         notes=[
             "Rogue's outfit (Rogues' Den) gives double loot and is worth grabbing before any long stint.",
             "Ardougne medium diary is the single biggest quality-of-life unlock here: knights become far more reliable.",
-            "The quest cape needs 72, which Pyramid Plunder reaches comfortably without tick manipulation.",
+            "The quest cape needs 72, which stealing artefacts reaches comfortably without tick manipulation.",
         ],
     ),
     dict(
         name="Mining", group=GATHER, target="99 (slow-skills block)", pick=None,
         phase="Slow-skills block, after Runecraft and Agility.",
-        summary="Motherlode Mine or Volcanic Mine.",
+        summary="Volcanic Mine, or granite if you can 3-tick.",
         methods=[
-            ("Motherlode Mine", "30", "30–65k", "The AFK standard. Prospector kit, upper level at 72, pay-dirt sack upgrades. Gives free ores and nuggets."),
-            ("Shooting Stars", "10 (60+ useful)", "20–40k",
+            ("Motherlode Mine", "30", "30–62k", "The AFK standard. Prospector kit, upper level at 72, pay-dirt sack upgrades. About 62k at 90 with everything unlocked."),
+            ("Shooting Stars", "10 (60+ useful)", "24–31k",
              "Crashed stars, a Distraction and Diversion. One click every 7 minutes, so it is the most AFK Mining there is, and stardust buys the celestial ring (+4 invisible Mining boost). Star tier scales with your level."),
-            ("Volcanic Mine", "70 (+ quests)", "70–100k", "Fastest non-tick-manipulated Mining. Group activity, needs attention."),
-            ("3-tick iron / granite", "15 / 45", "60–100k", "Top rates if you're willing to tick-manipulate. Granite at the Quarry, iron at the Mining Guild."),
-            ("Sunstone mining", "53 + Fallen From Grace", "day-one; verify",
-             "Mine active rocks on Wyrmscraig to build momentum for extra ore and XP; level 80 guarantees the momentum successes. The monolith is the slower, lower-attention alternative, and the sunstone feeds Golem Crafting."),
-            ("Rubium rocks", "48 Mining, 60 Sailing", "50-80k",
-             "Charred Dungeon, reached by docking at Charred Island. Higher XP than the nearby deposits but much more attention; the deposits at 68 are the AFK version."),
+            ("Volcanic Mine", "70 (+ Bone Voyage)", "68–94k", "68k at 70 with a dragon pickaxe, 84k at 99, 94k with a crystal one. The fastest Mining without tick manipulation, in a 3–5 player team."),
+            ("3-tick iron / granite", "15 / 45", "87–126k", "Granite at the Quarry: 109k at 75, 114k at 85, 126k at 99 with a celestial ring and Varrock 4. The top rate if you're willing to tick-manipulate."),
+            ("Blast Mine", "75", "65–101k", "65–76k at 75, 87–101k at 99. Solo, profitable, high click intensity."),
+            ("Rubium rocks", "48 Mining, 60 Sailing", "39–64k",
+             "Charred Dungeon, reached by docking at Charred Island. Low attention, stackable splinters and a profit; the deposits at 68 are the AFK version."),
+            ("Calcified rocks", "41 (+ Perilous Moons)", "25–50k",
+             "Underwater at Fossil Island style, but Varlamore: low attention, no competition, and 15–18k Prayer XP an hour in bone shards on top."),
+            ("Sunstone mining", "53 + Fallen From Grace", "verify",
+             "Mine active rocks on Wyrmscraig to build momentum for extra ore and XP; level 80 guarantees the momentum successes. The sunstone feeds Golem Crafting."),
+            ("Zalcano", "70 (+ Song of the Elves)", "varies",
+             "Group skilling boss that pays in crystal shards. Rates depend on team and reward mode; the wiki no longer quotes a single figure."),
+            ("Infernal shale", "78", "67–80k (tick)",
+             "Chasm of Fire. Only worth it with Jim's wet cloth tick manipulation, and then the value is the crushed shale, not the XP."),
             ("Amethyst", "92", "~20k", "Very AFK and profitable; used mainly for the last stretch or while doing something else."),
-            ("Calcified rocks", "41 (+ Fossil Island)", "25–45k",
-             "Underwater at Fossil Island. Very low attention and no competition for rocks."),
-            ("Zalcano", "70 (+ Song of the Elves)", "40–60k",
-             "Group boss that pays in crystal shards and Zalcano shards alongside the XP."),
-            ("Infernal shale", "78", "verify",
-             "Chasm of Fire. The crushed shale is what oathplate armour is made from, so the value is in the drops rather than the rate."),
-            ("Blast Mine", "Lovakengj", "40–60k", "Good GP, decent XP, high click intensity."),
         ],
         notes=[
             "Check whether Mining shows up in your remaining elite diary requirements before deciding how far to push it early.",
@@ -380,47 +399,49 @@ SKILLS = [
     dict(
         name="Woodcutting", group=GATHER, target="74 → 99", pick="Forestry teaks",
         phase="74 for the quest cape, then 99 in the slow-skills block.",
-        summary="Forestry teaks (2-tick).",
+        summary="Tick-manipulated teaks, or bloodwood if you would rather not.",
         methods=[
-            ("Forestry teaks", "35", "80–150k", "Your pick. 2-tick teak cutting with Forestry events layered on top is the top sustained method; the events also fund the Forestry shop."),
-            ("Sulliuscep", "65 (+ Fossil Island)", "70–90k", "Fast, and drops fossils for the museum. A good change of pace."),
-            ("Redwoods", "90", "~65k", "The AFK 99. Low rate, almost no attention."),
-            ("Ironwood / rosewood trees", "80 / 92", "70–110k",
-             "The high-level trees added alongside Sailing. Rosewood at 92 feeds the rosewood hull, which is a straight Sailing XP multiplier."),
-            ("Bloodwood trees", "77 (+ Blood Moon Rises)", "~55k",
-             "Vampyrium. Needs an empty bucket; the sap upgrades arrows into seeking arrows. Slower than teaks, worth it for the sap."),
-            ("Yew / magic trees", "60 / 75", "30–50k", "Slow but profitable; mostly obsolete for XP."),
-            ("Blisterwood tree", "62 (+ Sins of the Father)", "~60k",
-             "No competition, banks itself through the Darkmeyer bank, and drops blisterwood logs for vampyre gear."),
+            ("Forestry teaks", "35", "150–235k", "Your pick. 1.5-tick teaks are 194k at 71, 208k at 80, 235k at 99 with a crystal felling axe; 2-tick is about 10% behind. Without tick manipulation the same trees are 74–93k, so this pick is the manipulation, not the tree."),
+            ("Bloodwood trees", "77 (+ Blood Moon Rises)", "130–210k",
+             "Vampyrium. Three trees at a time with a felling axe, filling buckets of sap rather than cutting logs. The fastest Woodcutting without tick manipulation; the engorged tree nearby is a 70k low-click version."),
+            ("Sulliuscep", "65 (+ Fossil Island)", "83–105k", "86k at 71, 95k at 80, 105k at 99 with a crystal axe. Low effort, no tick manipulation, drops fossils for the museum."),
+            ("Ironwood / rosewood trees", "80 (72 Sailing) / 92 (79 Sailing)", "80–110k / 85–90k",
+             "Ironwood on Sunbleak island is 80–110k; rosewood on Drumstick Isle stands for four and a half minutes per tree, the most idle tree in the game, and its logs build the rosewood hull."),
+            ("Blisterwood tree", "62 (+ Sins of the Father)", "69–86k",
+             "Never depletes, a sound cue when you stop, and Darkmeyer's bank next door. 69k to 90, 86k with a crystal felling axe and rations. The AFK tree you can use today."),
+            ("Redwoods", "90", "55–75k", "The classic AFK 99. 65k with a dragon axe, 70–75k with crystal, almost no attention."),
+            ("Forestry events", "—", "80–90k", "Yews plus every event that spawns; the anima-infused bark buys the outfit and rations."),
             ("Woodcutting Guild", "60", "—", "Invisible +7 boost and a bank; use it wherever it applies."),
         ],
         notes=[
-            "Teaks are correct. Nothing else combines rate and accessibility as well.",
-            "If 2-ticking wears you out, alternate with Sulliuscep trips or Forestry group events.",
+            "Teaks are correct if you tick-manipulate. If you will not, bloodwood at 77 is the honest second: double the rate of anything else that only asks for normal clicking.",
+            "If 2-ticking wears you out, alternate with Sulliuscep trips or the blisterwood tree.",
         ],
     ),
     dict(
         name="Runecraft", group=GATHER, target="60 → 77 → 99", pick="Guardians of the Rift",
-        pick_note="ZMI is the named fallback in the plan if you would rather train solo without the minigame timer.",
+        pick_note="ZMI with daeyalt essence is the named alternative once Lunar Diplomacy and Sins of the Father are done; it is faster than the minigame and still relaxed.",
         phase="60 for the quest cape, ~77 relatively early for blood runes, then 99 first in the slow-skills block.",
-        summary="GOTR, then blood runes or ZMI.",
+        summary="GOTR, then ZMI or lavas; blood runes for income.",
         methods=[
-            ("Guardians of the Rift", "27", "25–70k", "Your pick. XP scales with level and the rewards include pouches, the Abyssal needle, Raiments of the Eye and eventually the pet. The robes give up to 60% more runes but no bonus XP."),
-            ("ZMI altar", "50 (+ Lunar Diplomacy)", "40–70k", "Consistent, solo, no minigame timer. Needs pouches and the Ourania teleport."),
-            ("Blood runes (Arceuus)", "77", "~36k", "Low attention, strong profit. This is why the plan wants 77 early. It turns Runecraft into passive income."),
-            ("Lava runes with runners", "23", "80–130k",
-             "The classic runner method. Far faster than solo lavas, but you depend on other players showing up."),
-            ("Lava runes (binding necklace)", "23", "43–102k", "Cheap and fast; requires a lot of clicking through the Abyss."),
+            ("Guardians of the Rift", "27", "25–70k", "Your pick. 40k at 50–75, 50k to 85, 65k to 98 in coordinated teams. The rewards include pouches, the Abyssal needle, Raiments of the Eye and eventually the pet. The robes give up to 60% more runes but no bonus XP."),
+            ("ZMI altar", "50 (+ Lunar Diplomacy)", "42–60k (63–90k daeyalt)", "Consistent, solo, no minigame timer, and a random rune assortment that pays. Daeyalt essence is a flat 50% more XP: about 85k at 75+."),
+            ("Lava runes (binding necklace)", "23", "56–102k", "Fire altar via the Abyss. 66k at 50, 80k at 75, 100k at 85 with Magic Imbue and a colossal pouch; a little less with talismans. The fastest solo Runecraft below 90."),
+            ("Aether runes", "90", "99–102k",
+             "The Aether altar with a colossal pouch. Same speed as lavas at the top end, and the runes are worth a great deal more."),
+            ("Blood runes (Arceuus)", "77", "~36k", "Low attention, strong profit, and passive Mining and Crafting. This is why the plan wants 77 early: it turns Runecraft into income."),
+            ("Soul runes (Arceuus)", "90", "~44k", "Same loop as blood runes, a little more XP, still profitable and idle."),
+            ("Lava runes with runners", "23", "160–320k",
+             "Duo 162k, four runners 280k. Only if you are paying people; the wiki prices a runner at 12M an hour."),
             ("Mud runes", "23 (+ Lunars)", "60–100k",
              "Binding necklace runs like lavas but with the Magic Imbue spell instead of an earth talisman staff. Similar rate; take whichever is cheaper."),
-            ("Aether runes with runners", "90", "165–445k",
-             "The top-end runner method. Newer, so check current rates on the wiki."),
-            ("Wrath runes", "95", "~60k", "Best XP and money at the very top end."),
-            ("Daeyalt essence", "Sins of the Father", "+XP", "Straight multiplier on any essence-based method. Get it before long Runecraft sessions."),
+            ("Wrath runes", "95", "~45k", "Best money at the very top end, and slow."),
+            ("Daeyalt essence", "Sins of the Father", "+50%", "Straight multiplier on any essence-based method. Get it before long Runecraft sessions."),
         ],
         notes=[
             "Reaching 77 early is the highest-value part of this skill's plan: blood runes then run in the background for the rest of the account.",
             "The QPC step from 57 to 60 is only about an hour at GOTR and will not produce a full outfit. Raiments cost 1,350 pearls (roughly 180 games on average) and increase rune output, not XP; treat them as a long-term maxing/profit goal.",
+            "Lunar Diplomacy is the gate on both fast solo options: Magic Imbue for lavas and the Ourania teleport for ZMI. It is in the quest route already.",
         ],
     ),
     dict(
@@ -438,21 +459,21 @@ SKILLS = [
     dict(
         name="Sailing", group=GATHER, target="62 → 99", pick=None,
         phase="62 for Fallen From Grace and the quest cape, then last in the slow-skills block. Pandemonium must be completed before any Sailing XP is possible.",
-        summary="62 for Wyrmscraig; Trials or courier runs.",
+        summary="62 for Wyrmscraig; Jubbly Jive, then Gwenith Glide or the Lunar Isle route.",
         methods=[
-            ("Barracuda Trials", "30 / 55 / 72", "80–200k", "The fastest Sailing from 30 onwards. Tempor Tantrum at 30, Jubbly Jive at 55, Gwenith Glide at 72; each has Swordfish/Shark/Marlin ranks with tighter timers. Gwenith Glide at Marlin rank reaches 200k+ with a rosewood hull and a crystal extractor running."),
-            ("Courier tasks", "1 (46+ useful)", "30–145k", "Cargo runs between ports. Summer Shore 46–55 gives ~30k, Rellekka 62–70 gives 55–90k, Prifddinas 70–72 gives 65–70k, and Lunar Isle round trips from 76 give 120–145k once you can hold five tasks at 84. Far less intense than trials."),
+            ("Barracuda Trials", "30 / 55 / 72", "24–200k", "The fastest Sailing from 55 onwards. Tempor Tantrum at 30 is only 19–25k an hour; Jubbly Jive at 55 is 65–89k by rank, Gwenith Glide at 72 is 114–184k, and 200k+ at Marlin rank with a rosewood hull and a crystal extractor running."),
+            ("Courier tasks", "1 (46+ useful)", "20–160k", "Cargo runs between ports. Summer Shore 46–55 gives ~20k, Rellekka 62 gives 66k and 99k once Etceteria is unlocked at 65, Prifddinas 70 gives 71–77k, and Lunar Isle round trips from 76 give 130–160k once you can hold five tasks at 84. Far less intense than trials."),
             ("Sea charting", "1", "~10k", "The starting method and the best XP before 30. One-off task rewards tracked in the captain's log, with bonuses for clearing a region. Charting everything needs 78 Sailing and unlocks horizon's lure, a permanent 2.5% Sailing XP boost."),
-            ("Bounty tasks", "30", "middle", "Kill an assigned sea monster for its bounty drop, structured like Hunter Rumours. Sits between salvaging and trials for rate, pays well, and at 80+ every task is available. Use Magic or Ranged with a cannon crew."),
-            ("Shipwreck salvaging", "15 (42 better)", "8–40k", "The AFK option. Two salvaging hooks, a salvaging station and crewmates on a sloop; a crewmate on your hook makes it nearly idle at roughly 8k/hr. Tick manipulation roughly doubles it if you want to work for it."),
-            ("Deep sea trawling", "Fishing hybrid", "moderate", "Trawling nets over fish shoals. Trains Sailing while producing raw deep-sea fish, so it doubles up with your Fishing goal."),
+            ("Bounty tasks", "30", "middle", "Kill an assigned sea monster for its bounty drop, structured like Hunter Rumours. The tasks were lengthened and rebalanced, so they are for the drops rather than the rate; at 80+ every task is available."),
+            ("Shipwreck salvaging", "15 (42 better)", "8–110k", "Two hooks, a salvaging station and crewmates on a sloop. Jagex's own tests: 35–40k an hour at 97 with two crew on dragon hooks and you only sorting, 85k active while multitasking, 105–110k fully active with rune hooks. The idle option."),
+            ("Deep sea trawling", "Fishing hybrid", "20–45k", "Trawling nets over fish shoals. 26k Sailing plus 43k Fishing at giant krill with cotton nets, 37–43k plus 57–60k at bluefin. Trains both, so it doubles up with your Fishing goal."),
             ("Crystal extractor", "73 (+ 67 Con)", "+10–15k", "Not a method, a passive top-up. 250 XP per harvest roughly every 63 seconds, stacking on top of whatever else you are doing. Build it as soon as you hit 73."),
             ("Wyrmscraig", "62", "12.5k quest XP",
              "Sail to the island after Pandemonium with 60 Crafting, 47 Runecraft and 53 Mining, then speak to Cormac in the middle of Auchrie village to start Fallen From Grace. It unlocks Mortimer during the quest, then the repeatable Mad Angel and Golem Crafting on completion."),
             ("Ocean encounters", "1", "passive", "Glows, strong winds and castaways while sailing. No requirement; trim your sails every time for the free XP."),
         ],
         notes=[
-            "Pandemonium is mandatory before any training, and several quests give Sailing XP. Chart the seas to about 30, then switch to Barracuda Trials.",
+            "Pandemonium is mandatory before any training, and several quests give Sailing XP. From 50 the honest options to 55 are all slow: finish charting and courier tasks, then Jubbly Jive changes everything.",
             "The plan puts Sailing in the slow block, which fits: it is the newest skill and its rates are still being balanced. Re-check the wiki guide before the long grind.",
             "Two permanent multipliers are worth detouring for: horizon's lure from full charting (78 Sailing, 2.5% bonus to everything) and the crystal extractor at 73 Sailing plus 67 Construction.",
             "Boat speed is XP rate. A rosewood hull at 93 Sailing and 84 Construction is about 20% faster, which is roughly 15% more XP per hour on trials.",
@@ -467,33 +488,33 @@ SKILLS = [
         phase="72 for the quest cape, then the buyables block at the end.",
         summary="Blast Furnace or Giants' Foundry.",
         methods=[
-            ("Blast Furnace – gold bars", "40 (60 for best rate)", "~350k", "With goldsmith gauntlets, the fastest Smithing XP in the game. Loses GP; you're buying levels."),
-            ("Giants' Foundry", "15", "150–300k", "Good XP with no real loss, plus moulds and the Smiths' uniform, which speeds up every later anvil session. The best all-round option."),
-            ("Cannonballs", "35", "~20k", "Extremely AFK and profitable. Terrible XP rate. Only for background training."),
+            ("Blast Furnace – gold bars", "40 (60 for best rate)", "~380k", "With goldsmith gauntlets, the fastest Smithing XP in the game: 380k, 410k with the cape. Loses GP; you're buying levels."),
+            ("Giants' Foundry", "15", "165–253k", "Steel-mithril swords 165k at 50, mithril-adamant 198k at 70, adamant-rune 253k at 85. Good XP with no real loss, plus moulds and the Smiths' uniform. The best all-round option."),
+            ("Anvil smithing (plates/darts)", "varies", "140–300k", "Adamant platebodies 200k at 68–88, rune 240k at 88+ and 300k with the uniform at the Prifddinas anvil. Costs unless you alch."),
+            ("Cannonballs", "35", "14–28k", "Extremely AFK and profitable; 28k with the double ammo mould, four times that at the ancient furnace with 87 Sailing. Terrible XP rate. Only for background training."),
             ("Blast Furnace – other bars", "varies", "100–250k", "Runite bars at 85 are profitable rather than costly."),
             ("Rune items (3-bar)", "95", "~120k",
              "Profitable at the very top end, unlike gold bars."),
-            ("Anvil smithing (plates/darts)", "varies", "50–150k", "Mostly obsolete since Giants' Foundry."),
         ],
         notes=[
             "Buy the useful moulds before the Smiths' uniform. The full 15,000-reputation set cuts anvil actions from 5 ticks to 4 and averages about 20% more XP per hour inside the Foundry.",
-            "The 60→72 quest-cape stretch is only about 606k XP, so it will not fund the full uniform after moulds. Giants' Foundry is still the cheapest sane route; finish the set during the later 99 grind.",
+            "The 63→72 quest-cape stretch is only about 520k XP, so it will not fund the full uniform after moulds. Giants' Foundry is still the cheapest sane route; finish the set during the later 99 grind.",
         ],
     ),
     dict(
         name="Crafting", group=ARTISAN, target="90 → 99", pick=None,
         phase="90 as an interim target, 99 in the buyables block.",
-        summary="D'hide bodies or battlestaves.",
+        summary="D'hide bodies or battlestaves; amethyst if you want it quiet.",
         methods=[
-            ("Dragonhide bodies", "63/71/77/84", "150–300k", "Green 63, blue 71, red 77, black 84. Simple, scalable, moderately expensive."),
-            ("Battlestaves", "54–66", "150–250k", "Water 54, earth 58, fire 62, air 66. Buy orbs, attach to staves. Often the cheapest GP per XP."),
-            ("Glassblowing / Superglass Make", "77 Magic", "150–250k", "Lunar spell + molten glass. Good rate; light hourly cost."),
-            ("Golem Crafting", "60 + Fallen From Grace", "100–165k+ day one",
-             "Mine sunstone, shape each side of a golem, then add a sunstone core and one Hunter fur. Lower intensity is about 100k Crafting XP/hr; better furs and active shaping push past 165k. The Jeweller's chisel reward improves semiprecious gem cutting and has a 10% chance to cut any gem twice."),
-            ("Crafting drift nets", "26", "low",
+            ("Dragonhide bodies", "63/71/77/84", "315–435k", "Green 63 (315k), blue 71 (355k), red 77 (395k), black 84 (435k) at 1,685 bodies an hour with a needle and thread. Simple, scalable, moderately expensive."),
+            ("Battlestaves", "54–66", "245–337k", "Water 54, earth 58, fire 62, air 66 (337k). Buy orbs, attach to staves. Often the cheapest GP per XP."),
+            ("Gem cutting", "varies", "100–380k", "Dragonstones are 380k at 2,780 gems an hour; usually a loss. A jeweller's chisel adds another 10%."),
+            ("Cutting amethyst", "83", "~165k", "One click per inventory and it cuts on its own. Small loss or small profit, and the only Crafting that deserves the word AFK."),
+            ("Golem Crafting", "60 + Fallen From Grace", "100–180k+",
+             "Mine sunstone, shape each side of a golem, then add a sunstone core and one Hunter fur. Lower intensity is about 100k Crafting XP/hr; better furs and active shaping push past 180k. The Jeweller's chisel reward improves semiprecious gem cutting and has a 10% chance to cut any gem twice."),
+            ("Glassblowing / Superglass Make", "1 (77 Magic for the spell)", "90–153k", "Molten glass into lenses or light orbs, an inventory per click. 108–153k Crafting plus 47–66k Magic if you cast Superglass Make yourself."),
+            ("Crafting drift nets", "26", "~60k",
              "Worth knowing because you will be running Drift Net Fishing anyway; make your own nets instead of buying them."),
-            ("Gem cutting", "varies", "100–200k", "Dragonstones and up are fast; usually a loss."),
-            ("Amethyst", "—", "low", "AFK bolt tips/arrowtips while doing something else."),
         ],
         notes=[
             "Your plan sets 90 as an interim target. Check which elite diary or quest wants it and stop exactly there before moving on.",
@@ -515,17 +536,16 @@ SKILLS = [
     dict(
         name="Construction", group=ARTISAN, target="80 → 83 → 99", pick=None,
         phase="The level-70 quest requirement is already met. Reach 80 for immediate questing conveniences, then 83 when you want to boost for the practical max-house upgrades.",
-        summary="Mahogany Homes, then oak/mahogany builds.",
+        summary="Mahogany Homes, then oak doors or the shipwrights' workbench.",
         methods=[
-            ("Mahogany Homes", "20+", "50–120k", "Contracts. By far the cheapest GP per XP, plus the carpenter's outfit and plank sack. The economical route to 80–83 and eventually 99."),
-            ("Oak larders", "33", "~180k", "Classic butler-based training; cheap planks, high clicks."),
-            ("Oak dungeon doors", "74", "~250k", "The mid-game standard once you pass 74."),
-            ("Mounted mythical capes", "50 (+ Dragon Slayer II)", "~200k",
+            ("Mahogany Homes", "20+", "185–280k", "Contracts. Expert tier at 70 is 185–210k, or 240–280k with the plank sack. By far the cheapest GP per XP, plus the carpenter's outfit and the sack itself."),
+            ("Oak dungeon doors", "74", "~550k", "Ten oak planks a door, hold the build key down. The cheapest fast method and the least click-intensive traditional one."),
+            ("Shipwrights' workbench", "1 (Deepfin Point)", "250–440k", "Hull parts at 77 are 437 XP each and about a thousand an hour, with up to 29 seconds of nothing per inventory. The planks are worth half their normal XP, but the parts resell, so it is cheap for the rate."),
+            ("Mahogany tables", "52", "~900k", "Fast and very expensive; gnome benches at 77 push it to 1.1M."),
+            ("Teak garden benches", "66", "500–700k", "Similar rate to mahogany tables, usually cheaper per XP."),
+            ("Mounted mythical capes", "50 (+ Dragon Slayer II)", "~430k",
              "Teak-based and cheaper per XP than mahogany furniture, with a butler doing the running."),
-            ("Mahogany tables", "52", "~300k+", "Fast and very expensive."),
-            ("Shipwrights' workbench", "Sailing content", "verify",
-             "Boat facilities built at the workbench. Ties Construction into your Sailing goals; check the wiki for current rates."),
-            ("Teak garden benches", "66", "~350k", "Similar rate to mahogany tables, usually cheaper per XP."),
+            ("Oak larders", "33", "~500k", "Classic butler-based training; cheap planks, high clicks."),
         ],
         notes=[
             "At 77 Construction, build a portal nexus and spirit tree. Boost to 80 for a fairy ring, rejuvenation pool and achievement gallery/spellbook altars, or train to 80 to avoid repeated stew boosts.",
@@ -539,18 +559,20 @@ SKILLS = [
         phase="Buyables block, after Construction.",
         summary="Potions. Cheapest available tier.",
         methods=[
-            ("Mastering Mixology", "60 (81 better)", "60–90k",
-             "The Aldarin minigame. Cheaper per XP than buying potions outright and it pays in mixology rewards, including the alchemist's amulet."),
-            ("Cleaning herbs", "any", "up to ~300k", "Cleaning herbs can provide fast raw XP, though the XP per herb is low."),
-            ("Prayer potions", "38", "~150k", "Reliable, usually near break-even."),
-            ("Super restores", "63", "~180k", "The long mid-game staple."),
-            ("Stamina potions", "77", "~200k", "Amylase from Marks of Grace makes these cheap if you've been doing rooftops."),
-            ("Super combat potions", "90", "~250k", "The standard 99 finisher; you'll drink plenty anyway."),
-            ("Extended super antifires", "98", "~250k", "Only relevant for the last level."),
+            ("Super restores", "63", "~356k", "The long mid-game staple; near break-even and 2,500 potions an hour."),
+            ("Super combat potions", "90", "~325k", "The standard 99 finisher; you'll drink plenty anyway."),
+            ("Brews", "78 / 81 / 85 / 89", "437–564k", "Zamorak 437k at 78, Saradomin 450k at 81, ancient 522k at 85, Armadyl 564k at 89. The fastest potions there are, at whatever the secondaries cost this week."),
+            ("Stamina potions", "77", "~200k (467k 1-tick)", "Amylase from Marks of Grace makes these cheap, and the stackable secondary means tick manipulation doubles the rate."),
+            ("Mastering Mixology", "60 (81 better)", "~105k",
+             "The Aldarin minigame. Far more XP per herb than any potion and the only source of the alchemist's amulet, prescription goggles and potion storage."),
+            ("Prayer potions", "38", "~219k", "Reliable, usually near break-even."),
+            ("Cleaning herbs", "any", "up to ~300k", "Fast raw XP if you click each herb; auto-clean is a third of that and free of attention."),
+            ("Extended super antifires", "98", "~450k", "Only relevant for the last level."),
         ],
         notes=[
             "Herblore is a pure buyable. The plan is right to leave it late. Bank every herb you get from Slayer, Herbiboar and farm runs in the meantime.",
             "Clean herbs and make unfinished potions during any AFK activity; it costs almost nothing to bank a stockpile over months.",
+            "Prescription goggles save 10% of secondaries on most potions. Over a 99 that is real money; do enough Mixology to get them first.",
         ],
     ),
     dict(
@@ -558,11 +580,12 @@ SKILLS = [
         phase="72 for the quest cape, then finish this fast buyable near the end.",
         summary="Wines or 1-tick karambwans.",
         methods=[
-            ("Jugs of wine", "35", "300–450k", "A fast and cheap route to 99 Cooking. Mind-numbing but short."),
-            ("1-tick karambwans", "30", "700k+", "The fastest Cooking method in the game by a wide margin, and it needs perfect tick timing."),
+            ("Jugs of wine", "35 (68 to stop failing)", "470–490k", "A fast and cheap route to 99 Cooking. Fourteen wines an inventory, so it wants more attention than fish. Mind-numbing but short."),
+            ("1-tick karambwans", "30", "740–950k", "740k at 70, 813k at 80, 883k at 90 at the Rogues' Den fire. The fastest Cooking method in the game by a wide margin, and it needs perfect tick timing."),
+            ("Karambwans, one click per inventory", "30", "218–273k", "The same fish at the Hosidius kitchen without the tick timing: 218k at 70, 251k at 80, 263k at 90. Sixty-seven seconds per inventory of doing nothing."),
             ("Bake Pie", "10 (+ 65 Magic)", "~150k",
              "The Lunar spell. Trains Cooking and Magic at once, which is why it shows up in both guides."),
-            ("Fish at Hosidius / Myths' Guild", "varies", "150–250k", "Range next to a bank; no burning at Hosidius."),
+            ("Fish at Hosidius / Myths' Guild", "varies", "165–285k", "Range next to a bank; no burning at Hosidius. Sharks and anglerfish at 80+ are 275–285k."),
             ("Sharks / Anglerfish", "80/84", "—", "Cook what you catch if you fished it yourself."),
         ],
         notes=[
@@ -574,14 +597,14 @@ SKILLS = [
         phase="75 for the quest cape block, then last in the grinds block.",
         summary="Wintertodt.",
         methods=[
-            ("Wintertodt", "50", "150–300k", "Your effective pick. Profitable, sociable, gives the pyromancer outfit, herbs, seeds and gems. Almost everyone does 50–99 here."),
-            ("Burning logs at a bank", "varies", "200–400k", "Faster raw XP with magic/redwood logs, but pure GP loss and zero rewards."),
+            ("Wintertodt", "50", "160–320k", "Your effective pick. 226k at 70, 258k at 80, 290k at 90 on the fast official worlds. Profitable, sociable, gives the pyromancer outfit, herbs, seeds and gems. Almost everyone does 50–99 here."),
+            ("Burning logs at a bank", "varies", "300–520k", "Yews 300k, magic logs 451k at 75, redwoods 520k at 90. Faster raw XP but pure GP loss and zero rewards."),
+            ("Bonfires", "1+", "135–233k", "A forester's campfire next to a bank: add the whole inventory and walk away for 150 seconds. Maples 135k, magic 202k at 75, redwood 233k at 90 on automatic; 40% more if you feed it by hand."),
             ("Forestry bonfires", "—", "bonus", "Group bonfires during Forestry events add XP while you cut teaks."),
-            ("Fire pits / wilderness ring", "—", "—", "Situational only."),
         ],
         notes=[
             "Wintertodt for the 75 requirement and then again for 99 is the obvious call; the supply drops effectively pay you to train.",
-            "The full pyromancer outfit gives 2.5% bonus Firemaking XP, but its pieces are random. Collect what drops on the 68→75 stretch; do not assume the short QPC grind will complete the set.",
+            "The full pyromancer outfit gives 2.5% bonus Firemaking XP, but its pieces are random. Collect what drops on the 70→75 stretch; do not assume the short QPC grind will complete the set.",
         ],
     ),
 ]
@@ -1377,6 +1400,17 @@ REFRESH_SVG = (
 )
 
 
+def snapshot_day(stamp):
+    """The date a snapshot was taken, as the sidebar prints it. Source time,
+    not build time: a rebuild does not make the numbers newer."""
+    if not isinstance(stamp, str) or len(stamp) < 10:
+        return "unknown"
+    try:
+        return datetime.date.fromisoformat(stamp[:10]).strftime("%-d %b %Y")
+    except ValueError:
+        return stamp[:10]
+
+
 def rail_meter(coach=False):
     """Account line at the top of the site index, with the local-server sync
     and next-action controls when the page carries the coach script."""
@@ -1391,6 +1425,8 @@ def rail_meter(coach=False):
                 f'<span class="mrow"><span>Combat</span>'
                 f'<b class="num" data-stat="combat">{STATS.get("combat")}</b>'
                 f'<span class="mmax">/{MAX_COMBAT}</span></span>'
+                f'<span class="mrow snap" id="statsnap">{e(STATS.get("name") or "")}'
+                f' · Hiscores {e(snapshot_day(STATS.get("fetched")))}</span>'
                 '<span class="sr" id="statrefresh-status" role="status" '
                 'aria-live="polite"></span>')
     else:
@@ -2489,6 +2525,8 @@ LIVE_STATS_JS = """
       });
     }).then(function (data) {
       paint(data);
+      var snap = document.getElementById('statsnap');
+      if (snap) snap.textContent = (data.name || 'gxexe') + ' \u00b7 Hiscores live, just now';
       setState('ok', 'gxexe refreshed from OSRS Hiscores');
     }).catch(function (error) {
       setState('bad', error.message || 'Hiscores refresh failed');
@@ -2809,9 +2847,96 @@ def best_for_level(methods, skill_name):
     return open_now[0][0][0]
 
 
+# Route legs are written for the paths page, method rows for the tables, and
+# the names do not always agree. Where a leg is not the row name or the row
+# name followed by a qualifier, this says which row it belongs to.
+ROUTE_ROWS = {
+    "Nieve, cannon and burst tasks": "Nieve / Steve",
+    "Nieve, cannon and burst": "Nieve / Steve",
+    "Nieve, Venator bow on long tasks": "Nieve / Steve",
+    "Duradel, barrage tasks": "Duradel",
+    "Duradel, cannon and barrage": "Duradel",
+    "Duradel, Venator bow on long tasks": "Duradel",
+    "Ice Burst on maniacal monkeys": "Bursting maniacal monkeys",
+    "Ice Barrage on maniacal monkeys": "Bursting maniacal monkeys",
+    "Ice Burst on Slayer tasks": "Bursting/barraging Slayer tasks",
+    "Ice Barrage on Slayer tasks": "Bursting/barraging Slayer tasks",
+    "Blood Burst at the Bandit Camp lodge": "Bandit Camp lodge, blood spells",
+    "Blood Barrage at the Bandit Camp lodge": "Bandit Camp lodge, blood spells",
+    "Gilded altar, superior dragon bones": "Gilded altar – superior dragon bones",
+    "Gilded altar, one click per inventory": "Gilded altar – dragon bones",
+    "Chaos altar, dragon bones": "Wilderness Chaos altar",
+    "Lava runes, Magic Imbue": "Lava runes (binding necklace)",
+    "Lava runes, giant pouch": "Lava runes (binding necklace)",
+    "Lava runes, colossal pouch": "Lava runes (binding necklace)",
+    "Ourania altar, daeyalt essence": "ZMI altar",
+    "Blood runes at Arceuus": "Blood runes (Arceuus)",
+    "Soul runes at Arceuus": "Soul runes (Arceuus)",
+    "Seers' Village rooftop": "Rooftop courses",
+    "Colossal Wyrm basic course": "Colossal Wyrm course",
+    "Colossal Wyrm advanced course": "Colossal Wyrm course",
+    "3-tick granite": "3-tick iron / granite",
+    "1.5-tick teaks": "Forestry teaks",
+    "Rosewood trees": "Ironwood / rosewood trees",
+    "Burning yew logs": "Burning logs at a bank",
+    "Burning magic logs": "Burning logs at a bank",
+    "Burning redwood logs": "Burning logs at a bank",
+    "Campfire, maple logs": "Bonfires",
+    "Campfire, magic logs": "Bonfires",
+    "Campfire, redwood logs": "Bonfires",
+    "Red d'hide bodies": "Dragonhide bodies",
+    "Black d'hide bodies": "Dragonhide bodies",
+    "Blast Furnace gold bars": "Blast Furnace – gold bars",
+    "Mithril dart tips": "Anvil smithing (plates/darts)",
+    "Adamant dart tips": "Anvil smithing (plates/darts)",
+    "Rune nails": "Anvil smithing (plates/darts)",
+    "Zamorak brews": "Brews",
+    "Ancient brews": "Brews",
+    "Armadyl brews": "Brews",
+    "Potions, an inventory at a time": "Super restores",
+    "Gnome benches": "Mahogany tables",
+    "Tempor Tantrum, Marlin rank": "Barracuda Trials",
+    "Jubbly Jive, Marlin rank": "Barracuda Trials",
+    "Jubbly Jive, Shark rank": "Barracuda Trials",
+    "Gwenith Glide, Marlin rank": "Barracuda Trials",
+    "Rellekka and Etceteria courier route": "Courier tasks",
+    "Lunar Isle courier route": "Courier tasks",
+    "Salvaging, Cabin Boy Jenkins on a hook": "Shipwreck salvaging",
+    "Salvaging, two crew on dragon hooks": "Shipwreck salvaging",
+    "Nightmare Zone, absorptions and blowpipe": "Nightmare Zone",
+    "Nightmare Zone, absorptions and Venator bow": "Nightmare Zone",
+    "Hallowfell on maniacal monkeys, auto-retaliate": "Hallowfell on maniacal monkeys",
+    "Red chinchompas, low-intensity stacking": "Red chinchompas on maniacal monkeys",
+}
+
+
+def route_rows(skill_name):
+    """Which route each method row belongs to: {row name: [route keys]}."""
+    opts = PATHS.get(skill_name)
+    sk = next((s for s in SKILLS if s["name"] == skill_name), None)
+    if not opts or not sk:
+        return {}
+    names = [m[0] for m in sk["methods"]]
+    out = {}
+    for key, _, _ in PATH_META:
+        for _, leg, _ in opts[key]:
+            row = ROUTE_ROWS.get(leg)
+            if row is None:
+                row = next((n for n in names
+                            if leg == n or leg.startswith(n + ", ")
+                            or leg.startswith(n + " ")), None)
+            if row in names and key not in out.setdefault(row, []):
+                out[row].append(key)
+    return out
+
+
+ROUTE_WORD = {"fast": "speed", "hybrid": "realistic", "afk": "afk"}
+
+
 def method_table(methods, pick, skill_name=None):
     rows = []
     rec = best_for_level(methods, skill_name)
+    on_route = route_rows(skill_name) if skill_name else {}
     for name, req, rate, note in methods:
         cls = " chosen" if pick and name == pick else ""
         blocker = unmet(req, skill_name)
@@ -2836,6 +2961,11 @@ def method_table(methods, pick, skill_name=None):
             tag = f'<span class="rtag lock">needs {e(blocker)}</span>'
         elif name == rec:
             tag = '<span class="rtag rec">best at your level</span>'
+        routes = "".join(
+            f'<span class="rtag route {k}" title="On the {ROUTE_WORD[k]} path">'
+            f'{ROUTE_WORD[k]}</span>' for k in on_route.get(name, []))
+        if routes:
+            tag += f'<span class="routes">{routes}</span>'
         rows.append(
             f'    <tr class="m{cls}" id="m-{slug(name)}" data-method="{e(name)}">'
             f'<td class="pic">{pic}</td>'
@@ -3425,6 +3555,43 @@ def carry_panel(skill_name, pick=None):
         f'<tbody>{"".join(rows)}</tbody></table></div></div>')
 
 
+def three_ways_panel(skill_name):
+    """Speed, Realistic and AFK for this one skill, costed from today's XP.
+
+    The paths page prices carries and ordering; this is the same three routes
+    read on their own, so a skill page answers "how long, and doing what" at a
+    glance.
+    """
+    st = stat_of(skill_name)
+    opts = PATHS.get(skill_name)
+    if not st or not opts:
+        return ""
+    xp = st["xp"] or 0
+    if xp >= MAX_XP or all(rate == 0 for key, _, _ in PATH_META
+                           for _, _, rate in opts[key]):
+        return ""
+    cols = []
+    for key, label, _ in PATH_META:
+        legs = merged_legs(legs_for(opts[key], xp))
+        hours = sum(leg["hours"] for leg in legs)
+        items = "".join(
+            f'<li><span class="wm">{e(leg["method"])}</span>'
+            f'<span class="wb">{leg["from"]}–{leg["to"]}</span>'
+            f'<span class="wr">{rate_span(leg["rates"])}</span>'
+            f'<span class="wh">{fmt_hours(leg["hours"])}</span></li>'
+            for leg in legs)
+        cols.append(
+            f'<div class="way {key}"><div class="whead"><h3>{e(label)}</h3>'
+            f'<b class="wt">{hours:,.0f}h</b></div>'
+            f'<span class="wp">{e((PATH_PROFILE.get(key) or ("",))[0])}</span>'
+            f'<ol class="wlegs">{items}</ol></div>')
+    return ('<section class="ways" id="ways"><div class="k">Three Ways to 99</div>'
+            f'<div class="waygrid">{"".join(cols)}</div>'
+            '<p class="wnote">From your XP today at each route\'s rates, before '
+            'anything another skill hands over. <a class="wl" href="../paths.html">'
+            'Which Path</a> prices those carries and the order.</p></section>')
+
+
 def build_skill_page(skill, prev_skill, next_skill):
     name = skill["name"]
     pick = skill.get("pick")
@@ -3509,6 +3676,7 @@ def build_skill_page(skill, prev_skill, next_skill):
                      "<p>The plan sets a target here but does not name a method. "
                      "Pick one with the box at the end of any row below.</p></div>")
 
+    parts.append(three_ways_panel(name))
     parts.append(carry_panel(name, pick))
 
     if name == "Slayer":
@@ -3762,18 +3930,21 @@ def outfit_section():
 
 # Sustained rate for the method the plan actually picks, and whether those
 # hours pay you, break even, or cost gold. Used to estimate what is left.
+# Planning rate per skill for the index cards, and whether the method pays.
+# The rate is the Realistic route's first leg, so the front page and Which
+# Path quote the same hours.
 SKILL_RATE = {
-    "Slayer": (55_000, "pays"), "Attack": (60_000, "pays"),
+    "Slayer": (30_000, "pays"), "Attack": (60_000, "pays"),
     "Strength": (60_000, "pays"), "Defence": (60_000, "pays"),
-    "Hitpoints": (0, "free"), "Ranged": (250_000, "costs"),
-    "Magic": (250_000, "costs"), "Prayer": (300_000, "costs"),
-    "Runecraft": (60_000, "pays"), "Agility": (70_000, "pays"),
-    "Thieving": (200_000, "pays"), "Hunter": (150_000, "pays"),
-    "Mining": (65_000, "neutral"), "Fishing": (60_000, "neutral"),
-    "Woodcutting": (100_000, "neutral"), "Sailing": (120_000, "neutral"),
-    "Firemaking": (250_000, "pays"), "Herblore": (250_000, "costs"),
-    "Crafting": (250_000, "costs"), "Construction": (250_000, "costs"),
-    "Smithing": (300_000, "costs"), "Cooking": (350_000, "costs"),
+    "Hitpoints": (0, "free"), "Ranged": (300_000, "costs"),
+    "Magic": (130_000, "costs"), "Prayer": (500_000, "costs"),
+    "Runecraft": (40_000, "pays"), "Agility": (53_000, "pays"),
+    "Thieving": (170_000, "pays"), "Hunter": (120_000, "pays"),
+    "Mining": (70_000, "neutral"), "Fishing": (72_000, "neutral"),
+    "Woodcutting": (86_000, "neutral"), "Sailing": (20_000, "neutral"),
+    "Firemaking": (226_000, "pays"), "Herblore": (350_000, "costs"),
+    "Crafting": (300_000, "costs"), "Construction": (500_000, "costs"),
+    "Smithing": (165_000, "neutral"), "Cooking": (470_000, "costs"),
     "Fletching": (0, "free"), "Farming": (0, "free"),
 }
 
@@ -3785,9 +3956,10 @@ MAX_ORDER = [
              "they are most of your Prayer.",
          skills=["Slayer"]),
     dict(title="Finish combat",
-         why="Whatever Slayer did not already carry. Ranged and Magic go fast on "
-             "chins and barrage, Prayer burns the bones you banked, Hitpoints "
-             "arrives on its own.",
+         why="Whatever Slayer did not already carry. Hallowfell at the maniacal "
+             "monkeys finishes the melee stats, chins or a Venator bow finish "
+             "Ranged, barrage finishes Magic, Prayer burns the bones you banked, "
+             "and Hitpoints arrives on its own.",
          caveat="Slayer's carry is already subtracted, which is why Hitpoints "
                 "is free and Magic is nearly so.",
          skills=["Attack", "Strength", "Defence", "Ranged", "Magic", "Prayer",
@@ -3961,61 +4133,102 @@ def h2(anchor, title, ico=None):
 
 # The least-attention option for each skill. `every` is how long you can leave
 # it between clicks, which is the thing that actually makes something AFK.
+# Rates are the wiki's for the idle version of the method, not the active one.
 AFK = [
     dict(skill="Hunter", method="Birdhouse runs", level="5+", every=50 * 60,
          xp="4-5k", note="Four houses, then nothing for 50 minutes. Nothing else "
                          "in the game asks so little of you."),
-    dict(skill="Mining", method="Shooting Stars", level="10+", every=7 * 60,
-         xp="20-40k", note="One click per layer, seven minutes apart. Stardust "
-                           "buys the celestial ring on the side."),
-    dict(skill="Magic", method="Splashing", level="1+", every=20 * 60,
-         xp="10-30k", note="Attack once and walk away until the runes run out. "
-                           "The lowest attention in the game, and the rate shows it."),
     dict(skill="Attack", method="Nightmare Zone, absorptions", level="Quest reqs",
-         every=15 * 60, xp="40-80k",
-         note="Absorption potions and a rock cake. Top up every ten to fifteen "
-              "minutes. Works for Strength, Defence and Hitpoints too."),
+         every=20 * 60, xp="~100k",
+         note="Absorption potions and a rock cake in a normal rumble. The game "
+              "stops you after 20 idle minutes; one click starts it again. Works "
+              "for Strength, Defence and Hitpoints too."),
+    dict(skill="Ranged", method="Nightmare Zone, absorptions and Venator bow",
+         level="80 (Quest reqs)", every=20 * 60, xp="90-150k",
+         note="Same rumble, same timer. A Venator bow bounces between the bosses "
+              "for 145k; a blowpipe manages 90k and a magic shortbow 70k."),
+    dict(skill="Magic", method="Blood Burst at the Bandit Camp lodge", level="68",
+         every=20 * 60, xp="150-230k",
+         note="Two tiles inside the lodge door every bandit comes to you, and blood "
+              "spells heal more than they hit. Auto-retaliate for 20 minutes at a "
+              "time; Blood Barrage at 92 is 230k. Costs the runes with nothing back."),
+    dict(skill="Mining", method="Shooting Stars", level="10+", every=7 * 60,
+         xp="24-31k", note="One click per layer, seven minutes apart. Stardust "
+                           "buys the celestial ring on the side. Motherlode Mine "
+                           "is twice the XP for a click every half minute, which "
+                           "is what the AFK route uses."),
+    dict(skill="Woodcutting", method="Rosewood trees", level="92 (79 Sailing)",
+         every=270,
+         xp="85-90k", note="Drumstick Isle. A tree stands for four and a half "
+                           "minutes, the longest of any tree, and there is no bank "
+                           "to distract you. Redwoods at 90 are the version without "
+                           "the boat."),
     dict(skill="Strength", method="Gemstone Crab", level="1+", every=10 * 60,
          xp="30-60k", note="Shared health pool in Varlamore, so it never dies on "
-                           "you and never stops being aggressive."),
-    dict(skill="Woodcutting", method="Redwoods", level="90", every=5 * 60,
-         xp="~65k", note="Chops until the inventory fills, and the Woodcutting "
-                         "Guild bank is right there."),
-    dict(skill="Firemaking", method="Bonfires", level="1+", every=4 * 60,
-         xp="200-300k", note="Add the whole inventory at once and it burns "
-                             "through unattended. Slower per log than a line of "
-                             "fires, but you are not clicking."),
-    dict(skill="Smithing", method="Cannonballs", level="35", every=3 * 60,
-         xp="~20k", note="A full inventory of steel bars smelts itself. Profitable, "
-                         "and the rate is as bad as it looks."),
-    dict(skill="Fishing", method="Anglerfish", level="82", every=3 * 60,
-         xp="~30k", note="Fishes until the inventory fills. Dark crabs and monkfish "
-                         "behave the same way if the level is not there yet."),
+                           "you and never stops being aggressive. Slower than NMZ; "
+                           "no quests needed."),
+    dict(skill="Fishing", method="Anglerfish", level="82", every=6 * 60,
+         xp="15-39k", note="From a boat off Piscarilius the spot never moves, so an "
+                           "inventory is six to seven minutes of nothing. Monkfish "
+                           "from a raft at 62 is the same trick at 37k."),
+    dict(skill="Firemaking", method="Bonfires", level="1+", every=150,
+         xp="135-233k", note="Add the whole inventory to a forester's campfire and "
+                             "it burns through unattended. Maples 135k, magic 202k, "
+                             "redwood 233k."),
     dict(skill="Sailing", method="Shipwreck salvaging with crew", level="15 (42 better)",
-         every=3 * 60, xp="7-8k",
-         note="Put a crewmate on your hook and it keeps salvaging while you sort. "
-              "The wiki's own figure for the idle version."),
-    dict(skill="Crafting", method="Cutting amethyst", level="83", every=2 * 60,
-         xp="~30k", note="Cuts through the inventory on its own. The only Crafting "
-                         "worth calling AFK."),
+         every=3 * 60, xp="15-40k",
+         note="Crewmates on the hooks keep salvaging while you sort. Jagex "
+              "measured 35-40k an hour at 97 with two crew on dragon hooks; expect "
+              "less with worse crew and wrecks."),
+    dict(skill="Smithing", method="Cannonballs", level="35", every=3 * 60,
+         xp="14-28k", note="A full inventory of steel bars smelts itself. Profitable, "
+                           "and the rate is as bad as it looks. The double ammo "
+                           "mould doubles it; the ancient furnace at 87 Sailing doubles "
+                           "it again. Dart tips are one click a minute for 53-80k and "
+                           "still profit, which is what the AFK route uses."),
+    dict(skill="Hunter", method="Maniacal monkey deadfalls", level="60 (+ MM2)",
+         every=28, xp="51-110k",
+         note="Bait a boulder with a banana from the back of a stunted gorilla, "
+              "reset it when it drops. A basket of bananas is a 50-minute trip. "
+              "The active AFK option once birdhouses are running."),
     dict(skill="Runecraft", method="Blood runes at Arceuus", level="77", every=90,
-         xp="~40k", note="Run essence, craft, repeat. Low attention and it pays, "
-                         "which nothing else in Runecraft manages."),
-    dict(skill="Cooking", method="Range cooking", level="1+", every=60,
-         xp="150-250k", note="One click per inventory at a bank range. Not truly "
-                            "idle, but you get a minute back each time."),
+         xp="~36k", note="Mine essence, chip it, run it to the altar. Low attention, "
+                         "it pays, and it drips Mining and Crafting."),
+    dict(skill="Thieving", method="Stealing valuables", level="50", every=60,
+         xp="72-105k", note="Pickpocket a house key, then loot the house while the "
+                            "owner is out. Both halves are about one click a minute."),
+    dict(skill="Agility", method="Colossal Wyrm advanced course", level="62",
+         every=20, xp="~42k",
+         note="Six clicks per lap and two 20-second stretches of nothing. The "
+              "only course that lets you look away."),
+    dict(skill="Crafting", method="Cutting amethyst", level="83", every=35,
+         xp="~165k", note="One click and it cuts the inventory on its own. The only "
+                          "Crafting worth calling AFK, and it roughly breaks even."),
+    dict(skill="Construction", method="Shipwrights' workbench", level="1+",
+         every=29, xp="250-440k",
+         note="Hull parts at Deepfin Point: an inventory of planks builds itself "
+              "for up to 29 seconds while you wait. Half the XP per plank, but the "
+              "parts sell back."),
+    dict(skill="Cooking", method="Karambwans, one click per inventory", level="30",
+         every=67, xp="218-273k",
+         note="The Hosidius kitchen without the tick timing: one click, then 67 "
+              "seconds of cooking. Fish are the same idea at 165-285k."),
+    dict(skill="Herblore", method="Potions, an inventory at a time", level="varies",
+         every=17, xp="~250k",
+         note="Fourteen potions per inventory, 17 seconds a batch. Never idle for "
+              "long, but the rate makes it the shortest grind on the page."),
     dict(skill="Prayer", method="Bonecrusher and ash sanctifier", level="Passive",
          every=None, xp="passive",
          note="Zero clicks: bones and ashes convert while you are killing things "
-              "for something else. The only free XP on this page."),
+              "for something else. Around 40k an hour at the monkeys. When you "
+              "do sit down to train it, a gilded altar offers an inventory of "
+              "bones one by one from a single click, about 270k with dragon bones."),
 ]
 
 NO_AFK = [
-    ("Agility", "Every course is a click every few seconds. There is no idle option."),
-    ("Construction", "Butler cycles are five seconds apart from start to finish."),
-    ("Thieving", "Pickpocketing is one click per attempt, whatever the target."),
-    ("Herblore", "Potions are made an inventory at a time, by hand."),
-    ("Slayer", "Individual tasks can be low effort, but the skill itself is not."),
+    ("Slayer", "Individual tasks can be low effort with a Venator bow, but the skill itself is not."),
+    ("Agility", "The Colossal Wyrm course is as idle as it gets: 20 seconds at a time, twice a lap."),
+    ("Herblore", "Potions are made an inventory at a time, by hand. Seventeen seconds is the ceiling."),
 ]
 
 
@@ -4054,14 +4267,16 @@ def build_afk_page():
         + '<img class="icon lg" src="assets/media/site/skills-icon.png" alt="">'
         + '<h1 class="page">The AFK Path</h1></div>',
         '<p class="lede">Sorted by how long you can leave it alone, which is the '
-        'only measure that matters here. XP rates are the price you pay for that.</p>',
+        'only measure that matters here. XP rates are the price you pay for that. '
+        'The <a class="wl" href="paths.html#afk">AFK path</a> turns these into a '
+        'full route to the cape.</p>',
         '<div class="tablewrap"><div class="tablescroll">'
         '<table class="afktable"><thead><tr>'
         '<th class="pic"><span class="sr">Image</span></th><th>Skill</th>'
         '<th>Method</th><th>Needs</th><th>Click every</th><th>XP/hr</th>'
         '<th>Why</th></tr></thead>'
         f'<tbody>{afk_rows()}</tbody></table></div></div>',
-        '<h2 id="none">Skills With No AFK Option</h2>',
+        '<h2 id="none">Where AFK Runs Out</h2>',
         '<p class="lede2">Being honest about these is more useful than pretending. '
         'If you want to idle, spend the time on the table above and come back to '
         'these when you can pay attention.</p>',
@@ -4075,165 +4290,270 @@ def build_afk_page():
         'including the Nightmare Zone and crab hours.</li>'
         '<li>Drift net fishing trains Fishing and Hunter at once, and the birdhouse '
         'run fits inside its downtime.</li>'
+        '<li>The 20-minute combat timer is the ceiling: Nightmare Zone and the '
+        'bandit lodge both stop when it runs out, so one click every twenty '
+        'minutes is as idle as combat gets.</li>'
         "</ul>",
     ]
-    return page("The AFK Path", "\n".join(body), depth=0)
+    return page("The AFK Path", "\n".join(body), depth=0, wide=True)
 
 
-# Three ways to spend the remaining XP. Each entry is (method, sustained rate).
-# "afk" is the lowest-attention option that still trains the skill; where a
-# skill has none, it holds the least demanding thing available and says so.
-# Each route is a list of legs: (unlocked at, method, xp/hr). Real training is
-# staged, so one method to 99 was always a fiction. A leg is used from its level
-# until the next one opens.
+# Three ways to spend the remaining XP. Each route is a list of legs:
+# (unlocked at, method, xp/hr). Real training is staged, so one method to 99
+# was always a fiction. A leg is used from its level until the next one opens.
+# Rates are the OSRS Wiki training guides' as of September 2026, taken at the
+# level band each leg covers; where the wiki quotes a range, the solo figure
+# without alt accounts is the one used.
 #
-# fast   the best rate there is, tick manipulation and runners included
-# hybrid the best rate that does not need tick manipulation. Not a slower plan,
-#        the same plan without the frame-perfect clicking
-# afk    the least attention that still trains the skill
+# fast   Speed. The best rate there is: tick manipulation, stacked monkeys,
+#        bought XP, and the Wilderness where it is clearly faster.
+# hybrid Realistic. A pace you can hold for hundreds of hours: no tick
+#        manipulation, no runners, methods that pay for themselves or nearly
+#        do. What most people who actually max end up doing.
+# afk    AFK. The least attention that still trains the skill. Where a skill
+#        has no idle option, it holds the least demanding thing available.
 PATHS = {
     "Slayer": dict(
-        # The account starts at 89 combat, so Nieve/Steve is the real first
+        # The account starts at 95 combat, so Nieve/Steve is the real first
         # master. Slayer ~85 is the carry model's approximate 100-combat point;
         # only then do the Duradel rates become available.
-        fast=[(1, "Nieve, aggressive cannon and burst", 35_000),
-              (85, "Duradel, barrage tasks", 60_000)],
+        fast=[(1, "Nieve, cannon and burst tasks", 38_000),
+              (85, "Duradel, barrage tasks", 70_000)],
         hybrid=[(1, "Nieve, cannon and burst", 30_000),
                 (85, "Duradel, cannon and barrage", 50_000)],
-        afk=[(1, "Nieve on long tasks", 25_000),
-             (83, "Duradel on long tasks", 30_000)]),
+        afk=[(1, "Nieve, Venator bow on long tasks", 25_000),
+             (85, "Duradel, Venator bow on long tasks", 35_000)]),
     "Attack": dict(
-        fast=[(1, "Slayer with best gear", 70_000)],
-        hybrid=[(1, "Slayer", 60_000)],
-        afk=[(1, "Gemstone Crab", 85_000)]),
+        fast=[(1, "Sulphur Nagua", 110_000),
+              (75, "Hallowfell on maniacal monkeys", 220_000)],
+        hybrid=[(1, "Slayer tasks", 60_000),
+                (75, "Hallowfell on maniacal monkeys, auto-retaliate", 150_000)],
+        afk=[(1, "Nightmare Zone, absorptions", 95_000)]),
     "Strength": dict(
-        fast=[(1, "Slayer with best gear", 70_000)],
-        hybrid=[(1, "Slayer", 60_000)],
-        afk=[(1, "Gemstone Crab", 85_000)]),
+        fast=[(1, "Sulphur Nagua", 110_000),
+              (75, "Hallowfell on maniacal monkeys", 220_000)],
+        hybrid=[(1, "Slayer tasks", 60_000),
+                (75, "Hallowfell on maniacal monkeys, auto-retaliate", 150_000)],
+        afk=[(1, "Nightmare Zone, absorptions", 95_000)]),
     "Defence": dict(
-        fast=[(1, "Slayer with best gear", 70_000)],
-        hybrid=[(1, "Slayer", 60_000)],
-        afk=[(1, "Gemstone Crab", 85_000)]),
+        fast=[(1, "Sulphur Nagua", 110_000),
+              (75, "Hallowfell on maniacal monkeys", 220_000)],
+        hybrid=[(1, "Slayer tasks", 60_000),
+                (75, "Hallowfell on maniacal monkeys, auto-retaliate", 150_000)],
+        afk=[(1, "Nightmare Zone, absorptions", 95_000)]),
     "Hitpoints": dict(
         fast=[(1, "Arrives with combat", 0)],
         hybrid=[(1, "Arrives with combat", 0)],
         afk=[(1, "Arrives with combat", 0)]),
     "Ranged": dict(
-        fast=[(1, "Chinning maniacal monkeys", 250_000)],
-        hybrid=[(1, "Chinning maniacal monkeys", 200_000)],
-        afk=[(1, "Gemstone Crab", 80_000)]),
+        fast=[(1, "Red chinchompas on maniacal monkeys", 450_000),
+              (85, "Black chinchompas on maniacal monkeys", 650_000)],
+        hybrid=[(1, "Red chinchompas, low-intensity stacking", 300_000),
+                (80, "Venator bow on maniacal monkeys", 200_000)],
+        afk=[(1, "Nightmare Zone, absorptions and blowpipe", 90_000),
+             (80, "Nightmare Zone, absorptions and Venator bow", 145_000)]),
     "Magic": dict(
-        fast=[(1, "Bursting maniacal monkeys", 250_000)],
-        hybrid=[(1, "Barrage on Slayer tasks", 110_000)],
-        afk=[(1, "Gemstone Crab", 60_000)]),
+        fast=[(1, "Ice Burst on maniacal monkeys", 300_000),
+              (94, "Ice Barrage on maniacal monkeys", 400_000)],
+        hybrid=[(1, "Ice Burst on Slayer tasks", 130_000),
+                (94, "Ice Barrage on Slayer tasks", 180_000)],
+        afk=[(1, "Blood Burst at the Bandit Camp lodge", 150_000),
+             (92, "Blood Barrage at the Bandit Camp lodge", 230_000)]),
     "Prayer": dict(
-        fast=[(1, "Superior bones, gilded altar", 500_000)],
-        hybrid=[(1, "Chaos altar, dragon bones", 300_000)],
-        afk=[(1, "Bonecrusher while you fight", 25_000)]),
+        fast=[(1, "Gilded altar, superior dragon bones", 1_300_000)],
+        hybrid=[(1, "Chaos altar, dragon bones", 500_000)],
+        afk=[(1, "Gilded altar, one click per inventory", 270_000)]),
     "Runecraft": dict(
-        fast=[(1, "Lava runes with runners", 110_000),
-              (90, "Aether runes with runners", 250_000)],
-        hybrid=[(1, "Lava runes (binding necklace)", 85_000)],
-        afk=[(1, "Guardians of the Rift", 55_000),
+        fast=[(1, "Lava runes, Magic Imbue", 65_000),
+              (75, "Lava runes, giant pouch", 80_000),
+              (85, "Lava runes, colossal pouch", 100_000),
+              (90, "Aether runes", 100_000)],
+        hybrid=[(1, "Guardians of the Rift", 40_000),
+                (75, "Ourania altar, daeyalt essence", 85_000)],
+        afk=[(1, "Guardians of the Rift", 40_000),
              (77, "Blood runes at Arceuus", 36_000),
-             (90, "Soul runes", 44_000)]),
+             (90, "Soul runes at Arceuus", 44_000)]),
     "Agility": dict(
-        fast=[(1, "Hallowed Sepulchre, top floors", 90_000)],
-        hybrid=[(1, "Hallowed Sepulchre", 70_000)],
-        afk=[(1, "Rooftops, nothing is idle here", 55_000)]),
+        fast=[(1, "Wilderness Agility Course", 55_000),
+              (62, "Hallowed Sepulchre, floors 1–2", 56_000),
+              (72, "Hallowed Sepulchre, floors 1–3", 69_000),
+              (77, "Hallowed Sepulchre, floors 1–4", 80_000),
+              (87, "Hallowed Sepulchre, all five floors", 98_000)],
+        hybrid=[(1, "Seers' Village rooftop", 53_000),
+                (62, "Hallowed Sepulchre, floors 1–2", 50_000),
+                (72, "Hallowed Sepulchre, floors 1–3", 62_000),
+                (77, "Hallowed Sepulchre, floors 1–4", 72_000),
+                (87, "Hallowed Sepulchre, all five floors", 86_000)],
+        afk=[(1, "Colossal Wyrm basic course", 31_000),
+             (62, "Colossal Wyrm advanced course", 42_000)]),
     "Thieving": dict(
-        fast=[(1, "Blackjacking", 250_000)],
-        hybrid=[(1, "Pyramid Plunder", 200_000)],
-        afk=[(1, "Stealing artefacts", 70_000)]),
+        fast=[(1, "Stealing artefacts", 165_000),
+              (65, "Blackjacking", 230_000),
+              (84, "Rogues' Castle chests", 280_000)],
+        hybrid=[(1, "Stealing artefacts", 170_000),
+                (91, "Pyramid Plunder, final room", 270_000)],
+        afk=[(1, "Stealing valuables", 85_000)]),
     "Mining": dict(
-        fast=[(1, "Volcanic Mine, 3-tick iron", 90_000)],
-        hybrid=[(1, "Motherlode Mine", 60_000)],
-        afk=[(1, "Shooting Stars", 30_000)]),
+        fast=[(1, "3-tick granite", 110_000)],
+        hybrid=[(1, "Volcanic Mine", 70_000),
+                (85, "Volcanic Mine, crystal pickaxe", 86_000)],
+        afk=[(1, "Motherlode Mine, upper level", 55_000),
+             (90, "Motherlode Mine, full upgrades", 62_000)]),
     "Fishing": dict(
-        fast=[(1, "Barbarian Fishing, 3-tick", 90_000),
-              (71, "2-tick harpooning", 115_000)],
-        hybrid=[(1, "Tempoross", 60_000),
-                (78, "Leechfin fishing", 120_000)],
-        afk=[(1, "Karambwans", 33_000), (82, "Minnows", 48_000)]),
+        fast=[(1, "Barbarian Fishing, 3-tick", 85_000),
+              (71, "2-tick harpooning", 95_000),
+              (85, "2-tick harpooning, crystal harpoon", 117_000)],
+        hybrid=[(1, "Drift Net Fishing", 72_000),
+                (70, "Drift Net Fishing", 88_000)],
+        afk=[(1, "Karambwans", 29_000), (62, "Monkfish from a raft", 37_000)]),
     "Woodcutting": dict(
-        fast=[(1, "2-tick teaks", 130_000)],
-        hybrid=[(1, "Forestry teaks", 95_000)],
-        afk=[(1, "Redwoods", 65_000)]),
+        fast=[(1, "1.5-tick teaks", 194_000),
+              (80, "1.5-tick teaks", 208_000),
+              (90, "1.5-tick teaks", 222_000)],
+        hybrid=[(1, "Sulliuscep", 86_000),
+                (77, "Bloodwood trees", 170_000)],
+        afk=[(1, "Blisterwood tree", 69_000),
+             (92, "Rosewood trees", 87_000)]),
     "Firemaking": dict(
-        fast=[(1, "Burning logs at a bank", 350_000)],
-        hybrid=[(1, "Wintertodt", 250_000)],
-        afk=[(1, "Bonfires", 250_000)]),
+        fast=[(1, "Burning yew logs", 300_000),
+              (75, "Burning magic logs", 450_000),
+              (90, "Burning redwood logs", 520_000)],
+        hybrid=[(1, "Wintertodt", 226_000),
+                (80, "Wintertodt", 258_000),
+                (90, "Wintertodt", 290_000)],
+        afk=[(1, "Campfire, maple logs", 135_000),
+             (75, "Campfire, magic logs", 200_000),
+             (90, "Campfire, redwood logs", 233_000)]),
     "Cooking": dict(
-        fast=[(1, "1-tick karambwans", 700_000)],
-        hybrid=[(1, "Jugs of wine", 400_000)],
-        afk=[(1, "Range cooking", 200_000)]),
+        fast=[(1, "1-tick karambwans", 740_000),
+              (80, "1-tick karambwans", 810_000),
+              (90, "1-tick karambwans", 880_000)],
+        hybrid=[(1, "Jugs of wine", 470_000)],
+        afk=[(1, "Karambwans, one click per inventory", 218_000),
+             (80, "Karambwans, one click per inventory", 251_000)]),
     "Crafting": dict(
-        fast=[(1, "Black d'hide bodies", 300_000)],
-        hybrid=[(1, "Battlestaves", 250_000)],
-        afk=[(1, "Cutting amethyst", 30_000)]),
+        fast=[(1, "Red d'hide bodies", 390_000),
+              (84, "Black d'hide bodies", 435_000)],
+        hybrid=[(1, "Battlestaves", 300_000)],
+        afk=[(1, "Glassblowing", 90_000),
+             (83, "Cutting amethyst", 160_000)]),
     "Smithing": dict(
-        fast=[(1, "Blast Furnace gold bars", 350_000)],
-        hybrid=[(1, "Giants' Foundry", 250_000)],
-        afk=[(1, "Cannonballs", 20_000)]),
+        fast=[(1, "Blast Furnace gold bars", 380_000)],
+        hybrid=[(1, "Giants' Foundry, steel and mithril", 165_000),
+                (70, "Giants' Foundry, mithril and adamant", 198_000),
+                (85, "Giants' Foundry, adamant and rune", 253_000)],
+        afk=[(1, "Mithril dart tips", 53_000),
+             (74, "Adamant dart tips", 66_000),
+             (89, "Rune nails", 80_000)]),
     "Herblore": dict(
-        fast=[(1, "Cleaning herbs", 300_000)],
-        hybrid=[(1, "Super combats", 250_000)],
-        afk=[(1, "Potions, nothing is idle here", 250_000)]),
+        fast=[(1, "Zamorak brews", 437_000),
+              (85, "Ancient brews", 520_000),
+              (89, "Armadyl brews", 560_000)],
+        hybrid=[(1, "Super restores", 350_000)],
+        afk=[(1, "Potions, an inventory at a time", 250_000)]),
     "Construction": dict(
-        fast=[(1, "Mahogany tables", 350_000)],
-        hybrid=[(1, "Mahogany tables", 300_000)],
-        afk=[(1, "Mahogany Homes, nothing is idle here", 120_000)]),
+        fast=[(1, "Mahogany tables", 900_000),
+              (77, "Gnome benches", 1_100_000)],
+        hybrid=[(1, "Oak dungeon doors", 500_000)],
+        afk=[(1, "Shipwrights' workbench, hull parts", 400_000)]),
     "Hunter": dict(
-        fast=[(1, "Red chinchompas", 120_000),
-              (73, "Black chinchompas", 220_000)],
-        hybrid=[(1, "Red chinchompas", 120_000),
-                (72, "Hunter Rumours", 190_000)],
-        afk=[(1, "Birdhouse runs", 5_000), (80, "Herbiboar", 150_000)]),
+        fast=[(1, "Razor-backed kebbits", 130_000),
+              (72, "Hunters' Rumours", 160_000),
+              (91, "Hunters' Rumours, master tier", 200_000)],
+        hybrid=[(1, "Razor-backed kebbits", 120_000),
+                (72, "Hunters' Rumours", 150_000),
+                (91, "Hunters' Rumours, master tier", 185_000)],
+        afk=[(1, "Maniacal monkey deadfalls", 59_000),
+             (80, "Maniacal monkey deadfalls", 82_000),
+             (90, "Maniacal monkey deadfalls", 96_000)]),
     "Sailing": dict(
-        fast=[(1, "Barracuda Trials", 200_000)],
-        hybrid=[(1, "Courier tasks", 120_000)],
-        afk=[(1, "Shipwreck salvaging", 8_000)]),
+        fast=[(1, "Tempor Tantrum, Marlin rank", 24_000),
+              (55, "Jubbly Jive, Marlin rank", 85_000),
+              (72, "Gwenith Glide, Marlin rank", 180_000)],
+        hybrid=[(1, "Courier tasks", 20_000),
+                (55, "Jubbly Jive, Shark rank", 78_000),
+                (65, "Rellekka and Etceteria courier route", 95_000),
+                (76, "Lunar Isle courier route", 140_000)],
+        afk=[(1, "Shipwreck salvaging with crew", 15_000),
+             (60, "Salvaging, Cabin Boy Jenkins on a hook", 25_000),
+             (85, "Salvaging, two crew on dragon hooks", 37_000)]),
 }
 
 
 PATH_META = [
-    ("fast", "Direct", "Every skill uses the highest direct XP rate available, tick "
-                       "manipulation included. This route asks the most of you."),
-    ("hybrid", "Hybrid", "Use the fast method where the gap matters and the calmer "
-                         "one where it barely does. This is how most people train."),
-    ("afk", "AFK", "The lowest attention that still trains the skill. Five skills "
-                   "have no idle option, so they hold the least demanding thing "
+    ("fast", "Speed", "The fastest rate the game has for every skill: tick "
+                      "manipulation, stacked monkeys, bought XP, and the Wilderness "
+                      "where it is clearly quicker. This route asks the most of you."),
+    ("hybrid", "Realistic", "A pace you can hold for hundreds of hours. No tick "
+                            "manipulation, no runners, and methods that pay for "
+                            "themselves or come close. This is how most people who "
+                            "actually max get there."),
+    ("afk", "AFK", "The least attention that still trains the skill: one click every "
+                   "minute to every twenty. The rate is the price of that. Where a "
+                   "skill has no idle option, it holds the least demanding thing "
                    "available."),
 ]
+
+# What each route asks of you, in three words each. Shown under the route
+# title so the totals above can be read as a trade rather than a ranking.
+PATH_PROFILE = {
+    "fast": ("the top rate, whatever it asks", "buys XP", "some Wilderness"),
+    "hybrid": ("ordinary clicking", "pays or breaks even", "safe"),
+    "afk": ("a click a minute or less", "cheap", "safe"),
+    "opt": ("mixed", "priced by the hour", "the search's pick"),
+}
 
 
 # What a method hands to other skills per hour. Rough, but ignoring it makes
 # every total wrong: drift net trains two skills at once, Slayer trains six.
+# Hitpoints is a third of the combat XP for melee and ranged, and a share of
+# the damage for Magic.
 CARRIES = {
-    "Nieve, aggressive cannon and burst": {
+    "Nieve, cannon and burst tasks": {
         "Attack": 12_000, "Strength": 12_000, "Defence": 12_000,
         "Hitpoints": 15_000, "Magic": 16_000, "Ranged": 16_000,
     },
     "Nieve, cannon and burst": {"Attack": 10_000, "Strength": 10_000,
                                  "Defence": 10_000, "Hitpoints": 13_000,
                                  "Magic": 14_000, "Ranged": 14_000},
-    "Nieve on long tasks": {"Attack": 10_000, "Strength": 10_000,
-                             "Defence": 10_000, "Hitpoints": 13_000,
-                             "Ranged": 12_000},
+    "Nieve, Venator bow on long tasks": {"Attack": 6_000, "Strength": 6_000,
+                                          "Defence": 6_000, "Hitpoints": 12_000,
+                                          "Ranged": 22_000},
     "Duradel, barrage tasks": {"Attack": 20_000, "Strength": 20_000,
                                "Defence": 20_000, "Hitpoints": 25_000,
                                "Magic": 35_000},
     "Duradel, cannon and barrage": {"Attack": 18_000, "Strength": 18_000,
                                     "Defence": 18_000, "Hitpoints": 22_000,
                                     "Magic": 25_000, "Ranged": 20_000},
-    "Duradel on long tasks": {"Attack": 12_000, "Strength": 12_000,
-                              "Defence": 12_000, "Hitpoints": 15_000,
-                              "Ranged": 15_000},
-    "Slayer with best gear": {"Hitpoints": 23_000},
-    "Slayer": {"Hitpoints": 20_000},
-    "Guardians of the Rift": {"Magic": 8_000},
-    "Gemstone Crab": {"Hitpoints": 28_000},
-    "Barbarian Fishing, 3-tick": {"Strength": 12_000, "Agility": 12_000},
+    "Duradel, Venator bow on long tasks": {"Attack": 8_000, "Strength": 8_000,
+                                            "Defence": 8_000, "Hitpoints": 16_000,
+                                            "Ranged": 32_000},
+    "Slayer tasks": {"Hitpoints": 20_000},
+    "Sulphur Nagua": {"Hitpoints": 37_000},
+    "Hallowfell on maniacal monkeys": {"Hitpoints": 73_000, "Prayer": 30_000},
+    "Hallowfell on maniacal monkeys, auto-retaliate": {"Hitpoints": 50_000,
+                                                       "Prayer": 25_000},
+    "Nightmare Zone, absorptions": {"Hitpoints": 32_000},
+    "Red chinchompas on maniacal monkeys": {"Hitpoints": 150_000, "Prayer": 30_000},
+    "Black chinchompas on maniacal monkeys": {"Hitpoints": 215_000, "Prayer": 30_000},
+    "Red chinchompas, low-intensity stacking": {"Hitpoints": 100_000,
+                                                "Prayer": 25_000},
+    "Venator bow on maniacal monkeys": {"Hitpoints": 66_000, "Prayer": 25_000},
+    "Nightmare Zone, absorptions and blowpipe": {"Hitpoints": 30_000},
+    "Nightmare Zone, absorptions and Venator bow": {"Hitpoints": 48_000},
+    "Ice Burst on maniacal monkeys": {"Hitpoints": 100_000, "Prayer": 30_000},
+    "Ice Barrage on maniacal monkeys": {"Hitpoints": 130_000, "Prayer": 30_000},
+    "Ice Burst on Slayer tasks": {"Hitpoints": 43_000},
+    "Ice Barrage on Slayer tasks": {"Hitpoints": 60_000},
+    "Blood Burst at the Bandit Camp lodge": {"Hitpoints": 50_000},
+    "Blood Barrage at the Bandit Camp lodge": {"Hitpoints": 75_000},
+    "Guardians of the Rift": {"Magic": 8_000, "Mining": 3_700, "Crafting": 2_000},
+    "Blood runes at Arceuus": {"Mining": 5_700, "Crafting": 4_200},
+    "Soul runes at Arceuus": {"Mining": 5_700, "Crafting": 4_100},
+    "Barbarian Fishing, 3-tick": {"Strength": 8_000, "Agility": 13_000},
+    "Drift Net Fishing": {"Hunter": 105_000},
+    "Wintertodt": {"Woodcutting": 15_000},
+    "Herbiboar": {"Herblore": 3_300},
 }
 
 
@@ -4386,7 +4706,7 @@ def walk(rows, diaries=True):
         r["left"] = max(0, MAX_XP - xp[r["skill"]])
         r["legs"] = legs_for(r["route"], xp[r["skill"]])
         r["hours"] = sum(leg["hours"] for leg in r["legs"])
-        r["method"] = (" → ".join(leg["method"] for leg in r["legs"])
+        r["method"] = (" → ".join(leg["method"] for leg in merged_legs(r["legs"]))
                        or "Carried to 99 by the steps above")
         r["rate"] = r["legs"][0]["rate"] if r["legs"] else 0
         total += r["hours"]
@@ -4476,23 +4796,85 @@ def optimal_mix():
     return choice, best
 
 
+def fmt_rate(rate):
+    """An hourly rate as the tables print it: 65k, 1.3M, or free."""
+    if not rate:
+        return "free"
+    if rate >= 1_000_000:
+        return f"{rate / 1_000_000:.1f}M".replace(".0M", "M")
+    return f"{rate // 1000}k"
+
+
+def merged_legs(legs):
+    """Consecutive legs with the same method read as one band.
+
+    A route can change rate without changing method, because the wiki quotes
+    the rate by level. That is worth modelling and not worth printing twice.
+    """
+    out = []
+    for leg in legs:
+        if out and out[-1]["method"] == leg["method"]:
+            out[-1] = dict(out[-1], to=leg["to"], xp=out[-1]["xp"] + leg["xp"],
+                           hours=out[-1]["hours"] + leg["hours"],
+                           rates=out[-1]["rates"] + [leg["rate"]])
+        else:
+            out.append(dict(leg, rates=[leg["rate"]]))
+    return out
+
+
+def rate_span(rates):
+    """One rate, or the first and last when a band's rate climbs with level."""
+    rates = [r for r in rates if r]
+    if not rates:
+        return "free"
+    if len(set(rates)) == 1:
+        return fmt_rate(rates[0])
+    return f"{fmt_rate(rates[0])}→{fmt_rate(rates[-1])}"
+
+
+def fmt_hours(hours):
+    if not hours:
+        return "free"
+    return "<1h" if hours < 0.5 else f"{hours:,.0f}h"
+
+
 def legs_cell(row):
     """The method, or the staged list of them with the band each one covers."""
-    legs = row["legs"]
+    legs = merged_legs(row["legs"])
     if not legs:
         return f'<span class="one">{e(row["method"])}</span>'
     if len(legs) == 1:
         return f'<span class="one">{e(legs[0]["method"])}</span>'
     return "".join(
         f'<span class="leg">{e(leg["method"])}'
-        f'<i>{leg["from"]}–{leg["to"]} · {leg["hours"]:.0f}h</i></span>'
+        f'<i>{leg["from"]}–{leg["to"]} · {fmt_hours(leg["hours"])}</i></span>'
         for leg in legs)
 
 
 def route_label(route):
     """A route as one line. The AFK table's 'nothing is idle here' tail is there
     to explain that table; anywhere else it is noise."""
-    return " → ".join(m.split(", nothing is idle here")[0] for _, m, _ in route)
+    seen = []
+    for _, m, _ in route:
+        name = m.split(", nothing is idle here")[0]
+        if not seen or seen[-1] != name:
+            seen.append(name)
+    return " → ".join(seen)
+
+
+def days_line(hours):
+    """Hours as a calendar, at a pace a person keeps: three hours a day."""
+    days = hours / 3
+    if days < 60:
+        return f"{days:.0f} days at 3h a day"
+    return f"{days / 30.4:.0f} months at 3h a day"
+
+
+def profile_tags(key):
+    """The three-word summary of what a route asks for."""
+    tags = PATH_PROFILE.get(key) or ()
+    return ('<div class="profile">'
+            + "".join(f'<span>{e(t)}</span>' for t in tags) + '</div>')
 
 
 def optimal_card(choice, computed):
@@ -4555,7 +4937,9 @@ def optimal_card(choice, computed):
     return (
         '<section class="pathcard" id="path-opt" data-path="opt" hidden>'
         '<div class="phead"><h2 id="opt">Optimal</h2>'
-        f'<span class="ptot">{best:,.0f} hours</span></div>'
+        f'<span class="ptot">{best:,.0f} hours</span>'
+        f'<span class="pdays">{days_line(best)}</span></div>'
+        f'{profile_tags("opt")}'
         f'<p class="lede2">{verdict}</p>'
         '<h3 class="sub">Cheapest swaps</h3>'
         '<p class="note nt">What each change would cost on top of the total. '
@@ -4622,8 +5006,8 @@ def paths_page():
             if not r["left"] and not r["need"]:
                 continue
             rates = [leg["rate"] for leg in r["legs"] if leg["rate"]]
-            rate = (f'{rates[0] // 1000}k' if len(set(rates)) == 1
-                    else f'{rates[0] // 1000}k→{rates[-1] // 1000}k'
+            rate = (fmt_rate(rates[0]) if len(set(rates)) == 1
+                    else f'{fmt_rate(rates[0])}→{fmt_rate(rates[-1])}'
                     if rates else "free")
             hrs = f'{r["hours"]:.0f}h' if r["hours"] else "free"
             others = []
@@ -4669,7 +5053,9 @@ def paths_page():
             f'<section class="pathcard" id="path-{key}" data-path="{key}"'
             f'{"" if key == "hybrid" else " hidden"}>'
             f'<div class="phead"><h2 id="{key}">{e(label)}</h2>'
-            f'<span class="ptot">{total:,.0f} hours</span></div>'
+            f'<span class="ptot">{total:,.0f} hours</span>'
+            f'<span class="pdays">{days_line(total)}</span></div>'
+            f'{profile_tags(key)}'
             f'<p class="lede2">{e(blurb)}</p>'
             + order_note(key, rows, total)
             + '<div class="tablewrap"><div class="tablescroll">'
@@ -4685,14 +5071,15 @@ def paths_page():
         f'data-path="{key}" aria-controls="path-{key}" '
         f'aria-pressed="{"true" if key == "hybrid" else "false"}">'
         f'<span class="l">{e(label)}</span>'
-        f'<span class="v">{totals[key]:,.0f}<small>hours</small></span></button>'
+        f'<span class="v">{totals[key]:,.0f}<small>hours</small></span>'
+        f'<span class="s">{e((PATH_PROFILE.get(key) or ("",))[0])}</span></button>'
         for key, label, _ in meta)
 
     left = sum(r["need"] for r in computed["fast"][0])
     now = {name: (stat_of(name) or {}).get("level", 0) for name in SKILL_NAMES}
     have_now = len(diary_state(now))
     body = [
-        '<div class="kick">Four routes, same cape</div>',
+        '<div class="kick">Three paths, one cape</div>',
         '<div class="page-head">'
         '<img class="icon lg" src="assets/media/max-cape.png" alt="">'
         '<h1 class="page">Which Path</h1></div>',
@@ -5194,7 +5581,7 @@ def build_index():
     after, left = post_diary_rows()
     parts.append(f'<p class="lede2">Starts from where the Diary Cape leaves '
                  f'you, so nothing is counted twice. <b>{left:,.0f} hours</b> on '
-                 f'the hybrid route, at the rates the '
+                 f'the Realistic route, at the rates the '
                  f'<a class="wl" href="paths.html">route tables</a> use. Skills '
                  f'that pay come before skills that cost; no other order is '
                  f'cheaper.</p>')

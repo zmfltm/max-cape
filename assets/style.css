@@ -296,6 +296,8 @@ img.icon.lg { width: 30px; height: 30px; flex-basis: 30px; }
 .meter .mrow b { color: var(--fg); font-size: 15px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .meter .mmax { font-family: var(--font-mono); font-size: 10.5px; color: var(--dim); }
 .meter .mrow.hint { display: block; color: var(--dim); font-size: 11px; line-height: 1.5; }
+/* which account, and when the Hiscores last said so */
+.meter .mrow.snap { display: block; margin-top: 4px; color: var(--dim); font-size: 11px; line-height: 1.5; }
 .meter code { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-2); }
 .refresh {
   flex: 0 0 18px;
@@ -941,6 +943,15 @@ tr.rec td:nth-child(2) { color: var(--fg); }
 }
 .rtag.rec { color: var(--accent); }
 .rtag.lock { color: var(--dim); }
+/* Which path a method belongs to. Colour is state elsewhere; here it is a
+   key, so it stays quiet: one tint per route and nothing filled. */
+.routes { display: block; margin-top: 4px; }
+.rtag.route { margin: 0 8px 0 0; padding-bottom: 1px; border-bottom: 1px solid currentColor; }
+/* keep "in plan" on the route line rather than a third line */
+tr.chosen td:nth-child(2) .routes { display: inline-block; }
+.rtag.route.fast { color: #e8a2ff; }
+.rtag.route.hybrid { color: var(--done); }
+.rtag.route.afk { color: #7fc9ff; }
 
 /* ------------------------------------------------------------ method picker */
 
@@ -1201,10 +1212,31 @@ button.stat.pick .v {
   font-variant-numeric: tabular-nums;
   margin-top: 2px;
 }
+button.stat.pick .s {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: -0.005em;
+}
 button.stat.pick:hover .v { color: var(--accent); }
+button.stat.pick:focus-visible { outline-offset: -2px; }
 /* The selected route is marked by the rule it sits under. */
 button.stat.pick.on { border-top-color: var(--accent); }
 button.stat.pick.on .v { color: var(--accent); }
+button.stat.pick.on .s { color: var(--muted); }
+
+/* What a route asks for, as three words under its title. */
+.profile { display: flex; flex-wrap: wrap; gap: 4px 0; margin: 2px 0 10px; }
+.profile span {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.profile span + span::before { content: "·"; color: var(--dim); margin: 0 8px; }
+.pdays { font-size: 12px; color: var(--dim); margin-left: auto; white-space: nowrap; }
 
 .pathcard { margin-top: 44px; }
 .sub { margin: 32px 0 0; font-size: 15px; font-weight: 500; }
@@ -1257,6 +1289,54 @@ table.pathtable th:last-child, table.pathtable td:last-child { text-align: right
 .alt i { font-style: normal; font-size: 10px; color: var(--dim); }
 .alt b { font-family: var(--font-mono); font-size: 10.5px; font-weight: 400; color: var(--accent); }
 .gives { display: block; font-family: var(--font-mono); font-size: 10px; color: var(--dim); margin-top: 2px; }
+
+/* ---------------------------------------------------------- three ways */
+
+/* Three columns on one rule: the same route data as Which Path, read for
+   one skill. Each column is a heading, a total, a word on what it asks, and
+   the legs in order. */
+.ways { padding-top: 12px; margin: 0 0 14px; border-top: 1px solid var(--line-soft); }
+.ways .k { font-size: 12.5px; color: var(--dim); }
+.waygrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 28px;
+  margin-top: 10px;
+}
+.way { min-width: 0; }
+.way + .way { border-left: 1px solid var(--line-soft); padding-left: 20px; }
+.whead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.whead h3 { margin: 0; font-size: 14px; }
+.way.fast h3 { color: #e8a2ff; }
+.way.hybrid h3 { color: var(--done); }
+.way.afk h3 { color: #7fc9ff; }
+.wt { font-size: 20px; font-weight: 500; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.wp {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.wlegs { list-style: none; margin: 10px 0 0; padding: 0; }
+.wlegs li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "m h" "b r";
+  column-gap: 10px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line-soft);
+  margin: 0;
+  color: var(--fg-2);
+  font-size: 13px;
+}
+.wlegs .wm { grid-area: m; font-weight: 500; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.wlegs .wh { grid-area: h; font-family: var(--font-mono); font-size: 12px; color: var(--accent); font-variant-numeric: tabular-nums; }
+.wlegs .wb { grid-area: b; font-family: var(--font-mono); font-size: 10.5px; color: var(--dim); }
+.wlegs .wr { grid-area: r; font-family: var(--font-mono); font-size: 10.5px; color: var(--dim); text-align: right; }
+.wnote { margin: 12px 0 0; font-size: 12px; color: var(--dim); max-width: 62ch; }
 
 /* ----------------------------------------------------------- time to max */
 
@@ -1549,8 +1629,19 @@ table.calctable tr.chosen td.tn { color: var(--accent); }
   .meter { padding: 14px 0 12px; border-top: 0; }
 }
 
+@media (max-width: 760px) {
+  .waygrid { grid-template-columns: 1fr; gap: 0; }
+  .way + .way { border-left: 0; padding-left: 0; margin-top: 18px; }
+  .pdays { margin-left: 0; flex-basis: 100%; }
+  .phead { flex-wrap: wrap; }
+}
+
 @media (max-width: 620px) {
   .shell { padding: 26px 16px 64px; }
+  .stats.switcher { grid-template-columns: repeat(2, 1fr); }
+  button.stat.pick:nth-child(2n) { border-right: 0; }
+  button.stat.pick:nth-child(n+3) { border-top: 1px solid var(--line-soft); }
+  button.stat.pick.on:nth-child(n+3) { border-top: 2px solid var(--accent); }
   h1.page { font-size: 27px; }
   h2 { margin-top: 52px; }
   .lede { font-size: 15.5px; }
