@@ -15,18 +15,32 @@
    "endsAt": 1789817868880
   },
   {
-   "world": 509,
-   "tier": 9,
-   "location": "Catherby bank",
-   "calledAt": 1789814217748,
-   "endsAt": 1789817997748
-  },
-  {
    "world": 562,
    "tier": 9,
    "location": "West of Grand Tree",
    "calledAt": 1789814238737,
    "endsAt": 1789818018737
+  },
+  {
+   "world": 340,
+   "tier": 9,
+   "location": "Champions Guild mine",
+   "calledAt": 1789814664845,
+   "endsAt": 1789818444845
+  },
+  {
+   "world": 536,
+   "tier": 9,
+   "location": "Southeast Varrock mine",
+   "calledAt": 1789814709228,
+   "endsAt": 1789818489228
+  },
+  {
+   "world": 518,
+   "tier": 9,
+   "location": "Mount Karuulm bank",
+   "calledAt": 1789814766920,
+   "endsAt": 1789818546920
   },
   {
    "world": 388,
@@ -41,13 +55,6 @@
    "location": "Fossil Island rune rocks",
    "calledAt": 1789812720878,
    "endsAt": 1789816080878
-  },
-  {
-   "world": 411,
-   "tier": 8,
-   "location": "Southwest of Brimhaven Poh",
-   "calledAt": 1789814221399,
-   "endsAt": 1789817581399
   },
   {
    "world": 328,
@@ -104,6 +111,34 @@
    "location": "Ardougne Monastery",
    "calledAt": 1789814597070,
    "endsAt": 1789817957070
+  },
+  {
+   "world": 448,
+   "tier": 8,
+   "location": "Catherby bank",
+   "calledAt": 1789814751707,
+   "endsAt": 1789818111707
+  },
+  {
+   "world": 509,
+   "tier": 8,
+   "location": "Catherby bank",
+   "calledAt": 1789814776629,
+   "endsAt": 1789818136629
+  },
+  {
+   "world": 513,
+   "tier": 8,
+   "location": "Varlamore colosseum entrance bank",
+   "calledAt": 1789814783633,
+   "endsAt": 1789818143633
+  },
+  {
+   "world": 389,
+   "tier": 8,
+   "location": "Varlamore colosseum entrance bank",
+   "calledAt": 1789814800047,
+   "endsAt": 1789818160047
   },
   {
    "world": 442,
@@ -232,18 +267,25 @@
    "endsAt": 1789817451233
   },
   {
+   "world": 411,
+   "tier": 7,
+   "location": "Southwest of Brimhaven Poh",
+   "calledAt": 1789814642732,
+   "endsAt": 1789817582732
+  },
+  {
+   "world": 302,
+   "tier": 7,
+   "location": "Lunar Isle mine entrance",
+   "calledAt": 1789814689073,
+   "endsAt": 1789817629073
+  },
+  {
    "world": 544,
    "tier": 6,
    "location": "Feldip Hills (aks fairy ring)",
    "calledAt": 1789812088115,
    "endsAt": 1789814608115
-  },
-  {
-   "world": 406,
-   "tier": 6,
-   "location": "North of Al Kharid PvP Arena",
-   "calledAt": 1789812663623,
-   "endsAt": 1789815183623
   },
   {
    "world": 556,
@@ -309,27 +351,6 @@
    "endsAt": 1789816641841
   },
   {
-   "world": 361,
-   "tier": 6,
-   "location": "Taverley house portal",
-   "calledAt": 1789814264454,
-   "endsAt": 1789816784454
-  },
-  {
-   "world": 519,
-   "tier": 6,
-   "location": "South Lovakengj bank",
-   "calledAt": 1789814342913,
-   "endsAt": 1789816862913
-  },
-  {
-   "world": 625,
-   "tier": 6,
-   "location": "Canifis bank",
-   "calledAt": 1789814345305,
-   "endsAt": 1789816865305
-  },
-  {
    "world": 495,
    "tier": 6,
    "location": "Gnome Stronghold spirit tree",
@@ -393,11 +414,18 @@
    "endsAt": 1789817112327
   },
   {
-   "world": 369,
-   "tier": 5,
-   "location": "Myths Guild",
-   "calledAt": 1789812955466,
-   "endsAt": 1789815055466
+   "world": 447,
+   "tier": 6,
+   "location": "Miscellania mine (cip fairy ring)",
+   "calledAt": 1789814639515,
+   "endsAt": 1789817159515
+  },
+  {
+   "world": 378,
+   "tier": 6,
+   "location": "Southeast Varrock mine",
+   "calledAt": 1789814697734,
+   "endsAt": 1789817217734
   },
   {
    "world": 360,
@@ -412,34 +440,6 @@
    "location": "East Falador bank",
    "calledAt": 1789813841082,
    "endsAt": 1789815941082
-  },
-  {
-   "world": 457,
-   "tier": 5,
-   "location": "Port Khazard mine",
-   "calledAt": 1789814240427,
-   "endsAt": 1789816340427
-  },
-  {
-   "world": 417,
-   "tier": 5,
-   "location": "Al Kharid mine",
-   "calledAt": 1789814254440,
-   "endsAt": 1789816354440
-  },
-  {
-   "world": 434,
-   "tier": 5,
-   "location": "West Lumbridge Swamp mine",
-   "calledAt": 1789814288818,
-   "endsAt": 1789816388818
-  },
-  {
-   "world": 534,
-   "tier": 5,
-   "location": "Crafting guild",
-   "calledAt": 1789814298480,
-   "endsAt": 1789816398480
   },
   {
    "world": 631,
@@ -463,11 +463,25 @@
    "endsAt": 1789816600721
   },
   {
-   "world": 522,
+   "world": 361,
    "tier": 5,
-   "location": "Piscatoris (akq fairy ring)",
-   "calledAt": 1789814553692,
-   "endsAt": 1789816653692
+   "location": "Taverley house portal",
+   "calledAt": 1789814685285,
+   "endsAt": 1789816785285
+  },
+  {
+   "world": 519,
+   "tier": 5,
+   "location": "South Lovakengj bank",
+   "calledAt": 1789814763718,
+   "endsAt": 1789816863718
+  },
+  {
+   "world": 625,
+   "tier": 5,
+   "location": "Canifis bank",
+   "calledAt": 1789814804049,
+   "endsAt": 1789816904049
   },
   {
    "world": 352,
@@ -484,25 +498,39 @@
    "endsAt": 1789815831630
   },
   {
-   "world": 465,
+   "world": 457,
    "tier": 4,
-   "location": "Salvager Overlook in Varlamore",
-   "calledAt": 1789814313045,
-   "endsAt": 1789815993045
+   "location": "Port Khazard mine",
+   "calledAt": 1789814661216,
+   "endsAt": 1789816341216
   },
   {
-   "world": 603,
+   "world": 417,
    "tier": 4,
-   "location": "Ardougne Monastery",
-   "calledAt": 1789814336319,
-   "endsAt": 1789816016319
+   "location": "Al Kharid mine",
+   "calledAt": 1789814676294,
+   "endsAt": 1789816356294
   },
   {
-   "world": 376,
+   "world": 434,
    "tier": 4,
-   "location": "Nardah bank",
-   "calledAt": 1789814379168,
-   "endsAt": 1789816059168
+   "location": "West Lumbridge Swamp mine",
+   "calledAt": 1789814707377,
+   "endsAt": 1789816387377
+  },
+  {
+   "world": 522,
+   "tier": 4,
+   "location": "Piscatoris (akq fairy ring)",
+   "calledAt": 1789814712833,
+   "endsAt": 1789816392833
+  },
+  {
+   "world": 534,
+   "tier": 4,
+   "location": "Crafting guild",
+   "calledAt": 1789814716325,
+   "endsAt": 1789816396325
   },
   {
    "world": 409,
@@ -519,25 +547,11 @@
    "endsAt": 1789814945293
   },
   {
-   "world": 412,
-   "tier": 3,
-   "location": "Ardougne Monastery",
-   "calledAt": 1789814324693,
-   "endsAt": 1789815584693
-  },
-  {
    "world": 663,
    "tier": 3,
    "location": "Mount Karuulm bank",
    "calledAt": 1789814363740,
    "endsAt": 1789815623740
-  },
-  {
-   "world": 387,
-   "tier": 3,
-   "location": "West of Grand Tree",
-   "calledAt": 1789814394651,
-   "endsAt": 1789815654651
   },
   {
    "world": 515,
@@ -561,11 +575,25 @@
    "endsAt": 1789815816847
   },
   {
-   "world": 408,
-   "tier": 2,
-   "location": "Al Kharid bank",
-   "calledAt": 1789814336318,
-   "endsAt": 1789815176318
+   "world": 465,
+   "tier": 3,
+   "location": "Salvager Overlook in Varlamore",
+   "calledAt": 1789814731310,
+   "endsAt": 1789815991310
+  },
+  {
+   "world": 603,
+   "tier": 3,
+   "location": "Ardougne Monastery",
+   "calledAt": 1789814754098,
+   "endsAt": 1789816014098
+  },
+  {
+   "world": 376,
+   "tier": 3,
+   "location": "Nardah bank",
+   "calledAt": 1789814798101,
+   "endsAt": 1789816058101
   },
   {
    "world": 503,
@@ -573,8 +601,36 @@
    "location": "Prifddinas Zalcano entrance",
    "calledAt": 1789814440690,
    "endsAt": 1789815280690
+  },
+  {
+   "world": 406,
+   "tier": 2,
+   "location": "North of Al Kharid PvP Arena",
+   "calledAt": 1789814626942,
+   "endsAt": 1789815466942
+  },
+  {
+   "world": 412,
+   "tier": 2,
+   "location": "Ardougne Monastery",
+   "calledAt": 1789814744847,
+   "endsAt": 1789815584847
+  },
+  {
+   "world": 387,
+   "tier": 2,
+   "location": "West of Grand Tree",
+   "calledAt": 1789814814359,
+   "endsAt": 1789815654359
+  },
+  {
+   "world": 408,
+   "tier": 1,
+   "location": "Al Kharid bank",
+   "calledAt": 1789814753343,
+   "endsAt": 1789815173343
   }
  ],
- "at": 1789814641096,
+ "at": 1789814891753,
  "source": "https://07.gg/trackers/shooting-star"
 }
